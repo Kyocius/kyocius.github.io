@@ -15,7 +15,7 @@
         <description>&lt;h1 id=&#34;关于我&#34;&gt;关于我&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;平凡高中生，坐标天津市&lt;/li&gt;
-&lt;li&gt;半桶水开发者，喜欢 &lt;strong&gt;C#&lt;/strong&gt; 和 &lt;strong&gt;Kotlin&lt;/strong&gt; 语言，目标是开发美观又好用的 App。&lt;/li&gt;
+&lt;li&gt;半桶水开发者，喜欢 &lt;strong&gt;C#&lt;/strong&gt; 和 &lt;strong&gt;Kotlin&lt;/strong&gt; 语言，目标是开发美观又好用的 App&lt;/li&gt;
 &lt;li&gt;正在为高考好好学习中&amp;hellip;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h1 id=&#34;关于文章&#34;&gt;关于文章&lt;/h1&gt;
@@ -40,21 +40,11 @@
         
         <guid>https://yoroion.github.io/links/</guid>
         <description>&lt;p&gt;别来无恙，我的朋友！请按照下方的格式给我留言以加入友链。&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
-&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;博客名：XXX&amp;#39;s Blog
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;简介：另一个 Blogger
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;链接：https://hexo.fluid-dev.com
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Icon：https://hexo.fluid-dev.com/img/favicon.png
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;</description>
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;博客名：XXX&amp;#39;s Blog
+简介：另一个 Blogger
+链接：https://hexo.fluid-dev.com
+Icon：https://hexo.fluid-dev.com/img/favicon.png
+&lt;/code&gt;&lt;/pre&gt;</description>
         </item>
         <item>
         <title>Search</title>
