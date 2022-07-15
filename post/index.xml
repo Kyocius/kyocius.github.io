@@ -6,7 +6,20 @@
         <description>Recent content in Posts on Yoroion&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
-        <lastBuildDate>Tue, 12 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://yoroion.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Fri, 15 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://yoroion.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>2022 年暑假日志</title>
+        <link>https://yoroion.github.io/posts/summer-holiday/</link>
+        <pubDate>Fri, 15 Jul 2022 00:00:00 +0000</pubDate>
+        
+        <guid>https://yoroion.github.io/posts/summer-holiday/</guid>
+        <description>&lt;img src="https://yoroion.github.io/posts/summer-holiday/head.jpg" alt="Featured image of post 2022 年暑假日志" /&gt;&lt;h2 id=&#34;7-月-15-日&#34;&gt;7 月 15 日&lt;/h2&gt;
+&lt;p&gt;平常的周五，作业、刷剧（Rick &amp;amp; Morty）、读书（Kickstart Android）。&lt;/p&gt;
+&lt;p&gt;印象深刻的是复习了一下 Jetpack Navigation 和 Retrofit 的用法。&lt;/p&gt;
+&lt;p&gt;新项目 Pikapi 还是没动，因为还在研究 Yabapi 的源码，不得不说还要学的知识还有很多（Orz）&lt;/p&gt;
+&lt;p&gt;物理作业又没写完···&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>又一个无聊的博客</title>
         <link>https://yoroion.github.io/posts/hello-hugo/</link>
         <pubDate>Tue, 12 Jul 2022 00:00:00 +0000</pubDate>
