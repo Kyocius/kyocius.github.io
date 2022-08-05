@@ -4,7 +4,7 @@ date: 2022-07-12
 slug: hello-hugo
 image: helena-hertz-wWZzXlDpMog-unsplash.jpg
 categories:
-    - Blog
+    - 博客搭建
 tags:
     - Hugo
 ---

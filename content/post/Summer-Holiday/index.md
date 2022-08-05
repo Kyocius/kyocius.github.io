@@ -5,10 +5,20 @@ date: 2022-07-15
 slug: summer-holiday
 image: head.jpg
 categories:
-    - Diary
+    - 日记
 tags:
-    - Holiday
+    - 暑假
 ---
+
+## 8 月 5 日
+
+又折腾了一下博客。
+
+把 Stack 主题换成了 Tania，更喜欢这种风格的。
+
+Tania 的配置参数也并不复杂。
+
+然后就是部署了 GitHub Action，现在写作算是更方便了（懒
 
 ## 8 月 1 日 ~ 4 日
 
