@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Diary on 鎧恩の部屋</title><link>https://yoroion.github.io/categories/diary/</link><description>Recent content in Diary on 鎧恩の部屋</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 15 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://yoroion.github.io/categories/diary/index.xml" rel="self" type="application/rss+xml"/><item><title>二〇二二年夏日谈</title><link>https://yoroion.github.io/post/summer-holiday/</link><pubDate>Fri, 15 Jul 2022 00:00:00 +0000</pubDate><guid>https://yoroion.github.io/post/summer-holiday/</guid><description>8 月 1 日 ~ 4 日 天气很热，窗外的蝉鸣聒耳。
+回北京了。陪家人看电影《独行月球》，虽然在旁人看来不免庸俗，但陪伴家人也算是美事一桩。
+把 Pikapi 名字改回了 Picsharp 并成功上架 NuGet，这个暑假算是没有遗憾。
+尝试学习响应式编程 Rx.NET，但依然不是很懂（恼
+最近的大事件：拭目以待→安全落地→强烈谴责（笑
+注：Picsharp = PicACG + C#
+7 月 31 日 当你认识到自己生命之重时，便是迈向了奥义之路。
+追《浪客剑心》。暑期的补习结束了，可以稍微晚睡会儿。
+7 月 17 日 ~ 30 日 被家长断网。
+主力机被没收了。把以前的 Redmi 7 拿出来刷上 LineageOS 19.1 凑合用着。
+话说类原生系统是针不戳，想起来小学时用的那部垃圾 Honor 6X 也是被我用 LineageOS 强行续命了一年。
+随手安装了谷歌相机，不禁赞叹 Redmi 7 也能拍出这么好看的照片。
+这段时间也没有出去玩，故无有趣的事情。
+决定放弃使用 Kotlin Multiplatform 来写 Pikapi，回归 .NET，问就是 KMP 生态太次了。
+7 月 16 日 有点慵懒的周六。
+《外星也难民》第三季更新了。</description></item></channel></rss>
