@@ -28,7 +28,9 @@
 
         &.button {
             margin-left: 1.5rem;
-            border-width: 2px;
+            border-width: 0px;
+            border-radius: 16px;
+            background-color: goldenrod;
         }
     }
 

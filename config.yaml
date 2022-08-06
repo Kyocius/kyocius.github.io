@@ -67,6 +67,8 @@ menu:
       url: "/articles/"
     - name: Friends
       url: "/friends/"
+    - name: About
+      url: "/about/"
   footer:
     - name: "Copyright © 2021- 2022 Yoroion"
     - name: RSS 订阅
