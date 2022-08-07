@@ -2,7 +2,6 @@
 title: 又一个无聊的博客
 date: 2022-07-12
 slug: hello-hugo
-image: helena-hertz-wWZzXlDpMog-unsplash.jpg
 categories:
     - 博客搭建
 tags:
