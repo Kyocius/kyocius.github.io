@@ -9,6 +9,7 @@ categories:
 tags:
     - Csharp
     - Rx.NET
+image: head.png
 ---
 ## 前言
 

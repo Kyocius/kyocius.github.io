@@ -8,6 +8,7 @@ categories:
     - 日记
 tags:
     - 暑假
+image: linm.png
 ---
 
 ## 8 月 5 日

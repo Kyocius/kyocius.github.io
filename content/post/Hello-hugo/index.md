@@ -1,11 +1,13 @@
 ---
 title: 又一个无聊的博客
+description: 终归是全新的开始
 date: 2022-07-12
 slug: hello-hugo
 categories:
     - 博客搭建
 tags:
     - Hugo
+image: gg.jpg
 ---
 
 ## 你好，雨果
