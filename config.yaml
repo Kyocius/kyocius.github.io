@@ -34,11 +34,10 @@ params:
         - post
     featuredImageField: image
     rssFullContent: true
-    favicon: https://avatars.githubusercontent.com/u/59552671?v=4
-
+    favicon: 
     footer:
         since: 2021
-        customText:
+        customText: (*/ω＼*)
 
     dateFormat:
         published: Jan 02, 2006
