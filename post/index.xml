@@ -1,24 +1,165 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on 鎧恩の部屋</title><link>https://yoroion.github.io/post/</link><description>Recent content in Posts on 鎧恩の部屋</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 15 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://yoroion.github.io/post/index.xml" rel="self" type="application/rss+xml"/><item><title>二〇二二年夏日谈</title><link>https://yoroion.github.io/post/summer-holiday/</link><pubDate>Fri, 15 Jul 2022 00:00:00 +0000</pubDate><guid>https://yoroion.github.io/post/summer-holiday/</guid><description>8 月 5 日 又折腾了一下博客。
-把 Stack 主题换成了 Tania，更喜欢这种风格的。
-Tania 的配置参数也并不复杂。
-然后就是部署了 GitHub Action，现在写作算是更方便了（懒
-8 月 1 日 ~ 4 日 天气很热，窗外的蝉鸣聒耳。
-回北京了。陪家人看电影《独行月球》，虽然在旁人看来不免庸俗，但陪伴家人也算是美事一桩。
-把 Pikapi 名字改回了 Picsharp 并成功上架 NuGet，这个暑假算是没有遗憾。
-尝试学习响应式编程 Rx.NET，但依然不是很懂（恼
-最近的大事件：拭目以待→安全落地→强烈谴责（笑
-注：Picsharp = PicACG + C#
-7 月 31 日 当你认识到自己生命之重时，便是迈向了奥义之路。
-追《浪客剑心》。暑期的补习结束了，可以稍微晚睡会儿。
-7 月 17 日 ~ 30 日 被家长断网。
-主力机被没收了。把以前的 Redmi 7 拿出来刷上 LineageOS 19.1 凑合用着。
-话说类原生系统是针不戳，想起来小学时用的那部垃圾 Honor 6X 也是被我用 LineageOS 强行续命了一年。
-随手安装了谷歌相机，不禁赞叹 Redmi 7 也能拍出这么好看的照片。
-这段时间也没有出去玩，故无有趣的事情。</description></item><item><title>又一个无聊的博客</title><link>https://yoroion.github.io/post/hello-hugo/</link><pubDate>Tue, 12 Jul 2022 00:00:00 +0000</pubDate><guid>https://yoroion.github.io/post/hello-hugo/</guid><description>你好，雨果 如你所见，这又是一个使用 Hugo 搭建的博客，主题是 Stack Theme。
-我曾在 2021 年多次打算启动一个博客，当时我记得尝试了：
-Hexo Jekyll 某 .NET CMS Hugo 因为当时已经折腾了很久，热情被消磨殆尽，选择了 Hugo 和 Eureka Theme，但后面发现 Eureka 的很多小细节我不满意，又不想再花时间修改 Sass（真的佩服有些大佬为了自定义博客，读完了 Hugo 的源码），最终草草放弃了博客。
-重启 时间来到了 2022 年 7 月 12 日暑假。无意间发现了一款很符合我审美的主题，也就是 Stack Theme， 花了半天时间调试配置修改样式和部署。最后，也就长这个样子。感激主题作者 Jimmy，让我不用过多的修改就可以享受到如此好看的主题。
-结语 我总是认为，博客的搭建重心应该放在写作上，但是很多时候会不小心掉进「过度美化」的误区。
-步入高三，我的时间越来越紧促。
-但我会尽我所能，记录所感所思所爱。
-写博客真的很开心啊 :D</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on 鎧恩の部屋</title><link>https://yoroion.github.io/post/</link><description>Recent content in Posts on 鎧恩の部屋</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 07 Aug 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://yoroion.github.io/post/index.xml" rel="self" type="application/rss+xml"/><item><title>Rx.NET 响应式编程指北 01</title><link>https://yoroion.github.io/p/rx-magic/</link><pubDate>Sun, 07 Aug 2022 00:00:00 +0000</pubDate><guid>https://yoroion.github.io/p/rx-magic/</guid><description>&lt;h2 id="前言">前言&lt;/h2>
+&lt;p>最近刚读了 &lt;em>Rx.NET in Action&lt;/em>，学到的新概念非常多，担忧自己会日渐遗忘，觉得有必要写一篇博客记录一下，说不定也能帮到一些志同道合的朋友。&lt;/p>
+&lt;p>本系列将会使用我深爱的 C# 语言和 Rx.NET 框架来讲解响应式编程（Reactive Programming）的魔法 ╰(&lt;em>°▽°&lt;/em>)╯&lt;/p>
+&lt;h2 id="背景知识">背景知识&lt;/h2>
+&lt;ul>
+&lt;li>C# 中的&lt;strong>委托&lt;/strong>、&lt;strong>泛型&lt;/strong>、&lt;strong>事件&lt;/strong>以及 &lt;strong>LINQ&lt;/strong> 等概念&lt;/li>
+&lt;li>Rx = Reactive Extension&lt;/li>
+&lt;li>Rx 是由&lt;strong>微软&lt;/strong>旗下一个实验室发起的 &lt;del>巨硬大法好&lt;/del>&lt;/li>
+&lt;/ul>
+&lt;h2 id="响应式概念">响应式概念&lt;/h2>
+&lt;p>首先来看看微软的解释：Rx = Observables + LINQ + Schedulers。谔谔，啥玩意儿？&lt;/p>
+&lt;p>那看看大佬怎么解释的吧：Rx = 处理异步数据流。这个解释还行，但还是不明白。&lt;/p>
+&lt;p>这里是更通俗的解释：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-c#" data-lang="c#">&lt;span class="line">&lt;span class="cl">&lt;span class="kt">var&lt;/span> &lt;span class="n">a&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="m">1&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kt">var&lt;/span> &lt;span class="n">b&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="m">2&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kt">var&lt;/span> &lt;span class="n">c&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="n">a&lt;/span> &lt;span class="p">+&lt;/span> &lt;span class="n">b&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">// c 的值显然为 3&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>当你改变 &lt;code>a&lt;/code> 或者 &lt;code>b&lt;/code> 值的时候，按照我们以前的思维，&lt;code>c&lt;/code> 的值并不会随之发生变化。&lt;/p>
+&lt;p>如果我们想要 &lt;code>c&lt;/code> 的值随之而改变呢？很简单，使用 &lt;strong>Rx.NET&lt;/strong>！&lt;/p>
+&lt;h3 id="可观察对象-observable">可观察对象 Observable&lt;/h3>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-c#" data-lang="c#">&lt;span class="line">&lt;span class="cl">&lt;span class="k">public&lt;/span> &lt;span class="k">interface&lt;/span> &lt;span class="nc">IObservable&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="n">T&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">IDisposable&lt;/span> &lt;span class="n">Subscribe&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">IObserver&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="n">T&lt;/span>&lt;span class="p">&amp;gt;&lt;/span> &lt;span class="n">observer&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;ul>
+&lt;li>接口只有一个方法 &lt;code>Subscribe&lt;/code>，返回 &lt;code>IDisposable&lt;/code> 对象（代表着订阅事件本身）&lt;/li>
+&lt;li>&lt;code>Observable&lt;/code> 持有 &lt;code>Observer&lt;/code> 的集合，在值改变时随时通知它们&lt;/li>
+&lt;li>&lt;code>IDisposable&lt;/code> 对象可以通过 &lt;code>Dispose&lt;/code> 方法随时取消订阅&lt;/li>
+&lt;/ul>
+&lt;h3 id="观察者-observer">观察者 Observer&lt;/h3>
+&lt;p>观察者的源码其实也很简单。&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-c#" data-lang="c#">&lt;span class="line">&lt;span class="cl">&lt;span class="k">public&lt;/span> &lt;span class="k">interface&lt;/span> &lt;span class="nc">IObserver&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="n">T&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">void&lt;/span> &lt;span class="n">OnNext&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">T&lt;/span> &lt;span class="k">value&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">void&lt;/span> &lt;span class="n">OnError&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">Exception&lt;/span> &lt;span class="n">error&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">void&lt;/span> &lt;span class="n">OnCompleted&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;ul>
+&lt;li>&lt;code>OnNext&lt;/code> 方法定义当观测的值出现变化时，该做什么（类比迭代）&lt;/li>
+&lt;li>&lt;code>OnError&lt;/code> 方法定义它出现错误时该做什么&lt;/li>
+&lt;li>&lt;code>OnCompleted&lt;/code> 方法定义它任务完成时该做什么&lt;/li>
+&lt;li>值得注意的是：发生错误时，数据流就会中断&lt;/li>
+&lt;/ul>
+&lt;h3 id="操作符-operator">操作符 Operator&lt;/h3>
+&lt;p>Rx 带来了海量的操作符，帮助我们分类、查找、转换数据。&lt;/p>
+&lt;p>Rx.NET 的操作符与其它语言的 Rx 不同的是，操作符采用了原汁原味的 LINQ 风格。&lt;/p>
+&lt;p>下面来点简单实例：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-c#" data-lang="c#">&lt;span class="line">&lt;span class="cl">&lt;span class="n">IObservable&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="kt">string&lt;/span>&lt;span class="p">&amp;gt;&lt;/span> &lt;span class="n">strings&lt;/span>&lt;span class="p">=&lt;/span> &lt;span class="p">...&lt;/span> &lt;span class="c1">// 数据源&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">IDisposable&lt;/span> &lt;span class="n">subscription&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="n">strings&lt;/span> &lt;span class="c1">// 一个 IDisposable 代表了订阅事件本身&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">.&lt;/span>&lt;span class="n">Where&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">str&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="n">str&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">StartsWith&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;A&amp;#34;&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">.&lt;/span>&lt;span class="n">Select&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">str&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="n">str&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">ToUpper&lt;/span>&lt;span class="p">())&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">.&lt;/span>&lt;span class="n">Subscribe&lt;/span>&lt;span class="p">(...);&lt;/span> &lt;span class="c1">// 传入 Observer 或直接传 OnNext 方法&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">subscription&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">Dispose&lt;/span>&lt;span class="p">();&lt;/span> &lt;span class="c1">// 上面说过了，可以随时取消订阅&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>上面的代码读起来是不是很流畅？&lt;/p>
+&lt;p>其实第一行省略了如何创建可观察数据源，专注于操作符本身，要不然太劝退了。&lt;/p>
+&lt;p>如何创建可观察的数据源将在后面的章节讲解。&lt;/p>
+&lt;h2 id="理解事件和流-events--streams">理解事件和流 Events &amp;amp; Streams&lt;/h2>
+&lt;p>事件非常好理解，比如我们点击一个按钮就是一个事件。&lt;/p>
+&lt;p>在 C# 中，事件由&lt;strong>数据源&lt;/strong>「Event Source」和&lt;strong>处理器&lt;/strong>「Event Handler」组成。&lt;/p>
+&lt;p>在 Rx 中，「Event Source」对应「Observable」而「Event Handler」对应「Observer」。&lt;/p>
+&lt;h3 id="万物皆流">万物皆流&lt;/h3>
+&lt;blockquote>
+&lt;p>A data stream is like a hose: every drop of water is a data packet that needs to go through stations until it reaches the end. Your data also needs to be filtered and transformed until it gets to the real handler that does something useful with it.&lt;/p>
+&lt;/blockquote>
+&lt;p>上面这段 Quote 来自 &lt;em>Rx.NET in Action&lt;/em>，大致的意思就是数据就像水管子一样，我们通过操作符过滤水流，最后通过喷头将水流传播。&lt;/p>
+&lt;p>我认为这是响应式的核心概念。只要你想持续地监听某数据的变化，那么使用 Rx 让数据变成可观察流，绝对是个好主意。&lt;/p></description></item><item><title>二〇二二年夏日谈</title><link>https://yoroion.github.io/p/summer-holiday/</link><pubDate>Fri, 15 Jul 2022 00:00:00 +0000</pubDate><guid>https://yoroion.github.io/p/summer-holiday/</guid><description>&lt;img src="https://yoroion.github.io/head.jpg" alt="Featured image of post 二〇二二年夏日谈" />&lt;h2 id="8-月-5-日">8 月 5 日&lt;/h2>
+&lt;p>又折腾了一下博客。&lt;/p>
+&lt;p>把 Stack 主题换成了 Tania，更喜欢这种风格的。&lt;/p>
+&lt;p>Tania 的配置参数也并不复杂。&lt;/p>
+&lt;p>然后就是部署了 GitHub Action，现在写作算是更方便了（懒&lt;/p>
+&lt;h2 id="8-月-1-日--4-日">8 月 1 日 ~ 4 日&lt;/h2>
+&lt;p>天气很热，窗外的蝉鸣聒耳。&lt;/p>
+&lt;p>回北京了。陪家人看电影《独行月球》，虽然在旁人看来不免庸俗，但陪伴家人也算是美事一桩。&lt;/p>
+&lt;p>把 Pikapi 名字改回了 Picsharp 并成功上架 NuGet，这个暑假算是没有遗憾。&lt;/p>
+&lt;p>尝试学习响应式编程 Rx.NET，但依然不是很懂（恼&lt;/p>
+&lt;p>最近的大事件：拭目以待→安全落地→强烈谴责（笑&lt;/p>
+&lt;p>注：Picsharp = PicACG + C#&lt;/p>
+&lt;h2 id="7-月-31-日">7 月 31 日&lt;/h2>
+&lt;blockquote>
+&lt;p>当你认识到自己生命之重时，便是迈向了奥义之路。&lt;/p>
+&lt;/blockquote>
+&lt;p>追《浪客剑心》。暑期的补习结束了，可以稍微晚睡会儿。&lt;/p>
+&lt;h2 id="7-月-17-日--30-日">7 月 17 日 ~ 30 日&lt;/h2>
+&lt;p>被家长断网。&lt;/p>
+&lt;p>主力机被没收了。把以前的 Redmi 7 拿出来刷上 LineageOS 19.1 凑合用着。&lt;/p>
+&lt;p>话说类原生系统是针不戳，想起来小学时用的那部垃圾 Honor 6X 也是被我用 LineageOS 强行续命了一年。&lt;/p>
+&lt;p>随手安装了谷歌相机，不禁赞叹 Redmi 7 也能拍出这么好看的照片。&lt;/p>
+&lt;p>这段时间也没有出去玩，故无有趣的事情。&lt;/p>
+&lt;p>决定放弃使用 Kotlin Multiplatform 来写 Pikapi，回归 .NET，问就是 KMP 生态太次了。&lt;/p>
+&lt;h2 id="7-月-16-日">7 月 16 日&lt;/h2>
+&lt;p>有点慵懒的周六。&lt;/p>
+&lt;p>《外星也难民》第三季更新了。&lt;/p>
+&lt;p>阅读 Yabapi 的源码。说实话，作为 API 库来说写得真复杂，不过 B 站的解析就是这么难。&lt;/p>
+&lt;p>发现了一个三年前的哔咔 API 库（&lt;a class="link" href="https://github1s.com/czp3009/picacomic-api" target="_blank" rel="noopener"
+>picacomic-api&lt;/a>），以后的日子就是同时阅读它的源码和 Yabapi 的代码了，估计我能改写出个基于 Kotlin Multiplatform 的版本？&lt;/p>
+&lt;p>吐槽一下 KMP，居然连 UUID 都没有。引用第三方类库的时候，Gradle 不知道抽了什么风，死活找不到依赖。不过也有可能是我的问题（好像 Version 标注错了），明天再玩玩吧。&lt;/p>
+&lt;p>C# 每次版本更新都多了好多新特性，但是好像 C# 10 的新特性我都没用上几个，果然 C# 号称 GC 界的 C++ 名不虚传，稍微落下就有点学不动了 &lt;del>呜呜呜&lt;/del>&lt;/p>
+&lt;h2 id="7-月-15-日">7 月 15 日&lt;/h2>
+&lt;p>平常的周五，作业、刷剧（Rick &amp;amp; Morty）、读书（Kickstart Android）。&lt;/p>
+&lt;p>印象深刻的是复习了一下 Jetpack Navigation 和 Retrofit 的用法，太久没用了。&lt;/p>
+&lt;p>新项目 Pikapi 还是没动，因为还在研究 Yabapi 的源码。&lt;/p></description></item><item><title>又一个无聊的博客</title><link>https://yoroion.github.io/p/hello-hugo/</link><pubDate>Tue, 12 Jul 2022 00:00:00 +0000</pubDate><guid>https://yoroion.github.io/p/hello-hugo/</guid><description>&lt;h2 id="你好雨果">你好，雨果&lt;/h2>
+&lt;p>如你所见，这又是一个使用 Hugo 搭建的博客，主题是 &lt;a class="link" href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener"
+>Stack Theme&lt;/a>。&lt;/p>
+&lt;p>我曾在 2021 年多次打算启动一个博客，当时我记得尝试了：&lt;/p>
+&lt;ul>
+&lt;li>Hexo&lt;/li>
+&lt;li>Jekyll&lt;/li>
+&lt;li>某 .NET CMS&lt;/li>
+&lt;li>Hugo&lt;/li>
+&lt;/ul>
+&lt;p>因为当时已经折腾了很久，热情被消磨殆尽，选择了 Hugo 和 &lt;a class="link" href="https://www.wangchucheng.com/zh/docs/hugo-eureka/homepage-configuration/" target="_blank" rel="noopener"
+>Eureka Theme&lt;/a>，但后面发现 Eureka 的很多小细节我不满意，又不想再花时间修改 Sass（真的佩服有些大佬为了自定义博客，读完了 Hugo 的源码），最终草草放弃了博客。&lt;/p>
+&lt;h2 id="重启">重启&lt;/h2>
+&lt;p>时间来到了 2022 年 7 月 12 日暑假。无意间发现了一款很符合我审美的主题，也就是 Stack Theme， 花了半天时间调试配置修改样式和部署。最后，也就长这个样子。感激主题作者 Jimmy，让我不用过多的修改就可以享受到如此好看的主题。&lt;/p>
+&lt;h2 id="结语">结语&lt;/h2>
+&lt;p>我总是认为，博客的搭建重心应该放在写作上，但是很多时候会不小心掉进「过度美化」的误区。&lt;/p>
+&lt;p>步入高三，我的时间越来越紧促。&lt;/p>
+&lt;p>但我会尽我所能，记录所感所思所爱。&lt;/p>
+&lt;p>写博客真的&lt;strong>很开心&lt;/strong>啊 :D&lt;/p></description></item></channel></rss>

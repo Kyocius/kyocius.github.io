@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>鎧恩の部屋</title><link>https://yoroion.github.io/</link><description>Recent content on 鎧恩の部屋</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 07 Aug 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://yoroion.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>Rx.NET 响应式编程指北 01</title><link>https://yoroion.github.io/p/rx-magic/</link><pubDate>Sun, 07 Aug 2022 00:00:00 +0000</pubDate><guid>https://yoroion.github.io/p/rx-magic/</guid><description>&lt;h2 id="前言">前言&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Csharp on 鎧恩の部屋</title><link>https://yoroion.github.io/tags/csharp/</link><description>Recent content in Csharp on 鎧恩の部屋</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 07 Aug 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://yoroion.github.io/tags/csharp/index.xml" rel="self" type="application/rss+xml"/><item><title>Rx.NET 响应式编程指北 01</title><link>https://yoroion.github.io/p/rx-magic/</link><pubDate>Sun, 07 Aug 2022 00:00:00 +0000</pubDate><guid>https://yoroion.github.io/p/rx-magic/</guid><description>&lt;h2 id="前言">前言&lt;/h2>
 &lt;p>最近刚读了 &lt;em>Rx.NET in Action&lt;/em>，学到的新概念非常多，担忧自己会日渐遗忘，觉得有必要写一篇博客记录一下，说不定也能帮到一些志同道合的朋友。&lt;/p>
 &lt;p>本系列将会使用我深爱的 C# 语言和 Rx.NET 框架来讲解响应式编程（Reactive Programming）的魔法 ╰(&lt;em>°▽°&lt;/em>)╯&lt;/p>
 &lt;h2 id="背景知识">背景知识&lt;/h2>
@@ -109,87 +109,4 @@
 &lt;p>A data stream is like a hose: every drop of water is a data packet that needs to go through stations until it reaches the end. Your data also needs to be filtered and transformed until it gets to the real handler that does something useful with it.&lt;/p>
 &lt;/blockquote>
 &lt;p>上面这段 Quote 来自 &lt;em>Rx.NET in Action&lt;/em>，大致的意思就是数据就像水管子一样，我们通过操作符过滤水流，最后通过喷头将水流传播。&lt;/p>
-&lt;p>我认为这是响应式的核心概念。只要你想持续地监听某数据的变化，那么使用 Rx 让数据变成可观察流，绝对是个好主意。&lt;/p></description></item><item><title>About</title><link>https://yoroion.github.io/about/</link><pubDate>Thu, 28 Jul 2022 00:00:00 +0000</pubDate><guid>https://yoroion.github.io/about/</guid><description>&lt;h2 id="名字">名字&lt;/h2>
-&lt;p>我的名字叫&lt;strong>鎧恩&lt;/strong>，英文 ID 为 &lt;strong>Yoroion&lt;/strong>，来源于我三次元名字的谐音。&lt;/p>
-&lt;p>叫我鎧恩、铠恩、Yoroion 都行。&lt;/p>
-&lt;h2 id="技术栈">技术栈&lt;/h2>
-&lt;p>喜欢 C# 和 Kotlin 语言，&lt;del>讨厌一切带 Java 的东西！&lt;/del>&lt;/p>
-&lt;p>平时就在 Windows 11 和蒸汽大脑送的 Rider 上干活。&lt;/p>
-&lt;p>还在学习 Jetpack Compose 和 WinUI 3 中。&lt;/p>
-&lt;p>偶尔使用 Zorin OS，是个 Linux 小白，遇到问题只能 Google。&lt;/p>
-&lt;h2 id="现状">现状&lt;/h2>
-&lt;p>坐标天津市，是名高中牲。&lt;/p>
-&lt;p>已经上高三，时间⑧是很充裕&amp;hellip;&lt;/p>
-&lt;h2 id="性格">性格&lt;/h2>
-&lt;p>并不是一个严肃的人，常常很幼稚。&lt;/p>
-&lt;p>讨厌键政、脚本小子、墙内大部分网站和 Jvav 等等。&lt;/p>
-&lt;p>自我感觉礼貌而友善，希望能和萍水相逢的你成为朋友 (≧∇≦)ﾉ&lt;/p></description></item><item><title>二〇二二年夏日谈</title><link>https://yoroion.github.io/p/summer-holiday/</link><pubDate>Fri, 15 Jul 2022 00:00:00 +0000</pubDate><guid>https://yoroion.github.io/p/summer-holiday/</guid><description>&lt;img src="https://yoroion.github.io/head.jpg" alt="Featured image of post 二〇二二年夏日谈" />&lt;h2 id="8-月-5-日">8 月 5 日&lt;/h2>
-&lt;p>又折腾了一下博客。&lt;/p>
-&lt;p>把 Stack 主题换成了 Tania，更喜欢这种风格的。&lt;/p>
-&lt;p>Tania 的配置参数也并不复杂。&lt;/p>
-&lt;p>然后就是部署了 GitHub Action，现在写作算是更方便了（懒&lt;/p>
-&lt;h2 id="8-月-1-日--4-日">8 月 1 日 ~ 4 日&lt;/h2>
-&lt;p>天气很热，窗外的蝉鸣聒耳。&lt;/p>
-&lt;p>回北京了。陪家人看电影《独行月球》，虽然在旁人看来不免庸俗，但陪伴家人也算是美事一桩。&lt;/p>
-&lt;p>把 Pikapi 名字改回了 Picsharp 并成功上架 NuGet，这个暑假算是没有遗憾。&lt;/p>
-&lt;p>尝试学习响应式编程 Rx.NET，但依然不是很懂（恼&lt;/p>
-&lt;p>最近的大事件：拭目以待→安全落地→强烈谴责（笑&lt;/p>
-&lt;p>注：Picsharp = PicACG + C#&lt;/p>
-&lt;h2 id="7-月-31-日">7 月 31 日&lt;/h2>
-&lt;blockquote>
-&lt;p>当你认识到自己生命之重时，便是迈向了奥义之路。&lt;/p>
-&lt;/blockquote>
-&lt;p>追《浪客剑心》。暑期的补习结束了，可以稍微晚睡会儿。&lt;/p>
-&lt;h2 id="7-月-17-日--30-日">7 月 17 日 ~ 30 日&lt;/h2>
-&lt;p>被家长断网。&lt;/p>
-&lt;p>主力机被没收了。把以前的 Redmi 7 拿出来刷上 LineageOS 19.1 凑合用着。&lt;/p>
-&lt;p>话说类原生系统是针不戳，想起来小学时用的那部垃圾 Honor 6X 也是被我用 LineageOS 强行续命了一年。&lt;/p>
-&lt;p>随手安装了谷歌相机，不禁赞叹 Redmi 7 也能拍出这么好看的照片。&lt;/p>
-&lt;p>这段时间也没有出去玩，故无有趣的事情。&lt;/p>
-&lt;p>决定放弃使用 Kotlin Multiplatform 来写 Pikapi，回归 .NET，问就是 KMP 生态太次了。&lt;/p>
-&lt;h2 id="7-月-16-日">7 月 16 日&lt;/h2>
-&lt;p>有点慵懒的周六。&lt;/p>
-&lt;p>《外星也难民》第三季更新了。&lt;/p>
-&lt;p>阅读 Yabapi 的源码。说实话，作为 API 库来说写得真复杂，不过 B 站的解析就是这么难。&lt;/p>
-&lt;p>发现了一个三年前的哔咔 API 库（&lt;a class="link" href="https://github1s.com/czp3009/picacomic-api" target="_blank" rel="noopener"
->picacomic-api&lt;/a>），以后的日子就是同时阅读它的源码和 Yabapi 的代码了，估计我能改写出个基于 Kotlin Multiplatform 的版本？&lt;/p>
-&lt;p>吐槽一下 KMP，居然连 UUID 都没有。引用第三方类库的时候，Gradle 不知道抽了什么风，死活找不到依赖。不过也有可能是我的问题（好像 Version 标注错了），明天再玩玩吧。&lt;/p>
-&lt;p>C# 每次版本更新都多了好多新特性，但是好像 C# 10 的新特性我都没用上几个，果然 C# 号称 GC 界的 C++ 名不虚传，稍微落下就有点学不动了 &lt;del>呜呜呜&lt;/del>&lt;/p>
-&lt;h2 id="7-月-15-日">7 月 15 日&lt;/h2>
-&lt;p>平常的周五，作业、刷剧（Rick &amp;amp; Morty）、读书（Kickstart Android）。&lt;/p>
-&lt;p>印象深刻的是复习了一下 Jetpack Navigation 和 Retrofit 的用法，太久没用了。&lt;/p>
-&lt;p>新项目 Pikapi 还是没动，因为还在研究 Yabapi 的源码。&lt;/p></description></item><item><title>又一个无聊的博客</title><link>https://yoroion.github.io/p/hello-hugo/</link><pubDate>Tue, 12 Jul 2022 00:00:00 +0000</pubDate><guid>https://yoroion.github.io/p/hello-hugo/</guid><description>&lt;h2 id="你好雨果">你好，雨果&lt;/h2>
-&lt;p>如你所见，这又是一个使用 Hugo 搭建的博客，主题是 &lt;a class="link" href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener"
->Stack Theme&lt;/a>。&lt;/p>
-&lt;p>我曾在 2021 年多次打算启动一个博客，当时我记得尝试了：&lt;/p>
-&lt;ul>
-&lt;li>Hexo&lt;/li>
-&lt;li>Jekyll&lt;/li>
-&lt;li>某 .NET CMS&lt;/li>
-&lt;li>Hugo&lt;/li>
-&lt;/ul>
-&lt;p>因为当时已经折腾了很久，热情被消磨殆尽，选择了 Hugo 和 &lt;a class="link" href="https://www.wangchucheng.com/zh/docs/hugo-eureka/homepage-configuration/" target="_blank" rel="noopener"
->Eureka Theme&lt;/a>，但后面发现 Eureka 的很多小细节我不满意，又不想再花时间修改 Sass（真的佩服有些大佬为了自定义博客，读完了 Hugo 的源码），最终草草放弃了博客。&lt;/p>
-&lt;h2 id="重启">重启&lt;/h2>
-&lt;p>时间来到了 2022 年 7 月 12 日暑假。无意间发现了一款很符合我审美的主题，也就是 Stack Theme， 花了半天时间调试配置修改样式和部署。最后，也就长这个样子。感激主题作者 Jimmy，让我不用过多的修改就可以享受到如此好看的主题。&lt;/p>
-&lt;h2 id="结语">结语&lt;/h2>
-&lt;p>我总是认为，博客的搭建重心应该放在写作上，但是很多时候会不小心掉进「过度美化」的误区。&lt;/p>
-&lt;p>步入高三，我的时间越来越紧促。&lt;/p>
-&lt;p>但我会尽我所能，记录所感所思所爱。&lt;/p>
-&lt;p>写博客真的&lt;strong>很开心&lt;/strong>啊 :D&lt;/p></description></item><item><title>Archives</title><link>https://yoroion.github.io/archives/</link><pubDate>Tue, 28 May 2019 00:00:00 +0000</pubDate><guid>https://yoroion.github.io/archives/</guid><description/></item><item><title>Links</title><link>https://yoroion.github.io/links/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://yoroion.github.io/links/</guid><description>&lt;p>欢迎给我发邮件交换友链 (&lt;em>/ω＼&lt;/em>)&lt;/p>
-&lt;p>我的邮箱：yoroion@qq.com&lt;/p>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;span class="lnt">2
-&lt;/span>&lt;span class="lnt">3
-&lt;/span>&lt;span class="lnt">4
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">博客名：XXX&amp;#39;s Blog
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">简介：另一个 Blogger
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">链接：https://hexo.fluid-dev.com
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Icon：https://hexo.fluid-dev.com/img/favicon.png
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div></description></item><item><title>Search</title><link>https://yoroion.github.io/search/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://yoroion.github.io/search/</guid><description/></item></channel></rss>
+&lt;p>我认为这是响应式的核心概念。只要你想持续地监听某数据的变化，那么使用 Rx 让数据变成可观察流，绝对是个好主意。&lt;/p></description></item></channel></rss>
