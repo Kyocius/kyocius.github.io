@@ -25,6 +25,8 @@ image: head.png
 
 ## 响应式概念
 
+Rx 到底是干啥的？
+
 首先来看看微软的解释：Rx = Observables + LINQ + Schedulers。谔谔，啥玩意儿？
 
 那看看大佬怎么解释的吧：Rx = 处理异步数据流。这个解释还行，但还是不明白。
@@ -39,7 +41,7 @@ var c = a + b; // c 的值显然为 3
 
 当你改变 `a` 或者 `b` 值的时候，按照我们以前的思维，`c` 的值并不会随之发生变化。
 
-如果我们想要 `c` 的值随之而改变呢？很简单，使用 **Rx.NET**！
+如果我们想要 `c` 的值随之而改变呢？很简单，快快使用 **Rx**！
 
 ### 可观察对象 Observable
 
@@ -61,9 +63,9 @@ public interface IObservable<T>
 ```c#
 public interface IObserver<T>
 {
-	void OnNext(T value); 
-	void OnError(Exception error); 
- 	void OnCompleted(); 
+    void OnNext(T value); 
+    void OnError(Exception error); 
+    void OnCompleted(); 
 }
 ```
 

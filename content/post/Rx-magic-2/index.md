@@ -242,22 +242,22 @@ let changeRatio = Math.Abs((tickPair[1].Price - tickPair[0].Price) /
 最后全部的代码：
 
 ```c#
-const decimal maxChangeRatio = 0.1m;
+const decimal maxChangeRatio = 0.1 m;
 
-var drasticChanges =
-	from tick in ticks
-	group tick by tick.QuoteSymbol
-	into company
-	from tickPair in company.Buffer(2, 1)
-	let changeRatio = Math.Abs((tickPair[1].Price - tickPair[0].Price) / tickPair[0].Price)
-	where changeRatio > maxChangeRatio 
-	select new DrasticChange()
-	{ 
-            Symbol = company.Key, 
-            ChangeRatio = changeRatio, 
-            OldPrice = tickPair[0].Price, 
-            NewPrice = tickPair[1].Price 
-	};
+var drasticChanges = 
+    from tick in ticks
+    group tick by tick.QuoteSymbol
+    into company
+    from tickPair in company.Buffer(2, 1)
+    let changeRatio = Math.Abs((tickPair[1].Price - tickPair[0].Price) / tickPair[0].Price)
+    where changeRatio > maxChangeRatio
+    select new DrasticChange()
+    {
+    Symbol = company.Key,
+        ChangeRatio = changeRatio,
+        OldPrice = tickPair[0].Price,
+        NewPrice = tickPair[1].Price
+    };
 ```
 
 ![Result](all.png)

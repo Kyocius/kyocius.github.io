@@ -5,6 +5,10 @@ links:
     description: 技术力爆表的破晓
     website: https://sinoahpx.github.io
     image: https://avatars.githubusercontent.com/u/34391004?v=4
+  - title: Atmosphere
+    description: IN PURSUIT OF FREEDOM
+    website: https://blog.awa.moe/links/
+    image: https://avatars.githubusercontent.com/u/17957399
 menu:
     main: 
         weight: -50
