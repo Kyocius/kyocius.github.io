@@ -174,9 +174,9 @@ Rx.NET 提供了好用的 `FromEventPattern` 方法，帮助我们将事件转�
 
 ```c#
 IObservable<EventPattern<StockTick>> ticks =
- Observable.FromEventPattern<EventHandler<StockTick>, StockTick>( 
- h => ticker.StockTick += h, 
- h => ticker.StockTick -= h);
+        Observable.FromEventPattern<EventHandler<StockTick>, StockTick>( 
+            h => ticker.StockTick += h, 
+            h => ticker.StockTick -= h);
 ```
 
 谔谔，看不懂捏...
@@ -195,9 +195,9 @@ FromEventPattern<TDelegate,TEventArgs(Action<TDelegate>addHandler, Action<TDeleg
 
 ```c#
 var ticks = Observable.FromEventPattern<EventHandler<StockTick>, StockTick>(
-    h => ticker.StockTick += h, 
-    h => ticker.StockTick -= h) 
-    .Select(tickEvent => tickEvent.EventArgs) 
+            h => ticker.StockTick += h, 
+            h => ticker.StockTick -= h) 
+        .Select(tickEvent => tickEvent.EventArgs);
 ```
 
 ### 数据处理
@@ -234,7 +234,7 @@ from tick in ticks
 group tick by tick.QuoteSymbol into company
 from tickPair in company.Buffer(2, 1)
 let changeRatio = Math.Abs((tickPair[1].Price - tickPair[0].Price) / 
-tickPair[0].Price)
+    tickPair[0].Price)
 ```
 
 ![Abs](abs.png)
@@ -245,18 +245,18 @@ tickPair[0].Price)
 const decimal maxChangeRatio = 0.1m;
 
 var drasticChanges =
-    from tick in ticks
-    group tick by tick.QuoteSymbol
-    into company
-    from tickPair in company.Buffer(2, 1)
-    let changeRatio = Math.Abs((tickPair[1].Price - tickPair[0].Price) / tickPair[0].Price)
-    where changeRatio > maxChangeRatio 
-    select new DrasticChange() 
+	from tick in ticks
+	group tick by tick.QuoteSymbol
+	into company
+	from tickPair in company.Buffer(2, 1)
+	let changeRatio = Math.Abs((tickPair[1].Price - tickPair[0].Price) / tickPair[0].Price)
+	where changeRatio > maxChangeRatio 
+	select new DrasticChange()
 	{ 
- 		Symbol = company.Key, 
- 		ChangeRatio = changeRatio, 
- 		OldPrice = tickPair[0].Price, 
- 		NewPrice = tickPair[1].Price 
+            Symbol = company.Key, 
+            ChangeRatio = changeRatio, 
+            OldPrice = tickPair[0].Price, 
+            NewPrice = tickPair[1].Price 
 	};
 ```
 
@@ -270,9 +270,9 @@ _subscription =
         Console.WriteLine($"Stock:{change.Symbol} has changed with {change.ChangeRatio} ratio, 
         Old Price: {change.OldPrice} 
         New Price: {change.NewPrice}");
-                          },
- ex => { /* 处理错误 */}, 
- () => {/* 响应任务完成 */});
+    },
+    ex => { /* 处理错误 */}, 
+    () => {/* 响应任务完成 */});
 ```
 
 ### 取消订阅
@@ -294,10 +294,59 @@ public void Dispose()
 
 ```c#
 var ticks = Observable.FromEventPattern<EventHandler<StockTick>, StockTick>(
- h => ticker.StockTick += h, 
- h => ticker.StockTick -= h) 
- .Select(tickEvent => tickEvent.EventArgs)
- .Synchronize()
+            h => ticker.StockTick += h, 
+            h => ticker.StockTick -= h) 
+        .Select(tickEvent => tickEvent.EventArgs)
+        .Synchronize();
+```
+
+### 总览代码
+
+```c#
+class RxStockMonitor : IDisposable
+{
+    private IDisposable _subscription;
+    public RxStockMonitor(StockTicker ticker)
+    {
+        const decimal maxChangeRatio = 0.1m;
+        var ticks = 
+            Observable.FromEventPattern<EventHandler<StockTick>, StockTick>(
+                    h => ticker.StockTick += h, 
+                    h => ticker.StockTick -= h) 
+                .Select(tickEvent => tickEvent.EventArgs)
+                .Synchronize(); 
+        var drasticChanges = 
+            from tick in ticks 
+            group tick by tick.QuoteSymbol 
+            into company 
+            from tickPair in company.Buffer(2, 1) 
+            let changeRatio = Math.Abs((tickPair[1].Price -
+                                        tickPair[0].Price)/tickPair[0].Price) 
+            where changeRatio > maxChangeRatio 
+            select new 
+            { 
+                Symbol = company.Key, 
+                ChangeRatio = changeRatio, 
+                OldPrice = tickPair[0].Price, 
+                NewPrice = tickPair[1].Price 
+            }; 
+        _subscription = 
+            drasticChanges.Subscribe(change => 
+                { 
+                    WriteLine($"Stock:{change.Symbol} has changed
+                        with {change.ChangeRatio} ratio,
+                    Old Price: {change.OldPrice} 
+                    New Price: {change.NewPrice}"); 
+                }, 
+                ex => { /* 处理错误 */}, 
+                () =>{/* 响应任务完成 */});
+    }
+ 
+    public void Dispose() 
+    {
+        _subscription.Dispose();
+    }
+}
 ```
 
 ## Rx 的优点
@@ -309,6 +358,6 @@ var ticks = Observable.FromEventPattern<EventHandler<StockTick>, StockTick>(
 
   [^1]: You’re unaware of the real resources that the Rx pipeline creates because they were well encapsulated in the operators’ implementation. This is the opposite of the traditional events version, in which you needed to add every resource that was involved and had to manage its lifetime. The fewer resources you need to manage, the better your code will be in managing resources.
 
-  
 - 强大的操作符：Rx 最明显的优势
 - 更简单地同步：一个 `Synchronize` 方法足矣
+
