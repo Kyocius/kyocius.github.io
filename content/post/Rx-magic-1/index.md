@@ -1,9 +1,9 @@
 ---
 title: Rx.NET 响应式编程指北 01
-description: 基础概念
+description: 响应式的概念
 date: 2022-08-07
 draft: false
-slug: rx-magic
+slug: rx-magic-1
 categories:
     - 编程
 tags:
