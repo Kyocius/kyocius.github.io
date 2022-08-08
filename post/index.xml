@@ -1,4 +1,499 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on 鎧恩の部屋</title><link>https://yoroion.github.io/post/</link><description>Recent content in Posts on 鎧恩の部屋</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 07 Aug 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://yoroion.github.io/post/index.xml" rel="self" type="application/rss+xml"/><item><title>Rx.NET 响应式编程指北 01</title><link>https://yoroion.github.io/p/rx-magic/</link><pubDate>Sun, 07 Aug 2022 00:00:00 +0000</pubDate><guid>https://yoroion.github.io/p/rx-magic/</guid><description>&lt;img src="https://yoroion.github.io/p/rx-magic/head.png" alt="Featured image of post Rx.NET 响应式编程指北 01" />&lt;h2 id="前言">前言&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on 鎧恩の部屋</title><link>https://yoroion.github.io/post/</link><description>Recent content in Posts on 鎧恩の部屋</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 08 Aug 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://yoroion.github.io/post/index.xml" rel="self" type="application/rss+xml"/><item><title>Rx.NET 响应式编程指北 02</title><link>https://yoroion.github.io/p/rx-magic-2/</link><pubDate>Mon, 08 Aug 2022 00:00:00 +0000</pubDate><guid>https://yoroion.github.io/p/rx-magic-2/</guid><description>&lt;img src="https://yoroion.github.io/p/rx-magic-2/head.png" alt="Featured image of post Rx.NET 响应式编程指北 02" />&lt;h2 id="前言">前言&lt;/h2>
+&lt;p>在上一章里，我们学习了响应式的基本概念。在这一章节，我们将编写一个&lt;strong>股票监控&lt;/strong>程序。首先我们将使用传统的 .NET 事件系统来写一次，之后再通过 Rx 来重构。&lt;/p>
+&lt;h2 id="传统事件写法">传统事件写法&lt;/h2>
+&lt;ol>
+&lt;li>先编写一个类，其中只有一个事件属性：&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-c#" data-lang="c#">&lt;span class="line">&lt;span class="cl">&lt;span class="k">class&lt;/span> &lt;span class="nc">StockTicker&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">public&lt;/span> &lt;span class="k">event&lt;/span> &lt;span class="n">EventHandler&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="n">StockTick&lt;/span>&lt;span class="p">&amp;gt;&lt;/span> &lt;span class="n">StockTick&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;ol start="2">
+&lt;li>编写一个类包含我们的数据：&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-c#" data-lang="c#">&lt;span class="line">&lt;span class="cl">&lt;span class="k">class&lt;/span> &lt;span class="nc">StockTick&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">public&lt;/span> &lt;span class="kt">string&lt;/span> &lt;span class="n">QuoteSymbol&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="k">get&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">set&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">public&lt;/span> &lt;span class="kt">decimal&lt;/span> &lt;span class="n">Price&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="k">get&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">set&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;ol start="3">
+&lt;li>创建一个类来监听变化，并订阅事件：&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-c#" data-lang="c#">&lt;span class="line">&lt;span class="cl">&lt;span class="k">class&lt;/span> &lt;span class="nc">StockMonitor&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">public&lt;/span> &lt;span class="n">StockMonitor&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">StockTicker&lt;/span> &lt;span class="n">ticker&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ticker&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">StockTick&lt;/span> &lt;span class="p">+=&lt;/span> &lt;span class="n">OnStockTick&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">// OnStockTick 注册事件&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">...&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;ol start="4">
+&lt;li>因为我们需要比较股票价格的变化，所以我们可以通过字典来存储先前的股票数据。编写一个新类：&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-c#" data-lang="c#">&lt;span class="line">&lt;span class="cl">&lt;span class="k">class&lt;/span> &lt;span class="nc">StockInfo&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">public&lt;/span> &lt;span class="n">StockInfo&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kt">string&lt;/span> &lt;span class="n">symbol&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="kt">decimal&lt;/span> &lt;span class="n">price&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Symbol&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="n">symbol&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">PrevPrice&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="n">price&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">public&lt;/span> &lt;span class="kt">string&lt;/span> &lt;span class="n">Symbol&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="k">get&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">set&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">public&lt;/span> &lt;span class="kt">decimal&lt;/span> &lt;span class="n">PrevPrice&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="k">get&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">set&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>之后你可以在 &lt;code>StockMonitor&lt;/code> 中声明一个 &lt;code>StockInfo&lt;/code> 类型的属性。&lt;/p>
+&lt;ol start="5">
+&lt;li>每当股票变化时，&lt;code>OnStockTick&lt;/code> 就会被调用。因此，我们的应用还要实现一个新旧数据比较的功能。我们将使用 &lt;code>TryGetValue&lt;/code> 方法。当我们想要的值存在时，这个方法会返回一个 &lt;code>true&lt;/code>。在 &lt;code>StockMonitor&lt;/code> 中编写以下代码：&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;span class="lnt">9
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-c#" data-lang="c#">&lt;span class="line">&lt;span class="cl">&lt;span class="kt">var&lt;/span> &lt;span class="n">_stockInfos&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="k">new&lt;/span> &lt;span class="n">Dictionary&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="kt">string&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">StockInfo&lt;/span>&lt;span class="p">&amp;gt;();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">void&lt;/span> &lt;span class="n">OnStockTick&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kt">object&lt;/span> &lt;span class="n">sender&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">StockTick&lt;/span> &lt;span class="n">stockTick&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">StockInfo&lt;/span> &lt;span class="n">stockInfo&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kt">var&lt;/span> &lt;span class="n">quoteSymbol&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="n">stockTick&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">QuoteSymbol&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kt">var&lt;/span> &lt;span class="n">stockInfoExists&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="n">_stockInfos&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">TryGetValue&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">quoteSymbol&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="k">out&lt;/span> &lt;span class="n">stockInfo&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">...&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;ol start="6">
+&lt;li>如果一个股票数据存在，我们就可以比较大小了：&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-c#" data-lang="c#">&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="kt">decimal&lt;/span> &lt;span class="n">maxChangeRatio&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="m">0.1&lt;/span>&lt;span class="n">m&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">...&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kt">var&lt;/span> &lt;span class="n">quoteSymbol&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="n">stockTick&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">QuoteSymbol&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kt">var&lt;/span> &lt;span class="n">stockInfoExists&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="n">_stockInfos&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">TryGetValue&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">quoteSymbol&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="k">out&lt;/span> &lt;span class="n">stockInfo&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">stockInfoExists&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kt">var&lt;/span> &lt;span class="n">priceDiff&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="n">stockTick&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">Price&lt;/span>&lt;span class="p">-&lt;/span>&lt;span class="n">stockInfo&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">PrevPrice&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 变化的百分比&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kt">var&lt;/span> &lt;span class="n">changeRatio&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="n">Math&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">Abs&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">priceDiff&lt;/span>&lt;span class="p">/&lt;/span>&lt;span class="n">stockInfo&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">PrevPrice&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">changeRatio&lt;/span> &lt;span class="p">&amp;gt;&lt;/span> &lt;span class="n">maxChangeRatio&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 简单打印个信息，用的是 C# 6.0 以前的写法&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">WriteLine&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;Stock:{0} has changed with {1} ratio, Old Price:{2} New Price:{3}&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">quoteSymbol&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">changeRatio&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">stockInfo&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">PrevPrice&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">stockTick&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">Price&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">//保存这个新数据&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">_stockInfos&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">quoteSymbol&lt;/span>&lt;span class="p">].&lt;/span>&lt;span class="n">PrevPrice&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="n">stockTick&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">Price&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;ol start="7">
+&lt;li>那如果我们不想要订阅股票消息了咋办？幸运的是 .NET 提供了方法来干这个活。在 &lt;code>StockMonitor&lt;/code> 里编写以下方法：&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-c#" data-lang="c#">&lt;span class="line">&lt;span class="cl">&lt;span class="k">public&lt;/span> &lt;span class="k">void&lt;/span> &lt;span class="n">Dispose&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">_ticker&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">StockTick&lt;/span> &lt;span class="p">-=&lt;/span> &lt;span class="n">OnStockTick&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">_stockInfos&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">Clear&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;ol start="8">
+&lt;li>写一点假数据，测试一下结果：&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;span class="lnt">9
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">// 瞎编的
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Symbol: &amp;#34;MSFT&amp;#34; Price: 100
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Symbol: &amp;#34;INTC&amp;#34; Price: 150
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Symbol: &amp;#34;MSFT&amp;#34; Price: 170
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Symbol: &amp;#34;MSFT&amp;#34; Price: 195
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">// 运行结果
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Stock:MSFT has changed with 0.7 ratio, Old Price:100 New Price:170
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Stock:MSFT has changed with 0.15 ratio, Old Price:170 New Price:195.5
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>哇哦，感觉还不错嘛！&lt;/p>
+&lt;p>但是这么写就一点问题没有吗？&lt;/p>
+&lt;h3 id="并发问题">并发问题&lt;/h3>
+&lt;p>我们的程序运行起来没啥问题，但背后有个严重漏洞：&lt;/p>
+&lt;p>不是&lt;strong>并发&lt;/strong>的！&lt;/p>
+&lt;p>如果 &lt;code>StockMonitor&lt;/code> 运行期间又有新的股票变化咋办？&lt;/p>
+&lt;p>很抱歉，只能等着第一次程序结束。&lt;/p>
+&lt;h3 id="线程不安全">线程不安全&lt;/h3>
+&lt;p>虽然我们的 &lt;code>StockInfo&lt;/code> 字典支持多读者（Multiple Readers）同时读取，但当我们读取字典时字典正在被修改，那么就会报错。&lt;/p>
+&lt;p>这是你可能会说，可以改用 .NET 提供的无锁 &lt;code>ConcurrentDictionary&lt;/code> 呀！这样就不报错了。&lt;/p>
+&lt;p>但是，那我们每次比较的&lt;strong>新值&lt;/strong>又是谁？是修改前的，还是修改后的？&lt;/p>
+&lt;p>你可能又会说，可以使用线程锁（Thread Lock）来阻塞两个同时发生的线程的其中一个。&lt;/p>
+&lt;p>可是如果资源不及时释放，又很容易导致&lt;strong>死锁&lt;/strong>问题。&lt;/p>
+&lt;h2 id="响应式写法">响应式写法&lt;/h2>
+&lt;p>使用 Rx 的话，传统事件写法暴露出的问题可以通过更简单的方式解决。&lt;/p>
+&lt;h3 id="安装-rxnet">安装 Rx.NET&lt;/h3>
+&lt;p>你都看到这里了，相信咋安装根本不用我教你。&lt;/p>
+&lt;p>Rx.NET 放在 &lt;code>System.Reactive&lt;/code> 名称空间下。&lt;/p>
+&lt;h3 id="事件转换">事件转换&lt;/h3>
+&lt;p>Rx.NET 提供了好用的 &lt;code>FromEventPattern&lt;/code> 方法，帮助我们将事件转换成可观察对象（Observable）：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-c#" data-lang="c#">&lt;span class="line">&lt;span class="cl">&lt;span class="n">IObservable&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="n">EventPattern&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="n">StockTick&lt;/span>&lt;span class="p">&amp;gt;&amp;gt;&lt;/span> &lt;span class="n">ticks&lt;/span> &lt;span class="p">=&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Observable&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">FromEventPattern&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="n">EventHandler&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="n">StockTick&lt;/span>&lt;span class="p">&amp;gt;,&lt;/span> &lt;span class="n">StockTick&lt;/span>&lt;span class="p">&amp;gt;(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">h&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="n">ticker&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">StockTick&lt;/span> &lt;span class="p">+=&lt;/span> &lt;span class="n">h&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">h&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="n">ticker&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">StockTick&lt;/span> &lt;span class="p">-=&lt;/span> &lt;span class="n">h&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>谔谔，看不懂捏&amp;hellip;&lt;/p>
+&lt;p>那来看一下这个方法的定义吧：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-c#" data-lang="c#">&lt;span class="line">&lt;span class="cl">&lt;span class="n">FromEventPattern&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="n">TDelegate&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="n">TEventArgs&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">Action&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="n">TDelegate&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>&lt;span class="n">addHandler&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">Action&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="n">TDelegate&lt;/span>&lt;span class="p">&amp;gt;&lt;/span> &lt;span class="n">removeHandler&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;ul>
+&lt;li>&lt;code>TDelegate&lt;/code> 是匹配事件的委托 → &lt;code>EventHandler&amp;lt;StockTick&amp;gt;&lt;/code>&lt;/li>
+&lt;li>&lt;code>TEventArgs&lt;/code> 就是 &lt;code>EventArgs&lt;/code> → &lt;code>StockTick&lt;/code>&lt;/li>
+&lt;li>&lt;code>addHandler&lt;/code> 和 &lt;code>removeHandler&lt;/code> 一般就直接写成 Lambda 表达式的形式&lt;/li>
+&lt;/ul>
+&lt;p>因为我们只关心传入的 &lt;code>EventArgs&lt;/code>，所以代码可以改写成：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-c#" data-lang="c#">&lt;span class="line">&lt;span class="cl">&lt;span class="kt">var&lt;/span> &lt;span class="n">ticks&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="n">Observable&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">FromEventPattern&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="n">EventHandler&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="n">StockTick&lt;/span>&lt;span class="p">&amp;gt;,&lt;/span> &lt;span class="n">StockTick&lt;/span>&lt;span class="p">&amp;gt;(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">h&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="n">ticker&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">StockTick&lt;/span> &lt;span class="p">+=&lt;/span> &lt;span class="n">h&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">h&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="n">ticker&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">StockTick&lt;/span> &lt;span class="p">-=&lt;/span> &lt;span class="n">h&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">.&lt;/span>&lt;span class="n">Select&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">tickEvent&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="n">tickEvent&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">EventArgs&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="数据处理">数据处理&lt;/h3>
+&lt;p>现在你已经有了一个可观察的数据流了，我们将围绕它展开查询操作，就像 LINQ 一样。&lt;/p>
+&lt;h4 id="分组-group">分组 Group&lt;/h4>
+&lt;p>我们试着通过 &lt;code>Symbol&lt;/code> 来为每支股票分组：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-c#" data-lang="c#">&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// 查询语句形式&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">from&lt;/span> &lt;span class="n">tick&lt;/span> &lt;span class="k">in&lt;/span> &lt;span class="n">ticks&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">group&lt;/span> &lt;span class="n">tick&lt;/span> &lt;span class="k">by&lt;/span> &lt;span class="n">tick&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">QuoteSymbol&lt;/span> &lt;span class="k">into&lt;/span> &lt;span class="n">company&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// 函数形式&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">ticks&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">GroupBy&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">tick&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="n">tick&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">QuoteSymbol&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://yoroion.github.io/p/rx-magic-2/company.png"
+width="847"
+height="303"
+srcset="https://yoroion.github.io/p/rx-magic-2/company_hu89ffbd07e877100e93eabfec3de46bdc_41634_480x0_resize_box_3.png 480w, https://yoroion.github.io/p/rx-magic-2/company_hu89ffbd07e877100e93eabfec3de46bdc_41634_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Company"
+class="gallery-image"
+data-flex-grow="279"
+data-flex-basis="670px"
+>&lt;/p>
+&lt;h4 id="分批-buffer">分批 Buffer&lt;/h4>
+&lt;p>&lt;code>Buffer&lt;/code> 用于同组内再分批（Batch）。&lt;/p>
+&lt;p>在这里是同组内数据两两前后比较：&lt;/p>
+&lt;p>&lt;img src="https://yoroion.github.io/p/rx-magic-2/batch.png"
+width="724"
+height="155"
+srcset="https://yoroion.github.io/p/rx-magic-2/batch_hu1c22c92359a794fe4e2c1313128f37f9_14444_480x0_resize_box_3.png 480w, https://yoroion.github.io/p/rx-magic-2/batch_hu1c22c92359a794fe4e2c1313128f37f9_14444_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Batch"
+class="gallery-image"
+data-flex-grow="467"
+data-flex-basis="1121px"
+>&lt;/p>
+&lt;p>&lt;img src="https://yoroion.github.io/p/rx-magic-2/buffer.png"
+width="889"
+height="300"
+srcset="https://yoroion.github.io/p/rx-magic-2/buffer_hua9460fa20267d4a3ff37a62d0fc0694a_51311_480x0_resize_box_3.png 480w, https://yoroion.github.io/p/rx-magic-2/buffer_hua9460fa20267d4a3ff37a62d0fc0694a_51311_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Buffer"
+class="gallery-image"
+data-flex-grow="296"
+data-flex-basis="711px"
+>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-c#" data-lang="c#">&lt;span class="line">&lt;span class="cl">&lt;span class="k">from&lt;/span> &lt;span class="n">tick&lt;/span> &lt;span class="k">in&lt;/span> &lt;span class="n">ticks&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">group&lt;/span> &lt;span class="n">tick&lt;/span> &lt;span class="k">by&lt;/span> &lt;span class="n">tick&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">QuoteSymbol&lt;/span> &lt;span class="k">into&lt;/span> &lt;span class="n">company&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">from&lt;/span> &lt;span class="n">tickPair&lt;/span> &lt;span class="k">in&lt;/span> &lt;span class="n">company&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">Buffer&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="m">2&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="m">1&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">let&lt;/span> &lt;span class="n">changeRatio&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="n">Math&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">Abs&lt;/span>&lt;span class="p">((&lt;/span>&lt;span class="n">tickPair&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="m">1&lt;/span>&lt;span class="p">].&lt;/span>&lt;span class="n">Price&lt;/span> &lt;span class="p">-&lt;/span> &lt;span class="n">tickPair&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="m">0&lt;/span>&lt;span class="p">].&lt;/span>&lt;span class="n">Price&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">/&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">tickPair&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="m">0&lt;/span>&lt;span class="p">].&lt;/span>&lt;span class="n">Price&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://yoroion.github.io/p/rx-magic-2/abs.png"
+width="846"
+height="373"
+srcset="https://yoroion.github.io/p/rx-magic-2/abs_hu9467c6061409122f0ca510ba68058cb4_41280_480x0_resize_box_3.png 480w, https://yoroion.github.io/p/rx-magic-2/abs_hu9467c6061409122f0ca510ba68058cb4_41280_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Abs"
+class="gallery-image"
+data-flex-grow="226"
+data-flex-basis="544px"
+>&lt;/p>
+&lt;p>最后全部的代码：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-c#" data-lang="c#">&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="kt">decimal&lt;/span> &lt;span class="n">maxChangeRatio&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="m">0.1&lt;/span>&lt;span class="n">m&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kt">var&lt;/span> &lt;span class="n">drasticChanges&lt;/span> &lt;span class="p">=&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">from&lt;/span> &lt;span class="n">tick&lt;/span> &lt;span class="k">in&lt;/span> &lt;span class="n">ticks&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">group&lt;/span> &lt;span class="n">tick&lt;/span> &lt;span class="k">by&lt;/span> &lt;span class="n">tick&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">QuoteSymbol&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">into&lt;/span> &lt;span class="n">company&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">from&lt;/span> &lt;span class="n">tickPair&lt;/span> &lt;span class="k">in&lt;/span> &lt;span class="n">company&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">Buffer&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="m">2&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="m">1&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">let&lt;/span> &lt;span class="n">changeRatio&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="n">Math&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">Abs&lt;/span>&lt;span class="p">((&lt;/span>&lt;span class="n">tickPair&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="m">1&lt;/span>&lt;span class="p">].&lt;/span>&lt;span class="n">Price&lt;/span> &lt;span class="p">-&lt;/span> &lt;span class="n">tickPair&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="m">0&lt;/span>&lt;span class="p">].&lt;/span>&lt;span class="n">Price&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">/&lt;/span> &lt;span class="n">tickPair&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="m">0&lt;/span>&lt;span class="p">].&lt;/span>&lt;span class="n">Price&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">where&lt;/span> &lt;span class="n">changeRatio&lt;/span> &lt;span class="p">&amp;gt;&lt;/span> &lt;span class="n">maxChangeRatio&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">select&lt;/span> &lt;span class="k">new&lt;/span> &lt;span class="n">DrasticChange&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Symbol&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="n">company&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">Key&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ChangeRatio&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="n">changeRatio&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">OldPrice&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="n">tickPair&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="m">0&lt;/span>&lt;span class="p">].&lt;/span>&lt;span class="n">Price&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">NewPrice&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="n">tickPair&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="m">1&lt;/span>&lt;span class="p">].&lt;/span>&lt;span class="n">Price&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://yoroion.github.io/p/rx-magic-2/all.png"
+width="858"
+height="493"
+srcset="https://yoroion.github.io/p/rx-magic-2/all_hue18b51f4c51fdac1903e8cd69588561b_53962_480x0_resize_box_3.png 480w, https://yoroion.github.io/p/rx-magic-2/all_hue18b51f4c51fdac1903e8cd69588561b_53962_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Result"
+class="gallery-image"
+data-flex-grow="174"
+data-flex-basis="417px"
+>&lt;/p>
+&lt;h3 id="消费数据">消费数据&lt;/h3>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-c#" data-lang="c#">&lt;span class="line">&lt;span class="cl">&lt;span class="n">_subscription&lt;/span> &lt;span class="p">=&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">drasticChanges&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">Subscribe&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">change&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">WriteLine&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">$&amp;#34;Stock:{change.Symbol} has changed with {change.ChangeRatio} ratio,
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s"> Old Price: {change.OldPrice}
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s"> New Price: {change.NewPrice}&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ex&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="cm">/* 处理错误 */&lt;/span>&lt;span class="p">},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">()&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>&lt;span class="cm">/* 响应任务完成 */&lt;/span>&lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="取消订阅">取消订阅&lt;/h3>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-c#" data-lang="c#">&lt;span class="line">&lt;span class="cl">&lt;span class="k">public&lt;/span> &lt;span class="k">void&lt;/span> &lt;span class="n">Dispose&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">_subscription&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">Dispose&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="同步流">同步流&lt;/h3>
+&lt;p>还记得我们之前使用事件系统的问题吗？&lt;/p>
+&lt;p>异步 IO 会导致线程不安全。&lt;/p>
+&lt;p>因此我们要将我们的 &lt;code>ticks&lt;/code> 可观察数据流转换成同步的：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-c#" data-lang="c#">&lt;span class="line">&lt;span class="cl">&lt;span class="kt">var&lt;/span> &lt;span class="n">ticks&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="n">Observable&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">FromEventPattern&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="n">EventHandler&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="n">StockTick&lt;/span>&lt;span class="p">&amp;gt;,&lt;/span> &lt;span class="n">StockTick&lt;/span>&lt;span class="p">&amp;gt;(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">h&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="n">ticker&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">StockTick&lt;/span> &lt;span class="p">+=&lt;/span> &lt;span class="n">h&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">h&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="n">ticker&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">StockTick&lt;/span> &lt;span class="p">-=&lt;/span> &lt;span class="n">h&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">.&lt;/span>&lt;span class="n">Select&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">tickEvent&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="n">tickEvent&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">EventArgs&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">.&lt;/span>&lt;span class="n">Synchronize&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="rx-的优点">Rx 的优点&lt;/h2>
+&lt;p>我们已经用两种方式编写了这个股票监控程序，是时候比较两种写法了。&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>代码更紧凑：所有逻辑集中在一起&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>更少的资源占用：Rx 几乎没有资源处理的开销&lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>强大的操作符：Rx 最明显的优势&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>更简单地同步：一个 &lt;code>Synchronize&lt;/code> 方法足矣&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;div class="footnotes" role="doc-endnotes">
+&lt;hr>
+&lt;ol>
+&lt;li id="fn:1">
+&lt;p>You’re unaware of the real resources that the Rx pipeline creates because they were well encapsulated in the operators’ implementation. This is the opposite of the traditional events version, in which you needed to add every resource that was involved and had to manage its lifetime. The fewer resources you need to manage, the better your code will be in managing resources.&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;/div></description></item><item><title>Rx.NET 响应式编程指北 01</title><link>https://yoroion.github.io/p/rx-magic-1/</link><pubDate>Sun, 07 Aug 2022 00:00:00 +0000</pubDate><guid>https://yoroion.github.io/p/rx-magic-1/</guid><description>&lt;img src="https://yoroion.github.io/p/rx-magic-1/head.png" alt="Featured image of post Rx.NET 响应式编程指北 01" />&lt;h2 id="前言">前言&lt;/h2>
 &lt;p>最近刚读了 &lt;em>Rx.NET in Action&lt;/em>，学到的新概念非常多，担忧自己会日渐遗忘，觉得有必要写一篇博客记录一下，说不定也能帮到一些志同道合的朋友。&lt;/p>
 &lt;p>本系列将会使用我深爱的 C# 语言和 Rx.NET 框架来讲解响应式编程（Reactive Programming）的魔法 ╰(&lt;em>°▽°&lt;/em>)╯&lt;/p>
 &lt;h2 id="背景知识">背景知识&lt;/h2>
