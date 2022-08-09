@@ -384,7 +384,7 @@ data-flex-basis="544px"
 &lt;/span>&lt;span class="lnt">16
 &lt;/span>&lt;/code>&lt;/pre>&lt;/td>
 &lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-c#" data-lang="c#">&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="kt">decimal&lt;/span> &lt;span class="n">maxChangeRatio&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="m">0.1&lt;/span>&lt;span class="n">m&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-c#" data-lang="c#">&lt;span class="line">&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="kt">decimal&lt;/span> &lt;span class="n">maxChangeRatio&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="m">0.1&lt;/span> &lt;span class="n">m&lt;/span>&lt;span class="p">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kt">var&lt;/span> &lt;span class="n">drasticChanges&lt;/span> &lt;span class="p">=&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">from&lt;/span> &lt;span class="n">tick&lt;/span> &lt;span class="k">in&lt;/span> &lt;span class="n">ticks&lt;/span>
@@ -598,6 +598,7 @@ data-flex-basis="417px"
 &lt;li>Rx 是由&lt;strong>微软&lt;/strong>旗下一个实验室发起的 &lt;del>巨硬大法好&lt;/del>&lt;/li>
 &lt;/ul>
 &lt;h2 id="响应式概念">响应式概念&lt;/h2>
+&lt;p>Rx 到底是干啥的？&lt;/p>
 &lt;p>首先来看看微软的解释：Rx = Observables + LINQ + Schedulers。谔谔，啥玩意儿？&lt;/p>
 &lt;p>那看看大佬怎么解释的吧：Rx = 处理异步数据流。这个解释还行，但还是不明白。&lt;/p>
 &lt;p>这里是更通俗的解释：&lt;/p>
@@ -614,7 +615,7 @@ data-flex-basis="417px"
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;p>当你改变 &lt;code>a&lt;/code> 或者 &lt;code>b&lt;/code> 值的时候，按照我们以前的思维，&lt;code>c&lt;/code> 的值并不会随之发生变化。&lt;/p>
-&lt;p>如果我们想要 &lt;code>c&lt;/code> 的值随之而改变呢？很简单，使用 &lt;strong>Rx.NET&lt;/strong>！&lt;/p>
+&lt;p>如果我们想要 &lt;code>c&lt;/code> 的值随之而改变呢？很简单，快快使用 &lt;strong>Rx&lt;/strong>！&lt;/p>
 &lt;h3 id="可观察对象-observable">可观察对象 Observable&lt;/h3>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
