@@ -16,23 +16,21 @@ image: head.png
 
 ## 前言
 
-这一章是独立于正式章节的番外，补充一下 C# **函数式**编程（Functional Programming）和**流式接口**（Fluent API）的知识。
+这一章是独立于正式章节的番外，补充一下 C# **函数式编程**（Functional Programming）以及**流式接口**（Fluent API）的知识。
 
-等等，我们不是在学 Rx.NET 吗，怎么又跑到函数式了 (＃°Д°)
+等等，我们不是在学 Rx.NET 吗，怎么又跑到函数式了？ (＃°Д°)
 
-你 先 别 急，其实二者并不冲突。
+你 先 别 急，二者并不冲突。
 
-学习函数式是响应式编程的必要前提。
+Rx.NET 提供的方法大部分都是函数式的，比如我们上一章学到的 `FromEventPattern` 方法，就是一个**高阶函数**（High-Order Function），因为它的参数也是函数。
 
-Rx 提供的方法大部分都是函数式的，比如我们上一章学到的 `FromEventPattern` 方法，就是一个**高阶函数**（High-Order Function），因为它的参数也是函数。
+有些老古董 Java 程序员认为，C# 和 Java 一样都是纯面向对象语言（Pure OOP），这是完全错误的。经过二十年的发展，C# 早已进化成一门多范式语言了。
 
-有些老古董 Java 程序员认为，C# 和 Java 一样都是纯面向对象语言（Pure OOP），这是完全错误的。经过二十年的发展，C# 早已进化成一门多范式的语言了。
-
-## 上手函数式
+## 函数式编程
 
 那么如何用 C# 编写函数式代码呢？
 
-来回顾一下基础知识吧！
+回顾一下基础知识吧。
 
 ### 委托 Delegate
 
@@ -53,7 +51,7 @@ myDel += <一些函数>;
 myDel("first", "second"); // 这样调用
 ```
 
-### 匿名方法 Anonymous
+### 匿名方法 Anonymous methods
 
 ```c#
 myDel = delegate (string first, string second)
@@ -76,7 +74,7 @@ MyDelegateType y = delegate (string s1,string s2) { return s1 == s2; };
 
 这俩都是 .NET 预定义好的标准委托类型。
 
-也就是说别傻乎乎地自己定义委托类型啦，用它俩就好了！
+也就是说别傻乎乎地自己定义委托类型啦，用它俩就好了。
 
 .NET 预定义了 17 种 Func 和 Action 委托，全放在 `System` 名称空间下。
 
@@ -111,7 +109,7 @@ ForEach(new[] { "a", "b", "c" }, Console.WriteLine);
 
 #### Func
 
-Action 用于**有返回值**的函数委托。
+Func 用于**有返回值**的函数委托。
 
 看看定义：
 
@@ -222,9 +220,7 @@ var result = sbuilder
     .ToString();
 ```
 
-看看破晓的 [ModuleLauncher.Re](https://github.com/SinoAHpx/ModuleLauncher.Re/blob/main/README_ZH.md) 是怎么写的吧：
-
-~~破晓打钱！~~
+看看破晓的 [ModuleLauncher.Re](https://github.com/SinoAHpx/ModuleLauncher.Re/blob/main/README_ZH.md) 是怎么写的吧：~~破晓打钱！~~
 
 ```c#
 var process = await minecraft.WithAuthentication("<player>")

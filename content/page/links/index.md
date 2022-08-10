@@ -9,6 +9,10 @@ links:
     description: IN PURSUIT OF FREEDOM
     website: https://blog.awa.moe/links/
     image: https://avatars.githubusercontent.com/u/17957399
+  - title: Dylech30th
+    description: DC
+    website: https://sora.ink/
+    image: https://avatars.githubusercontent.com/u/31894334?v=4
 menu:
     main: 
         weight: -50
