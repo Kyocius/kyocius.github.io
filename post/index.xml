@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on 鎧恩の部屋</title><link>https://yoroion.github.io/post/</link><description>Recent content in Posts on 鎧恩の部屋</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 09 Aug 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://yoroion.github.io/post/index.xml" rel="self" type="application/rss+xml"/><item><title>Rx.NET 响应式编程指北 Ex</title><link>https://yoroion.github.io/p/rx-magic-ex/</link><pubDate>Tue, 09 Aug 2022 00:00:00 +0000</pubDate><guid>https://yoroion.github.io/p/rx-magic-ex/</guid><description>&lt;img src="https://yoroion.github.io/p/rx-magic-ex/head.png" alt="Featured image of post Rx.NET 响应式编程指北 Ex" />&lt;h2 id="前言">前言&lt;/h2>
-&lt;p>这一章是独立于正式章节的番外，补充一下 C# &lt;strong>函数式&lt;/strong>编程（Functional Programming）和&lt;strong>流式接口&lt;/strong>（Fluent API）的知识。&lt;/p>
-&lt;p>等等，我们不是在学 Rx.NET 吗，怎么又跑到函数式了 (＃°Д°)&lt;/p>
-&lt;p>你 先 别 急，其实二者并不冲突。&lt;/p>
-&lt;p>学习函数式是响应式编程的必要前提。&lt;/p>
-&lt;p>Rx 提供的方法大部分都是函数式的，比如我们上一章学到的 &lt;code>FromEventPattern&lt;/code> 方法，就是一个&lt;strong>高阶函数&lt;/strong>（High-Order Function），因为它的参数也是函数。&lt;/p>
-&lt;p>有些老古董 Java 程序员认为，C# 和 Java 一样都是纯面向对象语言（Pure OOP），这是完全错误的。经过二十年的发展，C# 早已进化成一门多范式的语言了。&lt;/p>
-&lt;h2 id="上手函数式">上手函数式&lt;/h2>
+&lt;p>这一章是独立于正式章节的番外，补充一下 C# &lt;strong>函数式编程&lt;/strong>（Functional Programming）以及&lt;strong>流式接口&lt;/strong>（Fluent API）的知识。&lt;/p>
+&lt;p>等等，我们不是在学 Rx.NET 吗，怎么又跑到函数式了？ (＃°Д°)&lt;/p>
+&lt;p>你 先 别 急，二者并不冲突。&lt;/p>
+&lt;p>Rx.NET 提供的方法大部分都是函数式的，比如我们上一章学到的 &lt;code>FromEventPattern&lt;/code> 方法，就是一个&lt;strong>高阶函数&lt;/strong>（High-Order Function），因为它的参数也是函数。&lt;/p>
+&lt;p>有些老古董 Java 程序员认为，C# 和 Java 一样都是纯面向对象语言（Pure OOP），这是完全错误的。经过二十年的发展，C# 早已进化成一门多范式语言了。&lt;/p>
+&lt;h2 id="函数式编程">函数式编程&lt;/h2>
 &lt;p>那么如何用 C# 编写函数式代码呢？&lt;/p>
-&lt;p>来回顾一下基础知识吧！&lt;/p>
+&lt;p>回顾一下基础知识吧。&lt;/p>
 &lt;h3 id="委托-delegate">委托 Delegate&lt;/h3>
 &lt;p>为了传递函数，C# 老早就加入了委托特性：&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
@@ -34,7 +33,7 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">myDel&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;first&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s">&amp;#34;second&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="c1">// 这样调用&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;h3 id="匿名方法-anonymous">匿名方法 Anonymous&lt;/h3>
+&lt;/div>&lt;h3 id="匿名方法-anonymous-methods">匿名方法 Anonymous methods&lt;/h3>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
@@ -68,7 +67,7 @@
 &lt;/div>
 &lt;/div>&lt;h3 id="func-和-action">Func 和 Action&lt;/h3>
 &lt;p>这俩都是 .NET 预定义好的标准委托类型。&lt;/p>
-&lt;p>也就是说别傻乎乎地自己定义委托类型啦，用它俩就好了！&lt;/p>
+&lt;p>也就是说别傻乎乎地自己定义委托类型啦，用它俩就好了。&lt;/p>
 &lt;p>.NET 预定义了 17 种 Func 和 Action 委托，全放在 &lt;code>System&lt;/code> 名称空间下。&lt;/p>
 &lt;h4 id="action">Action&lt;/h4>
 &lt;p>Action 用于&lt;strong>无返回值&lt;/strong>的函数委托。&lt;/p>
@@ -117,7 +116,7 @@
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;h4 id="func">Func&lt;/h4>
-&lt;p>Action 用于&lt;strong>有返回值&lt;/strong>的函数委托。&lt;/p>
+&lt;p>Func 用于&lt;strong>有返回值&lt;/strong>的函数委托。&lt;/p>
 &lt;p>看看定义：&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
@@ -295,8 +294,7 @@
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;p>看看破晓的 &lt;a class="link" href="https://github.com/SinoAHpx/ModuleLauncher.Re/blob/main/README_ZH.md" target="_blank" rel="noopener"
->ModuleLauncher.Re&lt;/a> 是怎么写的吧：&lt;/p>
-&lt;p>&lt;del>破晓打钱！&lt;/del>&lt;/p>
+>ModuleLauncher.Re&lt;/a> 是怎么写的吧：&lt;del>破晓打钱！&lt;/del>&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
