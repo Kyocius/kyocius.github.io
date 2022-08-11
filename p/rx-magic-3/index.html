@@ -1,0 +1,769 @@
+<!doctype html><html lang=en-us dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="创建可观察数据流"><title>Rx.NET 响应式编程指北 03</title><link rel=canonical href=https://yoroion.github.io/p/rx-magic-3/><link rel=stylesheet href=/scss/style.min.ac77dcf8b111b51da39a92990f431923f210f3876d85798a2125667f96dc33a4.css><meta property="og:title" content="Rx.NET 响应式编程指北 03"><meta property="og:description" content="创建可观察数据流"><meta property="og:url" content="https://yoroion.github.io/p/rx-magic-3/"><meta property="og:site_name" content="鎧恩の部屋"><meta property="og:type" content="article"><meta property="article:section" content="Post"><meta property="article:tag" content="Csharp"><meta property="article:tag" content="Rx.NET"><meta property="article:published_time" content="2022-08-10T00:00:00+00:00"><meta property="article:modified_time" content="2022-08-10T00:00:00+00:00"><meta property="og:image" content="https://yoroion.github.io/p/rx-magic-3/head.png"><meta name=twitter:title content="Rx.NET 响应式编程指北 03"><meta name=twitter:description content="创建可观察数据流"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://yoroion.github.io/p/rx-magic-3/head.png"></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label="Toggle Menu">
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/><img src=/img/Rena_huf54989b94ffb0e40e11a86a7a6318d82_97049_300x0_resize_q75_box.jpg width=300 height=300 class=site-logo loading=lazy alt=Avatar></a>
+<span class=emoji>🎲</span></figure><div class=site-meta><h1 class=site-name><a href=/>鎧恩の部屋</a></h1><h2 class=site-description>逸一时，误一世，逸久逸久罢已龄</h2></div></header><ol class=social-menu><li><a href=https://github.com/Yoroion target=_blank title=GitHub><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6.0 00-1.3-3.2 4.2 4.2.0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3.0 00-6.2.0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2.0 00-.1 3.2A4.6 4.6.0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg></a></li><li><a href=https://twitter.com/yoroion target=_blank title=Twitter><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M22 4.01c-1 .49-1.98.689-3 .99-1.121-1.265-2.783-1.335-4.38-.737S11.977 6.323 12 8v1c-3.245.083-6.135-1.395-8-4 0 0-4.182 7.433 4 11-1.872 1.247-3.739 2.088-6 2 3.308 1.803 6.913 2.423 10.034 1.517 3.58-1.04 6.522-3.723 7.651-7.742a13.84 13.84.0 00.497-3.753C20.18 7.773 21.692 5.25 22 4.009z"/></svg></a></li></ol><ol class=menu id=main-menu><li><a href=/ target=_blank><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="5 12 3 12 12 3 21 12 19 12"/><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/><path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"/></svg><span>Home</span></a></li><li><a href=/about/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="7" r="4"/><path d="M6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg><span>About</span></a></li><li><a href=/archives/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><rect x="3" y="4" width="18" height="4" rx="2"/><path d="M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8"/><line x1="10" y1="12" x2="14" y2="12"/></svg><span>Archives</span></a></li><li><a href=/search/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg><span>Search</span></a></li><li><a href=/links/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M10 14a3.5 3.5.0 005 0l4-4a3.5 3.5.0 00-5-5l-.5.5"/><path d="M14 10a3.5 3.5.0 00-5 0l-4 4a3.5 3.5.0 005 5l.5-.5"/></svg><span>Links</span></a></li><div class=menu-bottom-section><li id=dark-mode-toggle><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg><span>Dark Mode</span></li></div></ol></aside><main class="main full-width"><article class="has-image main-article"><header class=article-header><div class=article-image><a href=/p/rx-magic-3/><img src=/p/rx-magic-3/head_hu60daa3e750dae8efe162b164d024055e_222411_800x0_resize_box_3.png srcset="/p/rx-magic-3/head_hu60daa3e750dae8efe162b164d024055e_222411_800x0_resize_box_3.png 800w, /p/rx-magic-3/head_hu60daa3e750dae8efe162b164d024055e_222411_1600x0_resize_box_3.png 1600w" width=800 height=420 loading=lazy alt="Featured image of post Rx.NET 响应式编程指北 03"></a></div><div class=article-details><header class=article-category><a href=/categories/%E7%BC%96%E7%A8%8B/>编程</a></header><div class=article-title-wrapper><h2 class=article-title><a href=/p/rx-magic-3/>Rx.NET 响应式编程指北 03</a></h2><h3 class=article-subtitle>创建可观察数据流</h3></div><footer class=article-time><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg><time class=article-time--published>Aug 10, 2022</time></div><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg><time class=article-time--reading>8 minute read</time></div></footer></div></header><section class=article-content><h2 id=前言>前言</h2><p>之前我们见识了 Rx.NET 的基本用法，把 .NET 事件转化成了可观察数据流，并且补充了一些拓展知识（Ex），现在我们要接着深入 Rx.NET 的核心技术了。</p><h2 id=普通数据流>普通数据流</h2><p>还记得吗，<code>IObservable</code> 接口只有一个方法 <code>Subscribe</code>，是 Rx.NET 的基础。</p><p>我们将试着打造一个<strong>即时通讯</strong>系统。</p><h3 id=实现-iobservable-接口>实现 <code>IObservable</code> 接口</h3><p>在实际的开发中，非常不推荐直接实现 <code>IObservable</code> 接口，但是理解这个流程对我们的学习很有帮助。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c# data-lang=c#><span class=line><span class=cl><span class=k>using</span> <span class=nn>System</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=k>using</span> <span class=nn>System.Reactive.Disposables</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>public</span> <span class=k>class</span> <span class=nc>NumbersObservable</span> <span class=p>:</span> <span class=n>IObservable</span><span class=p>&lt;</span><span class=kt>int</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>private</span> <span class=k>readonly</span> <span class=kt>int</span> <span class=n>_amount</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>    <span class=k>public</span> <span class=n>NumbersObservable</span><span class=p>(</span><span class=kt>int</span> <span class=n>amount</span><span class=p>)</span> 
+</span></span><span class=line><span class=cl>    <span class=p>{</span>
+</span></span><span class=line><span class=cl>         <span class=n>_amount</span> <span class=p>=</span> <span class=n>amount</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=k>public</span> <span class=n>IDisposable</span> <span class=n>Subscribe</span><span class=p>(</span><span class=n>IObserver</span><span class=p>&lt;</span><span class=kt>int</span><span class=p>&gt;</span> <span class=n>observer</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=k>for</span> <span class=p>(</span><span class=kt>int</span> <span class=n>i</span> <span class=p>=</span> <span class=m>0</span><span class=p>;</span> <span class=n>i</span> <span class=p>&lt;</span> <span class=n>_amount</span><span class=p>;</span> <span class=n>i</span><span class=p>++)</span> 
+</span></span><span class=line><span class=cl>        <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=n>observer</span><span class=p>.</span><span class=n>OnNext</span><span class=p>(</span><span class=n>i</span><span class=p>);</span> 
+</span></span><span class=line><span class=cl>        <span class=p>}</span> 
+</span></span><span class=line><span class=cl>        <span class=n>observer</span><span class=p>.</span><span class=n>OnCompleted</span><span class=p>();</span> 
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=n>Disposable</span><span class=p>.</span><span class=n>Empty</span><span class=p>;</span> 
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=实现-observer-接口>实现 <code>Observer</code> 接口</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c# data-lang=c#><span class=line><span class=cl><span class=k>public</span> <span class=k>class</span> <span class=nc>ConsoleObserver</span><span class=p>&lt;</span><span class=n>T</span><span class=p>&gt;</span> <span class=p>:</span> <span class=n>IObserver</span><span class=p>&lt;</span><span class=n>T</span><span class=p>&gt;</span> 
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>private</span> <span class=k>readonly</span> <span class=kt>string</span> <span class=n>_name</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>    <span class=k>public</span> <span class=n>ConsoleObserver</span><span class=p>(</span><span class=kt>string</span> <span class=n>name</span><span class=p>=</span><span class=s>&#34;&#34;</span><span class=p>)</span> 
+</span></span><span class=line><span class=cl>    <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>_name</span> <span class=p>=</span> <span class=n>name</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=k>public</span> <span class=k>void</span> <span class=n>OnNext</span><span class=p>(</span><span class=n>T</span> <span class=k>value</span><span class=p>)</span> 
+</span></span><span class=line><span class=cl>    <span class=p>{</span> 
+</span></span><span class=line><span class=cl>        <span class=n>Console</span><span class=p>.</span><span class=n>WriteLine</span><span class=p>(</span><span class=s>&#34;{0} - OnNext({1})&#34;</span><span class=p>,</span><span class=n>_name</span><span class=p>,</span><span class=k>value</span><span class=p>);</span> 
+</span></span><span class=line><span class=cl>    <span class=p>}</span> 
+</span></span><span class=line><span class=cl>    <span class=k>public</span> <span class=k>void</span> <span class=n>OnError</span><span class=p>(</span><span class=n>Exception</span> <span class=n>error</span><span class=p>)</span> 
+</span></span><span class=line><span class=cl>    <span class=p>{</span> 
+</span></span><span class=line><span class=cl>        <span class=n>Console</span><span class=p>.</span><span class=n>WriteLine</span><span class=p>(</span><span class=s>&#34;{0} - OnError:&#34;</span><span class=p>,</span> <span class=n>_name</span><span class=p>);</span> 
+</span></span><span class=line><span class=cl>        <span class=n>Console</span><span class=p>.</span><span class=n>WriteLine</span><span class=p>(</span><span class=s>&#34;\t {0}&#34;</span><span class=p>,</span> <span class=n>error</span><span class=p>);</span> 
+</span></span><span class=line><span class=cl>    <span class=p>}</span> 
+</span></span><span class=line><span class=cl>    <span class=k>public</span> <span class=k>void</span> <span class=n>OnCompleted</span><span class=p>()</span> 
+</span></span><span class=line><span class=cl>    <span class=p>{</span> 
+</span></span><span class=line><span class=cl>        <span class=n>Console</span><span class=p>.</span><span class=n>WriteLine</span><span class=p>(</span><span class=s>&#34;{0} - OnCompleted()&#34;</span><span class=p>,</span> <span class=n>_name</span><span class=p>);</span> 
+</span></span><span class=line><span class=cl>    <span class=p>}</span> 
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>最后消费它：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c# data-lang=c#><span class=line><span class=cl><span class=kt>var</span> <span class=n>numbers</span> <span class=p>=</span> <span class=k>new</span> <span class=n>NumbersObservable</span><span class=p>(</span><span class=m>5</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=kt>var</span> <span class=n>subscription</span> <span class=p>=</span>
+</span></span><span class=line><span class=cl>    <span class=n>numbers</span><span class=p>.</span><span class=n>Subscribe</span><span class=p>(</span><span class=k>new</span> <span class=n>ConsoleObserver</span><span class=p>&lt;</span><span class=kt>int</span><span class=p>&gt;(</span><span class=s>&#34;numbers&#34;</span><span class=p>));</span>
+</span></span></code></pre></td></tr></table></div></div><p>看看结果：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>numbers - OnNext(0)
+</span></span><span class=line><span class=cl>numbers - OnNext(1)
+</span></span><span class=line><span class=cl>numbers - OnNext(2)
+</span></span><span class=line><span class=cl>numbers - OnNext(3)
+</span></span><span class=line><span class=cl>numbers - OnNext(4)
+</span></span><span class=line><span class=cl>numbers - OnCompleted()
+</span></span></code></pre></td></tr></table></div></div><p>我们现在手动实现了一个可观察数据流和观察者。</p><p>再来个扩展方法方便我们打印，</p><p>注意！这个方法将会<strong>贯穿</strong>之后的章节：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c# data-lang=c#><span class=line><span class=cl><span class=k>public</span> <span class=k>static</span> <span class=k>class</span> <span class=nc>Extensions</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>public</span> <span class=k>static</span> <span class=n>IDisposable</span> <span class=n>SubscribeConsole</span><span class=p>&lt;</span><span class=n>T</span><span class=p>&gt;(</span>
+</span></span><span class=line><span class=cl>        <span class=k>this</span> <span class=n>IObservable</span><span class=p>&lt;</span><span class=n>T</span><span class=p>&gt;</span> <span class=n>observable</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=kt>string</span> <span class=n>name</span> <span class=p>=</span> <span class=s>&#34;&#34;</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=n>observable</span><span class=p>.</span><span class=n>Subscribe</span><span class=p>(</span><span class=k>new</span> <span class=n>ConsoleObserver</span><span class=p>&lt;</span><span class=n>T</span><span class=p>&gt;(</span><span class=n>name</span><span class=p>));</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=手动创建-observable-的缺陷>手动创建 <code>Observable</code> 的缺陷</h3><p>手动创建可观察数据流一般不推荐且很少用，因为如此明显繁琐且容易出错。</p><p>除此之外，如果你不小心在 <code>OnComplete</code> 方法之后调用了 <code>OnNext</code>：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c# data-lang=c#><span class=line><span class=cl><span class=k>public</span> <span class=n>IDisposable</span> <span class=n>Subscribe</span><span class=p>(</span><span class=n>IObserver</span><span class=p>&lt;</span><span class=kt>int</span><span class=p>&gt;</span> <span class=n>observer</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=p>(</span><span class=kt>int</span> <span class=n>i</span> <span class=p>=</span> <span class=m>0</span><span class=p>;</span> <span class=n>i</span> <span class=p>&lt;</span> <span class=n>_amount</span><span class=p>;</span> <span class=n>i</span><span class=p>++)</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>observer</span><span class=p>.</span><span class=n>OnNext</span><span class=p>(</span><span class=n>i</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=n>observer</span><span class=p>.</span><span class=n>OnCompleted</span><span class=p>();</span>
+</span></span><span class=line><span class=cl> 
+</span></span><span class=line><span class=cl>    <span class=n>observer</span><span class=p>.</span><span class=n>OnNext</span><span class=p>(</span><span class=n>_amount</span><span class=p>);</span> <span class=c1>// 注意这行</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>Disposable</span><span class=p>.</span><span class=n>Empty</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>你将得到以下结果：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>errorTest - OnNext(0)
+</span></span><span class=line><span class=cl>errorTest - OnNext(1)
+</span></span><span class=line><span class=cl>errorTest - OnNext(2)
+</span></span><span class=line><span class=cl>errorTest - OnNext(3)
+</span></span><span class=line><span class=cl>errorTest - OnNext(4)
+</span></span><span class=line><span class=cl>errorTest - OnComplete
+</span></span><span class=line><span class=cl>errorTest - OnNext(5)
+</span></span></code></pre></td></tr></table></div></div><p>怎么会事捏， <code>OnComplete</code> 之后居然还能订阅到数据？</p><p>这是 Rx 背后 <code>Observable</code> 与 <code>Observer</code> 的 <code>Repeat</code> 方法重新订阅导致的。</p><h3 id=observablebase-接口><code>ObservableBase</code> 接口</h3><p>手写也不是不可以，比如当你想封装一个复杂的、包含事件属性的接口的时候：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c# data-lang=c#><span class=line><span class=cl><span class=k>public</span> <span class=k>interface</span> <span class=nc>IChatConnection</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>event</span> <span class=n>Action</span><span class=p>&lt;</span><span class=kt>string</span><span class=p>&gt;</span> <span class=n>Received</span><span class=p>;</span> 
+</span></span><span class=line><span class=cl>    <span class=k>event</span> <span class=n>Action</span> <span class=n>Closed</span><span class=p>;</span> 
+</span></span><span class=line><span class=cl>    <span class=k>event</span> <span class=n>Action</span><span class=p>&lt;</span><span class=n>Exception</span><span class=p>&gt;</span> <span class=n>Error</span><span class=p>;</span> 
+</span></span><span class=line><span class=cl>    <span class=k>void</span> <span class=n>Disconnect</span><span class=p>();</span> 
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>我们一般会写个 Client：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c# data-lang=c#><span class=line><span class=cl><span class=k>public</span> <span class=k>class</span> <span class=nc>ChatClient</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=p>...</span>
+</span></span><span class=line><span class=cl>    <span class=k>public</span> <span class=n>IChatConnection</span> <span class=n>Connect</span><span class=p>(</span><span class=kt>string</span> <span class=n>user</span><span class=p>,</span> <span class=kt>string</span> <span class=n>password</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span>
+</span></span><span class=line><span class=cl>       <span class=c1>// 连接服务</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>再手动改写成一个 <code>Observable</code>：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c# data-lang=c#><span class=line><span class=cl><span class=k>using</span> <span class=nn>System</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=k>using</span> <span class=nn>System.Reactive</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=k>using</span> <span class=nn>System.Reactive.Disposables</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=k>public</span> <span class=k>class</span> <span class=nc>ObservableConnection</span> <span class=p>:</span> <span class=n>ObservableBase</span><span class=p>&lt;</span><span class=kt>string</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>private</span> <span class=k>readonly</span> <span class=n>IChatConnection</span> <span class=n>_chatConnection</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=k>public</span> <span class=n>ObservableConnection</span><span class=p>(</span><span class=n>IChatConnection</span> <span class=n>chatConnection</span><span class=p>)</span> 
+</span></span><span class=line><span class=cl>    <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>_chatConnection</span> <span class=p>=</span> <span class=n>chatConnection</span><span class=p>;</span> 
+</span></span><span class=line><span class=cl>    <span class=p>}</span> 
+</span></span><span class=line><span class=cl> 
+</span></span><span class=line><span class=cl>    <span class=k>protected</span> <span class=k>override</span> <span class=n>IDisposable</span> <span class=n>SubscribeCore</span><span class=p>(</span><span class=n>IObserver</span><span class=p>&lt;</span><span class=kt>string</span><span class=p>&gt;</span> <span class=n>observer</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>Action</span><span class=p>&lt;</span><span class=kt>string</span><span class=p>&gt;</span> <span class=n>received</span> <span class=p>=</span> <span class=n>message</span> <span class=p>=&gt;</span> 
+</span></span><span class=line><span class=cl>        <span class=p>{</span> 
+</span></span><span class=line><span class=cl>            <span class=n>observer</span><span class=p>.</span><span class=n>OnNext</span><span class=p>(</span><span class=n>message</span><span class=p>);</span> 
+</span></span><span class=line><span class=cl>        <span class=p>};</span> 
+</span></span><span class=line><span class=cl>        <span class=n>Action</span> <span class=n>closed</span> <span class=p>=</span> <span class=p>()</span> <span class=p>=&gt;</span> 
+</span></span><span class=line><span class=cl>        <span class=p>{</span> 
+</span></span><span class=line><span class=cl>            <span class=n>observer</span><span class=p>.</span><span class=n>OnCompleted</span><span class=p>();</span> 
+</span></span><span class=line><span class=cl>        <span class=p>};</span> 
+</span></span><span class=line><span class=cl>        <span class=n>Action</span><span class=p>&lt;</span><span class=n>Exception</span><span class=p>&gt;</span> <span class=n>error</span> <span class=p>=</span> <span class=n>ex</span> <span class=p>=&gt;</span> 
+</span></span><span class=line><span class=cl>        <span class=p>{</span> 
+</span></span><span class=line><span class=cl>            <span class=n>observer</span><span class=p>.</span><span class=n>OnError</span><span class=p>(</span><span class=n>ex</span><span class=p>);</span> 
+</span></span><span class=line><span class=cl>        <span class=p>};</span> 
+</span></span><span class=line><span class=cl>        <span class=n>_chatConnection</span><span class=p>.</span><span class=n>Received</span> <span class=p>+=</span> <span class=n>received</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>_chatConnection</span><span class=p>.</span><span class=n>Closed</span> <span class=p>+=</span> <span class=n>closed</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>_chatConnection</span><span class=p>.</span><span class=n>Error</span> <span class=p>+=</span> <span class=n>error</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=n>Disposable</span><span class=p>.</span><span class=n>Create</span><span class=p>(()</span> <span class=p>=&gt;</span> 
+</span></span><span class=line><span class=cl>        <span class=p>{</span> 
+</span></span><span class=line><span class=cl>            <span class=n>_chatConnection</span><span class=p>.</span><span class=n>Received</span> <span class=p>-=</span> <span class=n>received</span><span class=p>;</span> 
+</span></span><span class=line><span class=cl>            <span class=n>_chatConnection</span><span class=p>.</span><span class=n>Closed</span> <span class=p>-=</span> <span class=n>closed</span><span class=p>;</span> 
+</span></span><span class=line><span class=cl>            <span class=n>_chatConnection</span><span class=p>.</span><span class=n>Error</span> <span class=p>-=</span> <span class=n>error</span><span class=p>;</span> 
+</span></span><span class=line><span class=cl>            <span class=n>_chatConnection</span><span class=p>.</span><span class=n>Disconnect</span><span class=p>();</span> 
+</span></span><span class=line><span class=cl>        <span class=p>});</span> 
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><blockquote><p>发现没，这其实就是 SignalR 的写法（微软的后端框架）</p></blockquote><p>现在消费：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c# data-lang=c#><span class=line><span class=cl><span class=kt>var</span> <span class=n>chatClient</span> <span class=p>=</span> <span class=k>new</span> <span class=n>ChatClient</span><span class=p>();</span> 
+</span></span><span class=line><span class=cl><span class=kt>var</span> <span class=n>connection</span> <span class=p>=</span> <span class=n>chatClient</span><span class=p>.</span><span class=n>Connect</span><span class=p>(</span><span class=s>&#34;guest&#34;</span><span class=p>,</span> <span class=s>&#34;guest&#34;</span><span class=p>);</span> 
+</span></span><span class=line><span class=cl><span class=n>IObservable</span><span class=p>&lt;</span><span class=kt>string</span><span class=p>&gt;</span> <span class=n>observableConnection</span> <span class=p>=</span> <span class=k>new</span> <span class=n>ObservableConnection</span><span class=p>(</span><span class=n>connection</span><span class=p>);</span> 
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// 最开始的那个类</span>
+</span></span><span class=line><span class=cl><span class=kt>var</span> <span class=n>subscription</span> <span class=p>=</span> <span class=n>observableConnection</span><span class=p>.</span><span class=n>SubscribeConsole</span><span class=p>(</span><span class=s>&#34;receiver&#34;</span><span class=p>);</span> 
+</span></span></code></pre></td></tr></table></div></div><p>写个扩展方法来简化操作：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c# data-lang=c#><span class=line><span class=cl><span class=k>public</span> <span class=k>static</span> <span class=k>class</span> <span class=nc>ChatExtensions</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>public</span> <span class=k>static</span> <span class=n>IObservable</span><span class=p>&lt;</span><span class=kt>string</span><span class=p>&gt;</span> <span class=n>ToObservable</span><span class=p>(</span><span class=k>this</span> <span class=n>IChatConnection</span> <span class=n>connection</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=k>new</span> <span class=n>ObservableConnection</span><span class=p>(</span><span class=n>connection</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>综合下来看，这么手动写也太踏马折磨了。Rx 有没有方法来简化这些操作呢？</p><h3 id=observablecreate-方法><code>Observable.Create</code> 方法</h3><p>别傻乎乎地手写了，Rx 可是提供了好用的工厂函数呢。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c# data-lang=c#><span class=line><span class=cl><span class=n>Observable</span><span class=p>.</span><span class=n>Create</span><span class=p>&lt;</span><span class=kt>int</span><span class=p>&gt;(</span><span class=n>observer</span> <span class=p>=&gt;</span> 
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=p>(</span><span class=kt>int</span> <span class=n>i</span> <span class=p>=</span> <span class=m>0</span><span class=p>;</span> <span class=n>i</span> <span class=p>&lt;</span> <span class=m>5</span><span class=p>;</span> <span class=n>i</span><span class=p>++)</span> 
+</span></span><span class=line><span class=cl>    <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>observer</span><span class=p>.</span><span class=n>OnNext</span><span class=p>(</span><span class=n>i</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=n>observer</span><span class=p>.</span><span class=n>OnCompleted</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>Disposable</span><span class=p>.</span><span class=n>Empty</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>});</span>
+</span></span></code></pre></td></tr></table></div></div><p>直接写个 Lambda 表达式来作为 <code>Subscribe</code> 方法。</p><p><code>Observable.Create</code> 非常灵活，因此也被大量使用在 Rx 的应用中。</p><h3 id=延迟初始化-defer>延迟初始化 Defer</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c# data-lang=c#><span class=line><span class=cl><span class=k>public</span> <span class=n>IObservable</span><span class=p>&lt;</span><span class=kt>string</span><span class=p>&gt;</span> <span class=n>ObserveMessages</span><span class=p>(</span><span class=kt>string</span> <span class=n>user</span><span class=p>,</span> <span class=kt>string</span> <span class=n>password</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kt>var</span> <span class=n>connection</span> <span class=p>=</span> <span class=n>Connect</span><span class=p>(</span><span class=n>user</span><span class=p>,</span> <span class=n>password</span><span class=p>);</span> 
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>connection</span><span class=p>.</span><span class=n>ToObservable</span><span class=p>();</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>当我们想要这个可观察数据流仅在有观察者订阅它的时候才会被创建时，我们可以使用 <code>Observable.Defer</code> 方法来延迟初始化：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c# data-lang=c#><span class=line><span class=cl><span class=k>public</span> <span class=n>IObservable</span><span class=p>&lt;</span><span class=kt>string</span><span class=p>&gt;</span> <span class=n>ObserveMessagesDeferred</span><span class=p>(</span><span class=kt>string</span> <span class=n>user</span><span class=p>,</span> <span class=kt>string</span> <span class=n>password</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>Observable</span><span class=p>.</span><span class=n>Defer</span><span class=p>(()</span> <span class=p>=&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=kt>var</span> <span class=n>connection</span> <span class=p>=</span> <span class=n>Connect</span><span class=p>(</span><span class=n>user</span><span class=p>,</span> <span class=n>password</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=n>connection</span><span class=p>.</span><span class=n>ToObservable</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>    <span class=p>});</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>需要指出的是，由这些工厂函数创建的可观察数据流并不能共享观察者：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c# data-lang=c#><span class=line><span class=cl><span class=kt>var</span> <span class=n>messages</span> <span class=p>=</span> <span class=n>chatClient</span><span class=p>.</span><span class=n>ObserveMessagesDeferred</span><span class=p>(</span><span class=s>&#34;user&#34;</span><span class=p>,</span><span class=s>&#34;password&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=kt>var</span> <span class=n>subscription1</span> <span class=p>=</span> <span class=n>messages</span><span class=p>.</span><span class=n>SubscribeConsole</span><span class=p>();</span>
+</span></span><span class=line><span class=cl><span class=kt>var</span> <span class=n>subscription2</span> <span class=p>=</span> <span class=n>messages</span><span class=p>.</span><span class=n>SubscribeConsole</span><span class=p>();</span>
+</span></span></code></pre></td></tr></table></div></div><p>也就是说， <code>subscription1</code> 和 <code>subscription2</code> 是两个完全独立的实例。</p><p>关于「共享流」「热流」以及「冷流」的知识将会在第六章讲解。</p><h2 id=由事件转换>由事件转换</h2><p>在第二章我们已经见识过了，这回来点儿更深入的。</p><p>先看定义：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c# data-lang=c#><span class=line><span class=cl><span class=n>FromEventPattern</span><span class=p>&lt;</span><span class=n>TDelegate</span><span class=p>,</span> <span class=n>TEventArgs</span><span class=p>&gt;(</span><span class=n>Action</span><span class=p>&lt;</span><span class=n>TDelegate</span><span class=p>&gt;</span> <span class=n>addHandler</span><span class=p>,</span> <span class=n>Action</span><span class=p>&lt;</span><span class=n>TDelegate</span><span class=p>&gt;</span> <span class=n>removeHandler</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=标准事件>标准事件</h3><p>来个事件：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c# data-lang=c#><span class=line><span class=cl><span class=k>public</span> <span class=k>event</span> <span class=n>RoutedEventHandler</span> <span class=n>Click</span><span class=p>;</span>
+</span></span></code></pre></td></tr></table></div></div><p>这个委托类型是 <code>System.Windows</code> 中定义好的：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c# data-lang=c#><span class=line><span class=cl><span class=k>public</span> <span class=k>delegate</span> <span class=k>void</span> <span class=n>RoutedEventHandler</span><span class=p>(</span><span class=kt>object</span> <span class=n>sender</span><span class=p>,</span> <span class=n>System</span><span class=p>.</span><span class=n>Windows</span><span class=p>.</span><span class=n>RoutedEventArgs</span> <span class=n>e</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>转化成可观察的事件流：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c# data-lang=c#><span class=line><span class=cl><span class=n>IObservable</span><span class=p>&lt;</span><span class=n>EventPattern</span><span class=p>&lt;</span><span class=n>RoutedEventArgs</span><span class=p>&gt;&gt;</span> <span class=n>clicks</span> <span class=p>=</span> <span class=n>Observable</span><span class=p>.</span><span class=n>FromEventPattern</span><span class=p>&lt;</span><span class=n>RoutedEventHandler</span><span class=p>,</span> <span class=n>RoutedEventArgs</span><span class=p>&gt;(</span>
+</span></span><span class=line><span class=cl>    <span class=n>h</span> <span class=p>=&gt;</span> <span class=n>theButton</span><span class=p>.</span><span class=n>Click</span> <span class=p>+=</span> <span class=n>h</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=n>h</span> <span class=p>=&gt;</span> <span class=n>theButton</span><span class=p>.</span><span class=n>Click</span> <span class=p>-=</span> <span class=n>h</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>clicks</span><span class=p>.</span><span class=n>SubscribeConsole</span><span class=p>();</span> 
+</span></span></code></pre></td></tr></table></div></div><p>Rx 还提供了一种简化的写法，但并不推荐：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c# data-lang=c#><span class=line><span class=cl><span class=n>IObservable</span><span class=p>&lt;</span><span class=n>EventPattern</span><span class=p>&lt;</span><span class=kt>object</span><span class=p>&gt;&gt;</span> <span class=n>clicks</span> <span class=p>=</span> 
+</span></span><span class=line><span class=cl>    <span class=n>Observable</span><span class=p>.</span><span class=n>FromEventPattern</span><span class=p>(</span><span class=n>theButton</span><span class=p>,</span> <span class=s>&#34;Click&#34;</span><span class=p>);</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=不标准事件>不标准事件</h3><p>并不是所有事件的参数都是一个 <code>Sender</code> + 一个 <code>EventArgs</code>。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c# data-lang=c#><span class=line><span class=cl><span class=k>public</span> <span class=k>delegate</span> <span class=k>void</span> <span class=n>NetworkFoundEventHandler</span><span class=p>(</span><span class=kt>string</span> <span class=n>ssid</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>WifiScanner</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>public</span> <span class=k>event</span> <span class=n>NetworkFoundEventHandler</span> <span class=n>NetworkFound</span> <span class=p>=</span> <span class=k>delegate</span> <span class=p>{</span> <span class=p>};</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// ...</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>可以看到这个事件需要一个字符串类型的参数。</p><p>之前的 <code>FromEventPattern</code> 就不能用了，Rx 提供了 <code>FromEvent</code>：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c# data-lang=c#><span class=line><span class=cl><span class=n>IObservable</span><span class=p>&lt;</span><span class=n>TEventArgs</span><span class=p>&gt;</span> <span class=n>FromEvent</span><span class=p>&lt;</span><span class=n>TDelegate</span><span class=p>,</span> <span class=n>TEventArgs</span><span class=p>&gt;(</span><span class=n>Action</span><span class=p>&lt;</span><span class=n>TDelegate</span><span class=p>&gt;</span> <span class=n>addHandler</span><span class=p>,</span> <span class=n>Action</span><span class=p>&lt;</span><span class=n>TDelegate</span><span class=p>&gt;</span> <span class=n>removeHandler</span><span class=p>);</span>
+</span></span></code></pre></td></tr></table></div></div><p>如此就可以：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c# data-lang=c#><span class=line><span class=cl><span class=kt>var</span> <span class=n>wifiScanner</span> <span class=p>=</span> <span class=k>new</span> <span class=n>WifiScanner</span><span class=p>();</span>
+</span></span><span class=line><span class=cl><span class=n>IObservable</span><span class=p>&lt;</span><span class=kt>string</span><span class=p>&gt;</span> <span class=n>networks</span> <span class=p>=</span> 
+</span></span><span class=line><span class=cl>    <span class=n>Observable</span><span class=p>.</span><span class=n>FromEvent</span><span class=p>&lt;</span><span class=n>NetworkFoundEventHandler</span><span class=p>,</span> <span class=kt>string</span><span class=p>&gt;(</span>
+</span></span><span class=line><span class=cl>        <span class=n>h</span> <span class=p>=&gt;</span> <span class=n>wifiScanner</span><span class=p>.</span><span class=n>NetworkFound</span> <span class=p>+=</span> <span class=n>h</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=n>h</span> <span class=p>=&gt;</span> <span class=n>wifiScanner</span><span class=p>.</span><span class=n>NetworkFound</span> <span class=p>-=</span> <span class=n>h</span><span class=p>);</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=更复杂的事件>更复杂的事件</h3><p>Of course，还有更复杂的事件：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c# data-lang=c#><span class=line><span class=cl><span class=k>public</span> <span class=k>delegate</span> <span class=k>void</span> <span class=n>ExtendedNetworkFoundEventHandler</span><span class=p>(</span><span class=kt>string</span> <span class=n>ssid</span><span class=p>,</span> <span class=kt>int</span> <span class=n>strength</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>WifiScanner</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>public</span> <span class=k>event</span> <span class=n>ExtendedNetworkFoundEventHandler</span> <span class=n>ExtendedNetworkFound</span> <span class=p>=</span> <span class=k>delegate</span> <span class=p>{</span> <span class=p>};</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>放心，<code>FromEvent</code> 提供了重载：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c# data-lang=c#><span class=line><span class=cl><span class=n>IObservable</span><span class=p>&lt;</span><span class=n>TEventArgs</span><span class=p>&gt;</span> <span class=n>FromEvent</span><span class=p>&lt;</span><span class=n>TDelegate</span><span class=p>,</span> <span class=n>TEventArgs</span><span class=p>&gt;(</span>
+</span></span><span class=line><span class=cl>    <span class=n>Func</span><span class=p>&lt;</span><span class=n>Action</span><span class=p>&lt;</span><span class=n>TEventArgs</span><span class=p>&gt;,</span> <span class=n>TDelegate</span><span class=p>&gt;</span> <span class=n>conversion</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=n>Action</span><span class=p>&lt;</span><span class=n>TDelegate</span><span class=p>&gt;</span> <span class=n>addHandler</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=n>Action</span><span class=p>&lt;</span><span class=n>TDelegate</span><span class=p>&gt;</span> <span class=n>removeHandler</span><span class=p>);</span>
+</span></span></code></pre></td></tr></table></div></div><p>下面需要利用元组（Tuple）的特性：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c# data-lang=c#><span class=line><span class=cl><span class=n>IObservable</span><span class=p>&lt;</span><span class=n>Tuple</span><span class=p>&lt;</span><span class=kt>string</span><span class=p>,</span> <span class=kt>int</span><span class=p>&gt;&gt;</span> <span class=n>networks</span> <span class=p>=</span>
+</span></span><span class=line><span class=cl>    <span class=n>Observable</span><span class=p>.</span><span class=n>FromEvent</span><span class=p>&lt;</span><span class=n>ExtendedNetworkFoundEventHandler</span><span class=p>,</span> <span class=n>Tuple</span><span class=p>&lt;</span><span class=kt>string</span><span class=p>,</span> <span class=kt>int</span><span class=p>&gt;&gt;(</span>
+</span></span><span class=line><span class=cl>        <span class=n>rxHandler</span> <span class=p>=&gt;</span> <span class=p>(</span><span class=n>ssid</span><span class=p>,</span> <span class=n>strength</span><span class=p>)</span> <span class=p>=&gt;</span> <span class=n>rxHandler</span><span class=p>(</span><span class=n>Tuple</span><span class=p>.</span><span class=n>Create</span><span class=p>(</span><span class=n>ssid</span><span class=p>,</span> <span class=n>strength</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>        <span class=n>h</span> <span class=p>=&gt;</span> <span class=n>wifiScanner</span><span class=p>.</span><span class=n>ExtendedNetworkFound</span> <span class=p>+=</span> <span class=n>h</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=n>h</span> <span class=p>=&gt;</span> <span class=n>wifiScanner</span><span class=p>.</span><span class=n>ExtendedNetworkFound</span> <span class=p>-=</span> <span class=n>h</span><span class=p>);</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=无参事件>无参事件</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c# data-lang=c#><span class=line><span class=cl><span class=k>event</span> <span class=n>Action</span> <span class=n>Connected</span> <span class=p>=</span> <span class=k>delegate</span> <span class=p>{</span> <span class=p>};</span>
+</span></span></code></pre></td></tr></table></div></div><p>我们需要这么写：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c# data-lang=c#><span class=line><span class=cl><span class=n>IObservable</span><span class=p>&lt;</span><span class=n>Unit</span><span class=p>&gt;</span> <span class=n>connected</span> <span class=p>=</span>
+</span></span><span class=line><span class=cl>    <span class=n>Observable</span><span class=p>.</span><span class=n>FromEvent</span><span class=p>(</span><span class=n>h</span> <span class=p>=&gt;</span> <span class=n>wifiScanner</span><span class=p>.</span><span class=n>Connected</span> <span class=p>+=</span> <span class=n>h</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                         <span class=n>h</span> <span class=p>=&gt;</span> <span class=n>wifiScanner</span><span class=p>.</span><span class=n>Connected</span> <span class=p>-=</span> <span class=n>h</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>connected</span><span class=p>.</span><span class=n>SubscribeConsole</span><span class=p>(</span><span class=s>&#34;connected&#34;</span><span class=p>);</span>
+</span></span></code></pre></td></tr></table></div></div><p><code>Unit</code> 类型代表了「空」，它 <code>ToString</code> 之后的值为「()」</p><p>所以你会得到以下结果：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>connected - OnNext(())
+</span></span><span class=line><span class=cl>connected - OnNext(())
+</span></span></code></pre></td></tr></table></div></div><h2 id=由迭代类型转换>由迭代类型转换</h2><p>迭代类型和可观察类型长得很像，Rx 也提供了转换的方法。</p><h3 id=迭代类型--可观察流>迭代类型 → 可观察流</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c# data-lang=c#><span class=line><span class=cl><span class=n>IEnumerable</span><span class=p>&lt;</span><span class=kt>string</span><span class=p>&gt;</span> <span class=n>names</span> <span class=p>=</span> <span class=k>new</span> <span class=p>[]{</span><span class=s>&#34;AHpx&#34;</span><span class=p>,</span> <span class=s>&#34;Yoroion&#34;</span><span class=p>,</span> <span class=s>&#34;Weeknic&#34;</span><span class=p>,</span> <span class=s>&#34;GodLeaveMe&#34;</span><span class=p>};</span>
+</span></span><span class=line><span class=cl><span class=n>IObservable</span><span class=p>&lt;</span><span class=kt>string</span><span class=p>&gt;</span> <span class=n>observable</span> <span class=p>=</span> <span class=n>names</span><span class=p>.</span><span class=n>ToObservable</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>observable</span><span class=p>.</span><span class=n>SubscribeConsole</span><span class=p>(</span><span class=s>&#34;names&#34;</span><span class=p>);</span>
+</span></span></code></pre></td></tr></table></div></div><p>你将会得到：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>names - OnNext(AHpx)
+</span></span><span class=line><span class=cl>names - OnNext(Yoroion)
+</span></span><span class=line><span class=cl>names - OnNext(Weekenic)
+</span></span><span class=line><span class=cl>names - OnNext(GodLeaveMe)
+</span></span><span class=line><span class=cl>names - OnCompleted()
+</span></span></code></pre></td></tr></table></div></div><p>如果迭代的过程中发生了错误，那么报错就会传递至 <code>OnError</code> 方法：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c# data-lang=c#><span class=line><span class=cl><span class=k>class</span> <span class=nc>Program</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>static</span> <span class=k>void</span> <span class=n>Main</span><span class=p>(</span><span class=kt>string</span><span class=p>[]</span> <span class=n>args</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>NumbersAndThrow</span><span class=p>()</span> 
+</span></span><span class=line><span class=cl>            <span class=p>.</span><span class=n>ToObservable</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>            <span class=p>.</span><span class=n>SubscribeConsole</span><span class=p>(</span><span class=s>&#34;names&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>Console</span><span class=p>.</span><span class=n>ReadLine</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=k>static</span> <span class=n>IEnumerable</span><span class=p>&lt;</span><span class=kt>int</span><span class=p>&gt;</span> <span class=n>NumbersAndThrow</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=k>yield</span> <span class=k>return</span> <span class=m>1</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=k>yield</span> <span class=k>return</span> <span class=m>2</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=k>yield</span> <span class=k>return</span> <span class=m>3</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=k>throw</span> <span class=k>new</span> <span class=n>ApplicationException</span><span class=p>(</span><span class=s>&#34;报错啦&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>        <span class=k>yield</span> <span class=k>return</span> <span class=m>4</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>输出：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>enumerable with exception - OnNext(1)
+</span></span><span class=line><span class=cl>enumerable with exception - OnNext(2)
+</span></span><span class=line><span class=cl>enumerable with exception - OnNext(3)
+</span></span><span class=line><span class=cl>enumerable with exception - OnError:
+</span></span><span class=line><span class=cl>    System.ApplicationException: Something Bad Happened
+</span></span></code></pre></td></tr></table></div></div><p>Rx 还提供了一个更简单的方法，直接订阅迭代类型：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c# data-lang=c#><span class=line><span class=cl><span class=n>IEnumerable</span><span class=p>&lt;</span><span class=kt>string</span><span class=p>&gt;</span> <span class=n>names</span> <span class=p>=</span> <span class=k>new</span><span class=p>[]</span> <span class=p>{</span> <span class=s>&#34;AHpx&#34;</span><span class=p>,</span> <span class=s>&#34;Yoroion&#34;</span><span class=p>,</span> <span class=s>&#34;Weeknic&#34;</span><span class=p>,</span> <span class=s>&#34;GodLeaveMe&#34;</span> <span class=p>};</span>
+</span></span><span class=line><span class=cl><span class=n>names</span><span class=p>.</span><span class=n>Subscribe</span><span class=p>(</span><span class=k>new</span> <span class=n>ConsoleObserver</span><span class=p>&lt;</span><span class=kt>string</span><span class=p>&gt;(</span><span class=s>&#34;subscribe&#34;</span><span class=p>));</span>
+</span></span></code></pre></td></tr></table></div></div><p>那么如何合并可观察数据流与迭代类型呢？</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c# data-lang=c#><span class=line><span class=cl><span class=n>ChatClient</span> <span class=n>client</span> <span class=p>=</span> <span class=k>new</span> <span class=n>ChatClient</span><span class=p>();</span>
+</span></span><span class=line><span class=cl><span class=n>IObservable</span><span class=p>&lt;</span><span class=kt>string</span><span class=p>&gt;</span> <span class=n>liveMessages</span> <span class=p>=</span> <span class=n>client</span><span class=p>.</span><span class=n>ObserveMessages</span><span class=p>(</span><span class=s>&#34;user&#34;</span><span class=p>,</span><span class=s>&#34;pass&#34;</span><span class=p>);</span> 
+</span></span><span class=line><span class=cl><span class=n>IEnumerable</span><span class=p>&lt;</span><span class=kt>string</span><span class=p>&gt;</span> <span class=n>loadedMessages</span> <span class=p>=</span> <span class=n>LoadMessagesFromDB</span><span class=p>();</span> <span class=c1>// 假设从数据库加载数据</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>loadedMessages</span><span class=p>.</span><span class=n>ToObservable</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=p>.</span><span class=n>Concat</span><span class=p>(</span><span class=n>liveMessages</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>.</span><span class=n>SubscribeConsole</span><span class=p>(</span><span class=s>&#34;merged&#34;</span><span class=p>);</span>
+</span></span></code></pre></td></tr></table></div></div><p>注意看，以上代码使用了 <code>Concat</code> 合并了两个流。在所有 Database 数据（Loaded Messages）被加载后，实时数据（Live Messages）才会被发给观察者。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>merged - OnNext(loaded1)
+</span></span><span class=line><span class=cl>merged - OnNext(loaded2)
+</span></span><span class=line><span class=cl>merged - OnNext(live message1)
+</span></span><span class=line><span class=cl>merged - OnNext(live message2)
+</span></span></code></pre></td></tr></table></div></div><p>你也可以用以下写法免于手动转换：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c# data-lang=c#><span class=line><span class=cl><span class=n>liveMessages</span>
+</span></span><span class=line><span class=cl>    <span class=p>.</span><span class=n>StartWith</span><span class=p>(</span><span class=n>loadedMessages</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>.</span><span class=n>SubscribeConsole</span><span class=p>(</span><span class=s>&#34;loaded first&#34;</span><span class=p>);</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=可观察流--迭代类型>可观察流 → 迭代类型</h3><p>为啥要把可观察流转化成迭代类型呢？因为有的方法只接受迭代类型。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c# data-lang=c#><span class=line><span class=cl><span class=kt>var</span> <span class=n>observable</span> <span class=p>=</span>
+</span></span><span class=line><span class=cl>    <span class=n>Observable</span><span class=p>.</span><span class=n>Create</span><span class=p>&lt;</span><span class=kt>string</span><span class=p>&gt;(</span><span class=n>o</span> <span class=p>=&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>o</span><span class=p>.</span><span class=n>OnNext</span><span class=p>(</span><span class=s>&#34;Observable&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>o</span><span class=p>.</span><span class=n>OnNext</span><span class=p>(</span><span class=s>&#34;To&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>o</span><span class=p>.</span><span class=n>OnNext</span><span class=p>(</span><span class=s>&#34;Enumerable&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>o</span><span class=p>.</span><span class=n>OnCompleted</span><span class=p>();</span> <span class=c1>// 当所有OnNext中的值被消费后，线程会进入等待状态</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=n>Disposable</span><span class=p>.</span><span class=n>Empty</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=p>});</span>
+</span></span><span class=line><span class=cl><span class=kt>var</span> <span class=n>enumerable</span> <span class=p>=</span> <span class=n>observable</span><span class=p>.</span><span class=n>ToEnumerable</span><span class=p>();</span>
+</span></span><span class=line><span class=cl><span class=c1>// 可观察流完成时，循环便会结束</span>
+</span></span><span class=line><span class=cl><span class=k>foreach</span> <span class=p>(</span><span class=kt>var</span> <span class=n>item</span> <span class=k>in</span> <span class=n>enumerable</span><span class=p>)</span> 
+</span></span><span class=line><span class=cl><span class=p>{</span> 
+</span></span><span class=line><span class=cl>    <span class=n>Console</span><span class=p>.</span><span class=n>WriteLine</span><span class=p>(</span><span class=n>item</span><span class=p>);</span> 
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>把可观察流转换成 List：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c# data-lang=c#><span class=line><span class=cl><span class=kt>var</span> <span class=n>observable</span> <span class=p>=</span>
+</span></span><span class=line><span class=cl>    <span class=n>Observable</span><span class=p>.</span><span class=n>Create</span><span class=p>&lt;</span><span class=kt>string</span><span class=p>&gt;(</span><span class=n>o</span> <span class=p>=&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>o</span><span class=p>.</span><span class=n>OnNext</span><span class=p>(</span><span class=s>&#34;Observable&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>o</span><span class=p>.</span><span class=n>OnNext</span><span class=p>(</span><span class=s>&#34;To&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>o</span><span class=p>.</span><span class=n>OnNext</span><span class=p>(</span><span class=s>&#34;List&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>o</span><span class=p>.</span><span class=n>OnCompleted</span><span class=p>();</span> <span class=c1>// 只有当Complete之后，List才会被发送给观察者</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=n>Disposable</span><span class=p>.</span><span class=n>Empty</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=p>});</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>IObservable</span><span class=p>&lt;</span><span class=n>IList</span><span class=p>&lt;</span><span class=kt>string</span><span class=p>&gt;&gt;</span> <span class=n>listObservable</span> <span class=p>=</span>
+</span></span><span class=line><span class=cl>    <span class=n>observable</span><span class=p>.</span><span class=n>ToList</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>listObservable</span>
+</span></span><span class=line><span class=cl>    <span class=p>.</span><span class=n>Select</span><span class=p>(</span><span class=n>lst</span> <span class=p>=&gt;</span> <span class=kt>string</span><span class=p>.</span><span class=n>Join</span><span class=p>(</span><span class=s>&#34;,&#34;</span><span class=p>,</span> <span class=n>lst</span><span class=p>))</span> <span class=c1>// 使用逗号分隔</span>
+</span></span><span class=line><span class=cl>    <span class=p>.</span><span class=n>SubscribeConsole</span><span class=p>(</span><span class=s>&#34;list ready&#34;</span><span class=p>);</span>
+</span></span></code></pre></td></tr></table></div></div><p>输出：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>list ready - OnNext(Observable,To,List)
+</span></span><span class=line><span class=cl>list ready - OnCompleted()
+</span></span></code></pre></td></tr></table></div></div><h3 id=可观察流--字典>可观察流 → 字典</h3><p>Rx 提供了如下方法：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c# data-lang=c#><span class=line><span class=cl><span class=n>IObservable</span><span class=p>&lt;</span><span class=n>IDictionary</span><span class=p>&lt;</span><span class=n>TKey</span><span class=p>,</span> <span class=n>TSource</span><span class=p>&gt;&gt;</span> <span class=n>ToDictionary</span><span class=p>&lt;</span><span class=n>TSource</span><span class=p>,</span> <span class=n>TKey</span><span class=p>&gt;(</span><span class=k>this</span> <span class=n>IObservable</span><span class=p>&lt;</span><span class=n>TSource</span><span class=p>&gt;</span> <span class=n>source</span><span class=p>,</span> <span class=n>Func</span><span class=p>&lt;</span><span class=n>TSource</span><span class=p>,</span> <span class=n>TKey</span><span class=p>&gt;</span> <span class=n>keySelector</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>简单使用：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c# data-lang=c#><span class=line><span class=cl><span class=n>IEnumerable</span><span class=p>&lt;</span><span class=kt>string</span><span class=p>&gt;</span> <span class=n>cities</span> <span class=p>=</span> <span class=k>new</span><span class=p>[]</span> <span class=p>{</span> <span class=s>&#34;London&#34;</span><span class=p>,</span> <span class=s>&#34;Tel-Aviv&#34;</span><span class=p>,</span> <span class=s>&#34;Tokyo&#34;</span><span class=p>,</span> <span class=s>&#34;Rome&#34;</span> <span class=p>};</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kt>var</span> <span class=n>dictionaryObservable</span> <span class=p>=</span> <span class=n>cities</span>
+</span></span><span class=line><span class=cl>    <span class=p>.</span><span class=n>ToObservable</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=p>.</span><span class=n>ToDictionary</span><span class=p>(</span><span class=n>c</span> <span class=p>=&gt;</span> <span class=n>c</span><span class=p>.</span><span class=n>Length</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>dictionaryObservable</span>
+</span></span><span class=line><span class=cl>    <span class=p>.</span><span class=n>Select</span><span class=p>(</span><span class=n>d</span> <span class=p>=&gt;</span> <span class=kt>string</span><span class=p>.</span><span class=n>Join</span><span class=p>(</span><span class=s>&#34;,&#34;</span><span class=p>,</span> <span class=n>d</span><span class=p>))</span> 
+</span></span><span class=line><span class=cl>    <span class=p>.</span><span class=n>SubscribeConsole</span><span class=p>(</span><span class=s>&#34;dictionary&#34;</span><span class=p>);</span>
+</span></span></code></pre></td></tr></table></div></div><p>输出：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>dictionary - OnNext([6, London],[8, Tel-Aviv],[5, Tokyo],[4, Rome])
+</span></span><span class=line><span class=cl>dictionary - OnCompleted()
+</span></span></code></pre></td></tr></table></div></div><p>但是当两个 Key 的值相同时，它就会报错。</p><p>如果你需要一 Key 对应多值，你就需要 <strong>Lookup</strong> 类型：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c# data-lang=c#><span class=line><span class=cl><span class=n>IObservable</span><span class=p>&lt;</span><span class=n>ILookup</span><span class=p>&lt;</span><span class=n>TKey</span><span class=p>,</span> <span class=n>TSource</span><span class=p>&gt;&gt;</span> <span class=n>ToLookup</span><span class=p>&lt;</span><span class=n>TSource</span><span class=p>,</span> <span class=n>TKey</span><span class=p>&gt;(</span><span class=k>this</span> <span class=n>IObservable</span><span class=p>&lt;</span><span class=n>TSource</span><span class=p>&gt;</span> <span class=n>source</span><span class=p>,</span> <span class=n>Func</span><span class=p>&lt;</span><span class=n>TSource</span><span class=p>,</span> <span class=n>TKey</span><span class=p>&gt;</span> <span class=n>keySelector</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>长得和 <code>ToDictionary</code> 非常相似。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c# data-lang=c#><span class=line><span class=cl><span class=n>IEnumerable</span><span class=p>&lt;</span><span class=kt>string</span><span class=p>&gt;</span> <span class=n>cities</span> <span class=p>=</span> <span class=k>new</span><span class=p>[]</span> <span class=p>{</span> <span class=s>&#34;London&#34;</span><span class=p>,</span> <span class=s>&#34;Tel-Aviv&#34;</span><span class=p>,</span> <span class=s>&#34;Tokyo&#34;</span><span class=p>,</span> <span class=s>&#34;Rome&#34;</span><span class=p>,</span> <span class=s>&#34;Madrid&#34;</span> <span class=p>};</span> 
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kt>var</span> <span class=n>lookupObservable</span> <span class=p>=</span> <span class=n>cities</span>
+</span></span><span class=line><span class=cl>    <span class=p>.</span><span class=n>ToObservable</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=p>.</span><span class=n>ToLookup</span><span class=p>(</span><span class=n>c</span> <span class=p>=&gt;</span> <span class=n>c</span><span class=p>.</span><span class=n>Length</span><span class=p>);</span> 
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>lookupObservable</span>
+</span></span><span class=line><span class=cl>    <span class=p>.</span><span class=n>Select</span><span class=p>(</span><span class=n>lookup</span> <span class=p>=&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=kt>var</span> <span class=n>groups</span> <span class=p>=</span> <span class=k>new</span> <span class=n>StringBuilder</span><span class=p>();</span> 
+</span></span><span class=line><span class=cl>        <span class=k>foreach</span> <span class=p>(</span><span class=kt>var</span> <span class=n>grp</span> <span class=k>in</span> <span class=n>lookup</span><span class=p>)</span> 
+</span></span><span class=line><span class=cl>            <span class=n>groups</span><span class=p>.</span><span class=n>AppendFormat</span><span class=p>(</span><span class=s>&#34;[Key:{0} =&gt; {1}]&#34;</span><span class=p>,</span><span class=n>grp</span><span class=p>.</span><span class=n>Key</span><span class=p>,</span><span class=n>grp</span><span class=p>.</span><span class=n>Count</span><span class=p>());</span> 
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=n>groups</span><span class=p>.</span><span class=n>ToString</span><span class=p>();</span> 
+</span></span><span class=line><span class=cl>    <span class=p>})</span>
+</span></span><span class=line><span class=cl>    <span class=p>.</span><span class=n>SubscribeConsole</span><span class=p>(</span><span class=s>&#34;lookup&#34;</span><span class=p>);</span>
+</span></span></code></pre></td></tr></table></div></div><p>输出：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>lookup - OnNext([Key:6 =&gt; 2][Key:8 =&gt; 1][Key:5 =&gt; 1][Key:4 =&gt; 1])
+</span></span><span class=line><span class=cl>lookup - OnCompleted()
+</span></span></code></pre></td></tr></table></div></div><p>因为伦敦（London）和马德里（Madrid）的长度都是 6，Lookup Key 6 就有两个值。</p><h2 id=rx-创建型操作符>Rx 创建型操作符</h2><h3 id=可观察循环>可观察循环</h3><p>使用 <code>Observable.Generate</code> 来创建类似迭代的数据流：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c# data-lang=c#><span class=line><span class=cl><span class=n>IObservable</span><span class=p>&lt;</span><span class=n>TResult</span><span class=p>&gt;</span> <span class=n>Generate</span><span class=p>&lt;</span><span class=n>TState</span><span class=p>,</span> <span class=n>TResult</span><span class=p>&gt;(</span>
+</span></span><span class=line><span class=cl>    <span class=n>TState</span> <span class=n>initialState</span><span class=p>,</span> 
+</span></span><span class=line><span class=cl>    <span class=n>Func</span><span class=p>&lt;</span><span class=n>TState</span><span class=p>,</span> <span class=kt>bool</span><span class=p>&gt;</span> <span class=n>condition</span><span class=p>,</span> 
+</span></span><span class=line><span class=cl>    <span class=n>Func</span><span class=p>&lt;</span><span class=n>TState</span><span class=p>,</span> <span class=n>TState</span><span class=p>&gt;</span> <span class=n>iterate</span><span class=p>,</span> 
+</span></span><span class=line><span class=cl>    <span class=n>Func</span><span class=p>&lt;</span><span class=n>TState</span><span class=p>,</span> <span class=n>TResult</span><span class=p>&gt;</span> <span class=n>resultSelector</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>简单使用：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c# data-lang=c#><span class=line><span class=cl><span class=n>IObservable</span><span class=p>&lt;</span><span class=kt>int</span><span class=p>&gt;</span> <span class=n>observable</span> <span class=p>=</span> 
+</span></span><span class=line><span class=cl>    <span class=n>Observable</span><span class=p>.</span><span class=n>Generate</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=m>0</span><span class=p>,</span> <span class=c1>//初始值</span>
+</span></span><span class=line><span class=cl>    <span class=n>i</span> <span class=p>=&gt;</span> <span class=n>i</span> <span class=p>&lt;</span> <span class=m>10</span><span class=p>,</span> <span class=c1>//条件</span>
+</span></span><span class=line><span class=cl>    <span class=n>i</span> <span class=p>=&gt;</span> <span class=n>i</span> <span class=p>+</span> <span class=m>1</span><span class=p>,</span> <span class=c1>//迭代</span>
+</span></span><span class=line><span class=cl>    <span class=n>i</span> <span class=p>=&gt;</span> <span class=n>i</span><span class=p>*</span><span class=m>2</span><span class=p>);</span> <span class=c1>//数据处理</span>
+</span></span><span class=line><span class=cl><span class=n>observable</span><span class=p>.</span><span class=n>SubscribeConsole</span><span class=p>();</span>
+</span></span></code></pre></td></tr></table></div></div><p>你会得到：0, 2, 4, 6, 8, 10, 12, 14, 16, 18。</p><p>使用 <code>Observable.Range</code> 简化以上操作：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c# data-lang=c#><span class=line><span class=cl><span class=n>IObservable</span><span class=p>&lt;</span><span class=kt>int</span><span class=p>&gt;</span> <span class=n>Range</span><span class=p>(</span><span class=kt>int</span> <span class=n>start</span><span class=p>,</span> <span class=kt>int</span> <span class=n>count</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>顾名思义：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c# data-lang=c#><span class=line><span class=cl><span class=n>IObservable</span><span class=p>&lt;</span><span class=kt>int</span><span class=p>&gt;</span> <span class=n>observable</span> <span class=p>=</span> 
+</span></span><span class=line><span class=cl>    <span class=n>Observable</span>
+</span></span><span class=line><span class=cl>    <span class=p>.</span><span class=n>Range</span><span class=p>(</span><span class=m>0</span><span class=p>,</span> <span class=m>10</span><span class=p>)</span> 
+</span></span><span class=line><span class=cl>    <span class=p>.</span><span class=n>Select</span><span class=p>(</span><span class=n>i</span> <span class=p>=&gt;</span> <span class=n>i</span><span class=p>*</span><span class=m>2</span><span class=p>);</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=读取文件>读取文件</h3><p>我们利用 <code>Generate</code> 方法来读取文件：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c# data-lang=c#><span class=line><span class=cl><span class=n>IObservable</span><span class=p>&lt;</span><span class=kt>string</span><span class=p>&gt;</span> <span class=n>lines</span> <span class=p>=</span> 
+</span></span><span class=line><span class=cl>    <span class=n>Observable</span><span class=p>.</span><span class=n>Generate</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=n>File</span><span class=p>.</span><span class=n>OpenText</span><span class=p>(</span><span class=s>&#34;TextFile.txt&#34;</span><span class=p>),</span> <span class=c1>//这个地方有瑕疵</span>
+</span></span><span class=line><span class=cl>    <span class=n>s</span> <span class=p>=&gt;</span> <span class=p>!</span><span class=n>s</span><span class=p>.</span><span class=n>EndOfStream</span><span class=p>,</span> <span class=c1>//迭代到文件末端</span>
+</span></span><span class=line><span class=cl>    <span class=n>s</span> <span class=p>=&gt;</span> <span class=n>s</span><span class=p>,</span> <span class=c1>//状态就是文件流本身</span>
+</span></span><span class=line><span class=cl>    <span class=n>s</span> <span class=p>=&gt;</span> <span class=n>s</span><span class=p>.</span><span class=n>ReadLine</span><span class=p>());</span> 
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>lines</span><span class=p>.</span><span class=n>SubscribeConsole</span><span class=p>(</span><span class=s>&#34;lines&#34;</span><span class=p>);</span>
+</span></span></code></pre></td></tr></table></div></div><p>输出：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>lines - OnNext(The 1st line)
+</span></span><span class=line><span class=cl>lines - OnNext(The 2nd line)
+</span></span><span class=line><span class=cl>lines - OnNext(The 3rd line)
+</span></span><span class=line><span class=cl>lines - OnNext(The 4th line)
+</span></span><span class=line><span class=cl>lines - OnCompleted()
+</span></span></code></pre></td></tr></table></div></div><p>但是捏，我们肯定知道 IO 流的资源没有及时释放。文件还保持在打开的状态。</p><p>在平时写 C# 中，我们一般会使用 <code>using var ...</code> 来自动释放资源。</p><p>在 Rx.NET 中，提供了 <code>Observable.Using</code>：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c# data-lang=c#><span class=line><span class=cl><span class=n>IObservable</span><span class=p>&lt;</span><span class=kt>string</span><span class=p>&gt;</span> <span class=n>lines</span> <span class=p>=</span> <span class=n>Observable</span><span class=p>.</span><span class=n>Using</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=p>()</span> <span class=p>=&gt;</span> <span class=n>File</span><span class=p>.</span><span class=n>OpenText</span><span class=p>(</span><span class=s>&#34;TextFile.txt&#34;</span><span class=p>),</span> 
+</span></span><span class=line><span class=cl>    <span class=n>stream</span> <span class=p>=&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=n>Observable</span><span class=p>.</span><span class=n>Generate</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>        <span class=n>stream</span><span class=p>,</span> <span class=c1>//初始状态就是它自己</span>
+</span></span><span class=line><span class=cl>        <span class=n>s</span> <span class=p>=&gt;</span> <span class=p>!</span><span class=n>s</span><span class=p>.</span><span class=n>EndOfStream</span><span class=p>,</span> 
+</span></span><span class=line><span class=cl>        <span class=n>s</span> <span class=p>=&gt;</span> <span class=n>s</span><span class=p>,</span> 
+</span></span><span class=line><span class=cl>        <span class=n>s</span> <span class=p>=&gt;</span> <span class=n>s</span><span class=p>.</span><span class=n>ReadLine</span><span class=p>())</span> 
+</span></span><span class=line><span class=cl><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>lines</span><span class=p>.</span><span class=n>SubscribeConsole</span><span class=p>(</span><span class=s>&#34;lines&#34;</span><span class=p>);</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=原始可观察流>原始可观察流</h3><p>有些 Rx 创建型操作符没啥用，但是可以拿来玩玩或者测试。</p><h4 id=return>Return</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c# data-lang=c#><span class=line><span class=cl><span class=n>Observable</span><span class=p>.</span><span class=n>Return</span><span class=p>(</span><span class=s>&#34;Hello World&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>.</span><span class=n>SubscribeConsole</span><span class=p>(</span><span class=s>&#34;Return&#34;</span><span class=p>);</span>
+</span></span></code></pre></td></tr></table></div></div><p>输出：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>Return - OnNext(Hello World)
+</span></span><span class=line><span class=cl>Return - OnCompleted()
+</span></span></code></pre></td></tr></table></div></div><h4 id=never>Never</h4><p>一个永不结束的数据流：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c# data-lang=c#><span class=line><span class=cl><span class=n>Observable</span><span class=p>.</span><span class=n>Never</span><span class=p>&lt;</span><span class=kt>string</span><span class=p>&gt;()</span>
+</span></span><span class=line><span class=cl>    <span class=p>.</span><span class=n>SubscribeConsole</span><span class=p>(</span><span class=s>&#34;Never&#34;</span><span class=p>);</span>
+</span></span></code></pre></td></tr></table></div></div><h4 id=throw>Throw</h4><p>一个运行即报错的流：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c# data-lang=c#><span class=line><span class=cl><span class=n>Observable</span><span class=p>.</span><span class=n>Throw</span><span class=p>&lt;</span><span class=n>ApplicationException</span><span class=p>&gt;(</span>
+</span></span><span class=line><span class=cl>    <span class=k>new</span> <span class=n>ApplicationException</span><span class=p>(</span><span class=s>&#34;something bad happened&#34;</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>    <span class=p>.</span><span class=n>SubscribeConsole</span><span class=p>(</span><span class=s>&#34;Throw&#34;</span><span class=p>);</span>
+</span></span></code></pre></td></tr></table></div></div><p>输出：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>Throw - OnError:
+</span></span><span class=line><span class=cl>    System.ApplicationException: something bad happened
+</span></span></code></pre></td></tr></table></div></div><h4 id=empty>Empty</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c# data-lang=c#><span class=line><span class=cl><span class=n>Observable</span><span class=p>.</span><span class=n>Empty</span><span class=p>&lt;</span><span class=kt>string</span><span class=p>&gt;()</span>
+</span></span><span class=line><span class=cl>    <span class=p>.</span><span class=n>SubscribeConsole</span><span class=p>(</span><span class=s>&#34;Empty&#34;</span><span class=p>);</span>
+</span></span></code></pre></td></tr></table></div></div><p>输出：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>Empty - OnCompleted()
+</span></span></code></pre></td></tr></table></div></div></section><footer class=article-footer><section class=article-tags><a href=/tags/csharp/>Csharp</a>
+<a href=/tags/rx.net/>Rx.NET</a></section><section class=article-copyright><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg><span>Licensed under CC BY-NC-SA 4.0</span></section></footer></article><aside class=related-content--wrapper><h2 class=section-title>Related content</h2><div class=related-content><div class="flex article-list--tile"><article class=has-image><a href=/p/rx-magic-ex/><div class=article-image><img src=/p/rx-magic-ex/head.c9b141998febf281884606d443822a75_hu60daa3e750dae8efe162b164d024055e_222411_250x150_fill_box_smart1_3.png width=250 height=150 loading=lazy alt="Featured image of post Rx.NET 响应式编程指北 Ex" data-key=rx-magic-ex data-hash="md5-ybFBmY/r8oGIRgbUQ4IqdQ=="></div><div class=article-details><h2 class=article-title>Rx.NET 响应式编程指北 Ex</h2></div></a></article><article class=has-image><a href=/p/rx-magic-2/><div class=article-image><img src=/p/rx-magic-2/head.c9b141998febf281884606d443822a75_hu60daa3e750dae8efe162b164d024055e_222411_250x150_fill_box_smart1_3.png width=250 height=150 loading=lazy alt="Featured image of post Rx.NET 响应式编程指北 02" data-key=rx-magic-2 data-hash="md5-ybFBmY/r8oGIRgbUQ4IqdQ=="></div><div class=article-details><h2 class=article-title>Rx.NET 响应式编程指北 02</h2></div></a></article><article class=has-image><a href=/p/rx-magic-1/><div class=article-image><img src=/p/rx-magic-1/head.c9b141998febf281884606d443822a75_hu60daa3e750dae8efe162b164d024055e_222411_250x150_fill_box_smart1_3.png width=250 height=150 loading=lazy alt="Featured image of post Rx.NET 响应式编程指北 01" data-key=rx-magic-1 data-hash="md5-ybFBmY/r8oGIRgbUQ4IqdQ=="></div><div class=article-details><h2 class=article-title>Rx.NET 响应式编程指北 01</h2></div></a></article></div></div></aside><footer class=site-footer><section class=copyright>&copy;
+2021 -
+2022 鎧恩の部屋</section><section class=powerby>(*/ω＼*)<br>Built with <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a><br>Theme <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.13.0>Stack</a></b> designed by <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a></section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">Table of contents</h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#前言>前言</a></li><li><a href=#普通数据流>普通数据流</a><ol><li><a href=#实现-iobservable-接口>实现 <code>IObservable</code> 接口</a></li><li><a href=#实现-observer-接口>实现 <code>Observer</code> 接口</a></li><li><a href=#手动创建-observable-的缺陷>手动创建 <code>Observable</code> 的缺陷</a></li><li><a href=#observablebase-接口><code>ObservableBase</code> 接口</a></li><li><a href=#observablecreate-方法><code>Observable.Create</code> 方法</a></li><li><a href=#延迟初始化-defer>延迟初始化 Defer</a></li></ol></li><li><a href=#由事件转换>由事件转换</a><ol><li><a href=#标准事件>标准事件</a></li><li><a href=#不标准事件>不标准事件</a></li><li><a href=#更复杂的事件>更复杂的事件</a></li><li><a href=#无参事件>无参事件</a></li></ol></li><li><a href=#由迭代类型转换>由迭代类型转换</a><ol><li><a href=#迭代类型--可观察流>迭代类型 → 可观察流</a></li><li><a href=#可观察流--迭代类型>可观察流 → 迭代类型</a></li><li><a href=#可观察流--字典>可观察流 → 字典</a></li></ol></li><li><a href=#rx-创建型操作符>Rx 创建型操作符</a><ol><li><a href=#可观察循环>可观察循环</a></li><li><a href=#读取文件>读取文件</a></li><li><a href=#原始可观察流>原始可观察流</a><ol><li><a href=#return>Return</a></li><li><a href=#never>Never</a></li><li><a href=#throw>Throw</a></li><li><a href=#empty>Empty</a></li></ol></li></ol></li></ol></nav></div></section></aside></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.js defer></script>
+<script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></body></html>
