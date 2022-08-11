@@ -1,6 +1,6 @@
 ---
 title: Rx.NET 响应式编程指北 03
-description: 创建可观察数据流
+description: 深入可观察流的创建
 date: 2022-08-10
 draft: false
 slug: rx-magic-3
