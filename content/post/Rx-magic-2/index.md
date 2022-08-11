@@ -354,9 +354,7 @@ class RxStockMonitor : IDisposable
 我们已经用两种方式编写了这个股票监控程序，是时候比较两种写法了。
 
 - 代码更紧凑：所有逻辑集中在一起
-- 更少的资源占用：Rx 几乎没有资源处理的开销[^1]
-
-  [^1]: You’re unaware of the real resources that the Rx pipeline creates because they were well encapsulated in the operators’ implementation. This is the opposite of the traditional events version, in which you needed to add every resource that was involved and had to manage its lifetime. The fewer resources you need to manage, the better your code will be in managing resources.
+- 更少的资源占用：Rx 几乎没有资源处理的开销
 
 - 强大的操作符：Rx 最明显的优势
 - 更简单地同步：一个 `Synchronize` 方法足矣
