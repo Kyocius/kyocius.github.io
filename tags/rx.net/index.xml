@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Rx.NET on 鎧恩の部屋</title><link>https://yoroion.github.io/tags/rx.net/</link><description>Recent content in Rx.NET on 鎧恩の部屋</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Wed, 10 Aug 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://yoroion.github.io/tags/rx.net/index.xml" rel="self" type="application/rss+xml"/><item><title>Rx.NET 响应式编程指北 03</title><link>https://yoroion.github.io/p/rx-magic-3/</link><pubDate>Wed, 10 Aug 2022 00:00:00 +0000</pubDate><guid>https://yoroion.github.io/p/rx-magic-3/</guid><description>&lt;img src="https://yoroion.github.io/p/rx-magic-3/head.png" alt="Featured image of post Rx.NET 响应式编程指北 03" />&lt;h2 id="前言">前言&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Rx.NET on 鎧恩の部屋</title><link>https://yoroion.github.io/tags/rx.net/</link><description>Recent content in Rx.NET on 鎧恩の部屋</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Wed, 10 Aug 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://yoroion.github.io/tags/rx.net/index.xml" rel="self" type="application/rss+xml"/><item><title>Rx.NET 响应式编程指北 03 - 深入流的创建</title><link>https://yoroion.github.io/p/rx-magic-3/</link><pubDate>Wed, 10 Aug 2022 00:00:00 +0000</pubDate><guid>https://yoroion.github.io/p/rx-magic-3/</guid><description>&lt;img src="https://yoroion.github.io/p/rx-magic-3/head.png" alt="Featured image of post Rx.NET 响应式编程指北 03 - 深入流的创建" />&lt;h2 id="前言">前言&lt;/h2>
 &lt;p>之前我们见识了 Rx.NET 的基本用法，把 .NET 事件转化成了可观察数据流，并且补充了一些拓展知识（Ex），现在我们要接着深入 Rx.NET 的核心技术了。&lt;/p>
 &lt;h2 id="普通数据流">普通数据流&lt;/h2>
 &lt;p>还记得吗，&lt;code>IObservable&lt;/code> 接口只有一个方法 &lt;code>Subscribe&lt;/code>，是 Rx.NET 的基础。&lt;/p>
@@ -1228,7 +1228,7 @@
 &lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">Empty - OnCompleted()
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div></description></item><item><title>Rx.NET 响应式编程指北 Ex</title><link>https://yoroion.github.io/p/rx-magic-ex/</link><pubDate>Tue, 09 Aug 2022 00:00:00 +0000</pubDate><guid>https://yoroion.github.io/p/rx-magic-ex/</guid><description>&lt;img src="https://yoroion.github.io/p/rx-magic-ex/head.png" alt="Featured image of post Rx.NET 响应式编程指北 Ex" />&lt;h2 id="前言">前言&lt;/h2>
+&lt;/div></description></item><item><title>Rx.NET 响应式编程指北 Ex - 函数式思想 &amp; 流式接口</title><link>https://yoroion.github.io/p/rx-magic-ex/</link><pubDate>Tue, 09 Aug 2022 00:00:00 +0000</pubDate><guid>https://yoroion.github.io/p/rx-magic-ex/</guid><description>&lt;img src="https://yoroion.github.io/p/rx-magic-ex/head.png" alt="Featured image of post Rx.NET 响应式编程指北 Ex - 函数式思想 &amp; 流式接口" />&lt;h2 id="前言">前言&lt;/h2>
 &lt;p>这一章是独立于正式章节的番外，补充一下 C# &lt;strong>函数式编程&lt;/strong>（Functional Programming）以及&lt;strong>流式接口&lt;/strong>（Fluent API）的知识。&lt;/p>
 &lt;p>等等，我们不是在学 Rx.NET 吗，怎么又跑到函数式了？ (＃°Д°)&lt;/p>
 &lt;p>你 先 别 急，二者并不冲突。&lt;/p>
@@ -1501,7 +1501,8 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">});&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;h2 id="流式接口-fluent-api">流式接口 Fluent API&lt;/h2>
+&lt;/div>&lt;hr>
+&lt;h2 id="流式接口-fluent-api">流式接口 Fluent API&lt;/h2>
 &lt;p>流式接口（Fluent API）是一种方法调用风格：&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
@@ -1591,7 +1592,7 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">.&lt;/span>&lt;span class="n">AddItem&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;Weird&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;p>Awesome！瞬间就简洁多了。&lt;/p></description></item><item><title>Rx.NET 响应式编程指北 02</title><link>https://yoroion.github.io/p/rx-magic-2/</link><pubDate>Mon, 08 Aug 2022 00:00:00 +0000</pubDate><guid>https://yoroion.github.io/p/rx-magic-2/</guid><description>&lt;img src="https://yoroion.github.io/p/rx-magic-2/head.png" alt="Featured image of post Rx.NET 响应式编程指北 02" />&lt;h2 id="前言">前言&lt;/h2>
+&lt;/div>&lt;p>Awesome！瞬间就简洁多了。&lt;/p></description></item><item><title>Rx.NET 响应式编程指北 02 - 基本使用</title><link>https://yoroion.github.io/p/rx-magic-2/</link><pubDate>Mon, 08 Aug 2022 00:00:00 +0000</pubDate><guid>https://yoroion.github.io/p/rx-magic-2/</guid><description>&lt;img src="https://yoroion.github.io/p/rx-magic-2/head.png" alt="Featured image of post Rx.NET 响应式编程指北 02 - 基本使用" />&lt;h2 id="前言">前言&lt;/h2>
 &lt;p>在上一章里，我们学习了响应式的基本概念。在这一章节，我们将编写一个&lt;strong>股票监控&lt;/strong>程序。首先我们将使用传统的 .NET 事件系统来写一次，之后再通过 Rx 来重构。&lt;/p>
 &lt;h2 id="传统事件写法">传统事件写法&lt;/h2>
 &lt;ol>
@@ -2173,7 +2174,7 @@ data-flex-basis="417px"
 &lt;li>
 &lt;p>更简单地同步：一个 &lt;code>Synchronize&lt;/code> 方法足矣&lt;/p>
 &lt;/li>
-&lt;/ul></description></item><item><title>Rx.NET 响应式编程指北 01</title><link>https://yoroion.github.io/p/rx-magic-1/</link><pubDate>Sun, 07 Aug 2022 00:00:00 +0000</pubDate><guid>https://yoroion.github.io/p/rx-magic-1/</guid><description>&lt;img src="https://yoroion.github.io/p/rx-magic-1/head.png" alt="Featured image of post Rx.NET 响应式编程指北 01" />&lt;h2 id="前言">前言&lt;/h2>
+&lt;/ul></description></item><item><title>Rx.NET 响应式编程指北 01 - 基础概念</title><link>https://yoroion.github.io/p/rx-magic-1/</link><pubDate>Sun, 07 Aug 2022 00:00:00 +0000</pubDate><guid>https://yoroion.github.io/p/rx-magic-1/</guid><description>&lt;img src="https://yoroion.github.io/p/rx-magic-1/head.png" alt="Featured image of post Rx.NET 响应式编程指北 01 - 基础概念" />&lt;h2 id="前言">前言&lt;/h2>
 &lt;p>最近刚读了 &lt;em>Rx.NET in Action&lt;/em>，学到的新概念非常多，担忧自己会日渐遗忘，觉得有必要写一篇博客记录一下，说不定也能帮到一些志同道合的朋友。&lt;/p>
 &lt;p>本系列将会使用我深爱的 C# 语言和 Rx.NET 框架来讲解响应式编程（Reactive Programming）的魔法 ╰(&lt;em>°▽°&lt;/em>)╯&lt;/p>
 &lt;h2 id="背景知识">背景知识&lt;/h2>
