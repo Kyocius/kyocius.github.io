@@ -1,16 +1,17 @@
 ---
-title: Rx.NET 响应式编程指北 01
-description: 响应式的概念
+title: Rx.NET 响应式编程指北 01 - 基础概念
 date: 2022-08-07
 draft: false
 slug: rx-magic-1
 categories:
     - 编程
 tags:
-    - Csharp
     - Rx.NET
+    - CSharp
 image: head.png
+
 ---
+
 ## 前言
 
 最近刚读了 *Rx.NET in Action*，学到的新概念非常多，担忧自己会日渐遗忘，觉得有必要写一篇博客记录一下，说不定也能帮到一些志同道合的朋友。
@@ -107,7 +108,7 @@ subscription.Dispose(); // 上面说过了，可以随时取消订阅
 
 在 Rx 中，「Event Source」对应「Observable」而「Event Handler」对应「Observer」。
 
-### 万物皆流 
+### 万物皆流
 
 >  A data stream is like a hose: every drop of water is a data packet that needs to go through stations until it reaches the end. Your data also needs to be filtered and transformed until  it gets to the real handler that does something useful with it.
 

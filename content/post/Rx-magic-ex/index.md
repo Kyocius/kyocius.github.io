@@ -1,17 +1,16 @@
 ---
-title: Rx.NET 响应式编程指北 Ex
-description: 函数式思想 & 流式接口
+title: Rx.NET 响应式编程指北 Ex - 函数式思想 & 流式接口
 date: 2022-08-09
 draft: false
 slug: rx-magic-ex
 categories:
     - 编程
 tags:
-    - Csharp
     - Rx.NET
+    - CSharp
     - Functional
-    - Fluent API
 image: head.png
+
 ---
 
 ## 前言
@@ -60,7 +59,7 @@ myDel = delegate (string first, string second)
 }
 ```
 
-###  Lambda 表达式
+### Lambda 表达式
 
 ```c#
 // 👇 这就是 lambda
@@ -184,7 +183,7 @@ class ThinClass
 class ClassWithLazy
 {
     Lazy<HeavyClass> _lazyHeavyClass = new Lazy<HeavyClass>();
-    
+
     public void SomeMethod()
     {
         var myHeavy = _lazyHeavyClass.Value;
@@ -205,6 +204,8 @@ Lazy<HeavyClass> _lazyHeavyClass = new Lazy<HeavyClass>(() =>
     return heavy;
 });
 ```
+
+---
 
 ## 流式接口 Fluent API
 

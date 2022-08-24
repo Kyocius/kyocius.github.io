@@ -1,15 +1,16 @@
 ---
-title: Rx.NET 响应式编程指北 02
-description: Rx 的基本使用
+title: Rx.NET 响应式编程指北 02 - 基本使用
+description: 将传统事件改写成 Rx 模式
 date: 2022-08-08
 draft: false
 slug: rx-magic-2
 categories:
     - 编程
 tags:
-    - Csharp
     - Rx.NET
+    - CSharp
 image: head.png
+
 ---
 
 ## 前言
@@ -92,17 +93,17 @@ var stockInfoExists = _stockInfos.TryGetValue(quoteSymbol, out stockInfo);
 if (stockInfoExists)
 {
     var priceDiff = stockTick.Price-stockInfo.PrevPrice; 
-    
+
     // 变化的百分比
     var changeRatio = Math.Abs(priceDiff/stockInfo.PrevPrice); 
-    
+
     if (changeRatio > maxChangeRatio)
     {
         // 简单打印个信息，用的是 C# 6.0 以前的写法
         Console.WriteLine("Stock:{0} has changed with {1} ratio, Old Price:{2} New Price:{3}", quoteSymbol, changeRatio, stockInfo.PrevPrice, stockTick.Price);
-    
+
     }
-    
+
     //保存这个新数据
      _stockInfos[quoteSymbol].PrevPrice = stockTick.Price; 
 }
@@ -341,7 +342,7 @@ class RxStockMonitor : IDisposable
                 ex => { /* 处理错误 */}, 
                 () =>{/* 响应任务完成 */});
     }
- 
+
     public void Dispose() 
     {
         _subscription.Dispose();
@@ -354,8 +355,9 @@ class RxStockMonitor : IDisposable
 我们已经用两种方式编写了这个股票监控程序，是时候比较两种写法了。
 
 - 代码更紧凑：所有逻辑集中在一起
+
 - 更少的资源占用：Rx 几乎没有资源处理的开销
 
 - 强大的操作符：Rx 最明显的优势
-- 更简单地同步：一个 `Synchronize` 方法足矣
 
+- 更简单地同步：一个 `Synchronize` 方法足矣

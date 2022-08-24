@@ -1,16 +1,17 @@
 ---
-title: Rx.NET 响应式编程指北 03
-description: 深入可观察流的创建
+title: Rx.NET 响应式编程指北 03 - 深入流的创建
 date: 2022-08-10
 draft: false
 slug: rx-magic-3
 categories:
     - 编程
 tags:
-    - Csharp
     - Rx.NET
+    - CSharp
 image: head.png
+
 ---
+
 ## 前言
 
 之前我们见识了 Rx.NET 的基本用法，把 .NET 事件转化成了可观察数据流，并且补充了一些拓展知识（Ex），现在我们要接着深入 Rx.NET 的核心技术了。
@@ -32,7 +33,7 @@ using System.Reactive.Disposables;
 public class NumbersObservable : IObservable<int>
 {
     private readonly int _amount;
-    
+
     public NumbersObservable(int amount) 
     {
          _amount = amount;
@@ -55,7 +56,7 @@ public class NumbersObservable : IObservable<int>
 public class ConsoleObserver<T> : IObserver<T> 
 {
     private readonly string _name;
-    
+
     public ConsoleObserver(string name="") 
     {
         _name = name;
@@ -125,7 +126,7 @@ public IDisposable Subscribe(IObserver<int> observer)
         observer.OnNext(i);
     }
     observer.OnCompleted();
- 
+
     observer.OnNext(_amount); // 注意这行
     return Disposable.Empty;
 }
@@ -187,7 +188,7 @@ public class ObservableConnection : ObservableBase<string>
     {
         _chatConnection = chatConnection; 
     } 
- 
+
     protected override IDisposable SubscribeCore(IObserver<string> observer)
     {
         Action<string> received = message => 
@@ -780,4 +781,3 @@ Observable.Empty<string>()
 ```
 Empty - OnCompleted()
 ```
-
