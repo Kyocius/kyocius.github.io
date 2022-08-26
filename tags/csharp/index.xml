@@ -1113,7 +1113,54 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div></description></item><item><title>Rx.NET 响应式编程指北 03 - 深入流的创建</title><link>https://yoroion.github.io/p/rx-magic-3/</link><pubDate>Wed, 10 Aug 2022 00:00:00 +0000</pubDate><guid>https://yoroion.github.io/p/rx-magic-3/</guid><description>&lt;img src="https://yoroion.github.io/p/rx-magic-3/head.png" alt="Featured image of post Rx.NET 响应式编程指北 03 - 深入流的创建" />&lt;h2 id="前言">前言&lt;/h2>
+&lt;/div>&lt;p>整体看一下代码:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-c#" data-lang="c#">&lt;span class="line">&lt;span class="cl">&lt;span class="k">async&lt;/span> &lt;span class="n">Task&lt;/span> &lt;span class="n">Go&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">await&lt;/span> &lt;span class="n">PrintAnswerToLife&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">WriteLine&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;Done&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">async&lt;/span> &lt;span class="n">Task&lt;/span> &lt;span class="n">PrintAnswerToLife&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kt">int&lt;/span> &lt;span class="n">answer&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="k">await&lt;/span> &lt;span class="n">GetAnswerToLife&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">WriteLine&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">answer&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">async&lt;/span> &lt;span class="n">Task&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="kt">int&lt;/span>&lt;span class="p">&amp;gt;&lt;/span> &lt;span class="n">GetAnswerToLife&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">await&lt;/span> &lt;span class="n">Task&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">Delay&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="m">5000&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kt">int&lt;/span> &lt;span class="n">answer&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="m">21&lt;/span> &lt;span class="p">*&lt;/span> &lt;span class="m">2&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">answer&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;blockquote>
+&lt;p>这也揭示了 C# 中编写异步方法的基本原则:&lt;/p>
+&lt;ol>
+&lt;li>先同步地编写代码&lt;/li>
+&lt;li>将同步方法改成异步的&lt;/li>
+&lt;li>返回值改成 Task 或 Task&lt;!-- raw HTML omitted -->&lt;/li>
+&lt;/ol>
+&lt;/blockquote>
+&lt;h4 id="并行-parallelism">并行 Parallelism&lt;/h4></description></item><item><title>Rx.NET 响应式编程指北 03 - 深入流的创建</title><link>https://yoroion.github.io/p/rx-magic-3/</link><pubDate>Wed, 10 Aug 2022 00:00:00 +0000</pubDate><guid>https://yoroion.github.io/p/rx-magic-3/</guid><description>&lt;img src="https://yoroion.github.io/p/rx-magic-3/head.png" alt="Featured image of post Rx.NET 响应式编程指北 03 - 深入流的创建" />&lt;h2 id="前言">前言&lt;/h2>
 &lt;p>之前我们见识了 Rx.NET 的基本用法，把 .NET 事件转化成了可观察数据流，并且补充了一些拓展知识（Ex），现在我们要接着深入 Rx.NET 的核心技术了。&lt;/p>
 &lt;h2 id="普通数据流">普通数据流&lt;/h2>
 &lt;p>还记得吗，&lt;code>IObservable&lt;/code> 接口只有一个方法 &lt;code>Subscribe&lt;/code>，是 Rx.NET 的基础。&lt;/p>
