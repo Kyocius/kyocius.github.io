@@ -743,3 +743,29 @@ async Task<int> GetAnswerToLife()
     return answer; //直接返回整型
 }
 ```
+整体看一下代码:
+```c#
+async Task Go()
+{
+    await PrintAnswerToLife();
+    Console.WriteLine ("Done");
+}
+async Task PrintAnswerToLife()
+{
+    int answer = await GetAnswerToLife();
+    Console.WriteLine (answer);
+}
+async Task<int> GetAnswerToLife()
+{
+    await Task.Delay (5000);
+    int answer = 21 * 2;
+    return answer;
+}
+```
+> 这也揭示了 C# 中编写异步方法的基本原则:
+> 1. 先同步地编写代码
+> 2. 将同步方法改成异步的
+> 3. 返回值改成 Task 或 Task<TResult>
+
+#### 并行 Parallelism
+
