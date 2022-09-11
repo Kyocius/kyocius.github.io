@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on 鎧恩の部屋</title><link>https://yoroion.github.io/post/</link><description>Recent content in Posts on 鎧恩の部屋</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 26 Aug 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://yoroion.github.io/post/index.xml" rel="self" type="application/rss+xml"/><item><title>写给 C# 开发者的 F# 光速入门教程</title><link>https://yoroion.github.io/p/fsharp-for-csharp-devs/</link><pubDate>Fri, 26 Aug 2022 00:00:00 +0000</pubDate><guid>https://yoroion.github.io/p/fsharp-for-csharp-devs/</guid><description>&lt;img src="https://yoroion.github.io/p/fsharp-for-csharp-devs/head.png" alt="Featured image of post 写给 C# 开发者的 F# 光速入门教程" />&lt;blockquote>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on 鎧恩の部屋</title><link>https://yoroion.github.io/post/</link><description>Recent content in Posts on 鎧恩の部屋</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 26 Aug 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://yoroion.github.io/post/index.xml" rel="self" type="application/rss+xml"/><item><title>写给 C# 开发者的 F# 光速入门教程</title><link>https://yoroion.github.io/p/fsharp-for-csharp-devs/</link><pubDate>Fri, 26 Aug 2022 00:00:00 +0000</pubDate><guid>https://yoroion.github.io/p/fsharp-for-csharp-devs/</guid><description>&lt;img src="https://yoroion.github.io/p/fsharp-for-csharp-devs/head.jpg" alt="Featured image of post 写给 C# 开发者的 F# 光速入门教程" />&lt;blockquote>
 &lt;p>本文翻译自托管在 GitHub 上的 &lt;a class="link" href="https://github.com/knocte/2fsharp" target="_blank" rel="noopener"
 >2fsharp&lt;/a> 开源项目&lt;/p>
-&lt;/blockquote>
-&lt;blockquote>
 &lt;p>译版仅发表在知乎和 &lt;a class="link" href="https://yoroion.github.io" target="_blank" rel="noopener"
 >本人博客&lt;/a> 上，未经授权&lt;strong>禁止转载&lt;/strong>&lt;/p>
 &lt;/blockquote>
@@ -2009,7 +2007,7 @@
 >文章&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>如果过了一段时间，你还在为从 C# 转换至 F# 而挣扎，也可以时不时地使用这个 &lt;a class="link" href="https://github.com/willsam100/FShaper" target="_blank" rel="noopener"
->工具&lt;/a>。&lt;/p></description></item><item><title>鎧恩的 C# 不完全指南 01 - 并发与异步</title><link>https://yoroion.github.io/p/yoroion-csharp-tutorial-1/</link><pubDate>Mon, 15 Aug 2022 00:00:00 +0000</pubDate><guid>https://yoroion.github.io/p/yoroion-csharp-tutorial-1/</guid><description>&lt;img src="https://yoroion.github.io/p/yoroion-csharp-tutorial-1/head.png" alt="Featured image of post 鎧恩的 C# 不完全指南 01 - 并发与异步" />&lt;h2 id="前言">前言&lt;/h2>
+>工具&lt;/a>。&lt;/p></description></item><item><title>鎧恩的 C# 进阶小册 01 - 并发与异步</title><link>https://yoroion.github.io/p/advanced-csharp-1/</link><pubDate>Mon, 15 Aug 2022 00:00:00 +0000</pubDate><guid>https://yoroion.github.io/p/advanced-csharp-1/</guid><description>&lt;img src="https://yoroion.github.io/p/advanced-csharp-1/head.png" alt="Featured image of post 鎧恩的 C# 进阶小册 01 - 并发与异步" />&lt;h2 id="前言">前言&lt;/h2>
 &lt;p>就是太久没写异步，有的用法忘了。所以写篇博客回顾一下。&lt;/p>
 &lt;p>大量参考《C# 10 in a Nutshell》&lt;/p>
 &lt;h2 id="线程-thread">线程 Thread&lt;/h2>
