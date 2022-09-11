@@ -49,7 +49,7 @@ params:
         avatar:
             enabled: true
             local: true
-            src: img/Rena.jpg
+            src: img/南云日鹤2.jpg
 
     article:
         math: false

@@ -1,12 +1,12 @@
 ---
-title:  鎧恩的 C# 不完全指南  01 - 并发与异步
+title:  鎧恩的 C# 进阶小册  01 - 并发与异步
 date: 2022-08-15
 draft: false
-slug: yoroion-csharp-tutorial-1
+slug: advanced-csharp-1
 categories:
     - 编程
 tags:
-    - CSharp Tutorial
+    - Advanced CSharp 
     - CSharp
 image: head.png
 

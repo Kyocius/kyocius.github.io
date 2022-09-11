@@ -3,17 +3,17 @@ title:  写给 C# 开发者的 F# 光速入门教程
 date: 2022-08-26
 draft: false
 slug: fsharp-for-csharp-devs
+description: Guide for C# devs to learn F# real FAST
 categories:
     - 编程
 tags:
-    - FSharp Tutorial
-    - FSharp
-image: head.png
+    - FSharp Basic
+image: head.jpg
 
 ---
 
 > 本文翻译自托管在 GitHub 上的 [2fsharp](https://github.com/knocte/2fsharp) 开源项目
-
+> 
 > 译版仅发表在知乎和 [本人博客](https://yoroion.github.io) 上，未经授权**禁止转载**
 
 这个教程是基于实例来讲解的，将会花费你 15-30 分钟的时间。
