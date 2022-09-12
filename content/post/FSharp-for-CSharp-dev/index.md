@@ -8,7 +8,7 @@ categories:
     - 编程
 tags:
     - FSharp Basic
-image: head.jpg
+image: head.png
 
 ---
 
