@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>FSharp Basic on 鎧恩の部屋</title><link>https://yoroion.github.io/tags/fsharp-basic/</link><description>Recent content in FSharp Basic on 鎧恩の部屋</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 26 Aug 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://yoroion.github.io/tags/fsharp-basic/index.xml" rel="self" type="application/rss+xml"/><item><title>写给 C# 开发者的 F# 光速入门教程</title><link>https://yoroion.github.io/p/fsharp-for-csharp-devs/</link><pubDate>Fri, 26 Aug 2022 00:00:00 +0000</pubDate><guid>https://yoroion.github.io/p/fsharp-for-csharp-devs/</guid><description>&lt;img src="https://yoroion.github.io/p/fsharp-for-csharp-devs/head.png" alt="Featured image of post 写给 C# 开发者的 F# 光速入门教程" />&lt;blockquote>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>FSharp Basic on Yonable.Space</title><link>https://yonable.github.io/tags/fsharp-basic/</link><description>Recent content in FSharp Basic on Yonable.Space</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 26 Aug 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://yonable.github.io/tags/fsharp-basic/index.xml" rel="self" type="application/rss+xml"/><item><title>写给 C# 开发者的 F# 光速入门教程</title><link>https://yonable.github.io/p/fsharp-for-csharp-devs/</link><pubDate>Fri, 26 Aug 2022 00:00:00 +0000</pubDate><guid>https://yonable.github.io/p/fsharp-for-csharp-devs/</guid><description>&lt;img src="https://yonable.github.io/p/fsharp-for-csharp-devs/head.png" alt="Featured image of post 写给 C# 开发者的 F# 光速入门教程" />&lt;blockquote>
 &lt;p>本文翻译自托管在 GitHub 上的 &lt;a class="link" href="https://github.com/knocte/2fsharp" target="_blank" rel="noopener"
 >2fsharp&lt;/a> 开源项目&lt;/p>
 &lt;p>译版仅发表在知乎和 &lt;a class="link" href="https://yoroion.github.io" target="_blank" rel="noopener"
@@ -128,15 +128,15 @@
 &lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code class="language-fsharp" data-lang="fsharp">&lt;span class="line">&lt;span class="cl">&lt;span class="k">open&lt;/span> &lt;span class="nn">System&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">let&lt;/span> &lt;span class="nv">mutable&lt;/span> &lt;span class="n">exitCode&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="n">int&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">0&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">let&lt;/span> &lt;span class="nv">mutable&lt;/span> &lt;span class="n">exitCode&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="n">int&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">if&lt;/span> &lt;span class="n">incomingChar&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nn">Environment&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">NewLine&lt;/span> &lt;span class="k">then&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">exitCode&lt;/span> &lt;span class="o">&amp;lt;-&lt;/span> &lt;span class="n">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">exitCode&lt;/span> &lt;span class="o">&amp;lt;-&lt;/span> &lt;span class="mi">1&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">elif&lt;/span> &lt;span class="ow">not&lt;/span> &lt;span class="o">(&lt;/span>&lt;span class="n">incomingChar&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nn">String&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">Empty&lt;/span>&lt;span class="o">)&lt;/span> &lt;span class="k">then&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">exitCode&lt;/span> &lt;span class="o">&amp;lt;-&lt;/span> &lt;span class="n">2&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">elif&lt;/span> &lt;span class="o">(&lt;/span>&lt;span class="n">incomingChar&lt;/span> &lt;span class="o">&amp;lt;&amp;gt;&lt;/span> &lt;span class="s">&amp;#34;&lt;/span>&lt;span class="se">\t&lt;/span>&lt;span class="s">&amp;#34;&lt;/span> &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> &lt;span class="n">incomingChar&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Length&lt;/span> &lt;span class="o">&amp;gt;&lt;/span> &lt;span class="n">1&lt;/span>&lt;span class="o">)&lt;/span> &lt;span class="k">then&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">exitCode&lt;/span> &lt;span class="o">&amp;lt;-&lt;/span> &lt;span class="n">3&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">exitCode&lt;/span> &lt;span class="o">&amp;lt;-&lt;/span> &lt;span class="mi">2&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">elif&lt;/span> &lt;span class="o">(&lt;/span>&lt;span class="n">incomingChar&lt;/span> &lt;span class="o">&amp;lt;&amp;gt;&lt;/span> &lt;span class="s">&amp;#34;&lt;/span>&lt;span class="se">\t&lt;/span>&lt;span class="s">&amp;#34;&lt;/span> &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> &lt;span class="n">incomingChar&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Length&lt;/span> &lt;span class="o">&amp;gt;&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="o">)&lt;/span> &lt;span class="k">then&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">exitCode&lt;/span> &lt;span class="o">&amp;lt;-&lt;/span> &lt;span class="mi">3&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">else&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">exitCode&lt;/span> &lt;span class="o">&amp;lt;-&lt;/span> &lt;span class="n">4&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">exitCode&lt;/span> &lt;span class="o">&amp;lt;-&lt;/span> &lt;span class="mi">4&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nn">Environment&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">Exit&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="n">exitCode&lt;/span>&lt;span class="o">)&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
@@ -172,13 +172,13 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">let&lt;/span> &lt;span class="nv">exitCode&lt;/span> &lt;span class="o">=&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="n">incomingChar&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nn">Environment&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">NewLine&lt;/span> &lt;span class="k">then&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="mi">1&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">elif&lt;/span> &lt;span class="ow">not&lt;/span> &lt;span class="o">(&lt;/span>&lt;span class="n">incomingChar&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nn">String&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">Empty&lt;/span>&lt;span class="o">)&lt;/span> &lt;span class="k">then&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">2&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">elif&lt;/span> &lt;span class="o">(&lt;/span>&lt;span class="n">incomingChar&lt;/span> &lt;span class="o">&amp;lt;&amp;gt;&lt;/span> &lt;span class="s">&amp;#34;&lt;/span>&lt;span class="se">\t&lt;/span>&lt;span class="s">&amp;#34;&lt;/span> &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> &lt;span class="n">incomingChar&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Length&lt;/span> &lt;span class="o">&amp;gt;&lt;/span> &lt;span class="n">1&lt;/span>&lt;span class="o">)&lt;/span> &lt;span class="k">then&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">3&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="mi">2&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">elif&lt;/span> &lt;span class="o">(&lt;/span>&lt;span class="n">incomingChar&lt;/span> &lt;span class="o">&amp;lt;&amp;gt;&lt;/span> &lt;span class="s">&amp;#34;&lt;/span>&lt;span class="se">\t&lt;/span>&lt;span class="s">&amp;#34;&lt;/span> &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> &lt;span class="n">incomingChar&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Length&lt;/span> &lt;span class="o">&amp;gt;&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="o">)&lt;/span> &lt;span class="k">then&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="mi">3&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">else&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">4&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="mi">4&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nn">Environment&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">Exit&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="n">exitCode&lt;/span>&lt;span class="o">)&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
@@ -214,10 +214,10 @@
 &lt;/span>&lt;span class="lnt">4
 &lt;/span>&lt;/code>&lt;/pre>&lt;/td>
 &lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-fsharp" data-lang="fsharp">&lt;span class="line">&lt;span class="cl">&lt;span class="k">let&lt;/span> &lt;span class="nv">intArray&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="n">array&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">int&lt;/span>&lt;span class="o">&amp;gt;&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">[|&lt;/span> &lt;span class="n">1&lt;/span>&lt;span class="o">;&lt;/span> &lt;span class="n">2&lt;/span>&lt;span class="o">;&lt;/span> &lt;span class="n">3&lt;/span> &lt;span class="o">|]&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">let&lt;/span> &lt;span class="nv">intList&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="n">List&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">int&lt;/span>&lt;span class="o">&amp;gt;&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">[&lt;/span> &lt;span class="n">4&lt;/span> &lt;span class="o">;&lt;/span> &lt;span class="n">5&lt;/span> &lt;span class="o">;&lt;/span> &lt;span class="n">6&lt;/span> &lt;span class="o">]&lt;/span>
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fsharp" data-lang="fsharp">&lt;span class="line">&lt;span class="cl">&lt;span class="k">let&lt;/span> &lt;span class="nv">intArray&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="n">array&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">int&lt;/span>&lt;span class="o">&amp;gt;&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">[|&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="o">;&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="o">;&lt;/span> &lt;span class="mi">3&lt;/span> &lt;span class="o">|]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">let&lt;/span> &lt;span class="nv">intList&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="n">List&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">int&lt;/span>&lt;span class="o">&amp;gt;&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">[&lt;/span> &lt;span class="mi">4&lt;/span> &lt;span class="o">;&lt;/span> &lt;span class="mi">5&lt;/span> &lt;span class="o">;&lt;/span> &lt;span class="mi">6&lt;/span> &lt;span class="o">]&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">let&lt;/span> &lt;span class="nv">sequenceOfIntegers&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="n">seq&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">int&lt;/span>&lt;span class="o">&amp;gt;&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">intList&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">let&lt;/span> &lt;span class="nv">dictionary&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="n">IDictionary&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="kt">string&lt;/span>&lt;span class="o">,&lt;/span>&lt;span class="n">int&lt;/span>&lt;span class="o">&amp;gt;&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">dict&lt;/span> &lt;span class="o">[&lt;/span> &lt;span class="o">(&lt;/span>&lt;span class="s">&amp;#34;One&amp;#34;&lt;/span>&lt;span class="o">,&lt;/span> &lt;span class="n">1&lt;/span>&lt;span class="o">);&lt;/span> &lt;span class="o">(&lt;/span>&lt;span class="s">&amp;#34;Two&amp;#34;&lt;/span>&lt;span class="o">,&lt;/span> &lt;span class="n">2&lt;/span>&lt;span class="o">)&lt;/span> &lt;span class="o">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">let&lt;/span> &lt;span class="nv">dictionary&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="n">IDictionary&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="kt">string&lt;/span>&lt;span class="o">,&lt;/span>&lt;span class="n">int&lt;/span>&lt;span class="o">&amp;gt;&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">dict&lt;/span> &lt;span class="o">[&lt;/span> &lt;span class="o">(&lt;/span>&lt;span class="s">&amp;#34;One&amp;#34;&lt;/span>&lt;span class="o">,&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="o">);&lt;/span> &lt;span class="o">(&lt;/span>&lt;span class="s">&amp;#34;Two&amp;#34;&lt;/span>&lt;span class="o">,&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="o">)&lt;/span> &lt;span class="o">]&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;ul>
@@ -469,7 +469,7 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">module&lt;/span> &lt;span class="nn">FooFactory&lt;/span> &lt;span class="o">=&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">let&lt;/span> &lt;span class="nv">internal&lt;/span> &lt;span class="n">CreateFoo&lt;/span> &lt;span class="bp">()&lt;/span> &lt;span class="o">=&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">{&lt;/span> &lt;span class="n">Bar&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">42&lt;/span>&lt;span class="o">;&lt;/span> &lt;span class="n">Baz&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s">&amp;#34;forty-two&amp;#34;&lt;/span> &lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">{&lt;/span> &lt;span class="n">Bar&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">42&lt;/span>&lt;span class="o">;&lt;/span> &lt;span class="n">Baz&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s">&amp;#34;forty-two&amp;#34;&lt;/span> &lt;span class="o">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;p>由此可见:&lt;/p>
@@ -994,18 +994,18 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">DelegateReception3&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="k">fun&lt;/span> &lt;span class="o">_&lt;/span> &lt;span class="o">-&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nn">Console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">WriteLine&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="s">&amp;#34;hello 3&amp;#34;&lt;/span>&lt;span class="o">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">3&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="mi">3&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">)&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">let&lt;/span> &lt;span class="nv">SendingAnonymousMethodAsDelegate4&lt;/span>&lt;span class="bp">()&lt;/span> &lt;span class="o">=&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">let&lt;/span> &lt;span class="nv">DelegateReception4&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="n">dlg&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="kt">double&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="kt">int64&lt;/span>&lt;span class="o">)&lt;/span> &lt;span class="o">=&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">let&lt;/span> &lt;span class="nv">bar&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">4&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">0&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">let&lt;/span> &lt;span class="nv">bar&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">4&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="mi">0&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">let&lt;/span> &lt;span class="nv">result&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">dlg&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="n">bar&lt;/span>&lt;span class="o">)&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="bp">()&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">DelegateReception4&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="k">fun&lt;/span> &lt;span class="n">bar&lt;/span> &lt;span class="o">-&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nn">Console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">WriteLine&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="s">&amp;#34;hello 4 &amp;#34;&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="n">bar&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">ToString&lt;/span>&lt;span class="bp">()&lt;/span>&lt;span class="o">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kt">int64&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="n">4&lt;/span>&lt;span class="o">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kt">int64&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="mi">4&lt;/span>&lt;span class="o">)&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">)&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
@@ -1113,7 +1113,7 @@
 &lt;/span>&lt;/code>&lt;/pre>&lt;/td>
 &lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code class="language-fsharp" data-lang="fsharp">&lt;span class="line">&lt;span class="cl">&lt;span class="k">let&lt;/span> &lt;span class="nv">rec&lt;/span> &lt;span class="n">ReceiveTuple&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="n">str&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="kt">string&lt;/span>&lt;span class="o">,&lt;/span> &lt;span class="n">i&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="n">int&lt;/span>&lt;span class="o">)&lt;/span> &lt;span class="o">=&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">let&lt;/span> &lt;span class="nv">counter&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="n">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">let&lt;/span> &lt;span class="nv">counter&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="mi">1&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nn">Console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">WriteLine&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="n">str&lt;/span>&lt;span class="o">)&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">let&lt;/span> &lt;span class="nv">newTuple&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">(&lt;/span>&lt;span class="n">str&lt;/span>&lt;span class="o">,&lt;/span> &lt;span class="n">counter&lt;/span>&lt;span class="o">)&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ReceiveTuple&lt;/span> &lt;span class="o">(&lt;/span>&lt;span class="n">newTuple&lt;/span>&lt;span class="o">)&lt;/span>
@@ -1132,7 +1132,7 @@
 &lt;/span>&lt;/code>&lt;/pre>&lt;/td>
 &lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code class="language-fsharp" data-lang="fsharp">&lt;span class="line">&lt;span class="cl">&lt;span class="k">let&lt;/span> &lt;span class="nv">rec&lt;/span> &lt;span class="n">ReceiveNonTuple&lt;/span> &lt;span class="o">(&lt;/span>&lt;span class="n">str&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="kt">string&lt;/span>&lt;span class="o">)&lt;/span> &lt;span class="o">(&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="n">int&lt;/span>&lt;span class="o">)&lt;/span> &lt;span class="o">=&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">let&lt;/span> &lt;span class="nv">counter&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="n">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">let&lt;/span> &lt;span class="nv">counter&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="mi">1&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nn">Console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">WriteLine&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="n">str&lt;/span>&lt;span class="o">)&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ReceiveNonTuple&lt;/span> &lt;span class="n">str&lt;/span> &lt;span class="n">counter&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">true&lt;/span>
@@ -1161,7 +1161,7 @@
 &lt;/span>&lt;/code>&lt;/pre>&lt;/td>
 &lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code class="language-fsharp" data-lang="fsharp">&lt;span class="line">&lt;span class="cl">&lt;span class="k">let&lt;/span> &lt;span class="nv">Double&lt;/span> &lt;span class="o">(&lt;/span>&lt;span class="n">x&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="n">int&lt;/span>&lt;span class="o">):&lt;/span> &lt;span class="n">int&lt;/span> &lt;span class="o">=&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Multiply&lt;/span> &lt;span class="n">2&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Multiply&lt;/span> &lt;span class="mi">2&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;p>当我们只向函数 &lt;code>Multiply&lt;/code> 传递一个参数时会发生什么？&lt;/p>
@@ -1176,7 +1176,7 @@
 &lt;/span>&lt;/code>&lt;/pre>&lt;/td>
 &lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code class="language-fsharp" data-lang="fsharp">&lt;span class="line">&lt;span class="cl">&lt;span class="k">let&lt;/span> &lt;span class="nv">Double&lt;/span> &lt;span class="o">(&lt;/span>&lt;span class="n">x&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="n">int&lt;/span>&lt;span class="o">):&lt;/span> &lt;span class="n">int&lt;/span> &lt;span class="o">=&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">let&lt;/span> &lt;span class="nv">doubleFunc&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">Multiply&lt;/span> &lt;span class="n">2&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">let&lt;/span> &lt;span class="nv">doubleFunc&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">Multiply&lt;/span> &lt;span class="mi">2&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">let&lt;/span> &lt;span class="nv">result&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">doubleFunc&lt;/span> &lt;span class="n">x&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">result&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
@@ -1191,7 +1191,7 @@
 &lt;/span>&lt;/code>&lt;/pre>&lt;/td>
 &lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code class="language-fsharp" data-lang="fsharp">&lt;span class="line">&lt;span class="cl">&lt;span class="k">let&lt;/span> &lt;span class="nv">Double&lt;/span> &lt;span class="o">(&lt;/span>&lt;span class="n">x&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="n">int&lt;/span>&lt;span class="o">):&lt;/span> &lt;span class="n">int&lt;/span> &lt;span class="o">=&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">let&lt;/span> &lt;span class="nv">doubleFunc&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="n">int&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">int&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">Multiply&lt;/span> &lt;span class="n">2&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">let&lt;/span> &lt;span class="nv">doubleFunc&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="n">int&lt;/span>&lt;span class="o">-&amp;gt;&lt;/span>&lt;span class="n">int&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">Multiply&lt;/span> &lt;span class="mi">2&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">let&lt;/span> &lt;span class="nv">result&lt;/span>&lt;span class="o">:&lt;/span> &lt;span class="n">int&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">doubleFunc&lt;/span> &lt;span class="n">x&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">result&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
@@ -1418,7 +1418,7 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">let&lt;/span> &lt;span class="nv">toast&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">MakeToastWithButterAndJam&lt;/span>&lt;span class="bp">()&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">|&amp;gt;&lt;/span> &lt;span class="nn">Async&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">RunSynchronously&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nn">Console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">WriteLine&lt;/span> &lt;span class="o">(&lt;/span>&lt;span class="s">&amp;#34;Bye world!&amp;#34;&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="o">(&lt;/span>&lt;span class="n">toast&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">IsYummy&lt;/span>&lt;span class="bp">()&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">ToString&lt;/span>&lt;span class="bp">()&lt;/span>&lt;span class="o">))&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">0&lt;/span> &lt;span class="c1">// return an integer exit code
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="mi">0&lt;/span> &lt;span class="c1">// return an integer exit code
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;p>关键不同点：&lt;/p>
@@ -1586,7 +1586,7 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">MakeToasts&lt;/span>&lt;span class="bp">()&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">|&amp;gt;&lt;/span> &lt;span class="nn">Async&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">RunSynchronously&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nn">Console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">WriteLine&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="s">&amp;#34;Bye world!&amp;#34;&lt;/span>&lt;span class="o">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">0&lt;/span> &lt;span class="c1">// return an integer exit code
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="mi">0&lt;/span> &lt;span class="c1">// return an integer exit code
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;p>正如你所看到的：&lt;/p>
@@ -1628,13 +1628,13 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">let&lt;/span> &lt;span class="nv">exitCode&lt;/span> &lt;span class="o">=&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="n">incomingChar&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nn">Environment&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">NewLine&lt;/span> &lt;span class="k">then&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="mi">1&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">elif&lt;/span> &lt;span class="ow">not&lt;/span> &lt;span class="o">(&lt;/span>&lt;span class="n">incomingChar&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nn">String&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">Empty&lt;/span>&lt;span class="o">)&lt;/span> &lt;span class="k">then&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">2&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">elif&lt;/span> &lt;span class="n">incomingChar&lt;/span> &lt;span class="o">&amp;lt;&amp;gt;&lt;/span> &lt;span class="s">&amp;#34;&lt;/span>&lt;span class="se">\t&lt;/span>&lt;span class="s">&amp;#34;&lt;/span> &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> &lt;span class="n">incomingChar&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Length&lt;/span> &lt;span class="o">&amp;gt;&lt;/span> &lt;span class="n">1&lt;/span> &lt;span class="k">then&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">3&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="mi">2&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">elif&lt;/span> &lt;span class="n">incomingChar&lt;/span> &lt;span class="o">&amp;lt;&amp;gt;&lt;/span> &lt;span class="s">&amp;#34;&lt;/span>&lt;span class="se">\t&lt;/span>&lt;span class="s">&amp;#34;&lt;/span> &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> &lt;span class="n">incomingChar&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Length&lt;/span> &lt;span class="o">&amp;gt;&lt;/span> &lt;span class="mi">1&lt;/span> &lt;span class="k">then&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="mi">3&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">else&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">4&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="mi">4&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nn">Environment&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">Exit&lt;/span> &lt;span class="n">exitCode&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
@@ -1655,16 +1655,16 @@
 &lt;/span>&lt;/code>&lt;/pre>&lt;/td>
 &lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code class="language-fsharp" data-lang="fsharp">&lt;span class="line">&lt;span class="cl">&lt;span class="k">let&lt;/span> &lt;span class="nv">intArray&lt;/span> &lt;span class="o">=&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">[|&lt;/span> &lt;span class="n">1&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">2&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">3&lt;/span> &lt;span class="o">|]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">[|&lt;/span> &lt;span class="mi">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="mi">2&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="mi">3&lt;/span> &lt;span class="o">|]&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">let&lt;/span> &lt;span class="nv">intList&lt;/span> &lt;span class="o">=&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">[&lt;/span> &lt;span class="n">4&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">5&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">6&lt;/span> &lt;span class="o">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">[&lt;/span> &lt;span class="mi">4&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="mi">5&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="mi">6&lt;/span> &lt;span class="o">]&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">let&lt;/span> &lt;span class="nv">sequenceOfIntegers&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">intList&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">let&lt;/span> &lt;span class="nv">dic&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">dict&lt;/span> &lt;span class="o">[&lt;/span> &lt;span class="o">(&lt;/span>&lt;span class="s">&amp;#34;One&amp;#34;&lt;/span>&lt;span class="o">,&lt;/span> &lt;span class="n">1&lt;/span>&lt;span class="o">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">(&lt;/span>&lt;span class="s">&amp;#34;Two&amp;#34;&lt;/span>&lt;span class="o">,&lt;/span> &lt;span class="n">2&lt;/span>&lt;span class="o">)&lt;/span> &lt;span class="o">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">let&lt;/span> &lt;span class="nv">dic&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">dict&lt;/span> &lt;span class="o">[&lt;/span> &lt;span class="o">(&lt;/span>&lt;span class="s">&amp;#34;One&amp;#34;&lt;/span>&lt;span class="o">,&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="o">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">(&lt;/span>&lt;span class="s">&amp;#34;Two&amp;#34;&lt;/span>&lt;span class="o">,&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="o">)&lt;/span> &lt;span class="o">]&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;div class="highlight">&lt;div class="chroma">
@@ -1757,7 +1757,7 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">module&lt;/span> &lt;span class="nn">FooFactory&lt;/span> &lt;span class="o">=&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">let&lt;/span> &lt;span class="nv">internal&lt;/span> &lt;span class="n">CreateFoo&lt;/span> &lt;span class="bp">()&lt;/span> &lt;span class="o">=&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">{&lt;/span> &lt;span class="n">Bar&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">42&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">{&lt;/span> &lt;span class="n">Bar&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">42&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Baz&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s">&amp;#34;forty-two&amp;#34;&lt;/span> &lt;span class="o">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
@@ -1850,18 +1850,18 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">DelegateReception3&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="k">fun&lt;/span> &lt;span class="o">_&lt;/span> &lt;span class="o">-&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nn">Console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">WriteLine&lt;/span> &lt;span class="s">&amp;#34;hello 3&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">3&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="mi">3&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">)&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">let&lt;/span> &lt;span class="nv">SendingAnonymousMethodAsDelegate4&lt;/span>&lt;span class="bp">()&lt;/span> &lt;span class="o">=&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">let&lt;/span> &lt;span class="nv">DelegateReception4&lt;/span> &lt;span class="n">dlg&lt;/span> &lt;span class="o">=&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">let&lt;/span> &lt;span class="nv">bar&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">4&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">0&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">let&lt;/span> &lt;span class="nv">bar&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">4&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="mi">0&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">let&lt;/span> &lt;span class="nv">result&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">dlg&lt;/span> &lt;span class="n">bar&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="bp">()&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">DelegateReception4&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="k">fun&lt;/span> &lt;span class="n">bar&lt;/span> &lt;span class="o">-&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nn">Console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">WriteLine&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="s">&amp;#34;hello 4 &amp;#34;&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="n">bar&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">ToString&lt;/span>&lt;span class="bp">()&lt;/span>&lt;span class="o">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kt">int64&lt;/span> &lt;span class="n">4&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kt">int64&lt;/span> &lt;span class="mi">4&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">)&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
@@ -1887,7 +1887,7 @@
 &lt;/span>&lt;/code>&lt;/pre>&lt;/td>
 &lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code class="language-fsharp" data-lang="fsharp">&lt;span class="line">&lt;span class="cl">&lt;span class="k">let&lt;/span> &lt;span class="nv">rec&lt;/span> &lt;span class="n">ReceiveNonTuple&lt;/span> &lt;span class="n">str&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="o">=&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">let&lt;/span> &lt;span class="nv">counter&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="n">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">let&lt;/span> &lt;span class="nv">counter&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="mi">1&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nn">Console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">WriteLine&lt;/span> &lt;span class="n">str&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ReceiveNonTuple&lt;/span> &lt;span class="n">str&lt;/span> &lt;span class="n">counter&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">true&lt;/span>
@@ -1908,7 +1908,7 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">x&lt;/span> &lt;span class="o">*&lt;/span> &lt;span class="n">y&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">let&lt;/span> &lt;span class="nv">Double&lt;/span> &lt;span class="n">x&lt;/span> &lt;span class="o">=&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">let&lt;/span> &lt;span class="nv">doubleFunc&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">Multiply&lt;/span> &lt;span class="n">2&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">let&lt;/span> &lt;span class="nv">doubleFunc&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">Multiply&lt;/span> &lt;span class="mi">2&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">let&lt;/span> &lt;span class="nv">result&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">doubleFunc&lt;/span> &lt;span class="n">x&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">result&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
@@ -1988,7 +1988,7 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">MakeToasts&lt;/span>&lt;span class="bp">()&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">|&amp;gt;&lt;/span> &lt;span class="nn">Async&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">RunSynchronously&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nn">Console&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">WriteLine&lt;/span> &lt;span class="s">&amp;#34;Bye world!&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">0&lt;/span> &lt;span class="c1">// return an integer exit code
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="mi">0&lt;/span> &lt;span class="c1">// return an integer exit code
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;hr>
