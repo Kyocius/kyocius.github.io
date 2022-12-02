@@ -1,0 +1,2671 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='Guide for C# devs to learn F# real FAST'><title>写给 C# 开发者的 F# 光速入门教程</title>
+
+<link rel='canonical' href='https://yonable.github.io/p/fsharp-for-csharp-devs/'>
+
+<link rel="stylesheet" href="/scss/style.min.ee304400045e4b1243b4955b82f025dbfc5f73114e099916d64e2239f64be1aa.css"><meta property='og:title' content='写给 C# 开发者的 F# 光速入门教程'>
+<meta property='og:description' content='Guide for C# devs to learn F# real FAST'>
+<meta property='og:url' content='https://yonable.github.io/p/fsharp-for-csharp-devs/'>
+<meta property='og:site_name' content='Yonable.Init()'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='FSharp Basic' /><meta property='article:published_time' content='2022-08-26T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2022-08-26T00:00:00&#43;00:00'/><meta property='og:image' content='https://yonable.github.io/p/fsharp-for-csharp-devs/head.png' />
+<meta name="twitter:title" content="写给 C# 开发者的 F# 光速入门教程">
+<meta name="twitter:description" content="Guide for C# devs to learn F# real FAST"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://yonable.github.io/p/fsharp-for-csharp-devs/head.png' />
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/%E5%8D%97%E4%BA%91%E6%97%A5%E9%B9%A42_hu5971c73a93cd34c6a54b40261e8ec7c0_507693_300x0_resize_q75_box.jpg" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🎲</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Yonable.Init()</a></h1>
+            <h2 class="site-description">Idling for enlightenment.</h2>
+        </div>
+    </header><ol class="social-menu">
+            
+                <li>
+                    <a 
+                        href='https://github.com/Yoroion'
+                        target="_blank"
+                        title="GitHub"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://twitter.com/yoroion'
+                        target="_blank"
+                        title="Twitter"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+
+        <li >
+            <a href='/' target="_blank">
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>About</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+            
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <span>Dark Mode</span>
+                </li>
+            
+        </div>
+    </ol>
+</aside>
+<main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/fsharp-for-csharp-devs/">
+                <img src="/p/fsharp-for-csharp-devs/head_hu7ae8c9477ae0a68f34fbf9d5a3829117_280528_800x0_resize_box_3.png"
+                        srcset="/p/fsharp-for-csharp-devs/head_hu7ae8c9477ae0a68f34fbf9d5a3829117_280528_800x0_resize_box_3.png 800w, /p/fsharp-for-csharp-devs/head_hu7ae8c9477ae0a68f34fbf9d5a3829117_280528_1600x0_resize_box_3.png 1600w"
+                        width="800" 
+                        height="450" 
+                        loading="lazy"
+                        alt="Featured image of post 写给 C# 开发者的 F# 光速入门教程" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E7%BC%96%E7%A8%8B/" >
+                编程
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/fsharp-for-csharp-devs/">写给 C# 开发者的 F# 光速入门教程</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            Guide for C# devs to learn F# real FAST
+        </h3>
+        
+    </div>
+
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Aug 26, 2022</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    16 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+</header>
+
+    <section class="article-content">
+    
+    
+    <blockquote>
+<p>本文翻译自托管在 GitHub 上的 <a class="link" href="https://github.com/knocte/2fsharp"  target="_blank" rel="noopener"
+    >2fsharp</a> 开源项目</p>
+<p>译版仅发表在知乎和 <a class="link" href="https://yoroion.github.io"  target="_blank" rel="noopener"
+    >本人博客</a> 上，未经授权<strong>禁止转载</strong></p>
+</blockquote>
+<p>这个教程是基于实例来讲解的，将会花费你 15-30 分钟的时间。</p>
+<p>你将会学到 F# 这门语言 80% 的特性！</p>
+<h3 id="例-1基本函数声明与实现">例 1：基本函数声明与实现</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="k">public</span> <span class="kt">int</span> <span class="n">GiveMeTheLength</span><span class="p">(</span><span class="kt">string</span> <span class="n">input</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 单行注释</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">var</span> <span class="n">result</span> <span class="p">=</span> <span class="n">input</span><span class="p">.</span><span class="n">Length</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="cm">/* 多行注释 */</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>变成了</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fsharp" data-lang="fsharp"><span class="line"><span class="cl"><span class="k">let</span> <span class="nv">GiveMeTheLength</span><span class="o">(</span><span class="n">input</span><span class="o">)</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 单行注释
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">let</span> <span class="nv">result</span> <span class="o">=</span> <span class="n">input</span><span class="o">.</span><span class="n">Length</span>
+</span></span><span class="line"><span class="cl">    <span class="c">(* 多行注释 *)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">result</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>所有东西都是默认为 <code>public</code> 的，除非你显式声明 <code>private</code> 修饰符。</li>
+<li>关键字 <code>var</code> 变成了 <code>let</code>（不仅仅用来声明变量，还用来声明函数）。</li>
+<li>你不再需要 <code>return</code> 关键字。函数的最后一行就是返回值。</li>
+<li>不再需要花括号，使用 4 格（或者 2 格）缩进，就像 Python 一样。</li>
+<li>不再需要分号来标志一行结束。</li>
+<li>类型声明是可选的，除了极少数情况编译器无法推断类型。</li>
+<li>单行注释和 C# 相同，但是多行注释使用括号而不是斜杠。</li>
+</ul>
+<p>如果你想要声明类型，需要这样写：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fsharp" data-lang="fsharp"><span class="line"><span class="cl"><span class="k">let</span> <span class="nv">GiveMeTheLength</span><span class="o">(</span><span class="n">input</span><span class="o">:</span> <span class="kt">string</span><span class="o">):</span> <span class="n">int</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">    <span class="k">let</span> <span class="nv">result</span><span class="o">:</span> <span class="n">int</span> <span class="o">=</span> <span class="n">input</span><span class="o">.</span><span class="n">Length</span>
+</span></span><span class="line"><span class="cl">    <span class="n">result</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="例-2基本关键字和操作符">例 2：基本关键字和操作符</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">System</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">MainClass</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">void</span> <span class="n">Main</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">exitCode</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">incomingChar</span> <span class="p">==</span> <span class="n">Environment</span><span class="p">.</span><span class="n">NewLine</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">exitCode</span> <span class="p">=</span> <span class="m">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">else</span> <span class="k">if</span> <span class="p">(!(</span><span class="n">incomingChar</span> <span class="p">==</span> <span class="n">String</span><span class="p">.</span><span class="n">Empty</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">            <span class="n">exitCode</span> <span class="p">=</span> <span class="m">2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">incomingChar</span> <span class="p">!=</span> <span class="s">&#34;\t&#34;</span> <span class="p">&amp;&amp;</span> <span class="n">incomingChar</span><span class="p">.</span><span class="n">Length</span> <span class="p">&gt;</span> <span class="m">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">exitCode</span> <span class="p">=</span> <span class="m">3</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">else</span>
+</span></span><span class="line"><span class="cl">            <span class="n">exitCode</span> <span class="p">=</span> <span class="m">4</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Environment</span><span class="p">.</span><span class="n">Exit</span><span class="p">(</span><span class="n">exitCode</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>变成了</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fsharp" data-lang="fsharp"><span class="line"><span class="cl"><span class="k">open</span> <span class="nn">System</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">let</span> <span class="nv">mutable</span> <span class="n">exitCode</span><span class="o">:</span> <span class="n">int</span> <span class="o">=</span> <span class="n">0</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="n">incomingChar</span> <span class="o">=</span> <span class="nn">Environment</span><span class="p">.</span><span class="n">NewLine</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">    <span class="n">exitCode</span> <span class="o">&lt;-</span> <span class="n">1</span>
+</span></span><span class="line"><span class="cl"><span class="k">elif</span> <span class="ow">not</span> <span class="o">(</span><span class="n">incomingChar</span> <span class="o">=</span> <span class="nn">String</span><span class="p">.</span><span class="n">Empty</span><span class="o">)</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">    <span class="n">exitCode</span> <span class="o">&lt;-</span> <span class="n">2</span>
+</span></span><span class="line"><span class="cl"><span class="k">elif</span> <span class="o">(</span><span class="n">incomingChar</span> <span class="o">&lt;&gt;</span> <span class="s">&#34;</span><span class="se">\t</span><span class="s">&#34;</span> <span class="o">&amp;&amp;</span> <span class="n">incomingChar</span><span class="o">.</span><span class="n">Length</span> <span class="o">&gt;</span> <span class="n">1</span><span class="o">)</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">    <span class="n">exitCode</span> <span class="o">&lt;-</span> <span class="n">3</span>
+</span></span><span class="line"><span class="cl"><span class="k">else</span>
+</span></span><span class="line"><span class="cl">    <span class="n">exitCode</span> <span class="o">&lt;-</span> <span class="n">4</span>
+</span></span><span class="line"><span class="cl"><span class="nn">Environment</span><span class="p">.</span><span class="n">Exit</span><span class="o">(</span><span class="n">exitCode</span><span class="o">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><code>using</code> 关键字变成了 <code>open</code> 关键字。</li>
+<li><code>if (x) foo(); else if (y) bar(); else baz();</code> 模式变成了 <code>if x then foo() elif y then bar() else baz()</code>，条件语句也不再需要圆括号。但是使用了新的关键字 <code>then</code> 和 <code>elif</code>。</li>
+<li>初始赋值（只读常量）操作符是 <code>=</code>。如果你需要为这个元素重新赋值，你需要将它标记为 <code>mutable</code> 然后使用 <code>&lt;-</code> 操作符。</li>
+<li>操作符 <code>=</code> 变成了比较符（不再需要像 C# 那样使用双等号 <code>==</code> 了）。</li>
+<li>操作符 <code>!=</code> 变成了 <code>&lt;&gt;</code>。</li>
+<li>操作符 <code>!</code> 变成了 <code>not</code>。</li>
+<li>操作符 <code>&amp;&amp;</code> 和 <code>||</code> 在 F# 不变。</li>
+<li>不再需要提供 Main() 方法这样的入口函数, 直接在一个 <code>.fsx</code> 文件中编写逻辑或者使用最新的 <code>.fs</code> 文件中编写语句以满足 F# 编译器要求。</li>
+</ul>
+<p>通常，上面的代码其实不需要使用 <code>mutable</code>，就像如下写法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fsharp" data-lang="fsharp"><span class="line"><span class="cl"><span class="k">open</span> <span class="nn">System</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">let</span> <span class="nv">exitCode</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">incomingChar</span> <span class="o">=</span> <span class="nn">Environment</span><span class="p">.</span><span class="n">NewLine</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">        <span class="n">1</span>
+</span></span><span class="line"><span class="cl">    <span class="k">elif</span> <span class="ow">not</span> <span class="o">(</span><span class="n">incomingChar</span> <span class="o">=</span> <span class="nn">String</span><span class="p">.</span><span class="n">Empty</span><span class="o">)</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">        <span class="n">2</span>
+</span></span><span class="line"><span class="cl">    <span class="k">elif</span> <span class="o">(</span><span class="n">incomingChar</span> <span class="o">&lt;&gt;</span> <span class="s">&#34;</span><span class="se">\t</span><span class="s">&#34;</span> <span class="o">&amp;&amp;</span> <span class="n">incomingChar</span><span class="o">.</span><span class="n">Length</span> <span class="o">&gt;</span> <span class="n">1</span><span class="o">)</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">        <span class="n">3</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span>
+</span></span><span class="line"><span class="cl">        <span class="n">4</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nn">Environment</span><span class="p">.</span><span class="n">Exit</span><span class="o">(</span><span class="n">exitCode</span><span class="o">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>（这和 C# 中的三元操作符类似，但是可读性更高）</p>
+<h3 id="例-3基础集合">例 3：基础集合</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kt">var</span> <span class="n">intArray</span> <span class="p">=</span> <span class="k">new</span> <span class="kt">int</span><span class="p">[]</span> <span class="p">{</span> <span class="m">1</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">3</span> <span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="kt">var</span> <span class="n">intList</span> <span class="p">=</span> <span class="k">new</span> <span class="n">List</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">&gt;({</span> <span class="m">4</span><span class="p">,</span> <span class="m">5</span><span class="p">,</span> <span class="m">6</span> <span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="n">IEnumerable</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">&gt;</span> <span class="n">sequenceOfIntegers</span> <span class="p">=</span> <span class="n">intList</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">var</span> <span class="n">dictionary</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Dictionary</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">string</span><span class="p">&gt;()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span> <span class="s">&#34;One&#34;</span><span class="p">,</span> <span class="m">1</span> <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span> <span class="s">&#34;Two&#34;</span><span class="p">,</span> <span class="m">2</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>变成了如下代码（其实你不需要声明类型，这里只是为了方便教学）：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fsharp" data-lang="fsharp"><span class="line"><span class="cl"><span class="k">let</span> <span class="nv">intArray</span><span class="o">:</span> <span class="n">array</span><span class="o">&lt;</span><span class="n">int</span><span class="o">&gt;</span> <span class="o">=</span> <span class="o">[|</span> <span class="n">1</span><span class="o">;</span> <span class="n">2</span><span class="o">;</span> <span class="n">3</span> <span class="o">|]</span>
+</span></span><span class="line"><span class="cl"><span class="k">let</span> <span class="nv">intList</span><span class="o">:</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">int</span><span class="o">&gt;</span> <span class="o">=</span> <span class="o">[</span> <span class="n">4</span> <span class="o">;</span> <span class="n">5</span> <span class="o">;</span> <span class="n">6</span> <span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="k">let</span> <span class="nv">sequenceOfIntegers</span><span class="o">:</span> <span class="n">seq</span><span class="o">&lt;</span><span class="n">int</span><span class="o">&gt;</span> <span class="o">=</span> <span class="n">intList</span>
+</span></span><span class="line"><span class="cl"><span class="k">let</span> <span class="nv">dictionary</span><span class="o">:</span> <span class="n">IDictionary</span><span class="o">&lt;</span><span class="kt">string</span><span class="o">,</span><span class="n">int</span><span class="o">&gt;</span> <span class="o">=</span> <span class="n">dict</span> <span class="o">[</span> <span class="o">(</span><span class="s">&#34;One&#34;</span><span class="o">,</span> <span class="n">1</span><span class="o">);</span> <span class="o">(</span><span class="s">&#34;Two&#34;</span><span class="o">,</span> <span class="n">2</span><span class="o">)</span> <span class="o">]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>声明 Array/List/Dictionary 时，逗号变成了分号。</li>
+<li><code>IEnumerable&lt;T&gt;</code> 变成了 <code>seq&lt;'T&gt;</code>（Sequence 的缩写）。</li>
+<li>你使用一个 <code>dict</code> 来初始化一个<code>IDictionary&lt;K,V&gt;</code> 集合，但是在 F# 中你将会更倾向于使用 <code>Map&lt;'K,'V&gt;</code> 因为它是可变的。</li>
+</ul>
+<p>你可能也注意到了，泛型类型需要一个前缀单引号「&rsquo;」</p>
+<h3 id="例-4代码块">例 4：代码块</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="k">try</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">TrySomething</span><span class="p">(</span><span class="n">someParam</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">SomeException</span> <span class="n">ex</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">SomeCondition</span><span class="p">(</span><span class="n">ex</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">DoSomethingElse</span><span class="p">(</span><span class="n">ex</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">throw</span> <span class="k">new</span> <span class="n">OtherException</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">else</span>
+</span></span><span class="line"><span class="cl">        <span class="k">throw</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="k">finally</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">MakeSureToCleanup</span><span class="p">(</span><span class="n">someParam</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>变成了</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fsharp" data-lang="fsharp"><span class="line"><span class="cl"><span class="k">try</span>
+</span></span><span class="line"><span class="cl">    <span class="k">try</span>
+</span></span><span class="line"><span class="cl">        <span class="n">TrySomething</span><span class="o">(</span><span class="n">someParam</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">with</span>
+</span></span><span class="line"><span class="cl">    <span class="o">|</span> <span class="o">:?</span> <span class="n">SomeException</span> <span class="k">as</span> <span class="n">ex</span> <span class="o">-&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">SomeCondition</span><span class="o">(</span><span class="n">ex</span><span class="o">)</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">            <span class="n">DoSomethingElse</span><span class="o">(</span><span class="n">ex</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">raise</span> <span class="n">OtherException</span>
+</span></span><span class="line"><span class="cl">        <span class="k">else</span>
+</span></span><span class="line"><span class="cl">            <span class="n">reraise</span><span class="bp">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">finally</span>
+</span></span><span class="line"><span class="cl">    <span class="n">MakeSureToCleanup</span><span class="o">(</span><span class="n">someParam</span><span class="o">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><code>catch</code> 变成了 <code>with</code> 关键字。</li>
+<li><code>throw X;</code> 语句变成了 <code>raise X</code>，然后 <code>throw;</code> 变成了调用 <code>reraise()</code> 函数。</li>
+<li>但是，没有 <code>try-with-catch</code> 块！F# 只有 <code>try-with</code> 和 <code>try-finally</code> 块。所以我们只能用两个 <code>try</code> 嵌套。</li>
+</ul>
+<p>你可能会想，这是 F# 的缺陷，但其实完整的 <code>try-catch-finally</code> 块很少用，尤其是有了 <code>using</code> 关键字：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="k">using</span> <span class="p">(</span><span class="kt">var</span> <span class="n">reader</span> <span class="p">=</span> <span class="k">new</span> <span class="n">StreamReader</span><span class="p">(</span><span class="n">someFile</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">DoStuff</span><span class="p">(</span><span class="n">reader</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这变成了</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fsharp" data-lang="fsharp"><span class="line"><span class="cl"><span class="k">use</span> <span class="n">reader</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StreamReader</span><span class="o">(</span><span class="n">someFile</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">DoStuff</span><span class="o">(</span><span class="n">reader</span><span class="o">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>使用 <code>use</code> 就不再需要嵌套代码块了。</li>
+<li>资源会自动释放（和 C# 的 using 相同）。</li>
+</ul>
+<h3 id="例-5避免-null-和忽略">例 5：避免 Null 和忽略</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="k">void</span> <span class="n">Check</span><span class="p">(</span><span class="n">SomeType</span> <span class="n">someParam1</span><span class="p">,</span> <span class="n">SomeType</span> <span class="n">someParam2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">someParam1</span> <span class="p">!=</span> <span class="k">null</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">stringBuilder</span><span class="p">.</span><span class="n">Append</span><span class="p">(</span><span class="n">someParam1</span><span class="p">.</span><span class="n">ToString</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">someParam2</span> <span class="p">!=</span> <span class="k">null</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">stringBuilder</span><span class="p">.</span><span class="n">Append</span><span class="p">(</span><span class="n">String</span><span class="p">.</span><span class="n">Empty</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>变成了</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fsharp" data-lang="fsharp"><span class="line"><span class="cl"><span class="k">let</span> <span class="nv">Check</span><span class="o">(</span><span class="n">someParam1</span><span class="o">:</span> <span class="n">Option</span><span class="o">&lt;</span><span class="n">SomeType</span><span class="o">&gt;,</span> <span class="n">someParam2</span><span class="o">:</span> <span class="n">Option</span><span class="o">&lt;</span><span class="n">SomeType</span><span class="o">&gt;):</span> <span class="kt">unit</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">match</span> <span class="n">someParam1</span> <span class="k">with</span>
+</span></span><span class="line"><span class="cl">    <span class="o">|</span> <span class="n">Some</span><span class="o">(</span><span class="n">someValue</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="c1">// like &#39;as&#39; in C#, you cast and want the value
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">let</span> <span class="nv">str</span> <span class="o">=</span> <span class="n">someValue</span><span class="o">.</span><span class="n">ToString</span><span class="bp">()</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ignore</span><span class="o">(</span><span class="n">stringBuilder</span><span class="o">.</span><span class="n">Append</span><span class="o">(</span><span class="n">str</span><span class="o">))</span>
+</span></span><span class="line"><span class="cl">    <span class="o">|</span> <span class="n">None</span> <span class="o">-&gt;</span> <span class="bp">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">match</span> <span class="n">someParam2</span> <span class="k">with</span>
+</span></span><span class="line"><span class="cl">    <span class="o">|</span> <span class="n">Some</span><span class="o">(_)</span> <span class="o">-&gt;</span> <span class="c1">// like &#39;is&#39; in C#, you don&#39;t care about the value
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">stringBuilder</span><span class="o">.</span><span class="n">Append</span><span class="o">(</span><span class="nn">String</span><span class="p">.</span><span class="n">Empty</span><span class="o">)</span> <span class="o">|&gt;</span> <span class="n">ignore</span>
+</span></span><span class="line"><span class="cl">    <span class="o">|</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="bp">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>在 C# 中你经常会到处写判空检查（没有编译时安全）。在 F# 中，你将使用更安全的 <code>Option&lt;T&gt;</code> 类型（与<code>Nullable&lt;T&gt;</code> 类似但是更棒）和 <code>match</code> 表达式（模式匹配）。</p>
+<ul>
+<li>当你不想返回任何东西时，在 C# 你会写 <code>void</code> 表示没有声明类型。但是在 F# 中你需要返回一个特殊的类 <code>unit</code>，它的默认值为 <code>()</code>。</li>
+<li>一个 <code>match-with</code> 代码块基本上和 switch 代码块类似，但是更加简洁明了，因为它包含了 Casting（SomeValue）</li>
+<li>这里有三个方式来实现忽略：
+<ul>
+<li>比方说，我们不关心 <code>Append()</code> 函数的返回值，在 C# 中我们就直接忽略，但是在 F# 中我们需要显式地忽略它，使用 <code>ignore()</code> 这个魔法方法。</li>
+<li>Match 表达式的下划线：它就像 C# 的 <code>switch</code> 中的 <code>default</code> 分支。</li>
+<li>在 <code>Some(_)</code> 中的下划线表示，我们想保证一个值不是空，但我们又不关心它的具体值（就像 C# 中的 <code>is</code> 操作符）。</li>
+</ul>
+</li>
+<li>管道操作符：<code>ignore(x)</code> 与 <code>x |&gt; ignore</code> 等价。</li>
+</ul>
+<h3 id="例-6类型">例 6：类型</h3>
+<p>下面这个类使用 F# 就简单很多。</p>
+<p>（译者注：其实可以使用 C# 6.0 的自动完成属性或者 C# 9.0 的记录类）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="k">public</span> <span class="k">class</span> <span class="nc">Foo</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="n">Foo</span> <span class="p">(</span><span class="kt">int</span> <span class="n">bar</span><span class="p">,</span> <span class="kt">string</span> <span class="n">baz</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="p">.</span><span class="n">bar</span> <span class="p">=</span> <span class="n">bar</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="p">.</span><span class="n">baz</span> <span class="p">=</span> <span class="n">baz</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">readonly</span> <span class="kt">int</span> <span class="n">bar</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="kt">int</span> <span class="n">Bar</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">get</span> <span class="p">{</span> <span class="k">return</span> <span class="n">bar</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">readonly</span> <span class="kt">string</span> <span class="n">baz</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="kt">string</span> <span class="n">Baz</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">get</span> <span class="p">{</span> <span class="k">return</span> <span class="n">baz</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">static</span> <span class="k">class</span> <span class="nc">FooFactory</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">static</span> <span class="k">internal</span> <span class="n">Foo</span> <span class="n">CreateFoo</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="k">new</span> <span class="n">Foo</span><span class="p">(</span><span class="m">42</span><span class="p">,</span> <span class="s">&#34;forty-two&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>在 F# 中就一行：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fsharp" data-lang="fsharp"><span class="line"><span class="cl"><span class="k">type</span> <span class="nc">Foo</span> <span class="o">=</span> <span class="o">{</span> <span class="n">Bar</span><span class="o">:</span> <span class="n">int</span><span class="o">;</span> <span class="n">Baz</span><span class="o">:</span> <span class="kt">string</span> <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">module</span> <span class="nn">FooFactory</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">    <span class="k">let</span> <span class="nv">internal</span> <span class="n">CreateFoo</span> <span class="bp">()</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">        <span class="o">{</span> <span class="n">Bar</span> <span class="o">=</span> <span class="n">42</span><span class="o">;</span> <span class="n">Baz</span> <span class="o">=</span> <span class="s">&#34;forty-two&#34;</span> <span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>由此可见:</p>
+<ul>
+<li>没有动作行为的类（就像上面的 Foo 类）叫作「记录类 Record」，长得像 C# 的结构体但是它们依然是引用类型，并且被保存在堆上。记录类是不可变的。也就是说，一旦你创建它们，就不能再修改它们的值了。</li>
+<li>静态类变成了「modules」，如上 <code>FooFactory</code> 类。</li>
+<li>在 F# 中，不需要使用 <code>new</code> 关键字，除非这个类实现了 <code>IDisposable</code> 接口。</li>
+</ul>
+<h3 id="例-7函数的顺序很重要循环依赖是万恶之源">例 7：函数的顺序很重要，循环依赖是万恶之源</h3>
+<p>作为 C# 开发者，你当然知道下面的代码可以通过编译：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="k">static</span> <span class="k">class</span> <span class="nc">Foo</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">static</span> <span class="k">void</span> <span class="n">Bar</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">Baz</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Bar</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">static</span> <span class="kt">bool</span> <span class="n">Baz</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="k">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>理所应当！下面的代码也可以通过编译：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="k">static</span> <span class="k">class</span> <span class="nc">Foo1</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="n">Bar</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">static</span> <span class="k">void</span> <span class="n">Baz</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Foo2</span><span class="p">.</span><span class="n">Baz</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">static</span> <span class="k">class</span> <span class="nc">Foo2</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">static</span> <span class="k">void</span> <span class="n">Bar</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Foo1</span><span class="p">.</span><span class="n">Bar</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="n">Baz</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>也许你明白我说到哪里了。</p>
+<p>后一段 C# 代码可以通过编译，是因为 C# 允许循环依赖（Circular Dependencies）。</p>
+<p>但是这句话半对半错，因为在 C# 中循环依赖是合法的，但是在 .NET 程序集里不合法。如果程序集 A 依赖于程序集 B，你不能从 A 引用 B。</p>
+<p>这个模块性原则将会阻止你写出上面的代码，因为在未来你将不能将它们分为两个程序集（你不能将 Foo1 放进一个程序集里，然后把 Foo2 放进另一个程序集，因为在 .NET 中这并不合法）。</p>
+<p>之后，你需要了解的是，在 F# 中，即使在同一程序集里，循环依赖<strong>也不合法</strong>！</p>
+<p>通过强制你在类型 B 之前声明 类型 A，防止你在之后的函数中调用前面的函数时出错。</p>
+<p>因此，下面的 F# 编译时会报错：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fsharp" data-lang="fsharp"><span class="line"><span class="cl"><span class="k">module</span> <span class="nn">Foo1</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">    <span class="k">let</span> <span class="nv">Bar</span><span class="bp">()</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">let</span> <span class="nv">Baz</span><span class="bp">()</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">        <span class="nn">Foo2</span><span class="p">.</span><span class="n">Baz</span><span class="bp">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">module</span> <span class="nn">Foo2</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">    <span class="k">let</span> <span class="nv">Bar</span><span class="bp">()</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">        <span class="nn">Foo1</span><span class="p">.</span><span class="n">Bar</span><span class="bp">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">let</span> <span class="nv">Baz</span><span class="bp">()</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>为什么呢？来看看它的报错：</p>
+<ul>
+<li>Error FS0039: The value, namespace, type or module &lsquo;Foo2&rsquo; is not defined. (Referring to Foo1.Baz implementation.)</li>
+</ul>
+<p>这个报错是不能修复的，除非我们直接停止使用循环依赖。</p>
+<p>（还有一些特殊情况，比如使用 <code>via</code> 和 <code>rec</code> 关键字，但是在本教程中并不会讲解，因为太高级了）</p>
+<p>F# 编译器严格限制了我们不能循环依赖，这意味着如果函数 A 调用了函数 B，那么函数 B 就必须在 A 之前声明</p>
+<p>（如果这两个函数在同一个文件中，那么函数 B 就是在函数 A 上面；如果这两个函数在同一 F# 工程下不同文件中，那么 <code>B.fs</code> 必须比 <code>A.fs</code> 早列出）</p>
+<p>因此，下面的代码也不会通过编译：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fsharp" data-lang="fsharp"><span class="line"><span class="cl"><span class="k">module</span> <span class="nn">Foo</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">    <span class="k">let</span> <span class="nv">Bar</span><span class="bp">()</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">Baz</span><span class="bp">()</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Bar</span><span class="bp">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">let</span> <span class="nv">Baz</span><span class="bp">()</span><span class="o">:</span> <span class="kt">bool</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">        <span class="k">false</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>它抛出了如下错误：</p>
+<ul>
+<li>Error FS0039: The value or constructor &lsquo;Baz&rsquo; is not defined. (Referring to Foo.Bar implementation.)</li>
+<li>Error FS0039: The value or constructor &lsquo;Bar&rsquo; is not defined. (Referring to Foo.Bar implementation.)</li>
+</ul>
+<p>正如我们刚刚学到的，这更容易解决；只要先声明 <code>Baz</code> 即可。</p>
+<p>而为了让一个函数能够调用自己（在某种程度上，它也是一个循环依赖），我们使用 <code>rec</code> 关键字（意思就是「递归」)：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fsharp" data-lang="fsharp"><span class="line"><span class="cl"><span class="k">module</span> <span class="nn">Foo</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">    <span class="k">let</span> <span class="nv">Baz</span><span class="bp">()</span><span class="o">:</span> <span class="kt">bool</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">        <span class="k">false</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">let</span> <span class="nv">rec</span> <span class="n">Bar</span><span class="bp">()</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">Baz</span><span class="bp">()</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Bar</span><span class="bp">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="例-8委托匿名函数我的老天爷">例 8：委托、匿名函数···我的老天爷！</h3>
+<p>在 C# 的早期版本中，需要通过委托类型和匿名函数传递函数。请看下面有 4 种组合的例子：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="k">static</span> <span class="k">class</span> <span class="nc">SomeOldCsharpClass</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">delegate</span> <span class="k">void</span> <span class="n">ProcedureWithNoReturnValueAndNoArguments</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">static</span> <span class="k">void</span> <span class="n">DelegateReception1</span><span class="p">(</span><span class="n">ProcedureWithNoReturnValueAndNoArguments</span> <span class="n">dlg</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">dlg</span><span class="p">.</span><span class="n">Invoke</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">static</span> <span class="k">void</span> <span class="n">SendingAnonymousMethodAsDelegate1</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">DelegateReception1</span><span class="p">(</span><span class="k">delegate</span> <span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&#34;hello 1&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">});</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">delegate</span> <span class="k">void</span> <span class="n">ProcedureWithNoReturnValueAndOneArg</span><span class="p">(</span><span class="kt">string</span> <span class="n">foo</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">static</span> <span class="k">void</span> <span class="n">DelegateReception2</span><span class="p">(</span><span class="n">ProcedureWithNoReturnValueAndOneArg</span> <span class="n">dlg</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">string</span> <span class="n">bar</span> <span class="p">=</span> <span class="s">&#34;baz&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">dlg</span><span class="p">.</span><span class="n">Invoke</span><span class="p">(</span><span class="n">bar</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">static</span> <span class="k">void</span> <span class="n">SendingAnonymousMethodAsDelegate2</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">DelegateReception2</span><span class="p">(</span><span class="k">delegate</span> <span class="p">(</span><span class="kt">string</span> <span class="n">foo</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&#34;hello 2 &#34;</span> <span class="p">+</span> <span class="n">foo</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">});</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">delegate</span> <span class="kt">int</span> <span class="n">FunctionWithOneReturnValueAndNoArguments</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">static</span> <span class="k">void</span> <span class="n">DelegateReception3</span><span class="p">(</span><span class="n">FunctionWithOneReturnValueAndNoArguments</span> <span class="n">dlg</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">result</span> <span class="p">=</span> <span class="n">dlg</span><span class="p">.</span><span class="n">Invoke</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">static</span> <span class="k">void</span> <span class="n">SendingAnonymousMethodAsDelegate3</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">DelegateReception3</span><span class="p">(</span><span class="k">delegate</span> <span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&#34;hello 3&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="m">3</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">});</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">delegate</span> <span class="kt">long</span> <span class="n">FunctionWithOneReturnValueAndOneArg</span><span class="p">(</span><span class="kt">double</span> <span class="n">foo</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">static</span> <span class="k">void</span> <span class="n">DelegateReception4</span><span class="p">(</span><span class="n">FunctionWithOneReturnValueAndOneArg</span> <span class="n">dlg</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">double</span> <span class="n">bar</span> <span class="p">=</span> <span class="m">4.0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">long</span> <span class="n">result</span> <span class="p">=</span> <span class="n">dlg</span><span class="p">.</span><span class="n">Invoke</span><span class="p">(</span><span class="n">bar</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">static</span> <span class="k">void</span> <span class="n">SendingAnonymousMethodAsDelegate4</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">DelegateReception4</span><span class="p">(</span><span class="k">delegate</span> <span class="p">(</span><span class="kt">double</span> <span class="n">foo</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&#34;hello 4 &#34;</span> <span class="p">+</span> <span class="n">foo</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="m">4</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">});</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>但后来新版本的 C# 出现了更优雅的方式（得益于局部函数）：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="k">static</span> <span class="k">class</span> <span class="nc">SomeNewCsharpClass</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">static</span> <span class="k">void</span> <span class="n">SendingAnonymousMethodAsDelegate1</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">void</span> <span class="n">DelegateReception1</span><span class="p">(</span><span class="n">Action</span> <span class="n">dlg</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">dlg</span><span class="p">.</span><span class="n">Invoke</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">DelegateReception1</span><span class="p">(()</span> <span class="p">=&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&#34;hello 1&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">});</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">static</span> <span class="k">void</span> <span class="n">SendingAnonymousMethodAsDelegate2</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">void</span> <span class="n">DelegateReception2</span><span class="p">(</span><span class="n">Action</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;</span> <span class="n">dlg</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">string</span> <span class="n">bar</span> <span class="p">=</span> <span class="s">&#34;baz&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">dlg</span><span class="p">.</span><span class="n">Invoke</span><span class="p">(</span><span class="n">bar</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">DelegateReception2</span><span class="p">((</span><span class="kt">string</span> <span class="n">foo</span><span class="p">)</span> <span class="p">=&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&#34;hello 2 &#34;</span> <span class="p">+</span> <span class="n">foo</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">});</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">static</span> <span class="k">void</span> <span class="n">SendingAnonymousMethodAsDelegate3</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">void</span> <span class="n">DelegateReception3</span><span class="p">(</span><span class="n">Func</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">&gt;</span> <span class="n">dlg</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">result</span> <span class="p">=</span> <span class="n">dlg</span><span class="p">.</span><span class="n">Invoke</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">DelegateReception3</span><span class="p">(()</span> <span class="p">=&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&#34;hello 3&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="m">3</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">});</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">static</span> <span class="k">void</span> <span class="n">SendingAnonymousMethodAsDelegate4</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">void</span> <span class="n">DelegateReception4</span><span class="p">(</span><span class="n">Func</span><span class="p">&lt;</span><span class="kt">double</span><span class="p">,</span> <span class="kt">long</span><span class="p">&gt;</span> <span class="n">dlg</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">double</span> <span class="n">bar</span> <span class="p">=</span> <span class="m">4.0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">long</span> <span class="n">result</span> <span class="p">=</span> <span class="n">dlg</span><span class="p">.</span><span class="n">Invoke</span><span class="p">(</span><span class="n">bar</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">DelegateReception4</span><span class="p">((</span><span class="kt">double</span> <span class="n">foo</span><span class="p">)</span> <span class="p">=&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&#34;hello 4 &#34;</span> <span class="p">+</span> <span class="n">foo</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="m">4</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">});</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>最有趣的改进就是 .NET 预定义的 <code>Action</code> 和 <code>Func</code> 类型，以及 Lambda 表达式。</p>
+<p>好消息是在 F# 中，函数是一等公民。因此代码更加简单：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fsharp" data-lang="fsharp"><span class="line"><span class="cl"><span class="k">module</span> <span class="nn">SomeFsharpModule</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">let</span> <span class="nv">SendingAnonymousMethodAsDelegate1</span><span class="bp">()</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">        <span class="k">let</span> <span class="nv">DelegateReception1</span><span class="o">(</span><span class="n">dlg</span><span class="o">:</span> <span class="kt">unit</span><span class="o">-&gt;</span><span class="kt">unit</span><span class="o">)</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">            <span class="n">dlg</span><span class="bp">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">DelegateReception1</span><span class="o">(</span><span class="k">fun</span> <span class="o">_</span> <span class="o">-&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nn">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="o">(</span><span class="s">&#34;hello 1&#34;</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">        <span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">let</span> <span class="nv">SendingAnonymousMethodAsDelegate2</span><span class="bp">()</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">        <span class="k">let</span> <span class="nv">DelegateReception2</span><span class="o">(</span><span class="n">dlg</span><span class="o">:</span> <span class="kt">string</span><span class="o">-&gt;</span><span class="kt">unit</span><span class="o">)</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">            <span class="k">let</span> <span class="nv">bar</span> <span class="o">=</span> <span class="s">&#34;baz&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">dlg</span><span class="o">(</span><span class="n">bar</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">DelegateReception2</span><span class="o">(</span><span class="k">fun</span> <span class="n">bar</span> <span class="o">-&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nn">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="o">(</span><span class="s">&#34;hello 2 &#34;</span> <span class="o">+</span> <span class="n">bar</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">        <span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">let</span> <span class="nv">SendingAnonymousMethodAsDelegate3</span><span class="bp">()</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">        <span class="k">let</span> <span class="nv">DelegateReception3</span><span class="o">(</span><span class="n">dlg</span><span class="o">:</span> <span class="kt">unit</span><span class="o">-&gt;</span><span class="n">int</span><span class="o">)</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">            <span class="k">let</span> <span class="nv">result</span> <span class="o">=</span> <span class="n">dlg</span><span class="bp">()</span>
+</span></span><span class="line"><span class="cl">            <span class="bp">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">DelegateReception3</span><span class="o">(</span><span class="k">fun</span> <span class="o">_</span> <span class="o">-&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nn">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="o">(</span><span class="s">&#34;hello 3&#34;</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">3</span>
+</span></span><span class="line"><span class="cl">        <span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">let</span> <span class="nv">SendingAnonymousMethodAsDelegate4</span><span class="bp">()</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">        <span class="k">let</span> <span class="nv">DelegateReception4</span><span class="o">(</span><span class="n">dlg</span><span class="o">:</span> <span class="kt">double</span><span class="o">-&gt;</span><span class="kt">int64</span><span class="o">)</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">            <span class="k">let</span> <span class="nv">bar</span> <span class="o">=</span> <span class="n">4</span><span class="o">.</span><span class="n">0</span>
+</span></span><span class="line"><span class="cl">            <span class="k">let</span> <span class="nv">result</span> <span class="o">=</span> <span class="n">dlg</span><span class="o">(</span><span class="n">bar</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">            <span class="bp">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">DelegateReception4</span><span class="o">(</span><span class="k">fun</span> <span class="n">bar</span> <span class="o">-&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nn">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="o">(</span><span class="s">&#34;hello 4 &#34;</span> <span class="o">+</span> <span class="n">bar</span><span class="o">.</span><span class="n">ToString</span><span class="bp">()</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">int64</span><span class="o">(</span><span class="n">4</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">        <span class="o">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>正如你所看到的，BCL 的 <code>System.Function</code> 和 <code>System.Action</code> 变成了原生 F# 语法。</p>
+<p>通过 <code>-&gt;</code> 符号来表示参数和返回值，例如 <code>TArg1-&gt;TResult</code>。请记住，<code>void</code> 在 F# 中是 <code>unit</code>。</p>
+<p>同样重要的是，C# 的 <code>(...) =&gt; { ... }</code> 变成了 <code>fun ... -&gt; ...</code></p>
+<h3 id="例-9元组局部应用以及柯里化">例 9：元组、局部应用以及柯里化</h3>
+<p>如果你没有做过函数式编程，你可能会对其中的一些概念感到害怕，比如「局部应用 Partial Application」「柯里化 Currification」。</p>
+<p>但事实是，它们并不是那么复杂的概念。为了正确解释它们，我们需要先解释元组，以及为什么不建议在 F# 中滥用它们。</p>
+<p>（事实上，你不能用元组来使用局部应用！稍后将详细介绍）</p>
+<p>让我们先看看下面这段使用 <code>out</code> 参数的 C# 代码：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">anInteger</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="kt">int</span><span class="p">.</span><span class="n">TryParse</span><span class="p">(</span><span class="n">someString</span><span class="p">,</span> <span class="k">out</span> <span class="n">anInteger</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">DoSomethingWithAnInteger</span><span class="p">(</span><span class="n">anInteger</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">DoSomethingElse</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>如果你尝试将上面的 C# 代码转译成 F#，你首先会有一个疑问：我们怎样声明一个变量但不给它赋值呢？相信我，F# 是不可能做到的。</p>
+<p>你可能会想到先随便给变量 <code>anInteger</code> 赋一个值，反正最后会被 <code>TryParse()</code> 方法覆写。但是这种方式不够优雅，尤其是把变量标记为 <code>mutable</code>，不符合 F# 的语言习惯。</p>
+<p>最好的方法是使用「积极模式 Acitve Pattern」——将上面多个函数转换成一个函数，并且同时虚拟地返回两个值：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fsharp" data-lang="fsharp"><span class="line"><span class="cl"><span class="k">match</span> <span class="n">int</span><span class="o">.</span><span class="n">TryParse</span><span class="o">(</span><span class="n">someString</span><span class="o">)</span> <span class="k">with</span>
+</span></span><span class="line"><span class="cl"><span class="o">|</span> <span class="o">(</span><span class="k">true</span><span class="o">,</span> <span class="n">anInteger</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">DoSomethingWithAnInteger</span><span class="o">(</span><span class="n">anInteger</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">|</span> <span class="o">(</span><span class="k">false</span><span class="o">,</span> <span class="o">_)</span> <span class="o">-&gt;</span> <span class="n">DoSomethingElse</span><span class="bp">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>积极模式为 F# 编译器提供了语法糖，将 <code>bool TryParse(string,out int)</code> 转换成了类似 <code>(bool,int) TryParse(string)</code> 的函数，而 <code>(bool,int)</code> 是一个元组！</p>
+<p>所以在 F# 中，创建任意长度的元组是很容易的事情，不需要使用 <code>System.Tuple&lt;X,Y,...&gt;</code>。</p>
+<p>这让我想起了新版本 C# 对于元组的改进——你可以在函数的签名里使用元组而不需要用 <code>Tuple</code>。</p>
+<p>来检查一下我说的是什么意思吧。这是 C# 的老式写法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kt">bool</span> <span class="n">ReceiveTuple</span><span class="p">(</span><span class="n">Tuple</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span><span class="kt">int</span><span class="p">&gt;</span> <span class="n">aTuple</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">var</span> <span class="n">counter</span> <span class="p">=</span> <span class="n">aTuple</span><span class="p">.</span><span class="n">Item2</span><span class="p">++;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">aTuple</span><span class="p">.</span><span class="n">Item1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">var</span> <span class="n">newTuple</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Tuple</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span><span class="kt">int</span><span class="p">&gt;(</span><span class="n">aTuple</span><span class="p">.</span><span class="n">Item1</span><span class="p">,</span> <span class="n">counter</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ReceiveTuple</span><span class="p">(</span><span class="n">newTuple</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="k">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>如果我们想要一个变量指向这个函数，它的类型就应是 <code>Func&lt;Tuple&lt;string,int&gt;,bool&gt;</code>。</p>
+<p>新式的 C# 写法（会被编译成 <code>ValueTuple&lt;X,Y,...&gt;</code>）：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kt">bool</span> <span class="n">ReceiveTuple</span><span class="p">((</span><span class="kt">string</span> <span class="n">str</span><span class="p">,</span> <span class="kt">int</span> <span class="n">i</span><span class="p">)</span> <span class="n">aTuple</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">var</span> <span class="n">counter</span> <span class="p">=</span> <span class="n">aTuple</span><span class="p">.</span><span class="n">i</span><span class="p">++;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">aTuple</span><span class="p">.</span><span class="n">str</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">var</span> <span class="n">newTuple</span> <span class="p">=</span> <span class="p">(</span><span class="n">aTuple</span><span class="p">.</span><span class="n">str</span><span class="p">,</span> <span class="n">counter</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ReceiveTuple</span><span class="p">(</span><span class="n">newTuple</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="k">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>现在我们有了一个指向这个函数的变量，它的类型是 <code>Func&lt;ValueTuple&lt;string,int&gt;,bool&gt;</code>。</p>
+<p>使用 F#：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fsharp" data-lang="fsharp"><span class="line"><span class="cl"><span class="k">let</span> <span class="nv">rec</span> <span class="n">ReceiveTuple</span><span class="o">(</span><span class="n">str</span><span class="o">:</span> <span class="kt">string</span><span class="o">,</span> <span class="n">i</span><span class="o">:</span> <span class="n">int</span><span class="o">)</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">    <span class="k">let</span> <span class="nv">counter</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="n">1</span>
+</span></span><span class="line"><span class="cl">    <span class="nn">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="o">(</span><span class="n">str</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">let</span> <span class="nv">newTuple</span> <span class="o">=</span> <span class="o">(</span><span class="n">str</span><span class="o">,</span> <span class="n">counter</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ReceiveTuple</span> <span class="o">(</span><span class="n">newTuple</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">true</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>在这种情况下，你引用这个函数的 F# 类型是 <code>string*int-&gt;bool</code>；所以我们学到了一个新的符号：星号「*」在其它语言里代表指针，但在 F# 中它只是元组中类型的分隔符。</p>
+<p>你是否注意到元组是如何融入到 F# 中那些看似正常的参数中的？事实上，本指南到现在为止，我们在 F# 中写的所有接收多参的函数，实际上都在使用元组。不用元组能在 F# 中写出的上述方法吗？当然可以，只是省略了逗号：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fsharp" data-lang="fsharp"><span class="line"><span class="cl"><span class="k">let</span> <span class="nv">rec</span> <span class="n">ReceiveNonTuple</span> <span class="o">(</span><span class="n">str</span><span class="o">:</span> <span class="kt">string</span><span class="o">)</span> <span class="o">(</span><span class="n">i</span><span class="o">:</span> <span class="n">int</span><span class="o">)</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">    <span class="k">let</span> <span class="nv">counter</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="n">1</span>
+</span></span><span class="line"><span class="cl">    <span class="nn">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="o">(</span><span class="n">str</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ReceiveNonTuple</span> <span class="n">str</span> <span class="n">counter</span>
+</span></span><span class="line"><span class="cl">    <span class="k">true</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>函数 <code>ReceiveTuple</code> 和 <code>ReceiveNonTuple</code> 之间有什么区别？两者都接收相同数量的参数，并且具有相同的类型。但是，第一个函数的参数是 F# 元组，而第二个函数的参数则是以 F# 语言惯用方式声明的（以「柯里化」的形式）。</p>
+<p>为什么后者在 F# 中更符合语言习惯？因为 <code>ReceiveTuple</code> 不能用于局部应用，而<code>ReceiveNonTuple</code> 可以，因为它使用的是「柯里化」风格。在这种情况下，函数的类型不是 <code>string*int-&gt;bool</code>，而是 <code>(string-&gt;int)-&gt;bool</code>。</p>
+<p>那为什么 <code>(string-&gt;int)-&gt;bool</code> 比 <code>string*int-&gt;bool</code> 更好呢？</p>
+<p>后者允许与 C# 的互操作（因为这是以 CIL 级别传递参数的方式），但前者允许以非常直接和简洁的方式进行局部应用（我们将在后面看到，部分应用在 C# 中也是可能的，但方式非常复杂，可读性/维护性很差）。</p>
+<p>因此，不再多说，让我们看看一个非常简单的部分应用的例子。假设我们想创建一个乘法函数，接收两个整数并返回一个整数：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fsharp" data-lang="fsharp"><span class="line"><span class="cl"><span class="k">let</span> <span class="nv">Multiply</span> <span class="o">(</span><span class="n">x</span><span class="o">:</span> <span class="n">int</span><span class="o">)</span> <span class="o">(</span><span class="n">y</span><span class="o">:</span> <span class="n">int</span><span class="o">):</span> <span class="n">int</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">    <span class="n">x</span> <span class="o">*</span> <span class="n">y</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>现在，如果我们想写一个函数将一个数字的值增加一倍，而不需要重复乘法函数的任何实现细节，我们可以简单地这样写：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fsharp" data-lang="fsharp"><span class="line"><span class="cl"><span class="k">let</span> <span class="nv">Double</span> <span class="o">(</span><span class="n">x</span><span class="o">:</span> <span class="n">int</span><span class="o">):</span> <span class="n">int</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Multiply</span> <span class="n">2</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>当我们只向函数 <code>Multiply</code> 传递一个参数时会发生什么？</p>
+<p>让我们看看它的原始签名：<code>(int-&gt;int)-&gt;int</code>。「柯里法则」告诉我们，在类型表达式中使用小括号实际上是不需要的（或者把它们放在其他地方会得到一个等价的表达式）。这意味着我们也可以这样写 <code>int-&gt;int-&gt;int</code> 或者这样写 <code>int-&gt;（int-&gt;int）</code>。因此，向一个原本接收两个参数的函数只传递一个参数，实际上会导致返回另一个函数。</p>
+<p>我们可以这样更好地理解它：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fsharp" data-lang="fsharp"><span class="line"><span class="cl"><span class="k">let</span> <span class="nv">Double</span> <span class="o">(</span><span class="n">x</span><span class="o">:</span> <span class="n">int</span><span class="o">):</span> <span class="n">int</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">    <span class="k">let</span> <span class="nv">doubleFunc</span> <span class="o">=</span> <span class="n">Multiply</span> <span class="n">2</span>
+</span></span><span class="line"><span class="cl">    <span class="k">let</span> <span class="nv">result</span> <span class="o">=</span> <span class="n">doubleFunc</span> <span class="n">x</span>
+</span></span><span class="line"><span class="cl">    <span class="n">result</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>或者这样（冗长的类型声明）：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fsharp" data-lang="fsharp"><span class="line"><span class="cl"><span class="k">let</span> <span class="nv">Double</span> <span class="o">(</span><span class="n">x</span><span class="o">:</span> <span class="n">int</span><span class="o">):</span> <span class="n">int</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">    <span class="k">let</span> <span class="nv">doubleFunc</span><span class="o">:</span> <span class="n">int</span><span class="o">-&gt;</span><span class="n">int</span> <span class="o">=</span> <span class="n">Multiply</span> <span class="n">2</span>
+</span></span><span class="line"><span class="cl">    <span class="k">let</span> <span class="nv">result</span><span class="o">:</span> <span class="n">int</span> <span class="o">=</span> <span class="n">doubleFunc</span> <span class="n">x</span>
+</span></span><span class="line"><span class="cl">    <span class="n">result</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这是一个非常简单的例子，也许能让你明白局部应用的强大之处。但它是函数式编程中的依赖注入等操作的基础。随着时间的推移，你可能只会掌握它所带来的灵活性，但至少我们已经可以向你展示它在 F# 中的简单性。在 C# 中，我们只能这样来实现：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="k">static</span> <span class="n">Func</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="n">Func</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="p">&gt;&gt;</span> <span class="n">Multiply</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">x</span> <span class="p">*</span> <span class="n">y</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">};</span>
+</span></span><span class="line"><span class="cl">    <span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">static</span> <span class="n">Function</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="p">&gt;</span> <span class="n">Double</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">Multiply</span><span class="p">().</span><span class="n">Invoke</span><span class="p">(</span><span class="m">2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">static</span> <span class="kt">int</span> <span class="n">Main</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">var</span> <span class="n">someInt</span> <span class="p">=</span> <span class="m">3</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">Double</span><span class="p">().</span><span class="n">Invoke</span><span class="p">(</span><span class="n">someInt</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>你的大脑能转过弯儿来吗？对我来说，这比阅读 F# 代码难理解多了。</p>
+<p>关于局部应用及其用处的最后说明：你使用 F# 的时间越长，你就会意识到局部应用实际上是一种简化的依赖注入/控制反转（DI / IoC）方式，详见<a class="link" href="https://blog.ploeh.dk/2017/01/30/partial-application-is-dependency-injection/"  target="_blank" rel="noopener"
+    >《局部应用就是依赖注入》</a>一文。</p>
+<h3 id="例-10字符串插值">例 10：字符串插值</h3>
+<p>在早期的 C# 版本中，你需要这样写：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kt">var</span> <span class="n">aStringToShowToTheUser</span> <span class="p">=</span> <span class="n">String</span><span class="p">.</span><span class="n">Format</span><span class="p">(</span><span class="s">&#34;Hello {0}, I see you are {1} years old&#34;</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这有两个问题：在大型代码库中，许多变量和元素被包含在一个字符串中，我们索引了一个没有提供的变量（例如 <code>{2}</code>）很容易发生，或者我们提供的变量没有隐式转换为字符串。</p>
+<p>在 F# 中是这样的：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fsharp" data-lang="fsharp"><span class="line"><span class="cl"><span class="k">let</span> <span class="nv">aStringToShowToTheUser</span> <span class="o">=</span> <span class="n">sprintf</span> <span class="s">&#34;Hello %s, I see you are %i years old&#34;</span> <span class="n">name</span> <span class="n">age</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>哪个更好？</p>
+<ul>
+<li>如果你提供的参数少于（或多于）在字符串中插值所需的参数，你将得到一个编译器错误，而不是在运行时出现异常。</li>
+<li>你需要通过 <code>%</code> 后面的字母来指定字符串中元素的类型，如果它与为同一位置提供的元素的类型不匹配，那么你会得到一个编译器错误（而不是一个无用的元素字符串表示）。</li>
+<li>你需要更少的小括号（参见本指南中的最后一个例子）。</li>
+</ul>
+<h3 id="例-11异步代码">例 11：异步代码</h3>
+<p>一段简单的 C# 异步代码：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl">    <span class="k">static</span> <span class="k">class</span> <span class="nc">MainClass</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">public</span> <span class="k">class</span> <span class="nc">Toast</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">public</span> <span class="kt">bool</span> <span class="n">IsYummy</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">            <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="k">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">static</span> <span class="k">async</span> <span class="n">Task</span><span class="p">&lt;</span><span class="n">Toast</span><span class="p">&gt;</span> <span class="n">ToastBreadAsync</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">var</span> <span class="n">task</span> <span class="p">=</span> <span class="n">Task</span><span class="p">.</span><span class="n">Run</span><span class="p">(()</span> <span class="p">=&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="k">new</span> <span class="n">Toast</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">            <span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="k">await</span> <span class="n">task</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">static</span> <span class="k">void</span> <span class="n">ApplyButter</span><span class="p">(</span><span class="n">Toast</span> <span class="n">toast</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* TODO */</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">static</span> <span class="k">void</span> <span class="n">ApplyJam</span><span class="p">(</span><span class="n">Toast</span> <span class="n">toast</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* TODO */</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">static</span> <span class="k">async</span> <span class="n">Task</span><span class="p">&lt;</span><span class="n">Toast</span><span class="p">&gt;</span> <span class="n">MakeToastWithButterAndJamAsync</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">var</span> <span class="n">toast</span> <span class="p">=</span> <span class="k">await</span> <span class="n">ToastBreadAsync</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="n">ApplyButter</span><span class="p">(</span><span class="n">toast</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">ApplyJam</span><span class="p">(</span><span class="n">toast</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">toast</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">public</span> <span class="k">static</span> <span class="k">async</span> <span class="n">Task</span> <span class="n">Main</span><span class="p">(</span><span class="kt">string</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&#34;Hello World!&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">var</span> <span class="n">toast</span> <span class="p">=</span> <span class="k">await</span> <span class="n">MakeToastWithButterAndJamAsync</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&#34;Bye World!&#34;</span> <span class="p">+</span> <span class="n">toast</span><span class="p">.</span><span class="n">IsYummy</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>在 F# 中变成了：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fsharp" data-lang="fsharp"><span class="line"><span class="cl"><span class="k">type</span> <span class="nc">Toast</span><span class="bp">()</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">    <span class="k">member</span> <span class="n">this</span><span class="p">.</span><span class="nf">IsYummy</span><span class="bp">()</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">        <span class="k">true</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">let</span> <span class="nv">ToastBread</span><span class="bp">()</span><span class="o">:</span> <span class="n">Async</span><span class="o">&lt;</span><span class="n">Toast</span><span class="o">&gt;</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">    <span class="n">async</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">Toast</span><span class="bp">()</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">let</span> <span class="nv">ApplyButter</span><span class="o">(</span><span class="n">toast</span><span class="o">)</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">    <span class="bp">()</span> <span class="c1">//TODO
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="k">let</span> <span class="nv">ApplyJam</span><span class="o">(</span><span class="n">toast</span><span class="o">)</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">    <span class="bp">()</span> <span class="c1">//TODO
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="k">let</span> <span class="nv">MakeToastWithButterAndJam</span><span class="bp">()</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">    <span class="n">async</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">let!</span> <span class="nv">toast</span> <span class="o">=</span> <span class="n">ToastBread</span><span class="bp">()</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ApplyButter</span><span class="o">(</span><span class="n">toast</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ApplyJam</span><span class="o">(</span><span class="n">toast</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">toast</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[&lt;</span><span class="n">EntryPoint</span><span class="o">&gt;]</span>
+</span></span><span class="line"><span class="cl"><span class="k">let</span> <span class="nv">main</span><span class="o">(</span><span class="n">argv</span><span class="o">)</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">    <span class="nn">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="o">(</span><span class="s">&#34;Hello World!&#34;</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">let</span> <span class="nv">toast</span> <span class="o">=</span> <span class="n">MakeToastWithButterAndJam</span><span class="bp">()</span>
+</span></span><span class="line"><span class="cl">                <span class="o">|&gt;</span> <span class="nn">Async</span><span class="p">.</span><span class="n">RunSynchronously</span>
+</span></span><span class="line"><span class="cl">    <span class="nn">Console</span><span class="p">.</span><span class="n">WriteLine</span> <span class="o">(</span><span class="s">&#34;Bye world!&#34;</span> <span class="o">+</span> <span class="o">(</span><span class="n">toast</span><span class="o">.</span><span class="n">IsYummy</span><span class="bp">()</span><span class="o">.</span><span class="n">ToString</span><span class="bp">()</span><span class="o">))</span>
+</span></span><span class="line"><span class="cl">    <span class="n">0</span> <span class="c1">// return an integer exit code
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>关键不同点：</p>
+<ul>
+<li>在 C# 中，当你调用一个异步方法时，你会得到一个 <code>Task&lt;T&gt;</code> 对象，它代表正在进行的工作，并且已经被启动。但在 F# 中，Job 是由一个 <code>Async&lt;'T&gt;</code> 对象表示的，它还没有被启动（你可以在之后决定如何启动它；例如，在上面例子中，它用 <code>Async.RunSynchronously</code> 来启动）。</li>
+<li>在 F# 的 <code>let</code> 语句后面加上惊叹号 <code>!</code> 等价于 C# 的 <code>await</code>。</li>
+<li>在 C# 中，你将计算量大的同步方法包装在 <code>Task.Run()</code> 中，将其转换为异步方法。在 F# 中，你只需用 <code>async{}</code> 块（一个计算表达式）来包装它们。</li>
+</ul>
+<p>如果我们稍微改变上面的 C# 代码，引入非泛型 Task 对象和并行化（假设我们有两个烤面包机）：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="k">public</span> <span class="k">class</span> <span class="nc">Ingredients</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">public</span> <span class="k">class</span> <span class="nc">Toast</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="n">Toast</span><span class="p">(</span><span class="n">Ingredients</span> <span class="n">i</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">static</span> <span class="k">async</span> <span class="n">Task</span><span class="p">&lt;</span><span class="n">Toast</span><span class="p">&gt;</span> <span class="n">ToastBreadAsync</span><span class="p">(</span><span class="n">Ingredients</span> <span class="n">i</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">var</span> <span class="n">task</span> <span class="p">=</span> <span class="n">Task</span><span class="p">.</span><span class="n">Run</span><span class="p">(()</span> <span class="p">=&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">new</span> <span class="n">Toast</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="k">await</span> <span class="n">task</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">static</span> <span class="k">async</span> <span class="n">Task</span><span class="p">&lt;</span><span class="n">Toast</span><span class="p">[]&gt;</span> <span class="n">Make2ToastsAsync</span><span class="p">(</span><span class="n">Ingredients</span> <span class="n">i</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">var</span> <span class="n">toast1</span> <span class="p">=</span> <span class="n">ToastBreadAsync</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">var</span> <span class="n">toast2</span> <span class="p">=</span> <span class="n">ToastBreadAsync</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="k">await</span> <span class="n">Task</span><span class="p">.</span><span class="n">WhenAll</span><span class="p">(</span><span class="n">toast1</span><span class="p">,</span> <span class="n">toast2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">static</span> <span class="k">async</span> <span class="n">Task</span> <span class="n">MakeToastsAsync</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">var</span> <span class="n">i</span> <span class="p">=</span> <span class="k">await</span> <span class="n">GatherIngredients</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="k">await</span> <span class="n">Make2ToastsAsync</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">public</span> <span class="k">static</span> <span class="k">async</span> <span class="n">Task</span><span class="p">&lt;</span><span class="n">Ingredients</span><span class="p">&gt;</span> <span class="n">GatherIngredients</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="k">await</span> <span class="n">Task</span><span class="p">.</span><span class="n">FromResult</span><span class="p">(</span><span class="k">new</span> <span class="n">Ingredients</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">public</span> <span class="k">static</span> <span class="k">async</span> <span class="n">Task</span> <span class="n">Main</span><span class="p">(</span><span class="kt">string</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&#34;Hello World!&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">await</span> <span class="n">MakeToastsAsync</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&#34;Bye World!&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>在 F# 中，这变成了：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fsharp" data-lang="fsharp"><span class="line"><span class="cl"><span class="k">type</span> <span class="nc">Ingredients</span> <span class="bp">()</span> <span class="o">=</span> <span class="k">class</span> <span class="k">end</span>
+</span></span><span class="line"><span class="cl"><span class="k">type</span> <span class="nc">Toast</span> <span class="o">(</span><span class="n">i</span><span class="o">:</span> <span class="n">Ingredients</span><span class="o">)</span> <span class="o">=</span> <span class="k">class</span> <span class="k">end</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">let</span> <span class="nv">ToastBread</span><span class="o">(</span><span class="n">i</span><span class="o">):</span> <span class="n">Async</span><span class="o">&lt;</span><span class="n">Toast</span><span class="o">&gt;</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">    <span class="n">async</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">Toast</span><span class="o">(</span><span class="n">i</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">let</span> <span class="nv">GatherIngredients</span> <span class="bp">()</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">    <span class="n">async</span> <span class="o">{</span> <span class="k">return</span> <span class="n">Ingredients</span><span class="bp">()</span> <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">let</span> <span class="nv">Make2Toasts</span><span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">    <span class="n">async</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">let</span> <span class="nv">twoJobs</span><span class="o">:</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Async</span><span class="o">&lt;</span><span class="n">Toast</span><span class="o">&gt;&gt;</span> <span class="o">=</span> <span class="o">[</span><span class="n">ToastBread</span><span class="o">(</span><span class="n">i</span><span class="o">);</span> <span class="n">ToastBread</span><span class="o">(</span><span class="n">i</span><span class="o">)]</span>
+</span></span><span class="line"><span class="cl">        <span class="k">let!</span> <span class="nv">_</span> <span class="o">=</span> <span class="nn">Async</span><span class="p">.</span><span class="n">Parallel</span><span class="o">(</span><span class="n">twoJobs</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="bp">()</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">let</span> <span class="nv">MakeToasts</span><span class="bp">()</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">    <span class="n">async</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">let!</span> <span class="nv">i</span> <span class="o">=</span> <span class="n">GatherIngredients</span><span class="bp">()</span>
+</span></span><span class="line"><span class="cl">        <span class="k">do</span><span class="o">!</span> <span class="n">Make2Toasts</span><span class="o">(</span><span class="n">i</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[&lt;</span><span class="n">EntryPoint</span><span class="o">&gt;]</span>
+</span></span><span class="line"><span class="cl"><span class="k">let</span> <span class="nv">main</span><span class="o">(</span><span class="n">argv</span><span class="o">)</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">    <span class="nn">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="o">(</span><span class="s">&#34;Hello World!&#34;</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">MakeToasts</span><span class="bp">()</span>
+</span></span><span class="line"><span class="cl">        <span class="o">|&gt;</span> <span class="nn">Async</span><span class="p">.</span><span class="n">RunSynchronously</span>
+</span></span><span class="line"><span class="cl">    <span class="nn">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="o">(</span><span class="s">&#34;Bye world!&#34;</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">0</span> <span class="c1">// return an integer exit code
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>正如你所看到的：</p>
+<ul>
+<li>在 C# 中处理非泛型 Task，在 F# 中意味着使用 <code>unit</code> 作为 <code>Async</code> 的泛型参数：<code>Async&lt;unit&gt;</code>。不要使用 <code>let! x = ...</code>，你只需要 <code>do!</code>。</li>
+<li><code>Task.WhenAll</code> 的等价物是 <code>Async.Parallel</code>。</li>
+</ul>
+<h3 id="例-12编写更少符号提升-f-脚本的可阅读性">例 12：编写更少符号，提升 F# 脚本的可阅读性！</h3>
+<p>相信你已经明白了 F# 中元组和柯里化参数的区别。后者更推荐使用。</p>
+<p>你可能明白，写这么多小括号其实只是为了映射元组中的东西。事实上，这是刚从 C# 转到 F# 的思维惯性。</p>
+<p>F# 的简洁之处：</p>
+<ul>
+<li>没有那么多的括号，因为你不再使用元组了。</li>
+<li>不需要使用分号，如果你只使用 EOL 分隔符。</li>
+<li>不需要使用大括号（在 F# 中处理记录类型时才需要它们）。</li>
+<li>让 F# 编译器推断类型，就不需要多次使用冒号 <code>:</code>。</li>
+<li>更多地使用管道运算符 <code>|&gt;</code>，以避免在一大串代码的右边还要写一堆小括号。</li>
+<li>在 F# 中的 <code>if</code> 表达式中不需要小括号（与 C# 相反）。</li>
+</ul>
+<p>有了这些要点，我们来重写之前的所有 F# 实例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fsharp" data-lang="fsharp"><span class="line"><span class="cl"><span class="k">open</span> <span class="nn">System</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">let</span> <span class="nv">exitCode</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">incomingChar</span> <span class="o">=</span> <span class="nn">Environment</span><span class="p">.</span><span class="n">NewLine</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">        <span class="n">1</span>
+</span></span><span class="line"><span class="cl">    <span class="k">elif</span> <span class="ow">not</span> <span class="o">(</span><span class="n">incomingChar</span> <span class="o">=</span> <span class="nn">String</span><span class="p">.</span><span class="n">Empty</span><span class="o">)</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">        <span class="n">2</span>
+</span></span><span class="line"><span class="cl">    <span class="k">elif</span> <span class="n">incomingChar</span> <span class="o">&lt;&gt;</span> <span class="s">&#34;</span><span class="se">\t</span><span class="s">&#34;</span> <span class="o">&amp;&amp;</span> <span class="n">incomingChar</span><span class="o">.</span><span class="n">Length</span> <span class="o">&gt;</span> <span class="n">1</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">        <span class="n">3</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span>
+</span></span><span class="line"><span class="cl">        <span class="n">4</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nn">Environment</span><span class="p">.</span><span class="n">Exit</span> <span class="n">exitCode</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fsharp" data-lang="fsharp"><span class="line"><span class="cl"><span class="k">let</span> <span class="nv">intArray</span> <span class="o">=</span> 
+</span></span><span class="line"><span class="cl">        <span class="o">[|</span> <span class="n">1</span>
+</span></span><span class="line"><span class="cl">           <span class="n">2</span>
+</span></span><span class="line"><span class="cl">           <span class="n">3</span> <span class="o">|]</span>
+</span></span><span class="line"><span class="cl"><span class="k">let</span> <span class="nv">intList</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">        <span class="o">[</span> <span class="n">4</span>
+</span></span><span class="line"><span class="cl">          <span class="n">5</span>
+</span></span><span class="line"><span class="cl">          <span class="n">6</span> <span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="k">let</span> <span class="nv">sequenceOfIntegers</span> <span class="o">=</span> <span class="n">intList</span>
+</span></span><span class="line"><span class="cl"><span class="k">let</span> <span class="nv">dic</span> <span class="o">=</span> <span class="n">dict</span> <span class="o">[</span> <span class="o">(</span><span class="s">&#34;One&#34;</span><span class="o">,</span> <span class="n">1</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">                 <span class="o">(</span><span class="s">&#34;Two&#34;</span><span class="o">,</span> <span class="n">2</span><span class="o">)</span> <span class="o">]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fsharp" data-lang="fsharp"><span class="line"><span class="cl"><span class="k">try</span>
+</span></span><span class="line"><span class="cl">    <span class="k">try</span>
+</span></span><span class="line"><span class="cl">        <span class="n">TrySomething</span> <span class="n">someParam</span>
+</span></span><span class="line"><span class="cl">    <span class="k">with</span>
+</span></span><span class="line"><span class="cl">    <span class="o">|</span> <span class="o">:?</span> <span class="n">SomeException</span> <span class="k">as</span> <span class="n">ex</span> <span class="o">-&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">SomeCondition</span> <span class="n">ex</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">            <span class="n">DoSomethingElse</span> <span class="n">ex</span>
+</span></span><span class="line"><span class="cl">            <span class="n">raise</span> <span class="n">OtherException</span>
+</span></span><span class="line"><span class="cl">        <span class="k">else</span>
+</span></span><span class="line"><span class="cl">            <span class="n">reraise</span><span class="bp">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">finally</span>
+</span></span><span class="line"><span class="cl">    <span class="n">MakeSureToCleanup</span> <span class="n">someParam</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fsharp" data-lang="fsharp"><span class="line"><span class="cl"><span class="k">use</span> <span class="n">reader</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StreamReader</span> <span class="n">someFile</span>
+</span></span><span class="line"><span class="cl"><span class="n">DoStuff</span> <span class="n">reader</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fsharp" data-lang="fsharp"><span class="line"><span class="cl"><span class="k">let</span> <span class="nv">Check</span> <span class="n">someParam1</span> <span class="n">someParam2</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">match</span> <span class="n">someParam1</span> <span class="k">with</span>
+</span></span><span class="line"><span class="cl">    <span class="o">|</span> <span class="n">Some</span> <span class="n">someValue</span> <span class="o">-&gt;</span> <span class="c1">// like &#39;as&#39; in C#, you cast and want the value
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">let</span> <span class="nv">str</span> <span class="o">=</span> <span class="n">someValue</span><span class="o">.</span><span class="n">ToString</span><span class="bp">()</span>
+</span></span><span class="line"><span class="cl">        <span class="n">stringBuilder</span><span class="o">.</span><span class="n">Append</span> <span class="n">str</span> <span class="o">|&gt;</span> <span class="n">ignore</span>
+</span></span><span class="line"><span class="cl">    <span class="o">|</span> <span class="n">None</span> <span class="o">-&gt;</span> <span class="bp">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">match</span> <span class="n">someParam2</span> <span class="k">with</span>
+</span></span><span class="line"><span class="cl">    <span class="o">|</span> <span class="n">Some</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="c1">// like &#39;is&#39; in C#, you don&#39;t care about the value
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">stringBuilder</span><span class="o">.</span><span class="n">Append</span> <span class="nn">String</span><span class="p">.</span><span class="n">Empty</span> <span class="o">|&gt;</span> <span class="n">ignore</span>
+</span></span><span class="line"><span class="cl">    <span class="o">|</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="bp">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fsharp" data-lang="fsharp"><span class="line"><span class="cl"><span class="k">type</span> <span class="nc">Foo</span> <span class="o">=</span> 
+</span></span><span class="line"><span class="cl">    <span class="o">{</span> <span class="n">Bar</span><span class="o">:</span> <span class="n">int</span>
+</span></span><span class="line"><span class="cl">      <span class="n">Baz</span><span class="o">:</span> <span class="kt">string</span> <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">module</span> <span class="nn">FooFactory</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">    <span class="k">let</span> <span class="nv">internal</span> <span class="n">CreateFoo</span> <span class="bp">()</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">        <span class="o">{</span> <span class="n">Bar</span> <span class="o">=</span> <span class="n">42</span>
+</span></span><span class="line"><span class="cl">          <span class="n">Baz</span> <span class="o">=</span> <span class="s">&#34;forty-two&#34;</span> <span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fsharp" data-lang="fsharp"><span class="line"><span class="cl"><span class="k">module</span> <span class="nn">Foo</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">    <span class="k">let</span> <span class="nv">Baz</span><span class="bp">()</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">        <span class="k">false</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">let</span> <span class="nv">rec</span> <span class="n">Bar</span><span class="bp">()</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">Baz</span><span class="bp">()</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Bar</span><span class="bp">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fsharp" data-lang="fsharp"><span class="line"><span class="cl"><span class="k">module</span> <span class="nn">SomeFsharpModule</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">let</span> <span class="nv">SendingAnonymousMethodAsDelegate1</span><span class="bp">()</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">        <span class="k">let</span> <span class="nv">DelegateReception1</span> <span class="n">dlg</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">            <span class="n">dlg</span><span class="bp">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">DelegateReception1</span><span class="o">(</span><span class="k">fun</span> <span class="o">_</span> <span class="o">-&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nn">Console</span><span class="p">.</span><span class="n">WriteLine</span> <span class="s">&#34;hello 1&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">let</span> <span class="nv">SendingAnonymousMethodAsDelegate2</span><span class="bp">()</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">        <span class="k">let</span> <span class="nv">DelegateReception2</span> <span class="n">dlg</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">            <span class="k">let</span> <span class="nv">bar</span> <span class="o">=</span> <span class="s">&#34;baz&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">dlg</span> <span class="n">bar</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">DelegateReception2</span><span class="o">(</span><span class="k">fun</span> <span class="n">bar</span> <span class="o">-&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nn">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="o">(</span><span class="s">&#34;hello 2 &#34;</span> <span class="o">+</span> <span class="n">bar</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">        <span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">let</span> <span class="nv">SendingAnonymousMethodAsDelegate3</span><span class="bp">()</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">        <span class="k">let</span> <span class="nv">DelegateReception3</span> <span class="n">dlg</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">            <span class="k">let</span> <span class="nv">result</span> <span class="o">=</span> <span class="n">dlg</span><span class="bp">()</span>
+</span></span><span class="line"><span class="cl">            <span class="bp">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">DelegateReception3</span><span class="o">(</span><span class="k">fun</span> <span class="o">_</span> <span class="o">-&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nn">Console</span><span class="p">.</span><span class="n">WriteLine</span> <span class="s">&#34;hello 3&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">3</span>
+</span></span><span class="line"><span class="cl">        <span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">let</span> <span class="nv">SendingAnonymousMethodAsDelegate4</span><span class="bp">()</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">        <span class="k">let</span> <span class="nv">DelegateReception4</span> <span class="n">dlg</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">            <span class="k">let</span> <span class="nv">bar</span> <span class="o">=</span> <span class="n">4</span><span class="o">.</span><span class="n">0</span>
+</span></span><span class="line"><span class="cl">            <span class="k">let</span> <span class="nv">result</span> <span class="o">=</span> <span class="n">dlg</span> <span class="n">bar</span>
+</span></span><span class="line"><span class="cl">            <span class="bp">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">DelegateReception4</span><span class="o">(</span><span class="k">fun</span> <span class="n">bar</span> <span class="o">-&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nn">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="o">(</span><span class="s">&#34;hello 4 &#34;</span> <span class="o">+</span> <span class="n">bar</span><span class="o">.</span><span class="n">ToString</span><span class="bp">()</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">int64</span> <span class="n">4</span>
+</span></span><span class="line"><span class="cl">        <span class="o">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fsharp" data-lang="fsharp"><span class="line"><span class="cl"><span class="k">match</span> <span class="n">int</span><span class="o">.</span><span class="n">TryParse</span> <span class="n">someString</span> <span class="k">with</span>
+</span></span><span class="line"><span class="cl"><span class="o">|</span> <span class="k">true</span><span class="o">,</span> <span class="n">anInteger</span> <span class="o">-&gt;</span> <span class="n">DoSomethingWithAnInteger</span> <span class="n">anInteger</span>
+</span></span><span class="line"><span class="cl"><span class="o">|</span> <span class="k">false</span><span class="o">,</span> <span class="o">_</span> <span class="o">-&gt;</span> <span class="n">DoSomethingElse</span><span class="bp">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fsharp" data-lang="fsharp"><span class="line"><span class="cl"><span class="k">let</span> <span class="nv">rec</span> <span class="n">ReceiveNonTuple</span> <span class="n">str</span> <span class="n">i</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">    <span class="k">let</span> <span class="nv">counter</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="n">1</span>
+</span></span><span class="line"><span class="cl">    <span class="nn">Console</span><span class="p">.</span><span class="n">WriteLine</span> <span class="n">str</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ReceiveNonTuple</span> <span class="n">str</span> <span class="n">counter</span>
+</span></span><span class="line"><span class="cl">    <span class="k">true</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fsharp" data-lang="fsharp"><span class="line"><span class="cl"><span class="k">let</span> <span class="nv">Multiply</span> <span class="n">x</span> <span class="n">y</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">    <span class="n">x</span> <span class="o">*</span> <span class="n">y</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">let</span> <span class="nv">Double</span> <span class="n">x</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">    <span class="k">let</span> <span class="nv">doubleFunc</span> <span class="o">=</span> <span class="n">Multiply</span> <span class="n">2</span>
+</span></span><span class="line"><span class="cl">    <span class="k">let</span> <span class="nv">result</span> <span class="o">=</span> <span class="n">doubleFunc</span> <span class="n">x</span>
+</span></span><span class="line"><span class="cl">    <span class="n">result</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fsharp" data-lang="fsharp"><span class="line"><span class="cl"><span class="k">let</span> <span class="nv">aStringToShowToTheUser</span> <span class="o">=</span> <span class="n">sprintf</span> <span class="s">&#34;Hello %s, I see you are %i years old&#34;</span> <span class="n">name</span> <span class="n">age</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fsharp" data-lang="fsharp"><span class="line"><span class="cl"><span class="k">type</span> <span class="nc">Ingredients</span> <span class="bp">()</span> <span class="o">=</span> <span class="k">class</span> <span class="k">end</span>
+</span></span><span class="line"><span class="cl"><span class="k">type</span> <span class="nc">Toast</span> <span class="o">(</span><span class="n">i</span><span class="o">:</span> <span class="n">Ingredients</span><span class="o">)</span> <span class="o">=</span> <span class="k">class</span> <span class="k">end</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">let</span> <span class="nv">ToastBread</span> <span class="n">i</span><span class="o">:</span> <span class="n">Async</span><span class="o">&lt;</span><span class="n">Toast</span><span class="o">&gt;</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">    <span class="n">async</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">Toast</span> <span class="n">i</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">let</span> <span class="nv">GatherIngredients</span> <span class="bp">()</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">    <span class="n">async</span> <span class="o">{</span> <span class="k">return</span> <span class="n">Ingredients</span><span class="bp">()</span> <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">let</span> <span class="nv">Make2Toasts</span> <span class="n">i</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">    <span class="n">async</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">let</span> <span class="nv">twoJobs</span><span class="o">:</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Async</span><span class="o">&lt;</span><span class="n">Toast</span><span class="o">&gt;&gt;</span> <span class="o">=</span> <span class="o">[</span><span class="n">ToastBread</span> <span class="n">i</span><span class="o">;</span> <span class="n">ToastBread</span> <span class="n">i</span><span class="o">]</span>
+</span></span><span class="line"><span class="cl">        <span class="k">let!</span> <span class="nv">_</span> <span class="o">=</span> <span class="nn">Async</span><span class="p">.</span><span class="n">Parallel</span> <span class="n">twoJobs</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="bp">()</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">let</span> <span class="nv">MakeToasts</span><span class="bp">()</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">    <span class="n">async</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">let!</span> <span class="nv">i</span> <span class="o">=</span> <span class="n">GatherIngredients</span><span class="bp">()</span>
+</span></span><span class="line"><span class="cl">        <span class="k">do</span><span class="o">!</span> <span class="n">Make2Toasts</span> <span class="n">i</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[&lt;</span><span class="n">EntryPoint</span><span class="o">&gt;]</span>
+</span></span><span class="line"><span class="cl"><span class="k">let</span> <span class="nv">main</span> <span class="n">argv</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">    <span class="nn">Console</span><span class="p">.</span><span class="n">WriteLine</span> <span class="s">&#34;Hello World!&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">MakeToasts</span><span class="bp">()</span>
+</span></span><span class="line"><span class="cl">        <span class="o">|&gt;</span> <span class="nn">Async</span><span class="p">.</span><span class="n">RunSynchronously</span>
+</span></span><span class="line"><span class="cl">    <span class="nn">Console</span><span class="p">.</span><span class="n">WriteLine</span> <span class="s">&#34;Bye world!&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">0</span> <span class="c1">// return an integer exit code
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<p>祝贺你! 你学习了足够的知识，大概可以理解 80% 的 F# 代码了。</p>
+<p>或者说 80% 的简单 F# 代码，也就是大多数 F# 脚本中所使用的。</p>
+<p>我可以向你解释如何在 F# 中建立相当于类（有行为、构造函数、属性）或结构（值类型和堆栈分配）但是：</p>
+<ol>
+<li>这些不是 F# 的惯用写法</li>
+<li>大多数脚本甚至不需要类型，它们只需要函数、值和调用（如果你把 F# 当脚本用）</li>
+</ol>
+<p>无论如何，我建议下一步：</p>
+<ul>
+<li>观看这个 <a class="link" href="https://www.youtube.com/watch?v=HQ887aOZITY"  target="_blank" rel="noopener"
+    >讲座</a></li>
+<li>看看这篇 <a class="link" href="https://www.compositional-it.com/news-blog/5-features-that-c-has-that-f-doesnt-have/"  target="_blank" rel="noopener"
+    >文章</a></li>
+</ul>
+<p>如果过了一段时间，你还在为从 C# 转换至 F# 而挣扎，也可以时不时地使用这个 <a class="link" href="https://github.com/willsam100/FShaper"  target="_blank" rel="noopener"
+    >工具</a>。</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/fsharp-basic/">FSharp Basic</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">Related content</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/p/essential-fsharp-notes/">
+        
+        
+            <div class="article-image">
+                <img src="/p/essential-fsharp-notes/head.87737bdf5db61101d4ad0fb8eff57d53_hu7ae8c9477ae0a68f34fbf9d5a3829117_280528_250x150_fill_box_smart1_3.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post Essential F# 笔记"
+                        data-key="essential-fsharp-notes" 
+                        data-hash="md5-h3N73122EQHUrQ&#43;47/V9Uw==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Essential F# 笔记</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/nim-notes/">
+        
+        
+            <div class="article-image">
+                <img src="/p/nim-notes/head.c9b141998febf281884606d443822a75_hu60daa3e750dae8efe162b164d024055e_222411_250x150_fill_box_smart1_3.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post Nim"
+                        data-key="nim-notes" 
+                        data-hash="md5-ybFBmY/r8oGIRgbUQ4IqdQ==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Nim</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/advanced-csharp-1/">
+        
+        
+            <div class="article-image">
+                <img src="/p/advanced-csharp-1/head.50573d1817e36e3313a7fd57690ebc80_hu6445997bcd53608f7e2f035aad872a86_31881_250x150_fill_box_smart1_3.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post 鎧恩的 C# 进阶小册  01 - 并发与异步"
+                        data-key="advanced-csharp-1" 
+                        data-hash="md5-UFc9GBfjbjMTp/1XaQ68gA==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">鎧恩的 C# 进阶小册  01 - 并发与异步</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/rx-magic-3/">
+        
+        
+            <div class="article-image">
+                <img src="/p/rx-magic-3/head.c9b141998febf281884606d443822a75_hu60daa3e750dae8efe162b164d024055e_222411_250x150_fill_box_smart1_3.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post Rx.NET 响应式编程指北 03 - 深入流的创建"
+                        data-key="rx-magic-3" 
+                        data-hash="md5-ybFBmY/r8oGIRgbUQ4IqdQ==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Rx.NET 响应式编程指北 03 - 深入流的创建</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/rx-magic-ex/">
+        
+        
+            <div class="article-image">
+                <img src="/p/rx-magic-ex/head.c9b141998febf281884606d443822a75_hu60daa3e750dae8efe162b164d024055e_222411_250x150_fill_box_smart1_3.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post Rx.NET 响应式编程指北 Ex - 函数式思想 &amp; 流式接口"
+                        data-key="rx-magic-ex" 
+                        data-hash="md5-ybFBmY/r8oGIRgbUQ4IqdQ==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Rx.NET 响应式编程指北 Ex - 函数式思想 &amp; 流式接口</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2021 - 
+        
+        2022 Yonable.Init()
+    </section>
+    
+    <section class="powerby">
+        
+            (*/ω＼*) <br/>
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.13.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li>
+      <ol>
+        <li><a href="#例-1基本函数声明与实现">例 1：基本函数声明与实现</a></li>
+        <li><a href="#例-2基本关键字和操作符">例 2：基本关键字和操作符</a></li>
+        <li><a href="#例-3基础集合">例 3：基础集合</a></li>
+        <li><a href="#例-4代码块">例 4：代码块</a></li>
+        <li><a href="#例-5避免-null-和忽略">例 5：避免 Null 和忽略</a></li>
+        <li><a href="#例-6类型">例 6：类型</a></li>
+        <li><a href="#例-7函数的顺序很重要循环依赖是万恶之源">例 7：函数的顺序很重要，循环依赖是万恶之源</a></li>
+        <li><a href="#例-8委托匿名函数我的老天爷">例 8：委托、匿名函数···我的老天爷！</a></li>
+        <li><a href="#例-9元组局部应用以及柯里化">例 9：元组、局部应用以及柯里化</a></li>
+        <li><a href="#例-10字符串插值">例 10：字符串插值</a></li>
+        <li><a href="#例-11异步代码">例 11：异步代码</a></li>
+        <li><a href="#例-12编写更少符号提升-f-脚本的可阅读性">例 12：编写更少符号，提升 F# 脚本的可阅读性！</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

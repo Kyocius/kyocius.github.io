@@ -1,7 +1,7 @@
 ---
 title: About
 description: 
-date: '2022-07-28'
+date: '2022-11-28'
 aliases:
   - about
 license: CC BY-NC-ND
@@ -15,38 +15,30 @@ menu:
 
 ## 名字
 
-我的名字叫「**鎧恩**（kǎi ēn）」
+我的名字叫「**可遊**（yóu）」
 
-日语罗马音是「**Yoroi on**」来源于我三次元名字的谐音 (*/ω＼*)
+英文 ID 是「**Yonable**」其实就是「Yon-able」
 
 ## 技术栈
 
-涉猎过很多语言，但是最喜欢 C# 和 Kotlin！
+喜欢 **C#** 和 **Kotlin** 这类具有摩登特性的语言。
 
-对 Windows / Android Dev 比较熟悉
-
-~~讨厌一切名字里带 Java 的东西~~
-
-~~讨厌 Electron 写的软件~~
-
-想写出一些既好看又好用的程序
+对 Windows Dev 和 Android Dev 比较熟悉。
 
 ## 现状
 
-坐标天津市，是名高中牲
+坐标天津市，是名高中牲。已经上高三，时间不是很充裕。
 
-已经上高三，时间⑧是很充裕
+尽管能力有限，但依然在追逐自己 Dreamland。
 
 ## 联系方式
 
-QQ ID: Yoroion233 
+- Email: yonable@outlook.com
 
-Email: yoroion@qq.com
-
-Telegram: [Yoroion233](https://t.me/Yoroion4)
+- Telegram: [Yonab1e](https://t.me/Yonab1e)
 
 ## 总之...
 
-并不是一个严肃的人，常常很幼稚
+并不是一个严肃的人，常常很幼稚。
 
-自我感觉礼貌而友善，希望能和萍水相逢的你成为朋友 (≧∇≦)ﾉ
+自我感觉礼貌而友善，希望能和萍水相逢的你成为朋友。

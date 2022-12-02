@@ -1,8 +1,8 @@
-baseurl: https://yoroion.github.io/
+baseurl: https://yonable.github.io/
 languageCode: en-us
 theme: hugo-theme-stack
 paginate: 5
-title: 鎧恩の部屋
+title: Yonable.Space
 # ignoreErrors: error-remote-getjson
 
 # languages:
@@ -45,7 +45,7 @@ params:
 
     sidebar:
         emoji: 🎲
-        subtitle: 逸一时，误一世，逸久逸久罢已龄
+        subtitle: 即此羡闲逸，怅然吟式微
         avatar:
             enabled: true
             local: true
