@@ -21,6 +21,10 @@ links:
     description: 大葛格
     website: https://huuhghhgyg.github.io/
     image: https://avatars.githubusercontent.com/u/10482172?v=4
+  - title: Tony Ding
+    description: World Peace.
+    website: https://blog.tonyding.net/about.html
+    image: https://pbs.twimg.com/profile_images/1597491297350127616/FHruw66T_400x400.jpg
 menu:
     main: 
         weight: -50
@@ -32,7 +36,7 @@ comments: false
 
 欢迎给我发邮件交换友链 (*/ω＼*)
 
-我的邮箱：yoroion@qq.com
+我的邮箱：yonable@outlook.com
 
 ```
 博客名：XXX's Blog
