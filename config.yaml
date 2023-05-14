@@ -1,4 +1,4 @@
-baseurl: https://yonable.github.io/
+baseurl: https://kyocius.github.io/
 languageCode: zh-cn
 theme: hugo-theme-stack
 paginate: 5
