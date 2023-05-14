@@ -1,5 +1,5 @@
 ---
-title: Links
+title: 友链
 links:
   - title: AHpx
     description: 技术力爆表的破晓

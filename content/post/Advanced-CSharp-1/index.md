@@ -6,7 +6,7 @@ slug: advanced-csharp-1
 categories:
     - 编程
 tags:
-    - Advanced CSharp 
+    - Advanced CSharp
     - CSharp
 image: head.png
 

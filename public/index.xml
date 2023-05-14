@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-        <title>Yonable.Init()</title>
+        <title>Yonable.Space</title>
         <link>https://yonable.github.io/</link>
-        <description>Recent content on Yonable.Init()</description>
+        <description>Recent content on Yonable.Space</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
         <lastBuildDate>Mon, 28 Nov 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://yonable.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
@@ -35,22 +35,6 @@
 &lt;p&gt;并不是一个严肃的人，常常很幼稚。&lt;/p&gt;
 &lt;p&gt;自我感觉礼貌而友善，希望能和萍水相逢的你成为朋友。&lt;/p&gt;
 </description>
-        </item>
-        <item>
-        <title>Nim</title>
-        <link>https://yonable.github.io/p/nim-notes/</link>
-        <pubDate>Tue, 04 Oct 2022 00:00:00 +0000</pubDate>
-        
-        <guid>https://yonable.github.io/p/nim-notes/</guid>
-        <description>&lt;img src="https://yonable.github.io/p/nim-notes/head.png" alt="Featured image of post Nim" /&gt;</description>
-        </item>
-        <item>
-        <title>Essential F# 笔记</title>
-        <link>https://yonable.github.io/p/essential-fsharp-notes/</link>
-        <pubDate>Sat, 17 Sep 2022 00:00:00 +0000</pubDate>
-        
-        <guid>https://yonable.github.io/p/essential-fsharp-notes/</guid>
-        <description>&lt;img src="https://yonable.github.io/p/essential-fsharp-notes/head.png" alt="Featured image of post Essential F# 笔记" /&gt;</description>
         </item>
         <item>
         <title>写给 C# 开发者的 F# 光速入门教程</title>
@@ -5670,7 +5654,7 @@
         
         <guid>https://yonable.github.io/links/</guid>
         <description>&lt;p&gt;欢迎给我发邮件交换友链 (&lt;em&gt;/ω＼&lt;/em&gt;)&lt;/p&gt;
-&lt;p&gt;我的邮箱：yoroion@qq.com&lt;/p&gt;
+&lt;p&gt;我的邮箱：yonable@outlook.com&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1

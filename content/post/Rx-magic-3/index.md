@@ -6,7 +6,7 @@ slug: rx-magic-3
 categories:
     - 编程
 tags:
-    - Rx.NET
+    - Rx.NET Tutorial
     - CSharp
 image: head.png
 

@@ -2,13 +2,12 @@
 title: 二〇二二年夏日谈
 description: 一段不愿被忘记的时光
 date: 2022-07-15
-slug: summer-holiday
-image: head.jpg
+slug: summer-holiday-2022
 categories:
-    - 日记
+    - 随笔
 tags:
     - Holiday
-image: linm.png
+image: linm.jpg
 ---
 
 ## 8 月 5 日

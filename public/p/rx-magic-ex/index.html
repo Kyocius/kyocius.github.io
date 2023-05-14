@@ -28,7 +28,7 @@ Rx.NET 提供的方法大部分都是函数式的，比如我们上一章学到�
 我们这样为委托赋值：
 1 2 3 4 MyDelegateType myDel; myDel &#43;= &amp;lt;一些函数&amp;gt;; myDel(&amp;#34;first&amp;#34;, &amp;#34;second&amp;#34;); // 这样调用 匿名方法 Anonymous methods 1 2 3 4 myDel = delegate (string first, string second) { return first.'>
 <meta property='og:url' content='https://yonable.github.io/p/rx-magic-ex/'>
-<meta property='og:site_name' content='Yonable.Init()'>
+<meta property='og:site_name' content='Yonable.Space'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Rx.NET' /><meta property='article:tag' content='CSharp' /><meta property='article:tag' content='Functional' /><meta property='article:published_time' content='2022-08-09T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2022-08-09T00:00:00&#43;00:00'/><meta property='og:image' content='https://yonable.github.io/p/rx-magic-ex/head.png' />
 <meta name="twitter:title" content="Rx.NET 响应式编程指北 Ex - 函数式思想 &amp; 流式接口">
 <meta name="twitter:description" content="前言 这一章是独立于正式章节的番外，补充一下 C# 函数式编程（Functional Programming）以及流式接口（Fluent API）的知识。
@@ -42,7 +42,28 @@ Rx.NET 提供的方法大部分都是函数式的，比如我们上一章学到�
 1 public delegate bool MyDelegateType (string first, string second); 在上面的代码中，我们创建了一个名为 MyDelegateType 的委托类型。
 我们这样为委托赋值：
 1 2 3 4 MyDelegateType myDel; myDel &#43;= &amp;lt;一些函数&amp;gt;; myDel(&amp;#34;first&amp;#34;, &amp;#34;second&amp;#34;); // 这样调用 匿名方法 Anonymous methods 1 2 3 4 myDel = delegate (string first, string second) { return first."><meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content='https://yonable.github.io/p/rx-magic-ex/head.png' />
+    <meta name="twitter:image" content='https://yonable.github.io/p/rx-magic-ex/head.png' /><style>
+    :root {
+      --sys-font-family: "Noto Serif SC";
+      --zh-font-family: "Noto Serif SC";
+      --base-font-family: "Noto Serif SC";
+      --code-font-family: "Noto Serif SC";
+      --article-font-family: "Noto Serif SC";
+    }
+  </style>
+  
+  <script>
+    (function () {
+      const customFont = document.createElement("link");
+      customFont.href =
+        "https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&display=swap";
+  
+      customFont.type = "text/css";
+      customFont.rel = "stylesheet";
+  
+      document.head.appendChild(customFont);
+    })();
+  </script>
     </head>
     <body class="
     article-page
@@ -99,8 +120,8 @@ Rx.NET 提供的方法大部分都是函数式的，比如我们上一章学到�
         
         
         <div class="site-meta">
-            <h1 class="site-name"><a href="/">Yonable.Init()</a></h1>
-            <h2 class="site-description">Idling for enlightenment.</h2>
+            <h1 class="site-name"><a href="/">Yonable.Space</a></h1>
+            <h2 class="site-description">即此羡闲逸，怅然吟式微</h2>
         </div>
     </header><ol class="social-menu">
             
@@ -858,23 +879,23 @@ Rx.NET 提供的方法大部分都是函数式的，比如我们上一章学到�
             
                 
 <article class="has-image">
-    <a href="/p/nim-notes/">
+    <a href="/p/fsharp-for-csharp-devs/">
         
         
             <div class="article-image">
-                <img src="/p/nim-notes/head.c9b141998febf281884606d443822a75_hu60daa3e750dae8efe162b164d024055e_222411_250x150_fill_box_smart1_3.png" 
+                <img src="/p/fsharp-for-csharp-devs/head.87737bdf5db61101d4ad0fb8eff57d53_hu7ae8c9477ae0a68f34fbf9d5a3829117_280528_250x150_fill_box_smart1_3.png" 
                         width="250" 
                         height="150" 
                         loading="lazy"
-                        alt="Featured image of post Nim"
-                        data-key="nim-notes" 
-                        data-hash="md5-ybFBmY/r8oGIRgbUQ4IqdQ==">
+                        alt="Featured image of post 写给 C# 开发者的 F# 光速入门教程"
+                        data-key="fsharp-for-csharp-devs" 
+                        data-hash="md5-h3N73122EQHUrQ&#43;47/V9Uw==">
                 
             </div>
         
 
         <div class="article-details">
-            <h2 class="article-title">Nim</h2>
+            <h2 class="article-title">写给 C# 开发者的 F# 光速入门教程</h2>
         </div>
     </a>
 </article>
@@ -895,7 +916,7 @@ Rx.NET 提供的方法大部分都是函数式的，比如我们上一章学到�
         
             2021 - 
         
-        2022 Yonable.Init()
+        2023 Yonable.Space
     </section>
     
     <section class="powerby">

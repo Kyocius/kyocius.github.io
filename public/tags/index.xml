@@ -1,23 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-        <title>Tags on Yonable.Init()</title>
+        <title>Tags on Yonable.Space</title>
         <link>https://yonable.github.io/tags/</link>
-        <description>Recent content in Tags on Yonable.Init()</description>
+        <description>Recent content in Tags on Yonable.Space</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
-        <lastBuildDate>Tue, 04 Oct 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://yonable.github.io/tags/index.xml" rel="self" type="application/rss+xml" /><item>
-        <title>Nim</title>
-        <link>https://yonable.github.io/tags/nim/</link>
-        <pubDate>Tue, 04 Oct 2022 00:00:00 +0000</pubDate>
-        
-        <guid>https://yonable.github.io/tags/nim/</guid>
-        <description></description>
-        </item>
-        <item>
+        <lastBuildDate>Fri, 26 Aug 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://yonable.github.io/tags/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>FSharp Basic</title>
         <link>https://yonable.github.io/tags/fsharp-basic/</link>
-        <pubDate>Sat, 17 Sep 2022 00:00:00 +0000</pubDate>
+        <pubDate>Fri, 26 Aug 2022 00:00:00 +0000</pubDate>
         
         <guid>https://yonable.github.io/tags/fsharp-basic/</guid>
         <description></description>

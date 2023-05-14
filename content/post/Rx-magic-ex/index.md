@@ -6,9 +6,8 @@ slug: rx-magic-ex
 categories:
     - 编程
 tags:
-    - Rx.NET
+    - Rx.NET Tutorial
     - CSharp
-    - Functional
 image: head.png
 
 ---

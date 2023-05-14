@@ -7,7 +7,7 @@ slug: rx-magic-2
 categories:
     - 编程
 tags:
-    - Rx.NET
+    - Rx.NET Tutorial
     - CSharp
 image: head.png
 
