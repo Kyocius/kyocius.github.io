@@ -34,13 +34,13 @@ menu:
 comments: false
 ---
 
-欢迎给我发邮件交换友链 (*/ω＼*)
+欢迎给我发邮件交换友链 ;-)
 
 我的邮箱：yonable@outlook.com
 
 ```
-博客名：XXX's Blog
-简介：另一个 Blogger
+博客名：XXX Blog
+简介：XXX Blogger.
 链接：https://hexo.fluid-dev.com
 Icon：https://hexo.fluid-dev.com/img/favicon.png
 ```
