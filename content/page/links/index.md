@@ -36,12 +36,14 @@ comments: false
 
 欢迎给我发邮件交换友链 ;-)
 
-我的邮箱：yonable@outlook.com
+我的邮箱：kyocius@outlook.com
+
+申请友链的格式如下：
 
 ```
 博客名：XXX Blog
 简介：XXX Blogger.
 链接：https://hexo.fluid-dev.com
-Icon：https://hexo.fluid-dev.com/img/favicon.png
+头像：https://hexo.fluid-dev.com/img/favicon.png
 ```
 

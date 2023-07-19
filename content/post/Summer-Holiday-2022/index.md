@@ -8,6 +8,7 @@ categories:
 tags:
     - Holiday
 image: linm.jpg
+draft: true
 ---
 
 ## 8 月 5 日
