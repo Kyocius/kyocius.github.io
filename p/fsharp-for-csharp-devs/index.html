@@ -1,12 +1,12 @@
 <!doctype html><html lang=zh-cn dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="Guide for C# devs to learn F# real FAST"><title>写给 C# 开发者的 F# 光速入门教程</title><link rel=canonical href=https://kyocius.github.io/p/fsharp-for-csharp-devs/><link rel=stylesheet href=/scss/style.min.26f3734476757be60ded5a96146633e6d2efdd397b4a8f48736727c9e436c43d.css><meta property="og:title" content="写给 C# 开发者的 F# 光速入门教程"><meta property="og:description" content="Guide for C# devs to learn F# real FAST"><meta property="og:url" content="https://kyocius.github.io/p/fsharp-for-csharp-devs/"><meta property="og:site_name" content="游尔曼斯克"><meta property="og:type" content="article"><meta property="article:section" content="Post"><meta property="article:tag" content="FSharp Basic"><meta property="article:published_time" content="2022-08-26T00:00:00+00:00"><meta property="article:modified_time" content="2022-08-26T00:00:00+00:00"><meta property="og:image" content="https://kyocius.github.io/p/fsharp-for-csharp-devs/head.png"><meta name=twitter:title content="写给 C# 开发者的 F# 光速入门教程"><meta name=twitter:description content="Guide for C# devs to learn F# real FAST"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://kyocius.github.io/p/fsharp-for-csharp-devs/head.png"><style>:root{--sys-font-family:"Noto Serif SC";--zh-font-family:"Noto Serif SC";--base-font-family:"Noto Serif SC";--article-font-family:"Noto Serif SC"}</style><script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=切换菜单>
-<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/><img src=/img/Neki_hu5971c73a93cd34c6a54b40261e8ec7c0_242923_300x0_resize_q75_box.jpg width=300 height=300 class=site-logo loading=lazy alt=Avatar></a></figure><div class=site-meta><h1 class=site-name><a href=/>游尔曼斯克</a></h1><h2 class=site-description>Kyocius</h2></div></header><ol class=social-menu><li><a href=https://github.com/Kyocius target=_blank title=GitHub><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6.0 00-1.3-3.2 4.2 4.2.0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3.0 00-6.2.0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2.0 00-.1 3.2A4.6 4.6.0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg></a></li><li><a href=https://twitter.com/kyociusEX target=_blank title=Twitter><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M22 4.01c-1 .49-1.98.689-3 .99-1.121-1.265-2.783-1.335-4.38-.737S11.977 6.323 12 8v1c-3.245.083-6.135-1.395-8-4 0 0-4.182 7.433 4 11-1.872 1.247-3.739 2.088-6 2 3.308 1.803 6.913 2.423 10.034 1.517 3.58-1.04 6.522-3.723 7.651-7.742a13.84 13.84.0 00.497-3.753C20.18 7.773 21.692 5.25 22 4.009z"/></svg></a></li><li><a href=https://www.zhihu.com/people/you-wu-45-30 target=_blank title=Zhihu><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-zhihu" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 6h6v12h-2l-2 2-1-2h-1z"/><path d="M4 12h6.5"/><path d="M10.5 6h-5"/><path d="M6 4c-.5 2.5-1.5 3.5-2.5 4.5"/><path d="M8 6v7c0 4.5-2 5.5-4 7"/><path d="M11 18l-3-5"/></svg></a></li></ol><ol class=menu id=main-menu><li><a href=/ target=_blank><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="5 12 3 12 12 3 21 12 19 12"/><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/><path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"/></svg><span>主页</span></a></li><li><a href=/%E5%85%B3%E4%BA%8E/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="7" r="4"/><path d="M6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg><span>关于</span></a></li><li><a href=/archives/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><rect x="3" y="4" width="18" height="4" rx="2"/><path d="M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8"/><line x1="10" y1="12" x2="14" y2="12"/></svg><span>归档</span></a></li><li><a href=/search/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg><span>探求</span></a></li><li><a href=/%E5%8F%8B%E9%93%BE/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M10 14a3.5 3.5.0 005 0l4-4a3.5 3.5.0 00-5-5l-.5.5"/><path d="M14 10a3.5 3.5.0 00-5 0l-4 4a3.5 3.5.0 005 5l.5-.5"/></svg><span>友链</span></a></li><div class=menu-bottom-section><li id=dark-mode-toggle><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg><span>暗色模式</span></li></div></ol></aside><main class="main full-width"><article class="has-image main-article"><header class=article-header><div class=article-image><a href=/p/fsharp-for-csharp-devs/><img src=/p/fsharp-for-csharp-devs/head_hu7ae8c9477ae0a68f34fbf9d5a3829117_280528_800x0_resize_box_3.png srcset="/p/fsharp-for-csharp-devs/head_hu7ae8c9477ae0a68f34fbf9d5a3829117_280528_800x0_resize_box_3.png 800w, /p/fsharp-for-csharp-devs/head_hu7ae8c9477ae0a68f34fbf9d5a3829117_280528_1600x0_resize_box_3.png 1600w" width=800 height=450 loading=lazy alt="Featured image of post 写给 C# 开发者的 F# 光速入门教程"></a></div><div class=article-details><header class=article-category><a href=/categories/%E7%BC%96%E7%A8%8B/>编程</a></header><div class=article-title-wrapper><h2 class=article-title><a href=/p/fsharp-for-csharp-devs/>写给 C# 开发者的 F# 光速入门教程</a></h2><h3 class=article-subtitle>Guide for C# devs to learn F# real FAST</h3></div><footer class=article-time><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg><time class=article-time--published>Aug 26, 2022</time></div><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg><time class=article-time--reading>阅读时长: 16 分钟</time></div></footer></div></header><section class=article-content><blockquote><p>本文翻译自托管在 GitHub 上的 <a class=link href=https://github.com/knocte/2fsharp target=_blank rel=noopener>2fsharp</a> 开源项目</p><p>译版仅发表在知乎和 <a class=link href=https://yoroion.github.io target=_blank rel=noopener>本人博客</a> 上，未经授权<strong>禁止转载</strong></p></blockquote><p>这个教程是基于实例来讲解的，将会花费你 15-30 分钟的时间。</p><p>你将会学到 F# 这门语言 80% 的特性！</p><h3 id=例-1基本函数声明与实现>例 1：基本函数声明与实现</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/><img src=/img/Freren_hu75690b402167ecc980da5ad15a82f32a_174512_300x0_resize_q75_box.jpg width=300 height=299 class=site-logo loading=lazy alt=Avatar></a></figure><div class=site-meta><h1 class=site-name><a href=/>游尔曼斯克</a></h1><h2 class=site-description>Kyocius</h2></div></header><ol class=social-menu><li><a href=https://github.com/Kyocius target=_blank title=GitHub><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6.0 00-1.3-3.2 4.2 4.2.0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3.0 00-6.2.0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2.0 00-.1 3.2A4.6 4.6.0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg></a></li><li><a href=https://twitter.com/kyociusEX target=_blank title=Twitter><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M22 4.01c-1 .49-1.98.689-3 .99-1.121-1.265-2.783-1.335-4.38-.737S11.977 6.323 12 8v1c-3.245.083-6.135-1.395-8-4 0 0-4.182 7.433 4 11-1.872 1.247-3.739 2.088-6 2 3.308 1.803 6.913 2.423 10.034 1.517 3.58-1.04 6.522-3.723 7.651-7.742a13.84 13.84.0 00.497-3.753C20.18 7.773 21.692 5.25 22 4.009z"/></svg></a></li><li><a href=https://www.zhihu.com/people/you-wu-45-30 target=_blank title=Zhihu><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-zhihu" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 6h6v12h-2l-2 2-1-2h-1z"/><path d="M4 12h6.5"/><path d="M10.5 6h-5"/><path d="M6 4c-.5 2.5-1.5 3.5-2.5 4.5"/><path d="M8 6v7c0 4.5-2 5.5-4 7"/><path d="M11 18l-3-5"/></svg></a></li></ol><ol class=menu id=main-menu><li><a href=/ target=_blank><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="5 12 3 12 12 3 21 12 19 12"/><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/><path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"/></svg><span>主页</span></a></li><li><a href=/%E5%85%B3%E4%BA%8E/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="7" r="4"/><path d="M6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg><span>关于</span></a></li><li><a href=/archives/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><rect x="3" y="4" width="18" height="4" rx="2"/><path d="M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8"/><line x1="10" y1="12" x2="14" y2="12"/></svg><span>归档</span></a></li><li><a href=/search/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg><span>探求</span></a></li><li><a href=/%E5%8F%8B%E9%93%BE/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M10 14a3.5 3.5.0 005 0l4-4a3.5 3.5.0 00-5-5l-.5.5"/><path d="M14 10a3.5 3.5.0 00-5 0l-4 4a3.5 3.5.0 005 5l.5-.5"/></svg><span>友链</span></a></li><div class=menu-bottom-section><li id=dark-mode-toggle><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg><span>暗色模式</span></li></div></ol></aside><main class="main full-width"><article class="has-image main-article"><header class=article-header><div class=article-image><a href=/p/fsharp-for-csharp-devs/><img src=/p/fsharp-for-csharp-devs/head_hu7ae8c9477ae0a68f34fbf9d5a3829117_280528_800x0_resize_box_3.png srcset="/p/fsharp-for-csharp-devs/head_hu7ae8c9477ae0a68f34fbf9d5a3829117_280528_800x0_resize_box_3.png 800w, /p/fsharp-for-csharp-devs/head_hu7ae8c9477ae0a68f34fbf9d5a3829117_280528_1600x0_resize_box_3.png 1600w" width=800 height=450 loading=lazy alt="Featured image of post 写给 C# 开发者的 F# 光速入门教程"></a></div><div class=article-details><header class=article-category><a href=/categories/%E7%BC%96%E7%A8%8B/>编程</a></header><div class=article-title-wrapper><h2 class=article-title><a href=/p/fsharp-for-csharp-devs/>写给 C# 开发者的 F# 光速入门教程</a></h2><h3 class=article-subtitle>Guide for C# devs to learn F# real FAST</h3></div><footer class=article-time><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg><time class=article-time--published>Aug 26, 2022</time></div><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg><time class=article-time--reading>阅读时长: 16 分钟</time></div></footer></div></header><section class=article-content><blockquote><p>本文翻译自托管在 GitHub 上的 <a class=link href=https://github.com/knocte/2fsharp target=_blank rel=noopener>2fsharp</a> 开源项目</p><p>译版仅发表在知乎和 <a class=link href=https://yoroion.github.io target=_blank rel=noopener>本人博客</a> 上，未经授权<strong>禁止转载</strong></p></blockquote><p>这个教程是基于实例来讲解的，将会花费你 15-30 分钟的时间。</p><p>你将会学到 F# 这门语言 80% 的特性！</p><h3 id=例-1基本函数声明与实现>例 1：基本函数声明与实现</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
 </span><span class=lnt>5
 </span><span class=lnt>6
 </span><span class=lnt>7
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-csharp data-lang=csharp><span class=line><span class=cl><span class=k>public</span> <span class=kt>int</span> <span class=n>GiveMeTheLength</span><span class=p>(</span><span class=kt>string</span> <span class=n>input</span><span class=p>)</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-csharp data-lang=csharp><span class=line><span class=cl><span class=kd>public</span> <span class=kt>int</span> <span class=n>GiveMeTheLength</span><span class=p>(</span><span class=kt>string</span> <span class=n>input</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=p>{</span>
 </span></span><span class=line><span class=cl>    <span class=c1>// 单行注释</span>
 </span></span><span class=line><span class=cl>    <span class=kt>var</span> <span class=n>result</span> <span class=p>=</span> <span class=n>input</span><span class=p>.</span><span class=n>Length</span><span class=p>;</span>
@@ -207,10 +207,10 @@
 </span><span class=lnt>8
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-csharp data-lang=csharp><span class=line><span class=cl><span class=k>void</span> <span class=n>Check</span><span class=p>(</span><span class=n>SomeType</span> <span class=n>someParam1</span><span class=p>,</span> <span class=n>SomeType</span> <span class=n>someParam2</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=p>{</span>
-</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span><span class=n>someParam1</span> <span class=p>!=</span> <span class=k>null</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span><span class=n>someParam1</span> <span class=p>!=</span> <span class=kc>null</span><span class=p>)</span>
 </span></span><span class=line><span class=cl>        <span class=n>stringBuilder</span><span class=p>.</span><span class=n>Append</span><span class=p>(</span><span class=n>someParam1</span><span class=p>.</span><span class=n>ToString</span><span class=p>());</span>
 </span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span><span class=n>someParam2</span> <span class=p>!=</span> <span class=k>null</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span><span class=n>someParam2</span> <span class=p>!=</span> <span class=kc>null</span><span class=p>)</span>
 </span></span><span class=line><span class=cl>        <span class=n>stringBuilder</span><span class=p>.</span><span class=n>Append</span><span class=p>(</span><span class=n>String</span><span class=p>.</span><span class=n>Empty</span><span class=p>);</span>
 </span></span><span class=line><span class=cl><span class=p>}</span>
 </span></span></code></pre></td></tr></table></div></div><p>变成了</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
@@ -265,30 +265,30 @@
 </span><span class=lnt>26
 </span><span class=lnt>27
 </span><span class=lnt>28
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-csharp data-lang=csharp><span class=line><span class=cl><span class=k>public</span> <span class=k>class</span> <span class=nc>Foo</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-csharp data-lang=csharp><span class=line><span class=cl><span class=kd>public</span> <span class=k>class</span> <span class=nc>Foo</span>
 </span></span><span class=line><span class=cl><span class=p>{</span>
-</span></span><span class=line><span class=cl>    <span class=k>public</span> <span class=n>Foo</span> <span class=p>(</span><span class=kt>int</span> <span class=n>bar</span><span class=p>,</span> <span class=kt>string</span> <span class=n>baz</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=n>Foo</span> <span class=p>(</span><span class=kt>int</span> <span class=n>bar</span><span class=p>,</span> <span class=kt>string</span> <span class=n>baz</span><span class=p>)</span>
 </span></span><span class=line><span class=cl>    <span class=p>{</span>
 </span></span><span class=line><span class=cl>        <span class=k>this</span><span class=p>.</span><span class=n>bar</span> <span class=p>=</span> <span class=n>bar</span><span class=p>;</span>
 </span></span><span class=line><span class=cl>        <span class=k>this</span><span class=p>.</span><span class=n>baz</span> <span class=p>=</span> <span class=n>baz</span><span class=p>;</span>
 </span></span><span class=line><span class=cl>    <span class=p>}</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl>    <span class=k>readonly</span> <span class=kt>int</span> <span class=n>bar</span><span class=p>;</span>
-</span></span><span class=line><span class=cl>    <span class=k>public</span> <span class=kt>int</span> <span class=n>Bar</span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kt>int</span> <span class=n>Bar</span>
 </span></span><span class=line><span class=cl>    <span class=p>{</span>
 </span></span><span class=line><span class=cl>        <span class=k>get</span> <span class=p>{</span> <span class=k>return</span> <span class=n>bar</span><span class=p>;</span> <span class=p>}</span>
 </span></span><span class=line><span class=cl>    <span class=p>}</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl>    <span class=k>readonly</span> <span class=kt>string</span> <span class=n>baz</span><span class=p>;</span>
-</span></span><span class=line><span class=cl>    <span class=k>public</span> <span class=kt>string</span> <span class=n>Baz</span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kt>string</span> <span class=n>Baz</span>
 </span></span><span class=line><span class=cl>    <span class=p>{</span>
 </span></span><span class=line><span class=cl>        <span class=k>get</span> <span class=p>{</span> <span class=k>return</span> <span class=n>baz</span><span class=p>;</span> <span class=p>}</span>
 </span></span><span class=line><span class=cl>    <span class=p>}</span>
 </span></span><span class=line><span class=cl><span class=p>}</span>
 </span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=k>static</span> <span class=k>class</span> <span class=nc>FooFactory</span>
+</span></span><span class=line><span class=cl><span class=kd>static</span> <span class=k>class</span> <span class=nc>FooFactory</span>
 </span></span><span class=line><span class=cl><span class=p>{</span>
-</span></span><span class=line><span class=cl>    <span class=k>static</span> <span class=k>internal</span> <span class=n>Foo</span> <span class=n>CreateFoo</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=kd>static</span> <span class=kd>internal</span> <span class=n>Foo</span> <span class=n>CreateFoo</span><span class=p>()</span>
 </span></span><span class=line><span class=cl>    <span class=p>{</span>
 </span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=k>new</span> <span class=n>Foo</span><span class=p>(</span><span class=m>42</span><span class=p>,</span> <span class=s>&#34;forty-two&#34;</span><span class=p>);</span>
 </span></span><span class=line><span class=cl>    <span class=p>}</span>
@@ -316,17 +316,17 @@
 </span><span class=lnt>11
 </span><span class=lnt>12
 </span><span class=lnt>13
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-csharp data-lang=csharp><span class=line><span class=cl><span class=k>static</span> <span class=k>class</span> <span class=nc>Foo</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-csharp data-lang=csharp><span class=line><span class=cl><span class=kd>static</span> <span class=k>class</span> <span class=nc>Foo</span>
 </span></span><span class=line><span class=cl><span class=p>{</span>
-</span></span><span class=line><span class=cl>    <span class=k>static</span> <span class=k>void</span> <span class=n>Bar</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=kd>static</span> <span class=k>void</span> <span class=n>Bar</span><span class=p>()</span>
 </span></span><span class=line><span class=cl>    <span class=p>{</span>
 </span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=p>(</span><span class=n>Baz</span><span class=p>())</span>
 </span></span><span class=line><span class=cl>            <span class=n>Bar</span><span class=p>();</span>
 </span></span><span class=line><span class=cl>    <span class=p>}</span>
 </span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>    <span class=k>static</span> <span class=kt>bool</span> <span class=n>Baz</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=kd>static</span> <span class=kt>bool</span> <span class=n>Baz</span><span class=p>()</span>
 </span></span><span class=line><span class=cl>    <span class=p>{</span>
-</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=k>false</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=kc>false</span><span class=p>;</span>
 </span></span><span class=line><span class=cl>    <span class=p>}</span>
 </span></span><span class=line><span class=cl><span class=p>}</span>
 </span></span></code></pre></td></tr></table></div></div><p>理所应当！下面的代码也可以通过编译：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
@@ -352,26 +352,26 @@
 </span><span class=lnt>21
 </span><span class=lnt>22
 </span><span class=lnt>23
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-csharp data-lang=csharp><span class=line><span class=cl><span class=k>static</span> <span class=k>class</span> <span class=nc>Foo1</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-csharp data-lang=csharp><span class=line><span class=cl><span class=kd>static</span> <span class=k>class</span> <span class=nc>Foo1</span>
 </span></span><span class=line><span class=cl><span class=p>{</span>
-</span></span><span class=line><span class=cl>    <span class=k>public</span> <span class=k>static</span> <span class=k>void</span> <span class=n>Bar</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kd>static</span> <span class=k>void</span> <span class=n>Bar</span><span class=p>()</span>
 </span></span><span class=line><span class=cl>    <span class=p>{</span>
 </span></span><span class=line><span class=cl>    <span class=p>}</span>
 </span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>    <span class=k>static</span> <span class=k>void</span> <span class=n>Baz</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=kd>static</span> <span class=k>void</span> <span class=n>Baz</span><span class=p>()</span>
 </span></span><span class=line><span class=cl>    <span class=p>{</span>
 </span></span><span class=line><span class=cl>        <span class=n>Foo2</span><span class=p>.</span><span class=n>Baz</span><span class=p>();</span>
 </span></span><span class=line><span class=cl>    <span class=p>}</span>
 </span></span><span class=line><span class=cl><span class=p>}</span>
 </span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=k>static</span> <span class=k>class</span> <span class=nc>Foo2</span>
+</span></span><span class=line><span class=cl><span class=kd>static</span> <span class=k>class</span> <span class=nc>Foo2</span>
 </span></span><span class=line><span class=cl><span class=p>{</span>
-</span></span><span class=line><span class=cl>    <span class=k>static</span> <span class=k>void</span> <span class=n>Bar</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=kd>static</span> <span class=k>void</span> <span class=n>Bar</span><span class=p>()</span>
 </span></span><span class=line><span class=cl>    <span class=p>{</span>
 </span></span><span class=line><span class=cl>        <span class=n>Foo1</span><span class=p>.</span><span class=n>Bar</span><span class=p>();</span>
 </span></span><span class=line><span class=cl>    <span class=p>}</span>
 </span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>    <span class=k>public</span> <span class=k>static</span> <span class=k>void</span> <span class=n>Baz</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kd>static</span> <span class=k>void</span> <span class=n>Baz</span><span class=p>()</span>
 </span></span><span class=line><span class=cl>    <span class=p>{</span>
 </span></span><span class=line><span class=cl>    <span class=p>}</span>
 </span></span><span class=line><span class=cl><span class=p>}</span>
@@ -495,16 +495,16 @@
 </span><span class=lnt>64
 </span><span class=lnt>65
 </span><span class=lnt>66
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-csharp data-lang=csharp><span class=line><span class=cl><span class=k>static</span> <span class=k>class</span> <span class=nc>SomeOldCsharpClass</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-csharp data-lang=csharp><span class=line><span class=cl><span class=kd>static</span> <span class=k>class</span> <span class=nc>SomeOldCsharpClass</span>
 </span></span><span class=line><span class=cl><span class=p>{</span>
 </span></span><span class=line><span class=cl>    <span class=k>delegate</span> <span class=k>void</span> <span class=n>ProcedureWithNoReturnValueAndNoArguments</span><span class=p>();</span>
 </span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>    <span class=k>static</span> <span class=k>void</span> <span class=n>DelegateReception1</span><span class=p>(</span><span class=n>ProcedureWithNoReturnValueAndNoArguments</span> <span class=n>dlg</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=kd>static</span> <span class=k>void</span> <span class=n>DelegateReception1</span><span class=p>(</span><span class=n>ProcedureWithNoReturnValueAndNoArguments</span> <span class=n>dlg</span><span class=p>)</span>
 </span></span><span class=line><span class=cl>    <span class=p>{</span>
 </span></span><span class=line><span class=cl>        <span class=n>dlg</span><span class=p>.</span><span class=n>Invoke</span><span class=p>();</span>
 </span></span><span class=line><span class=cl>    <span class=p>}</span>
 </span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>    <span class=k>static</span> <span class=k>void</span> <span class=n>SendingAnonymousMethodAsDelegate1</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=kd>static</span> <span class=k>void</span> <span class=n>SendingAnonymousMethodAsDelegate1</span><span class=p>()</span>
 </span></span><span class=line><span class=cl>    <span class=p>{</span>
 </span></span><span class=line><span class=cl>        <span class=n>DelegateReception1</span><span class=p>(</span><span class=k>delegate</span> <span class=p>()</span>
 </span></span><span class=line><span class=cl>        <span class=p>{</span>
@@ -514,13 +514,13 @@
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl>    <span class=k>delegate</span> <span class=k>void</span> <span class=n>ProcedureWithNoReturnValueAndOneArg</span><span class=p>(</span><span class=kt>string</span> <span class=n>foo</span><span class=p>);</span>
 </span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>    <span class=k>static</span> <span class=k>void</span> <span class=n>DelegateReception2</span><span class=p>(</span><span class=n>ProcedureWithNoReturnValueAndOneArg</span> <span class=n>dlg</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=kd>static</span> <span class=k>void</span> <span class=n>DelegateReception2</span><span class=p>(</span><span class=n>ProcedureWithNoReturnValueAndOneArg</span> <span class=n>dlg</span><span class=p>)</span>
 </span></span><span class=line><span class=cl>    <span class=p>{</span>
 </span></span><span class=line><span class=cl>        <span class=kt>string</span> <span class=n>bar</span> <span class=p>=</span> <span class=s>&#34;baz&#34;</span><span class=p>;</span>
 </span></span><span class=line><span class=cl>        <span class=n>dlg</span><span class=p>.</span><span class=n>Invoke</span><span class=p>(</span><span class=n>bar</span><span class=p>);</span>
 </span></span><span class=line><span class=cl>    <span class=p>}</span>
 </span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>    <span class=k>static</span> <span class=k>void</span> <span class=n>SendingAnonymousMethodAsDelegate2</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=kd>static</span> <span class=k>void</span> <span class=n>SendingAnonymousMethodAsDelegate2</span><span class=p>()</span>
 </span></span><span class=line><span class=cl>    <span class=p>{</span>
 </span></span><span class=line><span class=cl>        <span class=n>DelegateReception2</span><span class=p>(</span><span class=k>delegate</span> <span class=p>(</span><span class=kt>string</span> <span class=n>foo</span><span class=p>)</span>
 </span></span><span class=line><span class=cl>        <span class=p>{</span>
@@ -530,12 +530,12 @@
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl>    <span class=k>delegate</span> <span class=kt>int</span> <span class=n>FunctionWithOneReturnValueAndNoArguments</span><span class=p>();</span>
 </span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>    <span class=k>static</span> <span class=k>void</span> <span class=n>DelegateReception3</span><span class=p>(</span><span class=n>FunctionWithOneReturnValueAndNoArguments</span> <span class=n>dlg</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=kd>static</span> <span class=k>void</span> <span class=n>DelegateReception3</span><span class=p>(</span><span class=n>FunctionWithOneReturnValueAndNoArguments</span> <span class=n>dlg</span><span class=p>)</span>
 </span></span><span class=line><span class=cl>    <span class=p>{</span>
 </span></span><span class=line><span class=cl>        <span class=kt>int</span> <span class=n>result</span> <span class=p>=</span> <span class=n>dlg</span><span class=p>.</span><span class=n>Invoke</span><span class=p>();</span>
 </span></span><span class=line><span class=cl>    <span class=p>}</span>
 </span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>    <span class=k>static</span> <span class=k>void</span> <span class=n>SendingAnonymousMethodAsDelegate3</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=kd>static</span> <span class=k>void</span> <span class=n>SendingAnonymousMethodAsDelegate3</span><span class=p>()</span>
 </span></span><span class=line><span class=cl>    <span class=p>{</span>
 </span></span><span class=line><span class=cl>        <span class=n>DelegateReception3</span><span class=p>(</span><span class=k>delegate</span> <span class=p>()</span>
 </span></span><span class=line><span class=cl>        <span class=p>{</span>
@@ -546,13 +546,13 @@
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl>    <span class=k>delegate</span> <span class=kt>long</span> <span class=n>FunctionWithOneReturnValueAndOneArg</span><span class=p>(</span><span class=kt>double</span> <span class=n>foo</span><span class=p>);</span>
 </span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>    <span class=k>static</span> <span class=k>void</span> <span class=n>DelegateReception4</span><span class=p>(</span><span class=n>FunctionWithOneReturnValueAndOneArg</span> <span class=n>dlg</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=kd>static</span> <span class=k>void</span> <span class=n>DelegateReception4</span><span class=p>(</span><span class=n>FunctionWithOneReturnValueAndOneArg</span> <span class=n>dlg</span><span class=p>)</span>
 </span></span><span class=line><span class=cl>    <span class=p>{</span>
 </span></span><span class=line><span class=cl>        <span class=kt>double</span> <span class=n>bar</span> <span class=p>=</span> <span class=m>4.0</span><span class=p>;</span>
 </span></span><span class=line><span class=cl>        <span class=kt>long</span> <span class=n>result</span> <span class=p>=</span> <span class=n>dlg</span><span class=p>.</span><span class=n>Invoke</span><span class=p>(</span><span class=n>bar</span><span class=p>);</span>
 </span></span><span class=line><span class=cl>    <span class=p>}</span>
 </span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>    <span class=k>static</span> <span class=k>void</span> <span class=n>SendingAnonymousMethodAsDelegate4</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=kd>static</span> <span class=k>void</span> <span class=n>SendingAnonymousMethodAsDelegate4</span><span class=p>()</span>
 </span></span><span class=line><span class=cl>    <span class=p>{</span>
 </span></span><span class=line><span class=cl>        <span class=n>DelegateReception4</span><span class=p>(</span><span class=k>delegate</span> <span class=p>(</span><span class=kt>double</span> <span class=n>foo</span><span class=p>)</span>
 </span></span><span class=line><span class=cl>        <span class=p>{</span>
@@ -619,9 +619,9 @@
 </span><span class=lnt>56
 </span><span class=lnt>57
 </span><span class=lnt>58
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-csharp data-lang=csharp><span class=line><span class=cl><span class=k>static</span> <span class=k>class</span> <span class=nc>SomeNewCsharpClass</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-csharp data-lang=csharp><span class=line><span class=cl><span class=kd>static</span> <span class=k>class</span> <span class=nc>SomeNewCsharpClass</span>
 </span></span><span class=line><span class=cl><span class=p>{</span>
-</span></span><span class=line><span class=cl>    <span class=k>static</span> <span class=k>void</span> <span class=n>SendingAnonymousMethodAsDelegate1</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=kd>static</span> <span class=k>void</span> <span class=n>SendingAnonymousMethodAsDelegate1</span><span class=p>()</span>
 </span></span><span class=line><span class=cl>    <span class=p>{</span>
 </span></span><span class=line><span class=cl>        <span class=k>void</span> <span class=n>DelegateReception1</span><span class=p>(</span><span class=n>Action</span> <span class=n>dlg</span><span class=p>)</span>
 </span></span><span class=line><span class=cl>        <span class=p>{</span>
@@ -634,7 +634,7 @@
 </span></span><span class=line><span class=cl>        <span class=p>});</span>
 </span></span><span class=line><span class=cl>    <span class=p>}</span>
 </span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>    <span class=k>static</span> <span class=k>void</span> <span class=n>SendingAnonymousMethodAsDelegate2</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=kd>static</span> <span class=k>void</span> <span class=n>SendingAnonymousMethodAsDelegate2</span><span class=p>()</span>
 </span></span><span class=line><span class=cl>    <span class=p>{</span>
 </span></span><span class=line><span class=cl>        <span class=k>void</span> <span class=n>DelegateReception2</span><span class=p>(</span><span class=n>Action</span><span class=p>&lt;</span><span class=kt>string</span><span class=p>&gt;</span> <span class=n>dlg</span><span class=p>)</span>
 </span></span><span class=line><span class=cl>        <span class=p>{</span>
@@ -648,7 +648,7 @@
 </span></span><span class=line><span class=cl>        <span class=p>});</span>
 </span></span><span class=line><span class=cl>    <span class=p>}</span>
 </span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>    <span class=k>static</span> <span class=k>void</span> <span class=n>SendingAnonymousMethodAsDelegate3</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=kd>static</span> <span class=k>void</span> <span class=n>SendingAnonymousMethodAsDelegate3</span><span class=p>()</span>
 </span></span><span class=line><span class=cl>    <span class=p>{</span>
 </span></span><span class=line><span class=cl>        <span class=k>void</span> <span class=n>DelegateReception3</span><span class=p>(</span><span class=n>Func</span><span class=p>&lt;</span><span class=kt>int</span><span class=p>&gt;</span> <span class=n>dlg</span><span class=p>)</span>
 </span></span><span class=line><span class=cl>        <span class=p>{</span>
@@ -662,7 +662,7 @@
 </span></span><span class=line><span class=cl>        <span class=p>});</span>
 </span></span><span class=line><span class=cl>    <span class=p>}</span>
 </span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>    <span class=k>static</span> <span class=k>void</span> <span class=n>SendingAnonymousMethodAsDelegate4</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=kd>static</span> <span class=k>void</span> <span class=n>SendingAnonymousMethodAsDelegate4</span><span class=p>()</span>
 </span></span><span class=line><span class=cl>    <span class=p>{</span>
 </span></span><span class=line><span class=cl>        <span class=k>void</span> <span class=n>DelegateReception4</span><span class=p>(</span><span class=n>Func</span><span class=p>&lt;</span><span class=kt>double</span><span class=p>,</span> <span class=kt>long</span><span class=p>&gt;</span> <span class=n>dlg</span><span class=p>)</span>
 </span></span><span class=line><span class=cl>        <span class=p>{</span>
@@ -787,7 +787,7 @@
 </span></span><span class=line><span class=cl>    <span class=n>Console</span><span class=p>.</span><span class=n>WriteLine</span><span class=p>(</span><span class=n>aTuple</span><span class=p>.</span><span class=n>Item1</span><span class=p>);</span>
 </span></span><span class=line><span class=cl>    <span class=kt>var</span> <span class=n>newTuple</span> <span class=p>=</span> <span class=k>new</span> <span class=n>Tuple</span><span class=p>&lt;</span><span class=kt>string</span><span class=p>,</span><span class=kt>int</span><span class=p>&gt;(</span><span class=n>aTuple</span><span class=p>.</span><span class=n>Item1</span><span class=p>,</span> <span class=n>counter</span><span class=p>)</span>
 </span></span><span class=line><span class=cl>    <span class=n>ReceiveTuple</span><span class=p>(</span><span class=n>newTuple</span><span class=p>);</span>
-</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=k>true</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=kc>true</span><span class=p>;</span>
 </span></span><span class=line><span class=cl><span class=p>}</span>
 </span></span></code></pre></td></tr></table></div></div><p>如果我们想要一个变量指向这个函数，它的类型就应是 <code>Func&lt;Tuple&lt;string,int>,bool></code>。</p><p>新式的 C# 写法（会被编译成 <code>ValueTuple&lt;X,Y,...></code>）：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
@@ -803,7 +803,7 @@
 </span></span><span class=line><span class=cl>    <span class=n>Console</span><span class=p>.</span><span class=n>WriteLine</span><span class=p>(</span><span class=n>aTuple</span><span class=p>.</span><span class=n>str</span><span class=p>);</span>
 </span></span><span class=line><span class=cl>    <span class=kt>var</span> <span class=n>newTuple</span> <span class=p>=</span> <span class=p>(</span><span class=n>aTuple</span><span class=p>.</span><span class=n>str</span><span class=p>,</span> <span class=n>counter</span><span class=p>);</span>
 </span></span><span class=line><span class=cl>    <span class=n>ReceiveTuple</span><span class=p>(</span><span class=n>newTuple</span><span class=p>);</span>
-</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=k>true</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=kc>true</span><span class=p>;</span>
 </span></span><span class=line><span class=cl><span class=p>}</span>
 </span></span></code></pre></td></tr></table></div></div><p>现在我们有了一个指向这个函数的变量，它的类型是 <code>Func&lt;ValueTuple&lt;string,int>,bool></code>。</p><p>使用 F#：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
@@ -870,7 +870,7 @@
 </span><span class=lnt>17
 </span><span class=lnt>18
 </span><span class=lnt>19
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-csharp data-lang=csharp><span class=line><span class=cl><span class=k>static</span> <span class=n>Func</span><span class=p>&lt;</span><span class=kt>int</span><span class=p>,</span> <span class=n>Func</span><span class=p>&lt;</span><span class=kt>int</span><span class=p>,</span> <span class=kt>int</span><span class=p>&gt;&gt;</span> <span class=n>Multiply</span><span class=p>()</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-csharp data-lang=csharp><span class=line><span class=cl><span class=kd>static</span> <span class=n>Func</span><span class=p>&lt;</span><span class=kt>int</span><span class=p>,</span> <span class=n>Func</span><span class=p>&lt;</span><span class=kt>int</span><span class=p>,</span> <span class=kt>int</span><span class=p>&gt;&gt;</span> <span class=n>Multiply</span><span class=p>()</span>
 </span></span><span class=line><span class=cl><span class=p>{</span>
 </span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=p>(</span><span class=n>x</span><span class=p>)</span> <span class=p>=&gt;</span> <span class=p>{</span>
 </span></span><span class=line><span class=cl>        <span class=p>(</span><span class=n>y</span><span class=p>)</span> <span class=p>=&gt;</span> <span class=p>{</span>
@@ -879,12 +879,12 @@
 </span></span><span class=line><span class=cl>    <span class=p>};</span>
 </span></span><span class=line><span class=cl><span class=p>}</span>
 </span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=k>static</span> <span class=n>Function</span><span class=p>&lt;</span><span class=kt>int</span><span class=p>,</span><span class=kt>int</span><span class=p>&gt;</span> <span class=n>Double</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=kd>static</span> <span class=n>Function</span><span class=p>&lt;</span><span class=kt>int</span><span class=p>,</span><span class=kt>int</span><span class=p>&gt;</span> <span class=n>Double</span><span class=p>()</span>
 </span></span><span class=line><span class=cl><span class=p>{</span>
 </span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>Multiply</span><span class=p>().</span><span class=n>Invoke</span><span class=p>(</span><span class=m>2</span><span class=p>);</span>
 </span></span><span class=line><span class=cl><span class=p>}</span>
 </span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=k>static</span> <span class=kt>int</span> <span class=n>Main</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=kd>static</span> <span class=kt>int</span> <span class=n>Main</span><span class=p>()</span>
 </span></span><span class=line><span class=cl><span class=p>{</span>
 </span></span><span class=line><span class=cl>    <span class=kt>var</span> <span class=n>someInt</span> <span class=p>=</span> <span class=m>3</span><span class=p>;</span>
 </span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>Double</span><span class=p>().</span><span class=n>Invoke</span><span class=p>(</span><span class=n>someInt</span><span class=p>);</span>
@@ -930,16 +930,16 @@
 </span><span class=lnt>35
 </span><span class=lnt>36
 </span><span class=lnt>37
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-csharp data-lang=csharp><span class=line><span class=cl>    <span class=k>static</span> <span class=k>class</span> <span class=nc>MainClass</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-csharp data-lang=csharp><span class=line><span class=cl>    <span class=kd>static</span> <span class=k>class</span> <span class=nc>MainClass</span>
 </span></span><span class=line><span class=cl>    <span class=p>{</span>
-</span></span><span class=line><span class=cl>        <span class=k>public</span> <span class=k>class</span> <span class=nc>Toast</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>            <span class=k>public</span> <span class=kt>bool</span> <span class=n>IsYummy</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>        <span class=kd>public</span> <span class=k>class</span> <span class=nc>Toast</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=kd>public</span> <span class=kt>bool</span> <span class=n>IsYummy</span><span class=p>()</span>
 </span></span><span class=line><span class=cl>            <span class=p>{</span>
-</span></span><span class=line><span class=cl>                <span class=k>return</span> <span class=k>true</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>                <span class=k>return</span> <span class=kc>true</span><span class=p>;</span>
 </span></span><span class=line><span class=cl>            <span class=p>}</span>
 </span></span><span class=line><span class=cl>        <span class=p>}</span>
 </span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>        <span class=k>static</span> <span class=k>async</span> <span class=n>Task</span><span class=p>&lt;</span><span class=n>Toast</span><span class=p>&gt;</span> <span class=n>ToastBreadAsync</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>        <span class=kd>static</span> <span class=kd>async</span> <span class=n>Task</span><span class=p>&lt;</span><span class=n>Toast</span><span class=p>&gt;</span> <span class=n>ToastBreadAsync</span><span class=p>()</span>
 </span></span><span class=line><span class=cl>        <span class=p>{</span>
 </span></span><span class=line><span class=cl>            <span class=kt>var</span> <span class=n>task</span> <span class=p>=</span> <span class=n>Task</span><span class=p>.</span><span class=n>Run</span><span class=p>(()</span> <span class=p>=&gt;</span>
 </span></span><span class=line><span class=cl>                <span class=k>new</span> <span class=n>Toast</span><span class=p>()</span>
@@ -947,11 +947,11 @@
 </span></span><span class=line><span class=cl>            <span class=k>return</span> <span class=k>await</span> <span class=n>task</span><span class=p>;</span>
 </span></span><span class=line><span class=cl>        <span class=p>}</span>
 </span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>        <span class=k>static</span> <span class=k>void</span> <span class=n>ApplyButter</span><span class=p>(</span><span class=n>Toast</span> <span class=n>toast</span><span class=p>)</span> <span class=p>{</span> <span class=cm>/* TODO */</span> <span class=p>}</span>
+</span></span><span class=line><span class=cl>        <span class=kd>static</span> <span class=k>void</span> <span class=n>ApplyButter</span><span class=p>(</span><span class=n>Toast</span> <span class=n>toast</span><span class=p>)</span> <span class=p>{</span> <span class=cm>/* TODO */</span> <span class=p>}</span>
 </span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>        <span class=k>static</span> <span class=k>void</span> <span class=n>ApplyJam</span><span class=p>(</span><span class=n>Toast</span> <span class=n>toast</span><span class=p>)</span> <span class=p>{</span> <span class=cm>/* TODO */</span> <span class=p>}</span>
+</span></span><span class=line><span class=cl>        <span class=kd>static</span> <span class=k>void</span> <span class=n>ApplyJam</span><span class=p>(</span><span class=n>Toast</span> <span class=n>toast</span><span class=p>)</span> <span class=p>{</span> <span class=cm>/* TODO */</span> <span class=p>}</span>
 </span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>        <span class=k>static</span> <span class=k>async</span> <span class=n>Task</span><span class=p>&lt;</span><span class=n>Toast</span><span class=p>&gt;</span> <span class=n>MakeToastWithButterAndJamAsync</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>        <span class=kd>static</span> <span class=kd>async</span> <span class=n>Task</span><span class=p>&lt;</span><span class=n>Toast</span><span class=p>&gt;</span> <span class=n>MakeToastWithButterAndJamAsync</span><span class=p>()</span>
 </span></span><span class=line><span class=cl>        <span class=p>{</span>
 </span></span><span class=line><span class=cl>            <span class=kt>var</span> <span class=n>toast</span> <span class=p>=</span> <span class=k>await</span> <span class=n>ToastBreadAsync</span><span class=p>();</span>
 </span></span><span class=line><span class=cl>            <span class=n>ApplyButter</span><span class=p>(</span><span class=n>toast</span><span class=p>);</span>
@@ -959,7 +959,7 @@
 </span></span><span class=line><span class=cl>            <span class=k>return</span> <span class=n>toast</span><span class=p>;</span>
 </span></span><span class=line><span class=cl>        <span class=p>}</span>
 </span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>        <span class=k>public</span> <span class=k>static</span> <span class=k>async</span> <span class=n>Task</span> <span class=n>Main</span><span class=p>(</span><span class=kt>string</span><span class=p>[]</span> <span class=n>args</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=kd>public</span> <span class=kd>static</span> <span class=kd>async</span> <span class=n>Task</span> <span class=n>Main</span><span class=p>(</span><span class=kt>string</span><span class=p>[]</span> <span class=n>args</span><span class=p>)</span>
 </span></span><span class=line><span class=cl>        <span class=p>{</span>
 </span></span><span class=line><span class=cl>            <span class=n>Console</span><span class=p>.</span><span class=n>WriteLine</span><span class=p>(</span><span class=s>&#34;Hello World!&#34;</span><span class=p>);</span>
 </span></span><span class=line><span class=cl>            <span class=kt>var</span> <span class=n>toast</span> <span class=p>=</span> <span class=k>await</span> <span class=n>MakeToastWithButterAndJamAsync</span><span class=p>();</span>
@@ -1071,17 +1071,17 @@
 </span><span class=lnt>40
 </span><span class=lnt>41
 </span><span class=lnt>42
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-csharp data-lang=csharp><span class=line><span class=cl><span class=k>public</span> <span class=k>class</span> <span class=nc>Ingredients</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-csharp data-lang=csharp><span class=line><span class=cl><span class=kd>public</span> <span class=k>class</span> <span class=nc>Ingredients</span>
 </span></span><span class=line><span class=cl><span class=p>{</span>
 </span></span><span class=line><span class=cl><span class=p>}</span>
 </span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=k>public</span> <span class=k>class</span> <span class=nc>Toast</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>    <span class=k>public</span> <span class=n>Toast</span><span class=p>(</span><span class=n>Ingredients</span> <span class=n>i</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=kd>public</span> <span class=k>class</span> <span class=nc>Toast</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=n>Toast</span><span class=p>(</span><span class=n>Ingredients</span> <span class=n>i</span><span class=p>)</span>
 </span></span><span class=line><span class=cl>    <span class=p>{</span>
 </span></span><span class=line><span class=cl>    <span class=p>}</span>
 </span></span><span class=line><span class=cl><span class=p>}</span>
 </span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=k>static</span> <span class=k>async</span> <span class=n>Task</span><span class=p>&lt;</span><span class=n>Toast</span><span class=p>&gt;</span> <span class=n>ToastBreadAsync</span><span class=p>(</span><span class=n>Ingredients</span> <span class=n>i</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=kd>static</span> <span class=kd>async</span> <span class=n>Task</span><span class=p>&lt;</span><span class=n>Toast</span><span class=p>&gt;</span> <span class=n>ToastBreadAsync</span><span class=p>(</span><span class=n>Ingredients</span> <span class=n>i</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=p>{</span>
 </span></span><span class=line><span class=cl>    <span class=kt>var</span> <span class=n>task</span> <span class=p>=</span> <span class=n>Task</span><span class=p>.</span><span class=n>Run</span><span class=p>(()</span> <span class=p>=&gt;</span>
 </span></span><span class=line><span class=cl>        <span class=k>new</span> <span class=n>Toast</span><span class=p>(</span><span class=n>i</span><span class=p>)</span>
@@ -1089,25 +1089,25 @@
 </span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=k>await</span> <span class=n>task</span><span class=p>;</span>
 </span></span><span class=line><span class=cl><span class=p>}</span>
 </span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=k>static</span> <span class=k>async</span> <span class=n>Task</span><span class=p>&lt;</span><span class=n>Toast</span><span class=p>[]&gt;</span> <span class=n>Make2ToastsAsync</span><span class=p>(</span><span class=n>Ingredients</span> <span class=n>i</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=kd>static</span> <span class=kd>async</span> <span class=n>Task</span><span class=p>&lt;</span><span class=n>Toast</span><span class=p>[]&gt;</span> <span class=n>Make2ToastsAsync</span><span class=p>(</span><span class=n>Ingredients</span> <span class=n>i</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=p>{</span>
 </span></span><span class=line><span class=cl>    <span class=kt>var</span> <span class=n>toast1</span> <span class=p>=</span> <span class=n>ToastBreadAsync</span><span class=p>(</span><span class=n>i</span><span class=p>);</span>
 </span></span><span class=line><span class=cl>    <span class=kt>var</span> <span class=n>toast2</span> <span class=p>=</span> <span class=n>ToastBreadAsync</span><span class=p>(</span><span class=n>i</span><span class=p>);</span>
 </span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=k>await</span> <span class=n>Task</span><span class=p>.</span><span class=n>WhenAll</span><span class=p>(</span><span class=n>toast1</span><span class=p>,</span> <span class=n>toast2</span><span class=p>);</span>
 </span></span><span class=line><span class=cl><span class=p>}</span>
 </span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=k>static</span> <span class=k>async</span> <span class=n>Task</span> <span class=n>MakeToastsAsync</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=kd>static</span> <span class=kd>async</span> <span class=n>Task</span> <span class=n>MakeToastsAsync</span><span class=p>()</span>
 </span></span><span class=line><span class=cl><span class=p>{</span>
 </span></span><span class=line><span class=cl>    <span class=kt>var</span> <span class=n>i</span> <span class=p>=</span> <span class=k>await</span> <span class=n>GatherIngredients</span><span class=p>();</span>
 </span></span><span class=line><span class=cl>    <span class=k>await</span> <span class=n>Make2ToastsAsync</span><span class=p>(</span><span class=n>i</span><span class=p>);</span>
 </span></span><span class=line><span class=cl><span class=p>}</span>
 </span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=k>public</span> <span class=k>static</span> <span class=k>async</span> <span class=n>Task</span><span class=p>&lt;</span><span class=n>Ingredients</span><span class=p>&gt;</span> <span class=n>GatherIngredients</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=kd>public</span> <span class=kd>static</span> <span class=kd>async</span> <span class=n>Task</span><span class=p>&lt;</span><span class=n>Ingredients</span><span class=p>&gt;</span> <span class=n>GatherIngredients</span><span class=p>()</span>
 </span></span><span class=line><span class=cl><span class=p>{</span>
 </span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=k>await</span> <span class=n>Task</span><span class=p>.</span><span class=n>FromResult</span><span class=p>(</span><span class=k>new</span> <span class=n>Ingredients</span><span class=p>());</span>
 </span></span><span class=line><span class=cl><span class=p>}</span>
 </span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=k>public</span> <span class=k>static</span> <span class=k>async</span> <span class=n>Task</span> <span class=n>Main</span><span class=p>(</span><span class=kt>string</span><span class=p>[]</span> <span class=n>args</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=kd>public</span> <span class=kd>static</span> <span class=kd>async</span> <span class=n>Task</span> <span class=n>Main</span><span class=p>(</span><span class=kt>string</span><span class=p>[]</span> <span class=n>args</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=p>{</span>
 </span></span><span class=line><span class=cl>    <span class=n>Console</span><span class=p>.</span><span class=n>WriteLine</span><span class=p>(</span><span class=s>&#34;Hello World!&#34;</span><span class=p>);</span>
 </span></span><span class=line><span class=cl>    <span class=k>await</span> <span class=n>MakeToastsAsync</span><span class=p>();</span>
