@@ -1,7 +1,7 @@
 ---
 title: C Programming 入门札记 01 - 内存管理
 date: 2023-08-31
-draft: false
+draft: true
 slug: clang-notes-1
 categories:
     - 编程
