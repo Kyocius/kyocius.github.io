@@ -52,7 +52,7 @@ params:
             src: img/Freren.png
 
     article:
-        math: false
+        math: true
         toc: true
         readingTime: true
         license:
