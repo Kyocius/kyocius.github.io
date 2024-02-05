@@ -1,6 +1,15 @@
 <!doctype html><html lang=zh-cn dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="Partial Answers for Learn C The Hard Way"><title>笨方法学 C 附加题不完全解答</title>
 <link rel=canonical href=https://kyocius.github.io/p/clang-review/><link rel=stylesheet href=/scss/style.min.26f3734476757be60ded5a96146633e6d2efdd397b4a8f48736727c9e436c43d.css><meta property="og:title" content="笨方法学 C 附加题不完全解答"><meta property="og:description" content="Partial Answers for Learn C The Hard Way"><meta property="og:url" content="https://kyocius.github.io/p/clang-review/"><meta property="og:site_name" content="游尔曼斯克"><meta property="og:type" content="article"><meta property="article:section" content="Post"><meta property="article:tag" content="Clang"><meta property="article:tag" content="ysyx"><meta property="article:published_time" content="2024-01-23T00:00:00+00:00"><meta property="article:modified_time" content="2024-01-23T00:00:00+00:00"><meta property="og:image" content="https://kyocius.github.io/p/clang-review/head.png"><meta name=twitter:title content="笨方法学 C 附加题不完全解答"><meta name=twitter:description content="Partial Answers for Learn C The Hard Way"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://kyocius.github.io/p/clang-review/head.png"><style>:root{--sys-font-family:"Noto Serif SC";--zh-font-family:"Noto Serif SC";--base-font-family:"Noto Serif SC";--article-font-family:"Noto Serif SC"}</style><script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=切换菜单>
-<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/><img src=/img/Freren_hu423750a5ef12a107b12a51b8150fa842_226963_300x0_resize_box_3.png width=300 height=300 class=site-logo loading=lazy alt=Avatar></a></figure><div class=site-meta><h1 class=site-name><a href=/>游尔曼斯克</a></h1><h2 class=site-description>Kyocius</h2></div></header><ol class=social-menu><li><a href=https://github.com/Kyocius target=_blank title=GitHub><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6.0 00-1.3-3.2 4.2 4.2.0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3.0 00-6.2.0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2.0 00-.1 3.2A4.6 4.6.0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg></a></li><li><a href=https://twitter.com/kyociusEX target=_blank title=Twitter><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M22 4.01c-1 .49-1.98.689-3 .99-1.121-1.265-2.783-1.335-4.38-.737S11.977 6.323 12 8v1c-3.245.083-6.135-1.395-8-4 0 0-4.182 7.433 4 11-1.872 1.247-3.739 2.088-6 2 3.308 1.803 6.913 2.423 10.034 1.517 3.58-1.04 6.522-3.723 7.651-7.742a13.84 13.84.0 00.497-3.753C20.18 7.773 21.692 5.25 22 4.009z"/></svg></a></li><li><a href=https://www.zhihu.com/people/you-wu-45-30 target=_blank title=Zhihu><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-zhihu" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 6h6v12h-2l-2 2-1-2h-1z"/><path d="M4 12h6.5"/><path d="M10.5 6h-5"/><path d="M6 4c-.5 2.5-1.5 3.5-2.5 4.5"/><path d="M8 6v7c0 4.5-2 5.5-4 7"/><path d="M11 18l-3-5"/></svg></a></li></ol><ol class=menu id=main-menu><li><a href=/ target=_blank><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="5 12 3 12 12 3 21 12 19 12"/><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/><path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"/></svg><span>主页</span></a></li><li><a href=/%E5%85%B3%E4%BA%8E/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="7" r="4"/><path d="M6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg><span>关于</span></a></li><li><a href=/archives/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><rect x="3" y="4" width="18" height="4" rx="2"/><path d="M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8"/><line x1="10" y1="12" x2="14" y2="12"/></svg><span>归档</span></a></li><li><a href=/search/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg><span>探求</span></a></li><li><a href=/%E5%8F%8B%E9%93%BE/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M10 14a3.5 3.5.0 005 0l4-4a3.5 3.5.0 00-5-5l-.5.5"/><path d="M14 10a3.5 3.5.0 00-5 0l-4 4a3.5 3.5.0 005 5l.5-.5"/></svg><span>友链</span></a></li><div class=menu-bottom-section><li id=dark-mode-toggle><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg><span>暗色模式</span></li></div></ol></aside><main class="main full-width"><article class="has-image main-article"><header class=article-header><div class=article-image><a href=/p/clang-review/><img src=/p/clang-review/head_hub4c439e7083278e8ec7df601f4a86ed3_945835_800x0_resize_box_3.png srcset="/p/clang-review/head_hub4c439e7083278e8ec7df601f4a86ed3_945835_800x0_resize_box_3.png 800w, /p/clang-review/head_hub4c439e7083278e8ec7df601f4a86ed3_945835_1600x0_resize_box_3.png 1600w" width=800 height=448 loading=lazy alt="Featured image of post 笨方法学 C 附加题不完全解答"></a></div><div class=article-details><header class=article-category><a href=/categories/%E7%BC%96%E7%A8%8B/>编程</a></header><div class=article-title-wrapper><h2 class=article-title><a href=/p/clang-review/>笨方法学 C 附加题不完全解答</a></h2><h3 class=article-subtitle>Partial Answers for Learn C The Hard Way</h3></div><footer class=article-time><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg><time class=article-time--published>Jan 23, 2024</time></div><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg><time class=article-time--reading>阅读时长: 3 分钟</time></div></footer></div></header><section class=article-content><h2 id=前言>前言</h2><p>其实笔者并不喜欢 C 语言，但是为了应试只能硬着头皮学了。</p><p>笔者在复习 C 语言时，看到一本书叫《笨方法学 C》，其以练习题的方式串联起 C 语言的大致语法。</p><p>本文尝试解答书后附加题，有的章节太简单就略过了。</p><h2 id=练习10字符串数组和循环>练习10：字符串数组和循环</h2><ol><li>如何使用 <code>,</code>（逗号）字符来在for循环的每一部分中，<code>;</code>（分号）之间分隔多条语句？</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/><img src=/img/Freren_hu423750a5ef12a107b12a51b8150fa842_226963_300x0_resize_box_3.png width=300 height=300 class=site-logo loading=lazy alt=Avatar></a></figure><div class=site-meta><h1 class=site-name><a href=/>游尔曼斯克</a></h1><h2 class=site-description>Kyocius</h2></div></header><ol class=social-menu><li><a href=https://github.com/Kyocius target=_blank title=GitHub><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6.0 00-1.3-3.2 4.2 4.2.0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3.0 00-6.2.0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2.0 00-.1 3.2A4.6 4.6.0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg></a></li><li><a href=https://twitter.com/kyociusEX target=_blank title=Twitter><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M22 4.01c-1 .49-1.98.689-3 .99-1.121-1.265-2.783-1.335-4.38-.737S11.977 6.323 12 8v1c-3.245.083-6.135-1.395-8-4 0 0-4.182 7.433 4 11-1.872 1.247-3.739 2.088-6 2 3.308 1.803 6.913 2.423 10.034 1.517 3.58-1.04 6.522-3.723 7.651-7.742a13.84 13.84.0 00.497-3.753C20.18 7.773 21.692 5.25 22 4.009z"/></svg></a></li><li><a href=https://www.zhihu.com/people/you-wu-45-30 target=_blank title=Zhihu><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-zhihu" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 6h6v12h-2l-2 2-1-2h-1z"/><path d="M4 12h6.5"/><path d="M10.5 6h-5"/><path d="M6 4c-.5 2.5-1.5 3.5-2.5 4.5"/><path d="M8 6v7c0 4.5-2 5.5-4 7"/><path d="M11 18l-3-5"/></svg></a></li></ol><ol class=menu id=main-menu><li><a href=/ target=_blank><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="5 12 3 12 12 3 21 12 19 12"/><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/><path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"/></svg>
+<span>主页</span></a></li><li><a href=/%E5%85%B3%E4%BA%8E/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="7" r="4"/><path d="M6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg>
+<span>关于</span></a></li><li><a href=/archives/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><rect x="3" y="4" width="18" height="4" rx="2"/><path d="M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
+<span>归档</span></a></li><li><a href=/search/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg>
+<span>探求</span></a></li><li><a href=/%E5%8F%8B%E9%93%BE/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M10 14a3.5 3.5.0 005 0l4-4a3.5 3.5.0 00-5-5l-.5.5"/><path d="M14 10a3.5 3.5.0 00-5 0l-4 4a3.5 3.5.0 005 5l.5-.5"/></svg>
+<span>友链</span></a></li><div class=menu-bottom-section><li id=dark-mode-toggle><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<span>暗色模式</span></li></div></ol></aside><main class="main full-width"><article class="has-image main-article"><header class=article-header><div class=article-image><a href=/p/clang-review/><img src=/p/clang-review/head_hub4c439e7083278e8ec7df601f4a86ed3_945835_800x0_resize_box_3.png srcset="/p/clang-review/head_hub4c439e7083278e8ec7df601f4a86ed3_945835_800x0_resize_box_3.png 800w, /p/clang-review/head_hub4c439e7083278e8ec7df601f4a86ed3_945835_1600x0_resize_box_3.png 1600w" width=800 height=448 loading=lazy alt="Featured image of post 笨方法学 C 附加题不完全解答"></a></div><div class=article-details><header class=article-category><a href=/categories/%E7%BC%96%E7%A8%8B/>编程</a></header><div class=article-title-wrapper><h2 class=article-title><a href=/p/clang-review/>笨方法学 C 附加题不完全解答</a></h2><h3 class=article-subtitle>Partial Answers for Learn C The Hard Way</h3></div><footer class=article-time><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
+<time class=article-time--published>Jan 23, 2024</time></div><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
+<time class=article-time--reading>阅读时长: 5 分钟</time></div></footer></div></header><section class=article-content><h2 id=前言>前言</h2><p>笔者撰写本文时还在上大一，数据结构基础几乎为零，所以会有一些可笑的问题和不合时宜的吐槽。</p><p>本文尝试解答书后附加题，有的章节太简单就略过了。</p><h2 id=练习10字符串数组和循环>练习10：字符串数组和循环</h2><ol><li>如何使用 <code>,</code>（逗号）字符来在for循环的每一部分中，<code>;</code>（分号）之间分隔多条语句？</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=k>for</span> <span class=p>(</span><span class=n>i</span> <span class=o>=</span> <span class=mi>0</span><span class=p>,</span> <span class=n>j</span> <span class=o>=</span> <span class=mi>10</span><span class=p>;</span> <span class=n>i</span> <span class=o>&lt;</span> <span class=mi>10</span><span class=p>;</span> <span class=n>i</span><span class=o>++</span><span class=p>,</span> <span class=n>j</span><span class=o>--</span><span class=p>)</span>
 </span></span></code></pre></td></tr></table></div></div><ol start=2><li>查询 <code>NULL</code> 是什么东西，看看它会打印出什么？</li></ol><p>在 C 语言中，NULL 是一个宏定义，通常用于表示指针不指向任何有效的对象或地址。NULL 的确切定义可能因编译器和平台而异，但通常它被定义为 <code>(void *)0</code>，即一个转换为 <code>void</code> 指针类型的零值。</p><p>当你尝试打印一个指向 <code>NULL</code>的指针时，结果会取决于你是如何打印它的。在 C 语言中，如果你使用 <code>%p</code> 格式化标志（用于打印指针地址）和 <code>printf</code> 函数，通常会打印出一个表示空指针的值，通常是 <code>(nil)</code> 或者 <code>0x0</code>，具体取决于编译器和平台。</p><ol start=3><li>看看你是否能在打印之前将 <code>states</code> 的一个元素赋值给 <code>argv</code> 中的元素，再试试相反的操作？</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
@@ -25,8 +34,8 @@
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;stdio.h&gt;</span><span class=cp>
 </span></span></span><span class=line><span class=cl><span class=cp></span>
 </span></span><span class=line><span class=cl><span class=kt>int</span> <span class=nf>main</span><span class=p>(</span><span class=kt>int</span> <span class=n>argc</span><span class=p>,</span> <span class=kt>char</span> <span class=o>*</span><span class=n>argv</span><span class=p>[])</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>    
-</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl>  
 </span></span><span class=line><span class=cl>    <span class=kt>char</span> <span class=o>*</span><span class=n>states</span><span class=p>[]</span> <span class=o>=</span> <span class=p>{</span><span class=s>&#34;California&#34;</span><span class=p>,</span> <span class=s>&#34;Oregon&#34;</span><span class=p>,</span> <span class=s>&#34;Washington&#34;</span><span class=p>,</span> <span class=s>&#34;Texas&#34;</span><span class=p>};</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl>    <span class=c1>// 将states的一个元素赋值给argv的一个元素
@@ -42,14 +51,375 @@
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=mi>0</span><span class=p>;</span>
 </span></span><span class=line><span class=cl><span class=p>}</span>
-</span></span></code></pre></td></tr></table></div></div><h2 id=练习16结构体和指向它们的指针>练习16：结构体和指向它们的指针</h2><ol><li><p>如何在栈上创建结构体，就像你创建任何其它变量那样？</p></li><li><p>如何使用 <code>x.y</code> 而不是 <code>x->y</code> 来初始化结构体？</p></li></ol><p>对于前两个问题其实非常好解答。只要把变量 <code>x</code> 设置成非指针即可。</p><ol start=3><li>如何不使用指针来将结构体传给其它函数？</li></ol><p>C 语言<strong>不可能</strong>不使用指针传递结构体本身。所以这道题的意思就浅显地指，把参数的 <code>*</code> 去掉你会不会&mldr;</p><h2 id=练习17堆和栈的内存分配>练习17：堆和栈的内存分配</h2><blockquote><p>对于现在你们这些年轻人来说，编程简直太容易了。如果你玩玩 Ruby 或者 Python 的话，只要创建对象或变量就好了，不用管它们存放在哪里。</p></blockquote><p>理清内存最简单原则：如果你的变量并不是从 <code>malloc</code> 中获取的，也不是从一个从 <code>malloc</code> 获取的函数中获取的，那么它在栈上。</p><ol><li><code>strncpy</code> 有什么设计缺陷？</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></span></code></pre></td></tr></table></div></div><h2 id=练习16结构体和指向它们的指针>练习16：结构体和指向它们的指针</h2><ol><li>如何在栈上创建结构体，就像你创建任何其它变量那样？</li><li>如何使用 <code>x.y</code> 而不是 <code>x->y</code> 来初始化结构体？</li></ol><p>对于前两个问题其实非常好解答。只要把变量 <code>x</code> 设置成非指针即可。</p><ol start=3><li>如何不使用指针来将结构体传给其它函数？</li></ol><p>C 语言<strong>不可能</strong>不使用指针传递结构体本身。所以这道题的意思就浅显地指，把参数的 <code>*</code> 去掉你会不会&mldr;</p><p>详细代码请见：<a class=link href=https://github.com/eleloya23/Learn-C-The-Hard-Way/blob/master/Ex16/ex16_e.c target=_blank rel=noopener>GitHub</a></p><h2 id=练习17堆和栈的内存分配>练习17：堆和栈的内存分配</h2><blockquote><p>对于现在你们这些年轻人来说，编程简直太容易了。如果你玩玩 Ruby 或者 Python 的话，只要创建对象或变量就好了，不用管它们存放在哪里。</p></blockquote><p>理清内存最简单原则：如果你的变量并不是从 <code>malloc</code> 中获取的，也不是从一个从 <code>malloc</code> 获取的函数中获取的，那么它在栈上。</p><ol><li><code>strncpy</code> 有什么设计缺陷？</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=kt>char</span> <span class=o>*</span><span class=nf>strncpy</span><span class=p>(</span><span class=kt>char</span> <span class=o>*</span><span class=n>dest</span><span class=p>,</span> <span class=k>const</span> <span class=kt>char</span> <span class=o>*</span><span class=n>src</span><span class=p>,</span> <span class=kt>size_t</span> <span class=n>n</span><span class=p>)</span>
-</span></span></code></pre></td></tr></table></div></div><p><code>strcpy</code> 函数不会向 <code>dest</code> 追加 <code>\0</code>，也就是字符串没有了结束，可能会造成内存非法访问。</p><ol start=2><li>C 如何打包结构体？结构体添加一些字段之后的新大小？</li></ol><p>在 C 语言中，结构体的默认对齐方式通常是按照结构体成员中占用内存最大的数据类型进行对齐。这被称为“最大成员对齐”或“自然对齐”。</p><p>结构体的总大小是其最大对齐成员的大小的整数倍。</p><h2 id=练习18函数指针>练习18：函数指针</h2><p>函数指针编写窍门：</p><ul><li>编写一个普通的函数声明：<code>int callme(int a, int b)</code></li><li>将函数用指针语法包装：<code>int (*callme)(int a, int b)</code></li><li>将名称改成指针名称：<code>int (*compare_cb)(int a, int b)</code></li></ul></section><footer class=article-footer><section class=article-tags><a href=/tags/clang/>Clang</a>
-<a href=/tags/ysyx/>ysyx</a></section><section class=article-copyright><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg><span>Licensed under CC BY-NC-SA 4.0</span></section></footer></article><aside class=related-content--wrapper><h2 class=section-title>相关文章</h2><div class=related-content><div class="flex article-list--tile"><article class=has-image><a href=/p/fsharp-for-csharp-devs/><div class=article-image><img src=/p/fsharp-for-csharp-devs/head.87737bdf5db61101d4ad0fb8eff57d53_hu7ae8c9477ae0a68f34fbf9d5a3829117_280528_250x150_fill_box_smart1_3.png width=250 height=150 loading=lazy alt="Featured image of post 写给 C# 开发者的 F# 光速入门教程" data-key=fsharp-for-csharp-devs data-hash="md5-h3N73122EQHUrQ+47/V9Uw=="></div><div class=article-details><h2 class=article-title>写给 C# 开发者的 F# 光速入门教程</h2></div></a></article><article class=has-image><a href=/p/advanced-csharp-1/><div class=article-image><img src=/p/advanced-csharp-1/head.50573d1817e36e3313a7fd57690ebc80_hu6445997bcd53608f7e2f035aad872a86_31881_250x150_fill_box_smart1_3.png width=250 height=150 loading=lazy alt="Featured image of post 鎧恩的 C# 进阶小册  01 - 并发与异步" data-key=advanced-csharp-1 data-hash="md5-UFc9GBfjbjMTp/1XaQ68gA=="></div><div class=article-details><h2 class=article-title>鎧恩的 C# 进阶小册 01 - 并发与异步</h2></div></a></article><article class=has-image><a href=/p/rx-magic-3/><div class=article-image><img src=/p/rx-magic-3/head.c9b141998febf281884606d443822a75_hu60daa3e750dae8efe162b164d024055e_222411_250x150_fill_box_smart1_3.png width=250 height=150 loading=lazy alt="Featured image of post Rx.NET 响应式编程指北 03 - 深入流的创建" data-key=rx-magic-3 data-hash="md5-ybFBmY/r8oGIRgbUQ4IqdQ=="></div><div class=article-details><h2 class=article-title>Rx.NET 响应式编程指北 03 - 深入流的创建</h2></div></a></article><article class=has-image><a href=/p/rx-magic-ex/><div class=article-image><img src=/p/rx-magic-ex/head.c9b141998febf281884606d443822a75_hu60daa3e750dae8efe162b164d024055e_222411_250x150_fill_box_smart1_3.png width=250 height=150 loading=lazy alt="Featured image of post Rx.NET 响应式编程指北 Ex - 函数式思想 & 流式接口" data-key=rx-magic-ex data-hash="md5-ybFBmY/r8oGIRgbUQ4IqdQ=="></div><div class=article-details><h2 class=article-title>Rx.NET 响应式编程指北 Ex - 函数式思想 & 流式接口</h2></div></a></article><article class=has-image><a href=/p/rx-magic-2/><div class=article-image><img src=/p/rx-magic-2/head.c9b141998febf281884606d443822a75_hu60daa3e750dae8efe162b164d024055e_222411_250x150_fill_box_smart1_3.png width=250 height=150 loading=lazy alt="Featured image of post Rx.NET 响应式编程指北 02 - 基本使用" data-key=rx-magic-2 data-hash="md5-ybFBmY/r8oGIRgbUQ4IqdQ=="></div><div class=article-details><h2 class=article-title>Rx.NET 响应式编程指北 02 - 基本使用</h2></div></a></article></div></div></aside><script src=https://giscus.app/client.js data-repo=Kyocius/kyocius.github.io data-repo-id="MDEwOlJlcG9zaXRvcnkyODE4MDgxOTA=" data-category=Announcements data-category-id=DIC_kwDOEMwNPs4CXHLA data-mapping=pathname data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=top data-theme=light data-lang=en crossorigin=anonymous async></script><script>function setGiscusTheme(e){let t=document.querySelector("iframe.giscus-frame");t&&t.contentWindow.postMessage({giscus:{setConfig:{theme:e}}},"https://giscus.app")}(function(){addEventListener("message",t=>{if(event.origin!=="https://giscus.app")return;e()}),window.addEventListener("onColorSchemeChange",e);function e(){setGiscusTheme(document.documentElement.dataset.scheme==="light"?"light":"dark")}})()</script><footer class=site-footer><section class=copyright>&copy;
+</span></span></code></pre></td></tr></table></div></div><p><code>strcpy</code> 函数不会向 <code>dest</code> 追加 <code>\0</code>，也就是字符串没有了结束，可能会造成内存非法访问。</p><ol start=2><li>C 如何打包结构体？结构体添加一些字段之后的新大小？</li></ol><p>在 C 语言中，结构体的默认对齐方式通常是按照结构体成员中占用内存最大的数据类型进行对齐。这被称为“最大成员对齐”或“自然对齐”。</p><p>结构体的总大小是其最大对齐成员的大小的整数倍。</p><h2 id=练习18函数指针>练习18：函数指针</h2><p>函数指针编写窍门：</p><ul><li>编写一个普通的函数声明：<code>int callme(int a, int b)</code></li><li>将函数用指针语法包装：<code>int (*callme)(int a, int b)</code></li><li>将名称改成指针名称：<code>int (*compare_cb)(int a, int b)</code></li></ul><p>我们可以使用 <code>typedef</code> 来简化函数指针以便于传参：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=k>typedef</span> <span class=kt>int</span> <span class=p>(</span><span class=o>*</span><span class=n>compare_cb</span><span class=p>)(</span><span class=kt>int</span> <span class=n>a</span><span class=p>,</span> <span class=kt>int</span> <span class=n>b</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>如此，在另一个函数中，我们就能将 <code>compare_cb</code> 作为类型传递：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=kt>int</span> <span class=o>*</span><span class=nf>bubble_sort</span><span class=p>(</span><span class=kt>int</span> <span class=o>*</span><span class=n>numbers</span><span class=p>,</span> <span class=kt>int</span> <span class=n>count</span><span class=p>,</span> <span class=n>compare_cb</span> <span class=n>cmp</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><ol><li>将错误的函数传给 <code>compare_cb</code>，并看看 C 编辑器会报告什么错误？</li></ol><p>类似于 &ldquo;assignment from incompatible pointer type&rdquo; 或 &ldquo;incompatible types in assignment&rdquo; 的错误消息。</p><ol start=2><li>将 <code>NULL</code> 传给它，看看程序中会发生什么。然后运行 Valgrind 来看看它会报告什么？</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;stdio.h&gt;</span><span class=cp>
+</span></span></span><span class=line><span class=cl><span class=cp></span>
+</span></span><span class=line><span class=cl><span class=kt>void</span> <span class=nf>myFunction</span><span class=p>(</span><span class=kt>int</span> <span class=o>*</span><span class=n>ptr</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span><span class=n>ptr</span> <span class=o>!=</span> <span class=nb>NULL</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=c1>// 在这里解引用非空指针
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=o>*</span><span class=n>ptr</span> <span class=o>=</span> <span class=mi>42</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kt>int</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kt>int</span> <span class=o>*</span><span class=n>nullPointer</span> <span class=o>=</span> <span class=nb>NULL</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1>// 将 NULL 传递给函数指针
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=nf>myFunction</span><span class=p>(</span><span class=n>nullPointer</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=mi>0</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>Valgrind 的报错：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>==12345== Invalid write of size 4
+</span></span><span class=line><span class=cl>==12345==    at 0x80484A7: myFunction (example.c:6)
+</span></span><span class=line><span class=cl>==12345==    by 0x80484F4: main (example.c:14)
+</span></span><span class=line><span class=cl>==12345==  Address 0x0 is not stack&#39;d, malloc&#39;d or (recently) free&#39;d
+</span></span></code></pre></td></tr></table></div></div><p>这个报告表明在 <code>myFunction</code> 函数的第 6 行发生了一个尝试写入大小为 4 的无效内存。</p><h2 id=练习32双向链表>练习32：双向链表</h2><p>强烈建议 0 数据结构基础先去油管看一下印度老哥的双向链表教程：<a class=link href="https://www.youtube.com/watch?v=nsMWbs-r4vE&amp;list=PLBlnK6fEyqRg7pacSDMgPn7vDVhz3N1uf&amp;index=2" target=_blank rel=noopener>YouTube</a></p><p>先在头文件中编写两个结构体：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;stdlib.h&gt;</span><span class=cp>
+</span></span></span><span class=line><span class=cl><span class=cp></span>
+</span></span><span class=line><span class=cl><span class=k>struct</span> <span class=n>ListNode</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>typedef</span> <span class=k>struct</span> <span class=n>ListNode</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>struct</span> <span class=n>ListNode</span> <span class=o>*</span><span class=n>prev</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=k>struct</span> <span class=n>ListNode</span> <span class=o>*</span><span class=n>next</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=kt>void</span> <span class=o>*</span><span class=n>value</span><span class=p>;</span> <span class=c1>// 可以指向任何数据类型
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>}</span> <span class=n>ListNode</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>typedef</span> <span class=k>struct</span> <span class=n>List</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>ListNode</span> <span class=o>*</span><span class=n>first</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=n>ListNode</span> <span class=o>*</span><span class=n>last</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=kt>int</span> <span class=n>count</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>然后预定义四个 List 的整体方法：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=n>List</span> <span class=o>*</span><span class=nf>List_create</span><span class=p>();</span>
+</span></span><span class=line><span class=cl><span class=kt>void</span> <span class=nf>List_destroy</span><span class=p>(</span><span class=n>List</span> <span class=o>*</span><span class=n>list</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=kt>void</span> <span class=nf>List_clear</span><span class=p>(</span><span class=n>List</span> <span class=o>*</span><span class=n>list</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=kt>void</span> <span class=nf>List_clear_destroy</span><span class=p>(</span><span class=n>List</span> <span class=o>*</span><span class=n>list</span><span class=p>);</span>
+</span></span></code></pre></td></tr></table></div></div><p>三个宏方法（不知道为什么要用宏）：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=cp>#define List_count(A) ((A)-&gt;count)
+</span></span></span><span class=line><span class=cl><span class=cp></span>
+</span></span><span class=line><span class=cl><span class=cp>#define List_first(A) ((A)-&gt;first != NULL ? (A)-&gt;first-&gt;value : NULL)
+</span></span></span><span class=line><span class=cl><span class=cp></span>
+</span></span><span class=line><span class=cl><span class=cp>#define List_last(A) ((A)-&gt;last != NULL ? (A)-&gt;last-&gt;value : NULL)
+</span></span></span></code></pre></td></tr></table></div></div><p>接下来预定义数据的操作方法：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=kt>void</span> <span class=nf>List_push</span><span class=p>(</span><span class=n>List</span> <span class=o>*</span><span class=n>list</span><span class=p>,</span> <span class=kt>void</span> <span class=o>*</span><span class=n>value</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=kt>void</span> <span class=o>*</span><span class=nf>List_pop</span><span class=p>(</span><span class=n>List</span> <span class=o>*</span><span class=n>list</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// 链表的头部插入与删除，命名风格来自于 Perl 语言
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kt>void</span> <span class=nf>List_unshift</span><span class=p>(</span><span class=n>List</span> <span class=o>*</span><span class=n>list</span><span class=p>,</span> <span class=kt>void</span> <span class=o>*</span><span class=n>value</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=kt>void</span> <span class=o>*</span><span class=nf>List_shift</span><span class=p>(</span><span class=n>List</span> <span class=o>*</span><span class=n>list</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kt>void</span> <span class=o>*</span><span class=nf>List_remove</span><span class=p>(</span><span class=n>List</span> <span class=o>*</span><span class=n>list</span><span class=p>,</span> <span class=n>ListNode</span> <span class=o>*</span><span class=n>node</span><span class=p>);</span>
+</span></span></code></pre></td></tr></table></div></div><p>定义 <code>LIST_FOREACH</code> 宏。书中说这是个常见的习语：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=cp>#define LIST_FOREACH(L, S, M, V) ListNode *_node = NULL; \
+</span></span></span><span class=line><span class=cl><span class=cp>    ListNode *V = NULL;\
+</span></span></span><span class=line><span class=cl><span class=cp>    for(V = _node = L -&gt; S; _node != NULL; V = _node = _node -&gt; M)
+</span></span></span></code></pre></td></tr></table></div></div><p>这个宏利用了一个 <code>for</code> 循环，其中 <code>_node</code> 用于跟踪当前节点，<code>V</code> 用于表示当前节点。在每次迭代中，<code>_node</code> 被更新为下一个节点，从而实现链表遍历的封装。</p><p>现在开始实现头文件的方法。在 <code>list.c</code> 中先完成 List 的整体方法：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;lcthw/list.h&gt;</span><span class=cp>
+</span></span></span><span class=line><span class=cl><span class=cp></span>
+</span></span><span class=line><span class=cl><span class=n>List</span> <span class=o>*</span><span class=nf>List_create</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=nf>calloc</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span> <span class=k>sizeof</span><span class=p>(</span><span class=n>List</span><span class=p>));</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kt>void</span> <span class=nf>List_destroy</span><span class=p>(</span><span class=n>List</span> <span class=o>*</span><span class=n>list</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nf>LIST_FOREACH</span><span class=p>(</span><span class=n>list</span><span class=p>,</span> <span class=n>first</span><span class=p>,</span> <span class=n>next</span><span class=p>,</span> <span class=n>cur</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=p>(</span><span class=n>cur</span><span class=o>-&gt;</span><span class=n>prev</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>            <span class=nf>free</span><span class=p>(</span><span class=n>cur</span><span class=o>-&gt;</span><span class=n>prev</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=nf>free</span><span class=p>(</span><span class=n>list</span><span class=o>-&gt;</span><span class=n>last</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=nf>free</span><span class=p>(</span><span class=n>list</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kt>void</span> <span class=nf>List_clear</span><span class=p>(</span><span class=n>List</span> <span class=o>*</span><span class=n>list</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nf>LIST_FOREACH</span><span class=p>(</span><span class=n>list</span><span class=p>,</span> <span class=n>first</span><span class=p>,</span> <span class=n>next</span><span class=p>,</span> <span class=n>cur</span><span class=p>)</span> 
+</span></span><span class=line><span class=cl>    <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nf>free</span><span class=p>(</span><span class=n>cur</span><span class=o>-&gt;</span><span class=n>value</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kt>void</span> <span class=nf>List_clear_destroy</span><span class=p>(</span><span class=n>List</span> <span class=o>*</span><span class=n>list</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nf>List_clear</span><span class=p>(</span><span class=n>list</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=nf>List_destroy</span><span class=p>(</span><span class=n>list</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>接下来实现数据的操作方法：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span><span class=lnt>51
+</span><span class=lnt>52
+</span><span class=lnt>53
+</span><span class=lnt>54
+</span><span class=lnt>55
+</span><span class=lnt>56
+</span><span class=lnt>57
+</span><span class=lnt>58
+</span><span class=lnt>59
+</span><span class=lnt>60
+</span><span class=lnt>61
+</span><span class=lnt>62
+</span><span class=lnt>63
+</span><span class=lnt>64
+</span><span class=lnt>65
+</span><span class=lnt>66
+</span><span class=lnt>67
+</span><span class=lnt>68
+</span><span class=lnt>69
+</span><span class=lnt>70
+</span><span class=lnt>71
+</span><span class=lnt>72
+</span><span class=lnt>73
+</span><span class=lnt>74
+</span><span class=lnt>75
+</span><span class=lnt>76
+</span><span class=lnt>77
+</span><span class=lnt>78
+</span><span class=lnt>79
+</span><span class=lnt>80
+</span><span class=lnt>81
+</span><span class=lnt>82
+</span><span class=lnt>83
+</span><span class=lnt>84
+</span><span class=lnt>85
+</span><span class=lnt>86
+</span><span class=lnt>87
+</span><span class=lnt>88
+</span><span class=lnt>89
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=kt>void</span> <span class=nf>List_push</span><span class=p>(</span><span class=n>List</span> <span class=o>*</span><span class=n>list</span><span class=p>,</span> <span class=kt>void</span> <span class=o>*</span><span class=n>value</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>ListNode</span> <span class=o>*</span><span class=n>node</span> <span class=o>=</span> <span class=nf>calloc</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span> <span class=k>sizeof</span><span class=p>(</span><span class=n>ListNode</span><span class=p>));</span>
+</span></span><span class=line><span class=cl>    <span class=nf>check_mem</span><span class=p>(</span><span class=n>node</span><span class=p>);</span> <span class=c1>// 跳转到 error 标签
+</span></span></span><span class=line><span class=cl><span class=c1></span>
+</span></span><span class=line><span class=cl>    <span class=n>node</span><span class=o>-&gt;</span><span class=n>value</span> <span class=o>=</span> <span class=n>value</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>if</span><span class=p>(</span><span class=n>list</span><span class=o>-&gt;</span><span class=n>last</span> <span class=o>==</span> <span class=nb>NULL</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>list</span><span class=o>-&gt;</span><span class=n>first</span> <span class=o>=</span> <span class=n>node</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>list</span><span class=o>-&gt;</span><span class=n>last</span> <span class=o>=</span> <span class=n>node</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=k>else</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>list</span><span class=o>-&gt;</span><span class=n>last</span><span class=o>-&gt;</span><span class=n>next</span> <span class=o>=</span> <span class=n>node</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>node</span><span class=o>-&gt;</span><span class=n>prev</span> <span class=o>=</span> <span class=n>list</span><span class=o>-&gt;</span><span class=n>last</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>list</span><span class=o>-&gt;</span><span class=n>last</span> <span class=o>=</span> <span class=n>node</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=n>list</span><span class=o>-&gt;</span><span class=n>count</span><span class=o>++</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=nl>error</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kt>void</span> <span class=o>*</span><span class=nf>List_pop</span><span class=p>(</span><span class=n>List</span> <span class=o>*</span><span class=n>list</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>ListNode</span> <span class=o>*</span><span class=n>node</span> <span class=o>=</span> <span class=n>list</span><span class=o>-&gt;</span><span class=n>last</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>node</span> <span class=o>!=</span> <span class=nb>NULL</span> <span class=o>?</span> <span class=nf>List_remove</span><span class=p>(</span><span class=n>list</span><span class=p>,</span> <span class=n>node</span><span class=p>)</span> <span class=o>:</span> <span class=nb>NULL</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kt>void</span> <span class=nf>List_unshift</span><span class=p>(</span><span class=n>List</span> <span class=o>*</span><span class=n>list</span><span class=p>,</span> <span class=kt>void</span> <span class=o>*</span><span class=n>value</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>ListNode</span> <span class=o>*</span><span class=n>node</span> <span class=o>=</span> <span class=nf>calloc</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span> <span class=k>sizeof</span><span class=p>(</span><span class=n>ListNode</span><span class=p>));</span>
+</span></span><span class=line><span class=cl>    <span class=nf>check_mem</span><span class=p>(</span><span class=n>node</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=n>node</span><span class=o>-&gt;</span><span class=n>value</span> <span class=o>=</span> <span class=n>value</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>if</span><span class=p>(</span><span class=n>list</span><span class=o>-&gt;</span><span class=n>first</span> <span class=o>==</span> <span class=nb>NULL</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>list</span><span class=o>-&gt;</span><span class=n>first</span> <span class=o>=</span> <span class=n>node</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>list</span><span class=o>-&gt;</span><span class=n>last</span> <span class=o>=</span> <span class=n>node</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span> <span class=k>else</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>node</span><span class=o>-&gt;</span><span class=n>next</span> <span class=o>=</span> <span class=n>list</span><span class=o>-&gt;</span><span class=n>first</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>list</span><span class=o>-&gt;</span><span class=n>first</span><span class=o>-&gt;</span><span class=n>prev</span> <span class=o>=</span> <span class=n>node</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>list</span><span class=o>-&gt;</span><span class=n>first</span> <span class=o>=</span> <span class=n>node</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=n>list</span><span class=o>-&gt;</span><span class=n>count</span><span class=o>++</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nl>error</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kt>void</span> <span class=o>*</span><span class=nf>List_shift</span><span class=p>(</span><span class=n>List</span> <span class=o>*</span><span class=n>list</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>ListNode</span> <span class=o>*</span><span class=n>node</span> <span class=o>=</span> <span class=n>list</span><span class=o>-&gt;</span><span class=n>first</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>node</span> <span class=o>!=</span> <span class=nb>NULL</span> <span class=o>?</span> <span class=nf>List_remove</span><span class=p>(</span><span class=n>list</span><span class=p>,</span> <span class=n>node</span><span class=p>)</span> <span class=o>:</span> <span class=nb>NULL</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kt>void</span> <span class=o>*</span><span class=nf>List_remove</span><span class=p>(</span><span class=n>List</span> <span class=o>*</span><span class=n>list</span><span class=p>,</span> <span class=n>ListNode</span> <span class=o>*</span><span class=n>node</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kt>void</span> <span class=o>*</span><span class=n>result</span> <span class=o>=</span> <span class=nb>NULL</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nf>check</span><span class=p>(</span><span class=n>list</span><span class=o>-&gt;</span><span class=n>first</span> <span class=o>&amp;&amp;</span> <span class=n>list</span><span class=o>-&gt;</span><span class=n>last</span><span class=p>,</span> <span class=s>&#34;List is empty.&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=nf>check</span><span class=p>(</span><span class=n>node</span><span class=p>,</span> <span class=s>&#34;node can&#39;t be NULL&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>if</span><span class=p>(</span><span class=n>node</span> <span class=o>==</span> <span class=n>list</span><span class=o>-&gt;</span><span class=n>first</span> <span class=o>&amp;&amp;</span> <span class=n>node</span> <span class=o>==</span> <span class=n>list</span><span class=o>-&gt;</span><span class=n>last</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>list</span><span class=o>-&gt;</span><span class=n>first</span> <span class=o>=</span> <span class=nb>NULL</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>list</span><span class=o>-&gt;</span><span class=n>last</span> <span class=o>=</span> <span class=nb>NULL</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span> <span class=k>else</span> <span class=k>if</span><span class=p>(</span><span class=n>node</span> <span class=o>==</span> <span class=n>list</span><span class=o>-&gt;</span><span class=n>first</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>list</span><span class=o>-&gt;</span><span class=n>first</span> <span class=o>=</span> <span class=n>node</span><span class=o>-&gt;</span><span class=n>next</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=nf>check</span><span class=p>(</span><span class=n>list</span><span class=o>-&gt;</span><span class=n>first</span> <span class=o>!=</span> <span class=nb>NULL</span><span class=p>,</span> <span class=s>&#34;Invalid list, somehow got a first that is NULL.&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>list</span><span class=o>-&gt;</span><span class=n>first</span><span class=o>-&gt;</span><span class=n>prev</span> <span class=o>=</span> <span class=nb>NULL</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span> <span class=k>else</span> <span class=k>if</span> <span class=p>(</span><span class=n>node</span> <span class=o>==</span> <span class=n>list</span><span class=o>-&gt;</span><span class=n>last</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>list</span><span class=o>-&gt;</span><span class=n>last</span> <span class=o>=</span> <span class=n>node</span><span class=o>-&gt;</span><span class=n>prev</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=nf>check</span><span class=p>(</span><span class=n>list</span><span class=o>-&gt;</span><span class=n>last</span> <span class=o>!=</span> <span class=nb>NULL</span><span class=p>,</span> <span class=s>&#34;Invalid list, somehow got a next that is NULL.&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>list</span><span class=o>-&gt;</span><span class=n>last</span><span class=o>-&gt;</span><span class=n>next</span> <span class=o>=</span> <span class=nb>NULL</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span> <span class=k>else</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>ListNode</span> <span class=o>*</span><span class=n>after</span> <span class=o>=</span> <span class=n>node</span><span class=o>-&gt;</span><span class=n>next</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>ListNode</span> <span class=o>*</span><span class=n>before</span> <span class=o>=</span> <span class=n>node</span><span class=o>-&gt;</span><span class=n>prev</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>after</span><span class=o>-&gt;</span><span class=n>prev</span> <span class=o>=</span> <span class=n>before</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>before</span><span class=o>-&gt;</span><span class=n>next</span> <span class=o>=</span> <span class=n>after</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=n>list</span><span class=o>-&gt;</span><span class=n>count</span><span class=o>--</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=n>result</span> <span class=o>=</span> <span class=n>node</span><span class=o>-&gt;</span><span class=n>value</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=nf>free</span><span class=p>(</span><span class=n>node</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nl>error</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>result</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>现在我们终于实现了双向链表上的所有操作。闹麻了，书上的实现方法感觉跟喂了 Poops 一样。</p><ol><li>研究双向和单向链表，以及什么情况下其中一种优于另一种。</li></ol><p>单向链表内存小，性能好；双向链表功能强，比如逆序遍历。</p><ol start=2><li>研究双向链表的限制。例如，虽然它们对于插入和删除元素很高效，但是对于变量元素比较慢。</li></ol><p>双向链表更改一个节点意味着要修改两端的节点，这太地狱了。</p></section><footer class=article-footer><section class=article-tags><a href=/tags/clang/>Clang</a>
+<a href=/tags/ysyx/>ysyx</a></section><section class=article-copyright><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg>
+<span>Licensed under CC BY-NC-SA 4.0</span></section></footer><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.css integrity="sha256-J+iAE0sgH8QSz9hpcDxXIftnj65JEZgNhGcgReTTK9s=" crossorigin=anonymous><script src=https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.js integrity="sha256-InsNdER1b2xUewP+pKCUJpkhiqwHgqiPXDlIk7GzBu4=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/contrib/auto-render.min.js integrity="sha256-y39Mpg7V3D4lhBX4x6O0bUqTV4pSrfgwEfGKfxkOdgI=" crossorigin=anonymous defer></script><script>window.addEventListener("DOMContentLoaded",()=>{renderMathInElement(document.querySelector(`.article-content`),{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1},{left:"\\(",right:"\\)",display:!1},{left:"\\[",right:"\\]",display:!0}]})})</script></article><aside class=related-content--wrapper><h2 class=section-title>相关文章</h2><div class=related-content><div class="flex article-list--tile"><article class=has-image><a href=/p/arch-book-1/><div class=article-image><img src=/p/arch-book-1/header.4b7a86145b41d721b87ecc37d72e0983_hueaa4c8e5fd7a5595d1ecd775a7c5eb94_634924_250x150_fill_box_smart1_3.png width=250 height=150 loading=lazy alt="Featured image of post 数电与计算机体系结构 01：入门" data-key=arch-book-1 data-hash="md5-S3qGFFtB1yG4fsw31y4Jgw=="></div><div class=article-details><h2 class=article-title>数电与计算机体系结构 01：入门</h2></div></a></article><article class=has-image><a href=/p/fsharp-for-csharp-devs/><div class=article-image><img src=/p/fsharp-for-csharp-devs/head.87737bdf5db61101d4ad0fb8eff57d53_hu7ae8c9477ae0a68f34fbf9d5a3829117_280528_250x150_fill_box_smart1_3.png width=250 height=150 loading=lazy alt="Featured image of post 写给 C# 开发者的 F# 光速入门教程" data-key=fsharp-for-csharp-devs data-hash="md5-h3N73122EQHUrQ+47/V9Uw=="></div><div class=article-details><h2 class=article-title>写给 C# 开发者的 F# 光速入门教程</h2></div></a></article><article class=has-image><a href=/p/advanced-csharp-1/><div class=article-image><img src=/p/advanced-csharp-1/head.50573d1817e36e3313a7fd57690ebc80_hu6445997bcd53608f7e2f035aad872a86_31881_250x150_fill_box_smart1_3.png width=250 height=150 loading=lazy alt="Featured image of post 鎧恩的 C# 进阶小册  01 - 并发与异步" data-key=advanced-csharp-1 data-hash="md5-UFc9GBfjbjMTp/1XaQ68gA=="></div><div class=article-details><h2 class=article-title>鎧恩的 C# 进阶小册 01 - 并发与异步</h2></div></a></article><article class=has-image><a href=/p/rx-magic-3/><div class=article-image><img src=/p/rx-magic-3/head.c9b141998febf281884606d443822a75_hu60daa3e750dae8efe162b164d024055e_222411_250x150_fill_box_smart1_3.png width=250 height=150 loading=lazy alt="Featured image of post Rx.NET 响应式编程指北 03 - 深入流的创建" data-key=rx-magic-3 data-hash="md5-ybFBmY/r8oGIRgbUQ4IqdQ=="></div><div class=article-details><h2 class=article-title>Rx.NET 响应式编程指北 03 - 深入流的创建</h2></div></a></article><article class=has-image><a href=/p/rx-magic-ex/><div class=article-image><img src=/p/rx-magic-ex/head.c9b141998febf281884606d443822a75_hu60daa3e750dae8efe162b164d024055e_222411_250x150_fill_box_smart1_3.png width=250 height=150 loading=lazy alt="Featured image of post Rx.NET 响应式编程指北 Ex - 函数式思想 & 流式接口" data-key=rx-magic-ex data-hash="md5-ybFBmY/r8oGIRgbUQ4IqdQ=="></div><div class=article-details><h2 class=article-title>Rx.NET 响应式编程指北 Ex - 函数式思想 & 流式接口</h2></div></a></article></div></div></aside><script src=https://giscus.app/client.js data-repo=Kyocius/kyocius.github.io data-repo-id="MDEwOlJlcG9zaXRvcnkyODE4MDgxOTA=" data-category=Announcements data-category-id=DIC_kwDOEMwNPs4CXHLA data-mapping=pathname data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=top data-theme=light data-lang=en crossorigin=anonymous async></script><script>function setGiscusTheme(e){let t=document.querySelector("iframe.giscus-frame");t&&t.contentWindow.postMessage({giscus:{setConfig:{theme:e}}},"https://giscus.app")}(function(){addEventListener("message",t=>{if(event.origin!=="https://giscus.app")return;e()}),window.addEventListener("onColorSchemeChange",e);function e(){setGiscusTheme(document.documentElement.dataset.scheme==="light"?"light":"dark")}})()</script><footer class=site-footer><section class=copyright>&copy;
 2021 -
 2024 游尔曼斯克</section><section class=powerby>Boys Be Ambitious.<br>Built with <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a><br>主题 <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.13.0>Stack</a></b> 由 <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a> 设计</section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
 <button class="pswp__button pswp__button--share" title=Share></button>
 <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
 <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
 </button>
-<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">目录</h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#前言>前言</a></li><li><a href=#练习10字符串数组和循环>练习10：字符串数组和循环</a></li><li><a href=#练习16结构体和指向它们的指针>练习16：结构体和指向它们的指针</a></li><li><a href=#练习17堆和栈的内存分配>练习17：堆和栈的内存分配</a></li><li><a href=#练习18函数指针>练习18：函数指针</a></li></ol></nav></div></section></aside></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.js defer></script><script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></body></html>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">目录</h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#前言>前言</a></li><li><a href=#练习10字符串数组和循环>练习10：字符串数组和循环</a></li><li><a href=#练习16结构体和指向它们的指针>练习16：结构体和指向它们的指针</a></li><li><a href=#练习17堆和栈的内存分配>练习17：堆和栈的内存分配</a></li><li><a href=#练习18函数指针>练习18：函数指针</a></li><li><a href=#练习32双向链表>练习32：双向链表</a></li></ol></nav></div></section></aside></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.js defer></script><script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></body></html>
