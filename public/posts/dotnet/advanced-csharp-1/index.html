@@ -1,0 +1,2410 @@
+<!DOCTYPE html>
+<html><head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Noto+Serif+SC&family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<title>C# 进阶小册  01 - 并发与异步</title>
+
+
+
+
+<meta charset="utf-8">
+<meta name="X-UA-Compatible" content="IE=edge">
+<meta name="google-site-verification" content="">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<meta content="telephone=no" name="format-detection">
+<meta name="description" content="大量参考《C# 10 in a Nutshell》">
+<meta name="renderer" content="webkit">
+<meta name="theme-color" content="#ffffff">
+
+
+
+<meta property="og:title" content="C# 进阶小册  01 - 并发与异步" />
+<meta property="og:description" content="大量参考《C# 10 in a Nutshell》" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://kyocius.github.io/posts/dotnet/advanced-csharp-1/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-08-15T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-08-15T00:00:00+00:00" /><meta property="og:site_name" content="My Blog" />
+
+
+
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="C# 进阶小册  01 - 并发与异步"/>
+<meta name="twitter:description" content="大量参考《C# 10 in a Nutshell》"/>
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+  (function(c,l,a,r,i,t,y){
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+  })(window, document, "clarity", "script", "abcdefghzd");
+</script>
+
+
+
+  
+
+
+
+
+
+
+      <script src="/js/toc.js"></script>
+    
+    <link type="text/css" rel="stylesheet" href="/vendor/css/bootstrap.min.css">
+
+<link rel="stylesheet" href="/scss/dark-mode.min.b60ebb44f6836508f5181ee036582b442efa24bbd7d5e42d547e04e68bd25d01.css" integrity="sha256-tg67RPaDZQj1GB7gNlgrRC76JLvX1eQtVH4E5ovSXQE=" media="screen">
+
+
+<link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Material+Icons">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+<body>
+    	<div id="app"><div class="single-column-drawer-container" id="drawer"
+     v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }">
+    <div class="drawer-content">
+        <div class="drawer-menu">
+            
+            
+            
+                
+                
+                
+                    
+                
+                
+                
+                <a class="a-block drawer-menu-item active" href="/posts">
+                    歸檔 Archive
+                </a>
+                
+            
+                
+                
+                
+                
+                
+                <a class="a-block drawer-menu-item false" href="/categories">
+                    分類 Categories
+                </a>
+                
+            
+                
+                
+                
+                
+                
+                <a class="a-block drawer-menu-item false" href="/tags">
+                    標簽 Tags
+                </a>
+                
+            
+                
+                
+                
+                
+                
+                <a class="a-block drawer-menu-item false" href="/about/">
+                    關於 About
+                </a>
+                
+            
+                
+                
+                
+                
+                
+                <a class="a-block drawer-menu-item false" href="/index.xml">
+                    訂閱 RSS
+                </a>
+                
+            
+            
+            <div class="toc">
+
+
+	<div class="toc-content">
+	
+		
+		
+		
+		<center>- 目錄 -</center>
+		
+		
+		<ul>
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								
+									<ul>
+								
+							
+						
+						
+							<li>
+								<a href="#%e5%89%8d%e8%a8%80" class="nav-前言">
+									前言
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e7%ba%bf%e7%a8%8b-thread" class="nav-线程-thread">
+									线程 Thread
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								
+									<ul>
+								
+							
+						
+						
+							<li>
+								<a href="#%e5%88%9b%e5%bb%ba%e7%ba%bf%e7%a8%8b-create-a-thread" class="nav-创建线程-create-a-thread">
+									创建线程 Create a Thread
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#join-%e4%b8%8e-sleep" class="nav-join-与-sleep">
+									Join 与 Sleep
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e9%98%bb%e5%a1%9e%e7%ba%bf%e7%a8%8b-blocking" class="nav-阻塞线程-blocking">
+									阻塞线程 Blocking
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								
+									<ul>
+								
+							
+						
+						
+							<li>
+								<a href="#io-%e5%af%86%e9%9b%86%e5%9e%8b--%e8%ae%a1%e7%ae%97%e5%af%86%e9%9b%86%e5%9e%8b-bound" class="nav-io-密集型--计算密集型-bound">
+									I/O 密集型 &amp; 计算密集型 Bound
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+							
+								</ul>
+							
+						
+						
+						
+							<li>
+								<a href="#%e5%b1%80%e9%83%a8%e5%8f%98%e9%87%8f--%e5%85%b1%e4%ba%ab%e7%8a%b6%e6%80%81-local--shared-state" class="nav-局部变量--共享状态-local--shared-state">
+									局部变量 &amp; 共享状态 Local &amp; Shared State
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e7%ba%bf%e7%a8%8b%e9%94%81--%e7%ba%bf%e7%a8%8b%e5%ae%89%e5%85%a8-lock--thread-safety" class="nav-线程锁--线程安全-lock--thread-safety">
+									线程锁 &amp; 线程安全 Lock &amp; Thread Safety
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e5%90%91%e7%ba%bf%e7%a8%8b%e4%bc%a0%e9%80%92%e6%95%b0%e6%8d%ae" class="nav-向线程传递数据">
+									向线程传递数据
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								
+									<ul>
+								
+							
+						
+						
+							<li>
+								<a href="#%e6%8d%95%e8%8e%b7%e5%8f%98%e9%87%8f-captured-variables" class="nav-捕获变量-captured-variables">
+									捕获变量 Captured Variables
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+							
+								</ul>
+							
+						
+						
+						
+							<li>
+								<a href="#%e5%bc%82%e5%b8%b8%e5%a4%84%e7%90%86" class="nav-异常处理">
+									异常处理
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								
+									<ul>
+								
+							
+						
+						
+							<li>
+								<a href="#%e9%9b%86%e4%b8%ad%e5%bc%82%e5%b8%b8%e5%a4%84%e7%90%86-centralized-exception-handler" class="nav-集中异常处理-centralized-exception-handler">
+									集中异常处理 Centralized Exception Handler
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+							
+								</ul>
+							
+						
+						
+						
+							<li>
+								<a href="#%e5%89%8d%e5%8f%b0%e7%ba%bf%e7%a8%8b--%e5%90%8e%e5%8f%b0%e7%ba%bf%e7%a8%8b-foreground--background-threads" class="nav-前台线程--后台线程-foreground--background-threads">
+									前台线程 &amp; 后台线程 Foreground &amp; Background Threads
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e7%ba%bf%e7%a8%8b%e7%ba%a7%e5%88%ab-thread-priority" class="nav-线程级别-thread-priority">
+									线程级别 Thread Priority
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e5%8f%91%e4%bf%a1%e5%8f%b7-signaling" class="nav-发信号-signaling">
+									发信号 Signaling
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e7%ba%bf%e7%a8%8b%e5%9c%a8%e5%ae%a2%e6%88%b7%e7%ab%af%e5%ba%94%e7%94%a8-threading-in-rich-client-applications" class="nav-线程在客户端应用-threading-in-rich-client-applications">
+									线程在客户端应用 Threading in Rich Client Applications
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e5%90%8c%e6%ad%a5%e4%b8%8a%e4%b8%8b%e6%96%87-synchronization-contexts" class="nav-同步上下文-synchronization-contexts">
+									同步上下文 Synchronization Contexts
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e7%ba%bf%e7%a8%8b%e6%b1%a0-the-thread-pool" class="nav-线程池-the-thread-pool">
+									线程池 The Thread Pool
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								
+									<ul>
+								
+							
+						
+						
+							<li>
+								<a href="#%e8%bf%9b%e5%85%a5%e7%ba%bf%e7%a8%8b%e6%b1%a0-enter-the-pool" class="nav-进入线程池-enter-the-pool">
+									进入线程池 Enter the pool
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e7%ba%bf%e7%a8%8b%e6%b1%a0%e5%8d%ab%e7%94%9f-hygiene-in-the-thread-pool" class="nav-线程池卫生-hygiene-in-the-thread-pool">
+									线程池卫生 Hygiene in the thread pool
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+							
+								</ul>
+							
+								</ul>
+							
+						
+						
+						
+							<li>
+								<a href="#%e4%bb%bb%e5%8a%a1-task" class="nav-任务-task">
+									任务 Task
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								
+									<ul>
+								
+							
+						
+						
+							<li>
+								<a href="#%e5%88%9b%e5%bb%ba%e4%bb%bb%e5%8a%a1-create-a-task" class="nav-创建任务-create-a-task">
+									创建任务 Create a Task
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								
+									<ul>
+								
+							
+						
+						
+							<li>
+								<a href="#%e7%ad%89%e5%be%85-wait" class="nav-等待-wait">
+									等待 Wait
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e8%80%97%e6%97%b6%e4%bb%bb%e5%8a%a1-longrunning-task" class="nav-耗时任务-longrunning-task">
+									耗时任务 LongRunning Task
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+							
+								</ul>
+							
+						
+						
+						
+							<li>
+								<a href="#%e8%bf%94%e5%9b%9e%e5%80%bc-return-values" class="nav-返回值-return-values">
+									返回值 Return Values
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e5%bc%82%e5%b8%b8-exception" class="nav-异常-exception">
+									异常 Exception
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e5%90%8e%e7%bb%ad-continuations" class="nav-后续-continuations">
+									后续 Continuations
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+							
+								</ul>
+							
+						
+						
+						
+							<li>
+								<a href="#c-%e5%bc%82%e6%ad%a5%e7%bc%96%e7%a8%8b" class="nav-c-异步编程">
+									C# 异步编程
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								
+									<ul>
+								
+							
+						
+						
+							<li>
+								<a href="#awaiting" class="nav-awaiting">
+									Awaiting
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								
+									<ul>
+								
+							
+						
+						
+							<li>
+								<a href="#%e6%8d%95%e8%8e%b7%e5%b1%80%e9%83%a8%e5%8f%98%e9%87%8f-capturing-local-state" class="nav-捕获局部变量-capturing-local-state">
+									捕获局部变量 Capturing local state
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e5%9c%a8-ui-%e4%b8%ad%e7%ad%89%e5%be%85-awaiting-in-a-ui" class="nav-在-ui-中等待-awaiting-in-a-ui">
+									在 UI 中等待 Awaiting in a UI
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+							
+								</ul>
+							
+						
+						
+						
+							<li>
+								<a href="#%e7%bc%96%e5%86%99%e5%bc%82%e6%ad%a5%e6%96%b9%e6%b3%95-writing-asynchronous-functions" class="nav-编写异步方法-writing-asynchronous-functions">
+									编写异步方法 Writing Asynchronous Functions
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								
+									<ul>
+								
+							
+						
+						
+							<li>
+								<a href="#%e8%bf%94%e5%9b%9e-tasktresult" class="nav-返回-tasktresult">
+									返回 Task
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e5%b9%b6%e8%a1%8c-parallelism" class="nav-并行-parallelism">
+									并行 Parallelism
+								</a>
+							</li>
+						
+						
+					
+				
+			
+		</ul>
+	</div>
+
+</div>
+            
+        </div>
+    </div>
+</div>
+<transition name="fade">
+    <div id="drawer-mask" v-bind:class="{ 'single-column-drawer-mask': mounted }" v-if="isDrawerOpen" v-on:click="toggleDrawer"></div>
+</transition>
+<nav id="navBar" class="navbar sticky-top navbar-light single-column-nav-container">
+    <div id="navBackground" class="nav-background"></div>
+    <div class="container container-narrow nav-content">
+        <button id="nav_dropdown_btn" class="nav-dropdown-toggle" type="button" v-on:click="toggleDrawer">
+            <i class="material-icons">
+                menu
+            </i>
+        </button>
+        <a id="navTitle" class="navbar-brand" href="https://kyocius.github.io/">
+            游尔曼斯克
+        </a>
+        
+        <button type="button" class="nav-darkmode-toggle" id="darkModeToggleButton2">
+            <i class="material-icons" id="darkModeToggleIcon2">
+                dark_mode
+            </i>
+        </button>
+        
+    </div>
+</nav>
+<div class="single-column-header-container" id="pageHead"
+     v-bind:style="{ transform: 'translateZ(0px) translateY('+.3*scrollY+'px)', opacity: 1-navOpacity }">
+    <a href="https://kyocius.github.io/">
+        <div class="single-column-header-title">游尔曼斯克</div>
+        
+        <div class="single-column-header-subtitle">Kyocius &#43;</div>
+        
+
+    </a>
+</div>
+
+            <div id="content">
+                <div id="streamContainer" class="stream-container">
+
+    <div class="post-list-container post-list-container-shadow">
+        <div class="post">
+            
+            
+            
+                
+            
+
+            <div class="post-head-wrapper"
+                
+                    
+                    
+                    style="background-image: url('/posts/dotnet/advanced-csharp-1/head.png')"
+                    
+                
+            >
+                <div class="post-title">
+                    C# 进阶小册  01 - 并发与异步
+                    
+                    <div class="post-subtitle">
+                        大量参考《C# 10 in a Nutshell》
+                    </div>
+                    
+                    <div class="post-meta">
+                        
+                        <time itemprop="datePublished">
+                            2022-08-15 00:00
+                        </time>
+                        
+
+                        
+                            <i class="material-icons" style="">folder</i>
+                                <a href="/categories/">[编程]</a>
+                                &nbsp;
+                        
+
+                        
+                            <i class="material-icons" style="">label</i>
+                            
+                                <a href="/tags/advanced-csharp">Advanced CSharp</a>
+                                &nbsp;
+                            
+                                <a href="/tags/csharp">CSharp</a>
+                                &nbsp;
+                            
+                        
+                        
+                    </div>
+                </div>
+            </div>
+            
+            <div class="post-body-wrapper">
+                
+                <div class="post-body" v-pre>
+                
+                    <h2 id="前言">前言</h2>
+<p>就是太久没写异步，有的用法忘了。所以写篇博客回顾一下。</p>
+<h2 id="线程-thread">线程 Thread</h2>
+<p>虽然在 C# 中 Task 的使用频率远超直接使用线程，但是有关线程的概念还是要复习一下的。</p>
+<p><del>才不是因为我全忘了</del></p>
+<h3 id="创建线程-create-a-thread">创建线程 Create a Thread</h3>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#c678dd">using</span> <span style="color:#e06c75">System</span>;
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">using</span> <span style="color:#e06c75">System.Threading</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#e5c07b">var</span> <span style="color:#e06c75">t</span> = <span style="color:#c678dd">new</span> <span style="color:#e06c75">Thread</span>(<span style="color:#e06c75">WriteY</span>);
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">t</span>.<span style="color:#e06c75">Start</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">for</span> (<span style="color:#e5c07b">var</span> <span style="color:#e06c75">i</span> = <span style="color:#d19a66">0</span>; <span style="color:#e06c75">i</span> &lt; <span style="color:#d19a66">1000</span>; <span style="color:#e06c75">i</span>++)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">Console</span>.<span style="color:#e06c75">Write</span>(<span style="color:#98c379">&#34;x&#34;</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">void</span> <span style="color:#e06c75">WriteY</span>()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">for</span> (<span style="color:#e5c07b">var</span> <span style="color:#e06c75">i</span> = <span style="color:#d19a66">0</span>; <span style="color:#e06c75">i</span> &lt; <span style="color:#d19a66">1000</span>; <span style="color:#e06c75">i</span>++) <span style="color:#e06c75">Console</span>.<span style="color:#e06c75">Write</span>(<span style="color:#98c379">&#34;y&#34;</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#7f848e">//输出：</span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">xxxxxxxxxxxxxyyyyyyyyyyyyyyyyyyyyy</span>...
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">xxxxxxxxxxxxxxxxxxxxxxxxxyyyyyyyyy</span>...
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">xxxxxxxxxxxxxxxxyyyyyyyyyyyyyyyyyy</span>...
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">yyyyyyyyyxxxxxxxxxxxxxxxxxxxxxxxxx</span>...
+</span></span></code></pre></div><p>我们可以通过 <code>Name</code> 属性来访问线程的名字：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#e06c75">WriteLine</span>(<span style="color:#e06c75">Thread</span>.<span style="color:#e06c75">CurrentThread</span>.<span style="color:#e06c75">Name</span>);
+</span></span></code></pre></div><h3 id="join-与-sleep">Join 与 Sleep</h3>
+<p>你可以使用 <code>Join</code> 方法来等待线程结束：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#e06c75">Thread</span> <span style="color:#e06c75">t</span> = <span style="color:#c678dd">new</span> <span style="color:#e06c75">Thread</span>(<span style="color:#e06c75">Go</span>);
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">t</span>.<span style="color:#e06c75">Start</span>();
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">t</span>.<span style="color:#e06c75">Join</span>();
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">Console</span>.<span style="color:#e06c75">WriteLine</span>(<span style="color:#98c379">&#34;线程t结束&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">void</span> <span style="color:#e06c75">Go</span>() { <span style="color:#c678dd">for</span> (<span style="color:#e5c07b">var</span> <span style="color:#e06c75">i</span> = <span style="color:#d19a66">0</span>; <span style="color:#e06c75">i</span> &lt; <span style="color:#d19a66">1000</span>; <span style="color:#e06c75">i</span>++) <span style="color:#e06c75">Console</span>.<span style="color:#e06c75">Write</span>(<span style="color:#98c379">&#34;y&#34;</span>); }
+</span></span></code></pre></div><p>这段代码会打印 <code>y</code> 1000 次然后才会输出 <code>线程t结束</code>。</p>
+<p>下面是 <code>Sleep</code> 的用法：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#e06c75">Thread</span>.<span style="color:#e06c75">Sleep</span>(<span style="color:#e06c75">TimeSpan</span>.<span style="color:#e06c75">FromHours</span>(<span style="color:#d19a66">1</span>)); <span style="color:#7f848e">//睡一小时</span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">Thread</span>.<span style="color:#e06c75">Sleep</span>(<span style="color:#d19a66">500</span>)                    <span style="color:#7f848e">//睡500毫秒</span>
+</span></span></code></pre></div><p>特殊的是：</p>
+<ul>
+<li>
+<p><code>Thread.Sleep(0)</code> 可以放弃当前线程，主动将 CPU 移交给其它线程。</p>
+</li>
+<li>
+<p><code>Thread.Yield()</code> 方法作用类似，只是移交<strong>相同的</strong>处理器。</p>
+</li>
+</ul>
+<h3 id="阻塞线程-blocking">阻塞线程 Blocking</h3>
+<p>查询阻塞状态：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#e5c07b">bool</span> <span style="color:#e06c75">isBlocked</span> = (<span style="color:#e06c75">someThread</span>.<span style="color:#e06c75">ThreadState</span> &amp; <span style="color:#e06c75">ThreadState</span>.<span style="color:#e06c75">WaitSleepJoin</span>) != <span style="color:#d19a66">0</span>;
+</span></span></code></pre></div><blockquote>
+<p><code>ThreadState</code> 是一个 flags 枚举。</p>
+</blockquote>
+<h4 id="io-密集型--计算密集型-bound">I/O 密集型 &amp; 计算密集型 Bound</h4>
+<p>两者是 C# 并发中非常重要的概念。</p>
+<ul>
+<li>等待事件发生的操作叫作 <strong>I/O 密集型</strong>（I/O-bound）</li>
+<li>占用 CPU 来处理数据叫<strong>计算密集型</strong>（Compute-bound）</li>
+</ul>
+<h3 id="局部变量--共享状态-local--shared-state">局部变量 &amp; 共享状态 Local &amp; Shared State</h3>
+<p>CLR 会分配给每个线程不同的内存栈，所以某一线程的局部变量是与其它线程隔绝的：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#c678dd">new</span> <span style="color:#e06c75">Thread</span> (<span style="color:#e06c75">Go</span>).<span style="color:#e06c75">Start</span>(); <span style="color:#7f848e">// 在新线程调用Go方法</span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">Go</span>();                    <span style="color:#7f848e">// 在主线程调用Go方法</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">void</span> <span style="color:#e06c75">Go</span>()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">//局部变量cycles</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">for</span> (<span style="color:#e5c07b">int</span> <span style="color:#e06c75">cycles</span> = <span style="color:#d19a66">0</span>; <span style="color:#e06c75">cycles</span> &lt; <span style="color:#d19a66">5</span>; <span style="color:#e06c75">cycles</span>++) <span style="color:#e06c75">Console</span>.<span style="color:#e06c75">Write</span> (<span style="color:#98c379">&#39;?&#39;</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>结果可想而知，会输出 10 个问号「?」。</p>
+<p>但是线程可以共享数据：如果它们有对同一对象或变量的引用：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#e5c07b">bool</span> <span style="color:#e06c75">_done</span> = <span style="color:#c678dd">false</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">new</span> <span style="color:#e06c75">Thread</span> (<span style="color:#e06c75">Go</span>).<span style="color:#e06c75">Start</span>();
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">Go</span>()
+</span></span><span style="display:flex;"><span>;
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">void</span> <span style="color:#e06c75">Go</span>()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">if</span> (!<span style="color:#e06c75">_done</span>) { <span style="color:#e06c75">_done</span> = <span style="color:#c678dd">true</span>; <span style="color:#e06c75">Console</span>.<span style="color:#e06c75">WriteLine</span> (<span style="color:#98c379">&#34;Done&#34;</span>); }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>两个线程共享了 <code>_done</code> 所以「Done」仅仅输出一次。</p>
+<p>换成 Lambda 表达式也是可以共享的：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#e5c07b">bool</span> <span style="color:#e06c75">done</span> = <span style="color:#c678dd">false</span>;
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">ThreadStart</span> <span style="color:#e06c75">action</span> = () =&gt;
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">if</span> (!<span style="color:#e06c75">done</span>) { <span style="color:#e06c75">done</span> = <span style="color:#c678dd">true</span>; <span style="color:#e06c75">Console</span>.<span style="color:#e06c75">WriteLine</span> (<span style="color:#98c379">&#34;Done&#34;</span>); }
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">new</span> <span style="color:#e06c75">Thread</span> (<span style="color:#e06c75">action</span>).<span style="color:#e06c75">Start</span>();
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">action</span>();
+</span></span></code></pre></div><p>这引出了一个关键概念：<strong>线程安全</strong>！</p>
+<h3 id="线程锁--线程安全-lock--thread-safety">线程锁 &amp; 线程安全 Lock &amp; Thread Safety</h3>
+<p>来看看锁🔒：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#c678dd">class</span> <span style="color:#e5c07b">ThreadSafe</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">static</span> <span style="color:#e5c07b">bool</span> <span style="color:#e06c75">_done</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">static</span> <span style="color:#c678dd">readonly</span> <span style="color:#e5c07b">object</span> <span style="color:#e06c75">_locker</span> = <span style="color:#c678dd">new</span> <span style="color:#e5c07b">object</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">static</span> <span style="color:#c678dd">void</span> <span style="color:#e06c75">Main</span>()
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">new</span> <span style="color:#e06c75">Thread</span> (<span style="color:#e06c75">Go</span>).<span style="color:#e06c75">Start</span>();
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">Go</span>();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">static</span> <span style="color:#c678dd">void</span> <span style="color:#e06c75">Go</span>()
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">lock</span> (<span style="color:#e06c75">_locker</span>)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#c678dd">if</span> (!<span style="color:#e06c75">_done</span>) { <span style="color:#e06c75">Console</span>.<span style="color:#e06c75">WriteLine</span> (<span style="color:#98c379">&#34;Done&#34;</span>); <span style="color:#e06c75">_done</span> = <span style="color:#c678dd">true</span>; }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>其实这也不必多说，就是阻止两个线程同时修改某一变量罢了。</p>
+<h3 id="向线程传递数据">向线程传递数据</h3>
+<p>有的时候，我们想在线程开始的时候传递数据，可以这么做：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#e06c75">Thread</span> <span style="color:#e06c75">t</span> = <span style="color:#c678dd">new</span> <span style="color:#e06c75">Thread</span> ( () =&gt; <span style="color:#e06c75">Print</span> (<span style="color:#98c379">&#34;Hello from t!&#34;</span>) );
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">t</span>.<span style="color:#e06c75">Start</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">void</span> <span style="color:#e06c75">Print</span> (<span style="color:#e5c07b">string</span> <span style="color:#e06c75">message</span>) =&gt; <span style="color:#e06c75">Console</span>.<span style="color:#e06c75">WriteLine</span> (<span style="color:#e06c75">message</span>);
+</span></span></code></pre></div><p>用 Lambda 表达式也行：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#c678dd">new</span> <span style="color:#e06c75">Thread</span> (() =&gt;
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">Console</span>.<span style="color:#e06c75">WriteLine</span> (<span style="color:#98c379">&#34;看！我跑在另一个线程里！&#34;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">Console</span>.<span style="color:#e06c75">WriteLine</span> (<span style="color:#98c379">&#34;有手就行！&#34;</span>);
+</span></span><span style="display:flex;"><span>}).<span style="color:#e06c75">Start</span>();
+</span></span></code></pre></div><h4 id="捕获变量-captured-variables">捕获变量 Captured Variables</h4>
+<p>一定要小心捕获变量：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span><span style="color:#c678dd">for</span> (<span style="color:#e5c07b">int</span> <span style="color:#e06c75">i</span> = <span style="color:#d19a66">0</span>; <span style="color:#e06c75">i</span> &lt; <span style="color:#d19a66">10</span>; <span style="color:#e06c75">i</span>++)
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">new</span> <span style="color:#e06c75">Thread</span> (() =&gt; <span style="color:#e06c75">Console</span>.<span style="color:#e06c75">Write</span> (<span style="color:#e06c75">i</span>)).<span style="color:#e06c75">Start</span>();
+</span></span></code></pre></div><p>输出结果是不确定的！结果：</p>
+<pre tabindex="0"><code>0223557799
+</code></pre><p>问题所在是变量 <code>i</code> 指向了循环中同一内存位置。所以变量 <code>i</code> 的值其实一直在被不同线程修改。</p>
+<p>解决方案是使用临时变量：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#c678dd">for</span> (<span style="color:#e5c07b">int</span> <span style="color:#e06c75">i</span> = <span style="color:#d19a66">0</span>; <span style="color:#e06c75">i</span> &lt; <span style="color:#d19a66">10</span>; <span style="color:#e06c75">i</span>++)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">int</span> <span style="color:#e06c75">temp</span> = <span style="color:#e06c75">i</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">new</span> <span style="color:#e06c75">Thread</span> (() =&gt; <span style="color:#e06c75">Console</span>.<span style="color:#e06c75">Write</span> (<span style="color:#e06c75">temp</span>)).<span style="color:#e06c75">Start</span>();
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>再来看看类似的问题：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#e5c07b">string</span> <span style="color:#e06c75">text</span> = <span style="color:#98c379">&#34;t1&#34;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">Thread</span> <span style="color:#e06c75">t1</span> = <span style="color:#c678dd">new</span> <span style="color:#e06c75">Thread</span> ( () =&gt; <span style="color:#e06c75">Console</span>.<span style="color:#e06c75">WriteLine</span> (<span style="color:#e06c75">text</span>) );
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">text</span> = <span style="color:#98c379">&#34;t2&#34;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">Thread</span> <span style="color:#e06c75">t2</span> = <span style="color:#c678dd">new</span> <span style="color:#e06c75">Thread</span> ( () =&gt; <span style="color:#e06c75">Console</span>.<span style="color:#e06c75">WriteLine</span> (<span style="color:#e06c75">text</span>) 
+</span></span><span style="display:flex;"><span>);
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">t1</span>.<span style="color:#e06c75">Start</span>(); <span style="color:#e06c75">t2</span>.<span style="color:#e06c75">Start</span>();
+</span></span></code></pre></div><p>因为两个 Lambda 表达式捕获了同一变量 <code>text</code>，所以值 <code>t2</code> 会被输出两次。</p>
+<h3 id="异常处理">异常处理</h3>
+<p>先看看<strong>不正确</strong>的写法：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#c678dd">try</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">new</span> <span style="color:#e06c75">Thread</span> (<span style="color:#e06c75">Go</span>).<span style="color:#e06c75">Start</span>();
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">catch</span> (<span style="color:#e06c75">Exception</span> <span style="color:#e06c75">ex</span>)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">// 永远不会到达这里！</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">Console</span>.<span style="color:#e06c75">WriteLine</span> (<span style="color:#98c379">&#34;Exception!&#34;</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">void</span> <span style="color:#e06c75">Go</span>() { <span style="color:#c678dd">throw</span> <span style="color:#c678dd">null</span>; } <span style="color:#7f848e">// 本应该抛出Null引用错误</span>
+</span></span></code></pre></div><p>每个线程有独立的执行路径，所以我们在线程之外捕获异常是没用的。</p>
+<p>解决方案是把异常处理语句放入方法内：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#c678dd">new</span> <span style="color:#e06c75">Thread</span> (<span style="color:#e06c75">Go</span>).<span style="color:#e06c75">Start</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">void</span> <span style="color:#e06c75">Go</span>()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">try</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">throw</span> <span style="color:#c678dd">null</span>; 
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">catch</span> (<span style="color:#e06c75">Exception</span> <span style="color:#e06c75">ex</span>)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#7f848e">// 这样就可以捕获了</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h4 id="集中异常处理-centralized-exception-handler">集中异常处理 Centralized Exception Handler</h4>
+<p>在 WPF、UWP 或者 WinForm 应用里，我们可以订阅<strong>全局</strong>异常处理事件 <code>Application.DispatcherUnhandledException</code> 以及 <code>Application.ThreadException</code>。</p>
+<h3 id="前台线程--后台线程-foreground--background-threads">前台线程 &amp; 后台线程 Foreground &amp; Background Threads</h3>
+<p>默认情况下，你显式创建的线程都是前台线程。程序结束，你的显式线程也会结束。</p>
+<p>后台线程则不然，依然会保持运行。</p>
+<p>你可以用 <code>IsBackground</code> 属性来操作前后台状态：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#c678dd">static</span> <span style="color:#c678dd">void</span> <span style="color:#e06c75">Main</span> (<span style="color:#e5c07b">string</span>[] <span style="color:#e06c75">args</span>)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>   <span style="color:#e06c75">Thread</span> <span style="color:#e06c75">worker</span> = <span style="color:#c678dd">new</span> <span style="color:#e06c75">Thread</span> ( () =&gt; <span style="color:#e06c75">Console</span>.<span style="color:#e06c75">ReadLine</span>() );
+</span></span><span style="display:flex;"><span>   <span style="color:#c678dd">if</span> (<span style="color:#e06c75">args</span>.<span style="color:#e06c75">Length</span> &gt; <span style="color:#d19a66">0</span>) <span style="color:#e06c75">worker</span>.<span style="color:#e06c75">IsBackground</span> = <span style="color:#c678dd">true</span>;
+</span></span><span style="display:flex;"><span>   <span style="color:#e06c75">worker</span>.<span style="color:#e06c75">Start</span>();
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="线程级别-thread-priority">线程级别 Thread Priority</h3>
+<p>一个线程的 <code>Priority</code> 属性决定了它可以运行多久（相较于其它线程而言）：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#c678dd">enum</span> <span style="color:#e06c75">ThreadPriority</span> { <span style="color:#e06c75">Lowest</span>, <span style="color:#e06c75">BelowNormal</span>, <span style="color:#e06c75">Normal</span>, <span style="color:#e06c75">AboveNormal</span>, <span style="color:#e06c75">Highest</span> }
+</span></span></code></pre></div><h3 id="发信号-signaling">发信号 Signaling</h3>
+<p>有时，你需要线程一直等待直到收到其它线程发送的通知，这就是 <strong>Signaling</strong>。</p>
+<p>最简单的 Signaling 结构是 <code>ManualResetEvent</code> 。</p>
+<p>在一个 <code>ManualResetEvent</code> 块中调用 <code>WaitOne</code> 方法，阻塞当前线程直到另一线程调用 <code>Set</code> 方法：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#e5c07b">var</span> <span style="color:#e06c75">signal</span> = <span style="color:#c678dd">new</span> <span style="color:#e06c75">ManualResetEvent</span> (<span style="color:#c678dd">false</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">new</span> <span style="color:#e06c75">Thread</span> (() =&gt;
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">Console</span>.<span style="color:#e06c75">WriteLine</span> (<span style="color:#98c379">&#34;Waiting for signal...&#34;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">signal</span>.<span style="color:#e06c75">WaitOne</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">signal</span>.<span style="color:#e06c75">Dispose</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">Console</span>.<span style="color:#e06c75">WriteLine</span> (<span style="color:#98c379">&#34;Got signal!&#34;</span>);
+</span></span><span style="display:flex;"><span>}).<span style="color:#e06c75">Start</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">Thread</span>.<span style="color:#e06c75">Sleep</span>(<span style="color:#d19a66">2000</span>);
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">signal</span>.<span style="color:#e06c75">Set</span>(); <span style="color:#7f848e">// 发送信号</span>
+</span></span></code></pre></div><h3 id="线程在客户端应用-threading-in-rich-client-applications">线程在客户端应用 Threading in Rich Client Applications</h3>
+<p>在 WPF 或者 UWP 等等客户端的开发中，但我们要执行耗时的任务时，通常的做法是启动一个「Worker」线程。</p>
+<p>当你想要从「Worker」线程更新 UI 时，你必须传递至 UI 线程。编程术语「编列 Marshal」专门指代这一行为。</p>
+<ul>
+<li>
+<p>WPF：调用 <code>Dispatcher</code> 对象的 <code>BeginInvoke</code> 或 <code>Invoke</code> 方法</p>
+</li>
+<li>
+<p>UWP：调用 <code>Dispatcher</code> 对象的 <code>RunAsync</code> 或 <code>Invoke</code> 方法</p>
+</li>
+<li>
+<p>WinForm：调用控件的 <code>BeginInvoke</code> 或 <code>Invoke</code> 方法</p>
+</li>
+</ul>
+<p>这些方法的实质都是把你想要执行的方法推送到 UI 线程的消息队列中。</p>
+<p>但是 <code>Invoke</code> 方法有一点特殊：它会<strong>阻塞</strong>线程直到消息被 UI 线程处理。因此它可以用来返回值。</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#c678dd">partial</span> <span style="color:#c678dd">class</span> <span style="color:#e5c07b">MyWindow</span> : <span style="color:#e06c75">Window</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">public</span> <span style="color:#e06c75">MyWindow</span>()
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">InitializeComponent</span>();
+</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">new</span> <span style="color:#e06c75">Thread</span> (<span style="color:#e06c75">Work</span>).<span style="color:#e06c75">Start</span>();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">void</span> <span style="color:#e06c75">Work</span>()
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">Thread</span>.<span style="color:#e06c75">Sleep</span> (<span style="color:#d19a66">5000</span>); <span style="color:#7f848e">// 假装耗时任务</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">UpdateMessage</span> (<span style="color:#98c379">&#34;The answer&#34;</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">void</span> <span style="color:#e06c75">UpdateMessage</span> (<span style="color:#e5c07b">string</span> <span style="color:#e06c75">message</span>)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">Action</span> <span style="color:#e06c75">action</span> = () =&gt; <span style="color:#e06c75">txtMessage</span>.<span style="color:#e06c75">Text</span> = <span style="color:#e06c75">message</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">Dispatcher</span>.<span style="color:#e06c75">BeginInvoke</span> (<span style="color:#e06c75">action</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="同步上下文-synchronization-contexts">同步上下文 Synchronization Contexts</h3>
+<p>WPF、UWP 等等框架都实现了这个类（子类）。</p>
+<p>这个类被放在 <code>System.ComponentModel</code> 中，用来帮助我们进行 「Marshal」操作。</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#c678dd">partial</span> <span style="color:#c678dd">class</span> <span style="color:#e5c07b">MyWindow</span> : <span style="color:#e06c75">Window</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">SynchronizationContext</span> <span style="color:#e06c75">_uiSyncContext</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">public</span> <span style="color:#e06c75">MyWindow</span>()
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">InitializeComponent</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#7f848e">// 获取当前UI线程的同步上下文</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">_uiSyncContext</span> = <span style="color:#e06c75">SynchronizationContext</span>.<span style="color:#e06c75">Current</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">new</span> <span style="color:#e06c75">Thread</span> (<span style="color:#e06c75">Work</span>).<span style="color:#e06c75">Start</span>();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">void</span> <span style="color:#e06c75">Work</span>()
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">Thread</span>.<span style="color:#e06c75">Sleep</span> (<span style="color:#d19a66">5000</span>); <span style="color:#7f848e">// 假装耗时操作</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">UpdateMessage</span> (<span style="color:#98c379">&#34;The answer&#34;</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">void</span> <span style="color:#e06c75">UpdateMessage</span> (<span style="color:#e5c07b">string</span> <span style="color:#e06c75">message</span>)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#7f848e">// Marshal委托至UI线程</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">_uiSyncContext</span>.<span style="color:#e06c75">Post</span> (<span style="color:#e06c75">_</span> =&gt; <span style="color:#e06c75">txtMessage</span>.<span style="color:#e06c75">Text</span> = <span style="color:#e06c75">message</span>, <span style="color:#c678dd">null</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>调用 <code>Post</code> 方法等价于调用 <code>BeginInvoke</code> 方法。</p>
+<h3 id="线程池-the-thread-pool">线程池 The Thread Pool</h3>
+<p>线程池就是用来方便多线程管理的。</p>
+<p>有几点值得注意：</p>
+<ul>
+<li>
+<p>你不能为池线程设置 Name 属性，这会让 Debug 更加困难</p>
+</li>
+<li>
+<p>池线程通常是<strong>后台线程</strong></p>
+</li>
+<li>
+<p>阻塞池线程会导致性能降低</p>
+</li>
+</ul>
+<p>你可以改变池线程的级别。</p>
+<p>你可以通过 <code>Thread.CurrentThread.IsThreadPoolThread.</code> 来指定是否让线程在池里运行。</p>
+<h4 id="进入线程池-enter-the-pool">进入线程池 Enter the pool</h4>
+<p>最简单的方式是：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#e06c75">Task</span>.<span style="color:#e06c75">Run</span> (() =&gt; <span style="color:#e06c75">Console</span>.<span style="color:#e06c75">WriteLine</span> (<span style="color:#98c379">&#34;你先别急，Task后面会讲&#34;</span>));
+</span></span></code></pre></div><p>在 .NET Framework 4.0 以前的上古时期 C# 没有 Task 协程，是这样进入线程池的：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#e06c75">ThreadPool</span>.<span style="color:#e06c75">QueueUserWorkItem</span> (<span style="color:#e06c75">notUsed</span> =&gt; <span style="color:#e06c75">Console</span>.<span style="color:#e06c75">WriteLine</span> (<span style="color:#98c379">&#34;Hello&#34;</span>));
+</span></span></code></pre></div><blockquote>
+<p>隐式使用线程池的库：</p>
+<ul>
+<li>
+<p>ASP.NET Core / Web API 应用</p>
+</li>
+<li>
+<p>System.Timers.Timer 和 System.Threading.Timer</p>
+</li>
+<li>
+<p>BackgroundWorker 类（传统）</p>
+</li>
+</ul>
+</blockquote>
+<h4 id="线程池卫生-hygiene-in-the-thread-pool">线程池卫生 Hygiene in the thread pool</h4>
+<p>线程池还有一个作用是保证 CPU 不会「超额认购 Oversubscription」。</p>
+<p>「Oversubscription」指的是活跃线程数量超过 CPU 核心数量的状态。</p>
+<p>总之，CLR 会通过排序任务队列和减速任务启动来阻止「超额认购」。</p>
+<hr>
+<h2 id="任务-task">任务 Task</h2>
+<h3 id="创建任务-create-a-task">创建任务 Create a Task</h3>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#e06c75">Task</span>.<span style="color:#e06c75">Run</span> (() =&gt; <span style="color:#e06c75">Console</span>.<span style="color:#e06c75">WriteLine</span> (<span style="color:#98c379">&#34;Foo&#34;</span>));
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">Console</span>.<span style="color:#e06c75">ReadLine</span>(); <span style="color:#7f848e">//用来阻塞一下</span>
+</span></span></code></pre></div><h4 id="等待-wait">等待 Wait</h4>
+<p>和线程的 <code>Join</code> 类似：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#e06c75">Task</span> <span style="color:#e06c75">task</span> = <span style="color:#e06c75">Task</span>.<span style="color:#e06c75">Run</span> (() =&gt;
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">Thread</span>.<span style="color:#e06c75">Sleep</span> (<span style="color:#d19a66">2000</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">Console</span>.<span style="color:#e06c75">WriteLine</span> (<span style="color:#98c379">&#34;Foo&#34;</span>);
+</span></span><span style="display:flex;"><span>});
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">Console</span>.<span style="color:#e06c75">WriteLine</span> (<span style="color:#e06c75">task</span>.<span style="color:#e06c75">IsCompleted</span>); <span style="color:#7f848e">// False</span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">task</span>.<span style="color:#e06c75">Wait</span>(); <span style="color:#7f848e">// 阻塞直到Task结束</span>
+</span></span></code></pre></div><h4 id="耗时任务-longrunning-task">耗时任务 LongRunning Task</h4>
+<p>CLR 默认会让 Task 运行在池线程（适用于短时计算的线程）。</p>
+<p>为了运行耗时长的 Task：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#e06c75">Task</span> <span style="color:#e06c75">task</span> = <span style="color:#e06c75">Task</span>.<span style="color:#e06c75">Factory</span>.<span style="color:#e06c75">StartNew</span> (() =&gt; ..., <span style="color:#e06c75">TaskCreationOptions</span>.<span style="color:#e06c75">LongRunning</span>);
+</span></span></code></pre></div><h3 id="返回值-return-values">返回值 Return Values</h3>
+<p>最简单的返回值写法：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#e06c75">Task</span>&lt;<span style="color:#e5c07b">int</span>&gt; <span style="color:#e06c75">task</span> = <span style="color:#e06c75">Task</span>.<span style="color:#e06c75">Run</span> (() =&gt; { <span style="color:#e06c75">Console</span>.<span style="color:#e06c75">WriteLine</span> (<span style="color:#98c379">&#34;Foo&#34;</span>); <span style="color:#c678dd">return</span> <span style="color:#d19a66">3</span>; });
+</span></span></code></pre></div><p>你可以通过 Task 的 <code>Result</code> 属性来获取返回值。这步操作将会阻塞线程直至 Task 结束：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#e5c07b">int</span> <span style="color:#e06c75">result</span> = <span style="color:#e06c75">task</span>.<span style="color:#e06c75">Result</span>;
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">Console</span>.<span style="color:#e06c75">WriteLine</span>(<span style="color:#e06c75">result</span>);
+</span></span></code></pre></div><p>接下来，我们创建一个使用 LINQ 的 Task，用以计算 300 0000 以内的素数：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#e06c75">Task</span>&lt;<span style="color:#e5c07b">int</span>&gt; <span style="color:#e06c75">primeNumberTask</span> = <span style="color:#e06c75">Task</span>.<span style="color:#e06c75">Run</span> (() =&gt; 
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">Enumerable</span>.<span style="color:#e06c75">Range</span> (<span style="color:#d19a66">2</span>, <span style="color:#d19a66">3000000</span>).<span style="color:#e06c75">Count</span> (<span style="color:#e06c75">n</span> =&gt;
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">Enumerable</span>.<span style="color:#e06c75">Range</span> (<span style="color:#d19a66">2</span>, (<span style="color:#e5c07b">int</span>)<span style="color:#e06c75">Math</span>.<span style="color:#e06c75">Sqrt</span>(<span style="color:#e06c75">n</span>)-<span style="color:#d19a66">1</span>).<span style="color:#e06c75">All</span> (<span style="color:#e06c75">i</span> =&gt; <span style="color:#e06c75">n</span> % <span style="color:#e06c75">i</span> &gt; <span style="color:#d19a66">0</span>)));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">Console</span>.<span style="color:#e06c75">WriteLine</span> (<span style="color:#98c379">&#34;Task running...&#34;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">Console</span>.<span style="color:#e06c75">WriteLine</span> (<span style="color:#98c379">&#34;The answer is &#34;</span> + <span style="color:#e06c75">primeNumberTask</span>.<span style="color:#e06c75">Result</span>);
+</span></span></code></pre></div><h3 id="异常-exception">异常 Exception</h3>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#7f848e">//开启一个抛出NullReferenceException的Task</span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">Task</span> <span style="color:#e06c75">task</span> = <span style="color:#e06c75">Task</span>.<span style="color:#e06c75">Run</span> (() =&gt; { <span style="color:#c678dd">throw</span> <span style="color:#c678dd">null</span>; });
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">try</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">task</span>.<span style="color:#e06c75">Wait</span>();
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">catch</span> (<span style="color:#e06c75">AggregateException</span> <span style="color:#e06c75">aex</span>)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">if</span> (<span style="color:#e06c75">aex</span>.<span style="color:#e06c75">InnerException</span> <span style="color:#c678dd">is</span> <span style="color:#e06c75">NullReferenceException</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">Console</span>.<span style="color:#e06c75">WriteLine</span> (<span style="color:#98c379">&#34;Null!&#34;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">else</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">throw</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="后续-continuations">后续 Continuations</h3>
+<p>顾名思义，就是当 Task 结束之后该干啥：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#e06c75">Task</span>&lt;<span style="color:#e5c07b">int</span>&gt; <span style="color:#e06c75">primeNumberTask</span> = <span style="color:#e06c75">Task</span>.<span style="color:#e06c75">Run</span> (() =&gt;
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">Enumerable</span>.<span style="color:#e06c75">Range</span> (<span style="color:#d19a66">2</span>, <span style="color:#d19a66">3000000</span>).<span style="color:#e06c75">Count</span> (<span style="color:#e06c75">n</span> =&gt;
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">Enumerable</span>.<span style="color:#e06c75">Range</span> (<span style="color:#d19a66">2</span>, (<span style="color:#e5c07b">int</span>)<span style="color:#e06c75">Math</span>.<span style="color:#e06c75">Sqrt</span>(<span style="color:#e06c75">n</span>)-<span style="color:#d19a66">1</span>).<span style="color:#e06c75">All</span> (<span style="color:#e06c75">i</span> =&gt; <span style="color:#e06c75">n</span> % <span style="color:#e06c75">i</span> &gt; <span style="color:#d19a66">0</span>)));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#e5c07b">var</span> <span style="color:#e06c75">awaiter</span> = <span style="color:#e06c75">primeNumberTask</span>.<span style="color:#e06c75">GetAwaiter</span>();
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">awaiter</span>.<span style="color:#e06c75">OnCompleted</span> (() =&gt;
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">int</span> <span style="color:#e06c75">result</span> = <span style="color:#e06c75">awaiter</span>.<span style="color:#e06c75">GetResult</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">Console</span>.<span style="color:#e06c75">WriteLine</span> (<span style="color:#e06c75">result</span>); 
+</span></span><span style="display:flex;"><span>});
+</span></span></code></pre></div><hr>
+<h2 id="c-异步编程">C# 异步编程</h2>
+<p>终于到了本章的重头戏了！</p>
+<h3 id="awaiting">Awaiting</h3>
+<p><code>await</code> 关键字自动附加后续操作。</p>
+<p>简单使用：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#e5c07b">var</span> <span style="color:#e06c75">result</span> = <span style="color:#c678dd">await</span> <span style="color:#e06c75">expression</span>;
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">statement</span>(<span style="color:#e06c75">s</span>);
+</span></span></code></pre></div><p>编译器会把这小段代码自动转化为：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#e5c07b">var</span> <span style="color:#e06c75">awaiter</span> = <span style="color:#e06c75">expression</span>.<span style="color:#e06c75">GetAwaiter</span>();
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">awaiter</span>.<span style="color:#e06c75">OnCompleted</span> (() =&gt;
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">var</span> <span style="color:#e06c75">result</span> = <span style="color:#e06c75">awaiter</span>.<span style="color:#e06c75">GetResult</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">statement</span>(<span style="color:#e06c75">s</span>);
+</span></span><span style="display:flex;"><span>});
+</span></span></code></pre></div><p>来看看之前的代码：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#e06c75">Task</span>&lt;<span style="color:#e5c07b">int</span>&gt; <span style="color:#e06c75">GetPrimesCountAsync</span> (<span style="color:#e5c07b">int</span> <span style="color:#e06c75">start</span>, <span style="color:#e5c07b">int</span> <span style="color:#e06c75">count</span>)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">return</span> <span style="color:#e06c75">Task</span>.<span style="color:#e06c75">Run</span> (() =&gt;
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">ParallelEnumerable</span>.<span style="color:#e06c75">Range</span> (<span style="color:#e06c75">start</span>, <span style="color:#e06c75">count</span>).<span style="color:#e06c75">Count</span> (<span style="color:#e06c75">n</span> =&gt;
+</span></span><span style="display:flex;"><span>            <span style="color:#e06c75">Enumerable</span>.<span style="color:#e06c75">Range</span> (<span style="color:#d19a66">2</span>, (<span style="color:#e5c07b">int</span>)<span style="color:#e06c75">Math</span>.<span style="color:#e06c75">Sqrt</span>(<span style="color:#e06c75">n</span>)-<span style="color:#d19a66">1</span>).<span style="color:#e06c75">All</span> (<span style="color:#e06c75">i</span> =&gt; <span style="color:#e06c75">n</span> % <span style="color:#e06c75">i</span> &gt; <span style="color:#d19a66">0</span>)));
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>使用 <code>await</code> 关键字，我们可以如下调用：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#e5c07b">int</span> <span style="color:#e06c75">result</span> = <span style="color:#c678dd">await</span> <span style="color:#e06c75">GetPrimesCountAsync</span> (<span style="color:#d19a66">2</span>, <span style="color:#d19a66">1000000</span>);
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">Console</span>.<span style="color:#e06c75">WriteLine</span> (<span style="color:#e06c75">result</span>);
+</span></span></code></pre></div><p>但在编译前，我们需要给外层代码加一个 <code>async</code> 关键字：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#c678dd">async</span> <span style="color:#c678dd">void</span> <span style="color:#e06c75">DisplayPrimesCount</span>()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">int</span> <span style="color:#e06c75">result</span> = <span style="color:#c678dd">await</span> <span style="color:#e06c75">GetPrimesCountAsync</span> (<span style="color:#d19a66">2</span>, <span style="color:#d19a66">1000000</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">Console</span>.<span style="color:#e06c75">WriteLine</span> (<span style="color:#e06c75">result</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><code>async</code> 关键字只能加给返回值类型是 <code>void</code>，<code>Task</code> 以及 <code>Task&lt;TResult&gt;</code> 的方法。</p>
+<p>当返回值是空时：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#c678dd">await</span> <span style="color:#e06c75">Task</span>.<span style="color:#e06c75">Delay</span> (<span style="color:#d19a66">5000</span>);
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">Console</span>.<span style="color:#e06c75">WriteLine</span> (<span style="color:#98c379">&#34;Five seconds passed!&#34;</span>);
+</span></span></code></pre></div><h4 id="捕获局部变量-capturing-local-state">捕获局部变量 Capturing local state</h4>
+<p><code>await</code> 的真正力量在于它可以出现在代码的任意位置（但不能在线程锁以及 <code>unsafe</code> 块中）：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#c678dd">async</span> <span style="color:#c678dd">void</span> <span style="color:#e06c75">DisplayPrimeCounts</span>()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">for</span> (<span style="color:#e5c07b">int</span> <span style="color:#e06c75">i</span> = <span style="color:#d19a66">0</span>; <span style="color:#e06c75">i</span> &lt; <span style="color:#d19a66">10</span>; <span style="color:#e06c75">i</span>++)
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">Console</span>.<span style="color:#e06c75">WriteLine</span> (<span style="color:#c678dd">await</span> <span style="color:#e06c75">GetPrimesCountAsync</span> (<span style="color:#e06c75">i</span>*<span style="color:#d19a66">1000000</span>+<span style="color:#d19a66">2</span>, <span style="color:#d19a66">1000000</span>));
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>在第一次执行 <code>GetPrimesCountAsync</code> 之后，变量 <code>i</code> 的值会被保存。</p>
+<h4 id="在-ui-中等待-awaiting-in-a-ui">在 UI 中等待 Awaiting in a UI</h4>
+<p>我们先从一个同步的代码开始：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#c678dd">class</span> <span style="color:#e5c07b">TestUI</span> : <span style="color:#e06c75">Window</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">Button</span> <span style="color:#e06c75">_button</span> = <span style="color:#c678dd">new</span> <span style="color:#e06c75">Button</span> { <span style="color:#e06c75">Content</span> = <span style="color:#98c379">&#34;Go&#34;</span> };
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">TextBlock</span> <span style="color:#e06c75">_results</span> = <span style="color:#c678dd">new</span> <span style="color:#e06c75">TextBlock</span>();
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">public</span> <span style="color:#e06c75">TestUI</span>()
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#e5c07b">var</span> <span style="color:#e06c75">panel</span> = <span style="color:#c678dd">new</span> <span style="color:#e06c75">StackPanel</span>();
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">panel</span>.<span style="color:#e06c75">Children</span>.<span style="color:#e06c75">Add</span> (<span style="color:#e06c75">_button</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">panel</span>.<span style="color:#e06c75">Children</span>.<span style="color:#e06c75">Add</span> (<span style="color:#e06c75">_results</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">Content</span> = <span style="color:#e06c75">panel</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">_button</span>.<span style="color:#e06c75">Click</span> += (<span style="color:#e06c75">sender</span>, <span style="color:#e06c75">args</span>) =&gt; <span style="color:#e06c75">Go</span>();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">void</span> <span style="color:#e06c75">Go</span>()
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">for</span> (<span style="color:#e5c07b">int</span> <span style="color:#e06c75">i</span> = <span style="color:#d19a66">1</span>; <span style="color:#e06c75">i</span> &lt; <span style="color:#d19a66">5</span>; <span style="color:#e06c75">i</span>++)
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">_results</span>.<span style="color:#e06c75">Text</span> += <span style="color:#e06c75">GetPrimesCount</span> (<span style="color:#e06c75">i</span> * <span style="color:#d19a66">1000000</span>, <span style="color:#d19a66">1000000</span>) +
+</span></span><span style="display:flex;"><span>        <span style="color:#98c379">&#34; primes between &#34;</span> + (<span style="color:#e06c75">i</span>*<span style="color:#d19a66">1000000</span>) + <span style="color:#98c379">&#34; and &#34;</span> + ((<span style="color:#e06c75">i</span>+<span style="color:#d19a66">1</span>)*<span style="color:#d19a66">1000000</span>-<span style="color:#d19a66">1</span>) +
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">Environment</span>.<span style="color:#e06c75">NewLine</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">int</span> <span style="color:#e06c75">GetPrimesCount</span> (<span style="color:#e5c07b">int</span> <span style="color:#e06c75">start</span>, <span style="color:#e5c07b">int</span> <span style="color:#e06c75">count</span>)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">return</span> <span style="color:#e06c75">ParallelEnumerable</span>.<span style="color:#e06c75">Range</span> (<span style="color:#e06c75">start</span>, <span style="color:#e06c75">count</span>).<span style="color:#e06c75">Count</span> (<span style="color:#e06c75">n</span> =&gt; <span style="color:#e06c75">Enumerable</span>.<span style="color:#e06c75">Range</span> (<span style="color:#d19a66">2</span>, (<span style="color:#e5c07b">int</span>) <span style="color:#e06c75">Math</span>.<span style="color:#e06c75">Sqrt</span>(<span style="color:#e06c75">n</span>)-<span style="color:#d19a66">1</span>).<span style="color:#e06c75">All</span> (<span style="color:#e06c75">i</span> =&gt; <span style="color:#e06c75">n</span> % <span style="color:#e06c75">i</span> &gt; <span style="color:#d19a66">0</span>));
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>可以看到点击按钮就会阻塞线程。</p>
+<p>接下来我们使用异步改写。</p>
+<p>第一步是把计算素数的方法改成异步的：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#e06c75">Task</span>&lt;<span style="color:#e5c07b">int</span>&gt; <span style="color:#e06c75">GetPrimesCountAsync</span> (<span style="color:#e5c07b">int</span> <span style="color:#e06c75">start</span>, <span style="color:#e5c07b">int</span> <span style="color:#e06c75">count</span>)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">return</span> <span style="color:#e06c75">Task</span>.<span style="color:#e06c75">Run</span> (() =&gt; <span style="color:#e06c75">ParallelEnumerable</span>.<span style="color:#e06c75">Range</span> (<span style="color:#e06c75">start</span>, <span style="color:#e06c75">count</span>).<span style="color:#e06c75">Count</span>(<span style="color:#e06c75">n</span> =&gt; <span style="color:#e06c75">Enumerable</span>.<span style="color:#e06c75">Range</span>(<span style="color:#d19a66">2</span>, (<span style="color:#e5c07b">int</span>) <span style="color:#e06c75">Math</span>.<span style="color:#e06c75">Sqrt</span>(<span style="color:#e06c75">n</span>)-<span style="color:#d19a66">1</span>).<span style="color:#e06c75">All</span> (<span style="color:#e06c75">i</span> =&gt; <span style="color:#e06c75">n</span> % <span style="color:#e06c75">i</span> &gt; <span style="color:#d19a66">0</span>)));
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>第二步是修改 <code>Go</code> 方法：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#c678dd">async</span> <span style="color:#c678dd">void</span> <span style="color:#e06c75">Go</span>()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">_button</span>.<span style="color:#e06c75">IsEnabled</span> = <span style="color:#c678dd">false</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">for</span> (<span style="color:#e5c07b">int</span> <span style="color:#e06c75">i</span> = <span style="color:#d19a66">1</span>; <span style="color:#e06c75">i</span> &lt; <span style="color:#d19a66">5</span>; <span style="color:#e06c75">i</span>++)
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">_results</span>.<span style="color:#e06c75">Text</span> += <span style="color:#c678dd">await</span> <span style="color:#e06c75">GetPrimesCountAsync</span> (<span style="color:#e06c75">i</span> * <span style="color:#d19a66">1000000</span>, <span style="color:#d19a66">1000000</span>) + <span style="color:#98c379">&#34; primes between &#34;</span> + (<span style="color:#e06c75">i</span>*<span style="color:#d19a66">1000000</span>) + <span style="color:#98c379">&#34; and &#34;</span> + ((<span style="color:#e06c75">i</span>+<span style="color:#d19a66">1</span>)*<span style="color:#d19a66">1000000</span>-<span style="color:#d19a66">1</span>) +
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">Environment</span>.<span style="color:#e06c75">NewLine</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">_button</span>.<span style="color:#e06c75">IsEnabled</span> = <span style="color:#c678dd">true</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>再来另一个例子，这回我们想要从网络上异步地下载数据了。</p>
+<p>重写 <code>Go</code> 方法：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#c678dd">async</span> <span style="color:#c678dd">void</span> <span style="color:#e06c75">Go</span>() 
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">_button</span>.<span style="color:#e06c75">IsEnabled</span> = <span style="color:#c678dd">false</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">string</span>[] <span style="color:#e06c75">urls</span> = <span style="color:#98c379">&#34;yoroion.github.io www.oreilly.com sinoahpx.github.io&#34;</span>.<span style="color:#e06c75">Split</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">int</span> <span style="color:#e06c75">totalLength</span> = <span style="color:#d19a66">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">try</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">foreach</span> (<span style="color:#e5c07b">string</span> <span style="color:#e06c75">url</span> <span style="color:#c678dd">in</span> <span style="color:#e06c75">urls</span>)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#e5c07b">var</span> <span style="color:#e06c75">uri</span> = <span style="color:#c678dd">new</span> <span style="color:#e06c75">Uri</span>(<span style="color:#98c379">&#34;http://&#34;</span> + <span style="color:#e06c75">url</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#e5c07b">byte</span>[] <span style="color:#e06c75">data</span> = <span style="color:#c678dd">await</span> <span style="color:#c678dd">new</span> <span style="color:#e06c75">WebClient</span>().<span style="color:#e06c75">DownloadDataTaskAsync</span> (<span style="color:#e06c75">uri</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#e06c75">_results</span>.<span style="color:#e06c75">Text</span> += <span style="color:#98c379">&#34;Length of &#34;</span> + <span style="color:#e06c75">url</span> + <span style="color:#98c379">&#34; is &#34;</span> + <span style="color:#e06c75">data</span>.<span style="color:#e06c75">Length</span> + <span style="color:#e06c75">Environment</span>.<span style="color:#e06c75">NewLine</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#e06c75">totalLength</span> += <span style="color:#e06c75">data</span>.<span style="color:#e06c75">Length</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">_results</span>.<span style="color:#e06c75">Text</span> += <span style="color:#98c379">&#34;Total length: &#34;</span> + <span style="color:#e06c75">totalLength</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">catch</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">_results</span>.<span style="color:#e06c75">Text</span> += <span style="color:#98c379">&#34;Error: &#34;</span> + <span style="color:#e06c75">ex</span>.<span style="color:#e06c75">Message</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">finally</span> { <span style="color:#e06c75">_button</span>.<span style="color:#e06c75">IsEnabled</span> = <span style="color:#c678dd">true</span>; }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>我们附加在 UI 控件上的 Event Handler 在消息队列（message loop）中进行。</p>
+<p>当我们的 <code>Go</code> 方法运行时，直至遇到 await 表达式，会跳转回消息队列来来响应其它事件。</p>
+<h3 id="编写异步方法-writing-asynchronous-functions">编写异步方法 Writing Asynchronous Functions</h3>
+<p>编写异步方法，我们可以把空返回值的方法改成返回 Task：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#c678dd">async</span> <span style="color:#e06c75">Task</span> <span style="color:#e06c75">PrintAnswerToLife</span>() <span style="color:#7f848e">//Task 替代了 void</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">await</span> <span style="color:#e06c75">Task</span>.<span style="color:#e06c75">Delay</span> (<span style="color:#d19a66">5000</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">int</span> <span style="color:#e06c75">answer</span> = <span style="color:#d19a66">21</span> * <span style="color:#d19a66">2</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">Console</span>.<span style="color:#e06c75">WriteLine</span> (<span style="color:#e06c75">answer</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>可以发现我们并没有显式地返回 Task，编译器帮我们简化了：</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#c678dd">async</span> <span style="color:#e06c75">Task</span> <span style="color:#e06c75">Go</span>()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">await</span> <span style="color:#e06c75">PrintAnswerToLife</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">Console</span>.<span style="color:#e06c75">WriteLine</span>(<span style="color:#98c379">&#34;Done&#34;</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h4 id="返回-tasktresult">返回 Task<!-- raw HTML omitted --></h4>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#c678dd">async</span> <span style="color:#e06c75">Task</span>&lt;<span style="color:#e5c07b">int</span>&gt; <span style="color:#e06c75">GetAnswerToLife</span>()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">await</span> <span style="color:#e06c75">Task</span>.<span style="color:#e06c75">Delay</span> (<span style="color:#d19a66">5000</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">int</span> <span style="color:#e06c75">answer</span> = <span style="color:#d19a66">21</span> * <span style="color:#d19a66">2</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">return</span> <span style="color:#e06c75">answer</span>; <span style="color:#7f848e">//直接返回整型</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>整体看一下代码:</p>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#c678dd">async</span> <span style="color:#e06c75">Task</span> <span style="color:#e06c75">Go</span>()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">await</span> <span style="color:#e06c75">PrintAnswerToLife</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">Console</span>.<span style="color:#e06c75">WriteLine</span> (<span style="color:#98c379">&#34;Done&#34;</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">async</span> <span style="color:#e06c75">Task</span> <span style="color:#e06c75">PrintAnswerToLife</span>()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">int</span> <span style="color:#e06c75">answer</span> = <span style="color:#c678dd">await</span> <span style="color:#e06c75">GetAnswerToLife</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">Console</span>.<span style="color:#e06c75">WriteLine</span> (<span style="color:#e06c75">answer</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">async</span> <span style="color:#e06c75">Task</span>&lt;<span style="color:#e5c07b">int</span>&gt; <span style="color:#e06c75">GetAnswerToLife</span>()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">await</span> <span style="color:#e06c75">Task</span>.<span style="color:#e06c75">Delay</span> (<span style="color:#d19a66">5000</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">int</span> <span style="color:#e06c75">answer</span> = <span style="color:#d19a66">21</span> * <span style="color:#d19a66">2</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">return</span> <span style="color:#e06c75">answer</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><blockquote>
+<p>这也揭示了 C# 中编写异步方法的基本原则:</p>
+<ol>
+<li>先同步地编写代码</li>
+<li>将同步方法改成异步的</li>
+<li>返回值改成 Task 或 Task<!-- raw HTML omitted --></li>
+</ol>
+</blockquote>
+<h4 id="并行-parallelism">并行 Parallelism</h4>
+
+                    
+                    <HR width="100%" id="EOF">
+		    <p style="color:#777;">上次修改於 2022-08-15</p>
+                    
+                </div>
+            </div>
+            
+            
+            <nav class="post-pagination">
+
+                
+                <a class="newer-posts" href="/posts/fsharp-for-csharp-devs/">
+			下回<br>写给 C# 开发者的 F# 光速入门教程
+                </a>
+                
+                
+                
+                <a class="older-posts" href="/posts/dotnet/rx-magic/rx-magic-3/">
+			上回<br>Rx.NET 响应式编程指北 03 - 深入流的创建
+                </a>
+                
+            </nav>
+            <div class="post-comment-wrapper">
+                
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+        data-repo="Kyocius/kyocius.github.io"
+        data-repo-id="MDEwOlJlcG9zaXRvcnkyODE4MDgxOTA="
+        data-category="Announcements"
+        data-category-id="DIC_kwDOEMwNPs4CXHLA"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="preferred_color_scheme"
+        data-lang="en"
+        crossorigin="anonymous"
+        async>
+</script>
+
+            </div>
+        </div>
+    </div>
+
+
+                    </div>
+            </div><div id="sideContainer" class="side-container">
+    
+    <a class="a-block nav-head false" href="https://kyocius.github.io/">
+    
+        <div class="nav-title">
+            游尔曼斯克
+        </div>
+        
+        <div class="nav-subtitle">
+            Kyocius &#43;
+        </div>
+        
+    </a>
+
+    <div class="nav-link-list">
+        
+        
+            
+            
+            
+                
+            
+            
+            
+            <a class="a-block nav-link-item active" href="/posts">
+                歸檔 Archive
+            </a>
+            
+        
+            
+            
+            
+            
+            
+            <a class="a-block nav-link-item false" href="/categories">
+                分類 Categories
+            </a>
+            
+        
+            
+            
+            
+            
+            
+            <a class="a-block nav-link-item false" href="/tags">
+                標簽 Tags
+            </a>
+            
+        
+            
+            
+            
+            
+            
+            <a class="a-block nav-link-item false" href="/about/">
+                關於 About
+            </a>
+            
+        
+            
+            
+            
+            
+            
+            <a class="a-block nav-link-item false" href="/index.xml">
+                訂閱 RSS
+            </a>
+            
+        
+    </div>
+
+    
+
+    <div class="nav-footer">
+        
+Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> by <a href="https://risehere.net/">Rise</a>
+<br>
+移植自 <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a>'s <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> <br>
+<br>
+
+&copy;
+	
+	Kyocius. 本站遵循 CC-BY-NC 4.0 协议
+	
+
+    </div>
+    
+</div><div id="extraContainer" class="extra-container">
+    <div class="toc-wrapper">
+        
+
+        
+        <div class="toc">
+
+
+	<div class="toc-content">
+	
+		
+		
+		
+		<center>- 目錄 -</center>
+		
+		
+		<ul>
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								
+									<ul>
+								
+							
+						
+						
+							<li>
+								<a href="#%e5%89%8d%e8%a8%80" class="nav-前言">
+									前言
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e7%ba%bf%e7%a8%8b-thread" class="nav-线程-thread">
+									线程 Thread
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								
+									<ul>
+								
+							
+						
+						
+							<li>
+								<a href="#%e5%88%9b%e5%bb%ba%e7%ba%bf%e7%a8%8b-create-a-thread" class="nav-创建线程-create-a-thread">
+									创建线程 Create a Thread
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#join-%e4%b8%8e-sleep" class="nav-join-与-sleep">
+									Join 与 Sleep
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e9%98%bb%e5%a1%9e%e7%ba%bf%e7%a8%8b-blocking" class="nav-阻塞线程-blocking">
+									阻塞线程 Blocking
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								
+									<ul>
+								
+							
+						
+						
+							<li>
+								<a href="#io-%e5%af%86%e9%9b%86%e5%9e%8b--%e8%ae%a1%e7%ae%97%e5%af%86%e9%9b%86%e5%9e%8b-bound" class="nav-io-密集型--计算密集型-bound">
+									I/O 密集型 &amp; 计算密集型 Bound
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+							
+								</ul>
+							
+						
+						
+						
+							<li>
+								<a href="#%e5%b1%80%e9%83%a8%e5%8f%98%e9%87%8f--%e5%85%b1%e4%ba%ab%e7%8a%b6%e6%80%81-local--shared-state" class="nav-局部变量--共享状态-local--shared-state">
+									局部变量 &amp; 共享状态 Local &amp; Shared State
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e7%ba%bf%e7%a8%8b%e9%94%81--%e7%ba%bf%e7%a8%8b%e5%ae%89%e5%85%a8-lock--thread-safety" class="nav-线程锁--线程安全-lock--thread-safety">
+									线程锁 &amp; 线程安全 Lock &amp; Thread Safety
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e5%90%91%e7%ba%bf%e7%a8%8b%e4%bc%a0%e9%80%92%e6%95%b0%e6%8d%ae" class="nav-向线程传递数据">
+									向线程传递数据
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								
+									<ul>
+								
+							
+						
+						
+							<li>
+								<a href="#%e6%8d%95%e8%8e%b7%e5%8f%98%e9%87%8f-captured-variables" class="nav-捕获变量-captured-variables">
+									捕获变量 Captured Variables
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+							
+								</ul>
+							
+						
+						
+						
+							<li>
+								<a href="#%e5%bc%82%e5%b8%b8%e5%a4%84%e7%90%86" class="nav-异常处理">
+									异常处理
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								
+									<ul>
+								
+							
+						
+						
+							<li>
+								<a href="#%e9%9b%86%e4%b8%ad%e5%bc%82%e5%b8%b8%e5%a4%84%e7%90%86-centralized-exception-handler" class="nav-集中异常处理-centralized-exception-handler">
+									集中异常处理 Centralized Exception Handler
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+							
+								</ul>
+							
+						
+						
+						
+							<li>
+								<a href="#%e5%89%8d%e5%8f%b0%e7%ba%bf%e7%a8%8b--%e5%90%8e%e5%8f%b0%e7%ba%bf%e7%a8%8b-foreground--background-threads" class="nav-前台线程--后台线程-foreground--background-threads">
+									前台线程 &amp; 后台线程 Foreground &amp; Background Threads
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e7%ba%bf%e7%a8%8b%e7%ba%a7%e5%88%ab-thread-priority" class="nav-线程级别-thread-priority">
+									线程级别 Thread Priority
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e5%8f%91%e4%bf%a1%e5%8f%b7-signaling" class="nav-发信号-signaling">
+									发信号 Signaling
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e7%ba%bf%e7%a8%8b%e5%9c%a8%e5%ae%a2%e6%88%b7%e7%ab%af%e5%ba%94%e7%94%a8-threading-in-rich-client-applications" class="nav-线程在客户端应用-threading-in-rich-client-applications">
+									线程在客户端应用 Threading in Rich Client Applications
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e5%90%8c%e6%ad%a5%e4%b8%8a%e4%b8%8b%e6%96%87-synchronization-contexts" class="nav-同步上下文-synchronization-contexts">
+									同步上下文 Synchronization Contexts
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e7%ba%bf%e7%a8%8b%e6%b1%a0-the-thread-pool" class="nav-线程池-the-thread-pool">
+									线程池 The Thread Pool
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								
+									<ul>
+								
+							
+						
+						
+							<li>
+								<a href="#%e8%bf%9b%e5%85%a5%e7%ba%bf%e7%a8%8b%e6%b1%a0-enter-the-pool" class="nav-进入线程池-enter-the-pool">
+									进入线程池 Enter the pool
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e7%ba%bf%e7%a8%8b%e6%b1%a0%e5%8d%ab%e7%94%9f-hygiene-in-the-thread-pool" class="nav-线程池卫生-hygiene-in-the-thread-pool">
+									线程池卫生 Hygiene in the thread pool
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+							
+								</ul>
+							
+								</ul>
+							
+						
+						
+						
+							<li>
+								<a href="#%e4%bb%bb%e5%8a%a1-task" class="nav-任务-task">
+									任务 Task
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								
+									<ul>
+								
+							
+						
+						
+							<li>
+								<a href="#%e5%88%9b%e5%bb%ba%e4%bb%bb%e5%8a%a1-create-a-task" class="nav-创建任务-create-a-task">
+									创建任务 Create a Task
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								
+									<ul>
+								
+							
+						
+						
+							<li>
+								<a href="#%e7%ad%89%e5%be%85-wait" class="nav-等待-wait">
+									等待 Wait
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e8%80%97%e6%97%b6%e4%bb%bb%e5%8a%a1-longrunning-task" class="nav-耗时任务-longrunning-task">
+									耗时任务 LongRunning Task
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+							
+								</ul>
+							
+						
+						
+						
+							<li>
+								<a href="#%e8%bf%94%e5%9b%9e%e5%80%bc-return-values" class="nav-返回值-return-values">
+									返回值 Return Values
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e5%bc%82%e5%b8%b8-exception" class="nav-异常-exception">
+									异常 Exception
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e5%90%8e%e7%bb%ad-continuations" class="nav-后续-continuations">
+									后续 Continuations
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+							
+								</ul>
+							
+						
+						
+						
+							<li>
+								<a href="#c-%e5%bc%82%e6%ad%a5%e7%bc%96%e7%a8%8b" class="nav-c-异步编程">
+									C# 异步编程
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								
+									<ul>
+								
+							
+						
+						
+							<li>
+								<a href="#awaiting" class="nav-awaiting">
+									Awaiting
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								
+									<ul>
+								
+							
+						
+						
+							<li>
+								<a href="#%e6%8d%95%e8%8e%b7%e5%b1%80%e9%83%a8%e5%8f%98%e9%87%8f-capturing-local-state" class="nav-捕获局部变量-capturing-local-state">
+									捕获局部变量 Capturing local state
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e5%9c%a8-ui-%e4%b8%ad%e7%ad%89%e5%be%85-awaiting-in-a-ui" class="nav-在-ui-中等待-awaiting-in-a-ui">
+									在 UI 中等待 Awaiting in a UI
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+							
+								</ul>
+							
+						
+						
+						
+							<li>
+								<a href="#%e7%bc%96%e5%86%99%e5%bc%82%e6%ad%a5%e6%96%b9%e6%b3%95-writing-asynchronous-functions" class="nav-编写异步方法-writing-asynchronous-functions">
+									编写异步方法 Writing Asynchronous Functions
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								
+									<ul>
+								
+							
+						
+						
+							<li>
+								<a href="#%e8%bf%94%e5%9b%9e-tasktresult" class="nav-返回-tasktresult">
+									返回 Task
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e5%b9%b6%e8%a1%8c-parallelism" class="nav-并行-parallelism">
+									并行 Parallelism
+								</a>
+							</li>
+						
+						
+					
+				
+			
+		</ul>
+	</div>
+
+</div>
+        
+    </div>
+    <div class="pagination">
+        <a id="globalBackToTop" class="pagination-action animated-visibility" href="#top"
+            :class="{ invisible: scrollY == 0 }">
+            <i class="material-icons pagination-action-icon">
+                keyboard_arrow_up
+            </i>
+        </a>
+        
+        <a type="button" class="pagination-action" id="darkModeToggleButton">
+            <span class="material-icons pagination-action-icon" id="darkModeToggleIcon">
+                dark_mode
+            </span>
+        </a>
+        
+        
+    </div>
+</div><div id="single-column-footer">
+Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> by <a href="https://risehere.net/">Rise</a>
+<br>
+移植自 <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a>'s <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> <br>
+<br>
+
+&copy;
+	
+	Kyocius. 本站遵循 CC-BY-NC 4.0 协议
+	
+</div>
+            </div>
+    
+    <script src="/js/journal.js"></script></body>
+</html>
