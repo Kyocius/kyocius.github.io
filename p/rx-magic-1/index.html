@@ -1,63 +1,815 @@
-<!doctype html><html lang=zh-cn dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="前言 最近刚读了 Rx.NET in Action，学到的新概念非常多，担忧自己会日渐遗忘，觉得有必要写一篇博客记录一下，说不定也能帮到一些志同道合的朋友。 本系"><title>Rx.NET 响应式编程指北 01 - 基础概念</title>
-<link rel=canonical href=https://kyocius.github.io/p/rx-magic-1/><link rel=stylesheet href=/scss/style.min.26f3734476757be60ded5a96146633e6d2efdd397b4a8f48736727c9e436c43d.css><meta property="og:title" content="Rx.NET 响应式编程指北 01 - 基础概念"><meta property="og:description" content="前言 最近刚读了 Rx.NET in Action，学到的新概念非常多，担忧自己会日渐遗忘，觉得有必要写一篇博客记录一下，说不定也能帮到一些志同道合的朋友。 本系"><meta property="og:url" content="https://kyocius.github.io/p/rx-magic-1/"><meta property="og:site_name" content="游尔曼斯克"><meta property="og:type" content="article"><meta property="article:section" content="Post"><meta property="article:tag" content="Rx.NET Tutorial"><meta property="article:tag" content="CSharp"><meta property="article:published_time" content="2022-08-07T00:00:00+00:00"><meta property="article:modified_time" content="2022-08-07T00:00:00+00:00"><meta property="og:image" content="https://kyocius.github.io/p/rx-magic-1/head.png"><meta name=twitter:title content="Rx.NET 响应式编程指北 01 - 基础概念"><meta name=twitter:description content="前言 最近刚读了 Rx.NET in Action，学到的新概念非常多，担忧自己会日渐遗忘，觉得有必要写一篇博客记录一下，说不定也能帮到一些志同道合的朋友。 本系"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://kyocius.github.io/p/rx-magic-1/head.png"><style>:root{--sys-font-family:"Noto Serif SC";--zh-font-family:"Noto Serif SC";--base-font-family:"Noto Serif SC";--article-font-family:"Noto Serif SC"}</style><script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=切换菜单>
-<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/><img src=/img/Freren_hu423750a5ef12a107b12a51b8150fa842_226963_300x0_resize_box_3.png width=300 height=300 class=site-logo loading=lazy alt=Avatar></a></figure><div class=site-meta><h1 class=site-name><a href=/>游尔曼斯克</a></h1><h2 class=site-description>Kyocius</h2></div></header><ol class=social-menu><li><a href=https://github.com/Kyocius target=_blank title=GitHub><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6.0 00-1.3-3.2 4.2 4.2.0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3.0 00-6.2.0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2.0 00-.1 3.2A4.6 4.6.0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg></a></li><li><a href=https://twitter.com/kyociusEX target=_blank title=Twitter><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M22 4.01c-1 .49-1.98.689-3 .99-1.121-1.265-2.783-1.335-4.38-.737S11.977 6.323 12 8v1c-3.245.083-6.135-1.395-8-4 0 0-4.182 7.433 4 11-1.872 1.247-3.739 2.088-6 2 3.308 1.803 6.913 2.423 10.034 1.517 3.58-1.04 6.522-3.723 7.651-7.742a13.84 13.84.0 00.497-3.753C20.18 7.773 21.692 5.25 22 4.009z"/></svg></a></li><li><a href=https://www.zhihu.com/people/you-wu-45-30 target=_blank title=Zhihu><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-zhihu" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 6h6v12h-2l-2 2-1-2h-1z"/><path d="M4 12h6.5"/><path d="M10.5 6h-5"/><path d="M6 4c-.5 2.5-1.5 3.5-2.5 4.5"/><path d="M8 6v7c0 4.5-2 5.5-4 7"/><path d="M11 18l-3-5"/></svg></a></li></ol><ol class=menu id=main-menu><li><a href=/ target=_blank><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="5 12 3 12 12 3 21 12 19 12"/><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/><path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"/></svg>
-<span>主页</span></a></li><li><a href=/%E5%85%B3%E4%BA%8E/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="7" r="4"/><path d="M6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg>
-<span>关于</span></a></li><li><a href=/archives/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><rect x="3" y="4" width="18" height="4" rx="2"/><path d="M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
-<span>归档</span></a></li><li><a href=/search/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg>
-<span>探求</span></a></li><li><a href=/%E5%8F%8B%E9%93%BE/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M10 14a3.5 3.5.0 005 0l4-4a3.5 3.5.0 00-5-5l-.5.5"/><path d="M14 10a3.5 3.5.0 00-5 0l-4 4a3.5 3.5.0 005 5l.5-.5"/></svg>
-<span>友链</span></a></li><div class=menu-bottom-section><li id=dark-mode-toggle><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
-<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
-<span>暗色模式</span></li></div></ol></aside><main class="main full-width"><article class="has-image main-article"><header class=article-header><div class=article-image><a href=/p/rx-magic-1/><img src=/p/rx-magic-1/head_hu60daa3e750dae8efe162b164d024055e_222411_800x0_resize_box_3.png srcset="/p/rx-magic-1/head_hu60daa3e750dae8efe162b164d024055e_222411_800x0_resize_box_3.png 800w, /p/rx-magic-1/head_hu60daa3e750dae8efe162b164d024055e_222411_1600x0_resize_box_3.png 1600w" width=800 height=420 loading=lazy alt="Featured image of post Rx.NET 响应式编程指北 01 - 基础概念"></a></div><div class=article-details><header class=article-category><a href=/categories/%E7%BC%96%E7%A8%8B/>编程</a></header><div class=article-title-wrapper><h2 class=article-title><a href=/p/rx-magic-1/>Rx.NET 响应式编程指北 01 - 基础概念</a></h2></div><footer class=article-time><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
-<time class=article-time--published>Aug 07, 2022</time></div><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
-<time class=article-time--reading>阅读时长: 3 分钟</time></div></footer></div></header><section class=article-content><h2 id=前言>前言</h2><p>最近刚读了 <em>Rx.NET in Action</em>，学到的新概念非常多，担忧自己会日渐遗忘，觉得有必要写一篇博客记录一下，说不定也能帮到一些志同道合的朋友。</p><p>本系列将会使用我深爱的 C# 语言和 Rx.NET 框架来讲解响应式编程（Reactive Programming）的魔法 ╰(<em>°▽°</em>)╯</p><h2 id=背景知识>背景知识</h2><ul><li>C# 中的<strong>委托</strong>、<strong>泛型</strong>、<strong>事件</strong>以及 <strong>LINQ</strong> 等概念</li><li>Rx = Reactive Extension</li><li>Rx 是由<strong>微软</strong>旗下一个实验室发起的 <del>巨硬大法好</del></li></ul><h2 id=响应式概念>响应式概念</h2><p>Rx 到底是干啥的？</p><p>首先来看看微软的解释：Rx = Observables + LINQ + Schedulers。谔谔，啥玩意儿？</p><p>那看看大佬怎么解释的吧：Rx = 处理异步数据流。这个解释还行，但还是不明白。</p><p>这里是更通俗的解释：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c# data-lang=c#><span class=line><span class=cl><span class=kt>var</span> <span class=n>a</span> <span class=p>=</span> <span class=m>1</span><span class=p>;</span>
-</span></span><span class=line><span class=cl><span class=kt>var</span> <span class=n>b</span> <span class=p>=</span> <span class=m>2</span><span class=p>;</span>
-</span></span><span class=line><span class=cl><span class=kt>var</span> <span class=n>c</span> <span class=p>=</span> <span class=n>a</span> <span class=p>+</span> <span class=n>b</span><span class=p>;</span> <span class=c1>// c 的值显然为 3</span>
-</span></span></code></pre></td></tr></table></div></div><p>当你改变 <code>a</code> 或者 <code>b</code> 值的时候，按照我们以前的思维，<code>c</code> 的值并不会随之发生变化。</p><p>如果我们想要 <code>c</code> 的值随之而改变呢？很简单，快快使用 <strong>Rx</strong>！</p><h3 id=可观察对象-observable>可观察对象 Observable</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c# data-lang=c#><span class=line><span class=cl><span class=kd>public</span> <span class=k>interface</span> <span class=nc>IObservable</span><span class=p>&lt;</span><span class=n>T</span><span class=p>&gt;</span>
-</span></span><span class=line><span class=cl><span class=p>{</span>
-</span></span><span class=line><span class=cl>    <span class=n>IDisposable</span> <span class=n>Subscribe</span><span class=p>(</span><span class=n>IObserver</span><span class=p>&lt;</span><span class=n>T</span><span class=p>&gt;</span> <span class=n>observer</span><span class=p>);</span>
-</span></span><span class=line><span class=cl><span class=p>}</span>
-</span></span></code></pre></td></tr></table></div></div><ul><li>接口只有一个方法 <code>Subscribe</code>，返回 <code>IDisposable</code> 对象（代表着订阅事件本身）</li><li><code>Observable</code> 持有 <code>Observer</code> 的集合，在值改变时随时通知它们</li><li><code>IDisposable</code> 对象可以通过 <code>Dispose</code> 方法随时取消订阅</li></ul><h3 id=观察者-observer>观察者 Observer</h3><p>观察者的源码其实也很简单。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
-</span><span class=lnt>6
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c# data-lang=c#><span class=line><span class=cl><span class=kd>public</span> <span class=k>interface</span> <span class=nc>IObserver</span><span class=p>&lt;</span><span class=n>T</span><span class=p>&gt;</span>
-</span></span><span class=line><span class=cl><span class=p>{</span>
-</span></span><span class=line><span class=cl>    <span class=k>void</span> <span class=n>OnNext</span><span class=p>(</span><span class=n>T</span> <span class=k>value</span><span class=p>);</span> 
-</span></span><span class=line><span class=cl>    <span class=k>void</span> <span class=n>OnError</span><span class=p>(</span><span class=n>Exception</span> <span class=n>error</span><span class=p>);</span> 
-</span></span><span class=line><span class=cl>    <span class=k>void</span> <span class=n>OnCompleted</span><span class=p>();</span> 
-</span></span><span class=line><span class=cl><span class=p>}</span>
-</span></span></code></pre></td></tr></table></div></div><ul><li><code>OnNext</code> 方法定义当观测的值出现变化时，该做什么（类比迭代）</li><li><code>OnError</code> 方法定义它出现错误时该做什么</li><li><code>OnCompleted</code> 方法定义它任务完成时该做什么</li><li>值得注意的是：发生错误时，数据流就会中断</li></ul><h3 id=操作符-operator>操作符 Operator</h3><p>Rx 带来了海量的操作符，帮助我们分类、查找、转换数据。</p><p>Rx.NET 的操作符与其它语言的 Rx 不同的是，操作符采用了原汁原味的 LINQ 风格。</p><p>下面来点简单实例：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
-</span><span class=lnt>6
-</span><span class=lnt>7
-</span><span class=lnt>8
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c# data-lang=c#><span class=line><span class=cl><span class=n>IObservable</span><span class=p>&lt;</span><span class=kt>string</span><span class=p>&gt;</span> <span class=n>strings</span><span class=p>=</span> <span class=p>...</span> <span class=c1>// 数据源</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=n>IDisposable</span> <span class=n>subscription</span> <span class=p>=</span> <span class=n>strings</span> <span class=c1>// 一个 IDisposable 代表了订阅事件本身</span>
-</span></span><span class=line><span class=cl>    <span class=p>.</span><span class=n>Where</span><span class=p>(</span><span class=n>str</span> <span class=p>=&gt;</span> <span class=n>str</span><span class=p>.</span><span class=n>StartsWith</span><span class=p>(</span><span class=s>&#34;A&#34;</span><span class=p>))</span>
-</span></span><span class=line><span class=cl>    <span class=p>.</span><span class=n>Select</span><span class=p>(</span><span class=n>str</span> <span class=p>=&gt;</span> <span class=n>str</span><span class=p>.</span><span class=n>ToUpper</span><span class=p>())</span>
-</span></span><span class=line><span class=cl>    <span class=p>.</span><span class=n>Subscribe</span><span class=p>(...);</span> <span class=c1>// 传入 Observer 或直接传 OnNext 方法</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=n>subscription</span><span class=p>.</span><span class=n>Dispose</span><span class=p>();</span> <span class=c1>// 上面说过了，可以随时取消订阅</span>
-</span></span></code></pre></td></tr></table></div></div><p>上面的代码读起来是不是很流畅？</p><p>其实第一行省略了如何创建可观察数据源，专注于操作符本身，要不然太劝退了。</p><p>如何创建可观察的数据源将在后面的章节讲解。</p><h2 id=理解事件和流-events--streams>理解事件和流 Events & Streams</h2><p>事件非常好理解，比如我们点击一个按钮就是一个事件。</p><p>在 C# 中，事件由<strong>数据源</strong>「Event Source」和<strong>处理器</strong>「Event Handler」组成。</p><p>在 Rx 中，「Event Source」对应「Observable」而「Event Handler」对应「Observer」。</p><h3 id=万物皆流>万物皆流</h3><blockquote><p>A data stream is like a hose: every drop of water is a data packet that needs to go through stations until it reaches the end. Your data also needs to be filtered and transformed until it gets to the real handler that does something useful with it.</p></blockquote><p>上面这段 Quote 来自 <em>Rx.NET in Action</em>，大致的意思就是数据就像水管子一样，我们通过操作符过滤水流，最后通过喷头将水流传播。</p><p>我认为这是响应式的核心概念。只要你想持续地监听某数据的变化，那么使用 Rx 让数据变成可观察流，绝对是个好主意。</p></section><footer class=article-footer><section class=article-tags><a href=/tags/rx.net-tutorial/>Rx.NET Tutorial</a>
-<a href=/tags/csharp/>CSharp</a></section><section class=article-copyright><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg>
-<span>Licensed under CC BY-NC-SA 4.0</span></section></footer><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.css integrity="sha256-J+iAE0sgH8QSz9hpcDxXIftnj65JEZgNhGcgReTTK9s=" crossorigin=anonymous><script src=https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.js integrity="sha256-InsNdER1b2xUewP+pKCUJpkhiqwHgqiPXDlIk7GzBu4=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/contrib/auto-render.min.js integrity="sha256-y39Mpg7V3D4lhBX4x6O0bUqTV4pSrfgwEfGKfxkOdgI=" crossorigin=anonymous defer></script><script>window.addEventListener("DOMContentLoaded",()=>{renderMathInElement(document.querySelector(`.article-content`),{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1},{left:"\\(",right:"\\)",display:!1},{left:"\\[",right:"\\]",display:!0}]})})</script></article><aside class=related-content--wrapper><h2 class=section-title>相关文章</h2><div class=related-content><div class="flex article-list--tile"><article class=has-image><a href=/p/rx-magic-3/><div class=article-image><img src=/p/rx-magic-3/head.c9b141998febf281884606d443822a75_hu60daa3e750dae8efe162b164d024055e_222411_250x150_fill_box_smart1_3.png width=250 height=150 loading=lazy alt="Featured image of post Rx.NET 响应式编程指北 03 - 深入流的创建" data-key=rx-magic-3 data-hash="md5-ybFBmY/r8oGIRgbUQ4IqdQ=="></div><div class=article-details><h2 class=article-title>Rx.NET 响应式编程指北 03 - 深入流的创建</h2></div></a></article><article class=has-image><a href=/p/rx-magic-ex/><div class=article-image><img src=/p/rx-magic-ex/head.c9b141998febf281884606d443822a75_hu60daa3e750dae8efe162b164d024055e_222411_250x150_fill_box_smart1_3.png width=250 height=150 loading=lazy alt="Featured image of post Rx.NET 响应式编程指北 Ex - 函数式思想 & 流式接口" data-key=rx-magic-ex data-hash="md5-ybFBmY/r8oGIRgbUQ4IqdQ=="></div><div class=article-details><h2 class=article-title>Rx.NET 响应式编程指北 Ex - 函数式思想 & 流式接口</h2></div></a></article><article class=has-image><a href=/p/rx-magic-2/><div class=article-image><img src=/p/rx-magic-2/head.c9b141998febf281884606d443822a75_hu60daa3e750dae8efe162b164d024055e_222411_250x150_fill_box_smart1_3.png width=250 height=150 loading=lazy alt="Featured image of post Rx.NET 响应式编程指北 02 - 基本使用" data-key=rx-magic-2 data-hash="md5-ybFBmY/r8oGIRgbUQ4IqdQ=="></div><div class=article-details><h2 class=article-title>Rx.NET 响应式编程指北 02 - 基本使用</h2></div></a></article><article class=has-image><a href=/p/advanced-csharp-1/><div class=article-image><img src=/p/advanced-csharp-1/head.50573d1817e36e3313a7fd57690ebc80_hu6445997bcd53608f7e2f035aad872a86_31881_250x150_fill_box_smart1_3.png width=250 height=150 loading=lazy alt="Featured image of post 鎧恩的 C# 进阶小册  01 - 并发与异步" data-key=advanced-csharp-1 data-hash="md5-UFc9GBfjbjMTp/1XaQ68gA=="></div><div class=article-details><h2 class=article-title>鎧恩的 C# 进阶小册 01 - 并发与异步</h2></div></a></article><article class=has-image><a href=/p/arch-book-1/><div class=article-image><img src=/p/arch-book-1/header.4b7a86145b41d721b87ecc37d72e0983_hueaa4c8e5fd7a5595d1ecd775a7c5eb94_634924_250x150_fill_box_smart1_3.png width=250 height=150 loading=lazy alt="Featured image of post 数电与计算机体系结构 01：入门" data-key=arch-book-1 data-hash="md5-S3qGFFtB1yG4fsw31y4Jgw=="></div><div class=article-details><h2 class=article-title>数电与计算机体系结构 01：入门</h2></div></a></article></div></div></aside><script src=https://giscus.app/client.js data-repo=Kyocius/kyocius.github.io data-repo-id="MDEwOlJlcG9zaXRvcnkyODE4MDgxOTA=" data-category=Announcements data-category-id=DIC_kwDOEMwNPs4CXHLA data-mapping=pathname data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=top data-theme=light data-lang=en crossorigin=anonymous async></script><script>function setGiscusTheme(e){let t=document.querySelector("iframe.giscus-frame");t&&t.contentWindow.postMessage({giscus:{setConfig:{theme:e}}},"https://giscus.app")}(function(){addEventListener("message",t=>{if(event.origin!=="https://giscus.app")return;e()}),window.addEventListener("onColorSchemeChange",e);function e(){setGiscusTheme(document.documentElement.dataset.scheme==="light"?"light":"dark")}})()</script><footer class=site-footer><section class=copyright>&copy;
-2021 -
-2024 游尔曼斯克</section><section class=powerby>Boys Be Ambitious.<br>Built with <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a><br>主题 <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.13.0>Stack</a></b> 由 <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a> 设计</section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
-<button class="pswp__button pswp__button--share" title=Share></button>
-<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
-<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
-</button>
-<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">目录</h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#前言>前言</a></li><li><a href=#背景知识>背景知识</a></li><li><a href=#响应式概念>响应式概念</a><ol><li><a href=#可观察对象-observable>可观察对象 Observable</a></li><li><a href=#观察者-observer>观察者 Observer</a></li><li><a href=#操作符-operator>操作符 Operator</a></li></ol></li><li><a href=#理解事件和流-events--streams>理解事件和流 Events & Streams</a><ol><li><a href=#万物皆流>万物皆流</a></li></ol></li></ol></nav></div></section></aside></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.js defer></script><script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></body></html>
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='前言 最近刚读了 Rx.NET in Action，学到的新概念非常多，担忧自己会日渐遗忘，觉得有必要写一篇博客记录一下，说不定也能帮到一些志同道合的朋友。
+本系列将会使用我深爱的 C# 语言和 Rx.NET 框架来讲解响应式编程（Reactive Programming）的魔法 ╰(°▽°)╯
+背景知识 C# 中的委托、泛型、事件以及 LINQ 等概念 Rx = Reactive Extension Rx 是由微软旗下一个实验室发起的 巨硬大法好 响应式概念 Rx 到底是干啥的？
+首先来看看微软的解释：Rx = Observables &#43; LINQ &#43; Schedulers。谔谔，啥玩意儿？
+那看看大佬怎么解释的吧：Rx = 处理异步数据流。这个解释还行，但还是不明白。
+这里是更通俗的解释：
+1 2 3 var a = 1; var b = 2; var c = a &#43; b; // c 的值显然为 3 当你改变 a 或者 b 值的时候，按照我们以前的思维，c 的值并不会随之发生变化。
+如果我们想要 c 的值随之而改变呢？很简单，快快使用 Rx！
+可观察对象 Observable 1 2 3 4 public interface IObservable&amp;lt;T&amp;gt; { IDisposable Subscribe(IObserver&amp;lt;T&amp;gt; observer); } 接口只有一个方法 Subscribe，返回 IDisposable 对象（代表着订阅事件本身） Observable 持有 Observer 的集合，在值改变时随时通知它们 IDisposable 对象可以通过 Dispose 方法随时取消订阅 观察者 Observer 观察者的源码其实也很简单。'><title>Rx.NET 响应式编程指北 01 - 基础概念</title>
+
+<link rel='canonical' href='https://yonable.github.io/p/rx-magic-1/'>
+
+<link rel="stylesheet" href="/scss/style.min.ee304400045e4b1243b4955b82f025dbfc5f73114e099916d64e2239f64be1aa.css"><meta property='og:title' content='Rx.NET 响应式编程指北 01 - 基础概念'>
+<meta property='og:description' content='前言 最近刚读了 Rx.NET in Action，学到的新概念非常多，担忧自己会日渐遗忘，觉得有必要写一篇博客记录一下，说不定也能帮到一些志同道合的朋友。
+本系列将会使用我深爱的 C# 语言和 Rx.NET 框架来讲解响应式编程（Reactive Programming）的魔法 ╰(°▽°)╯
+背景知识 C# 中的委托、泛型、事件以及 LINQ 等概念 Rx = Reactive Extension Rx 是由微软旗下一个实验室发起的 巨硬大法好 响应式概念 Rx 到底是干啥的？
+首先来看看微软的解释：Rx = Observables &#43; LINQ &#43; Schedulers。谔谔，啥玩意儿？
+那看看大佬怎么解释的吧：Rx = 处理异步数据流。这个解释还行，但还是不明白。
+这里是更通俗的解释：
+1 2 3 var a = 1; var b = 2; var c = a &#43; b; // c 的值显然为 3 当你改变 a 或者 b 值的时候，按照我们以前的思维，c 的值并不会随之发生变化。
+如果我们想要 c 的值随之而改变呢？很简单，快快使用 Rx！
+可观察对象 Observable 1 2 3 4 public interface IObservable&amp;lt;T&amp;gt; { IDisposable Subscribe(IObserver&amp;lt;T&amp;gt; observer); } 接口只有一个方法 Subscribe，返回 IDisposable 对象（代表着订阅事件本身） Observable 持有 Observer 的集合，在值改变时随时通知它们 IDisposable 对象可以通过 Dispose 方法随时取消订阅 观察者 Observer 观察者的源码其实也很简单。'>
+<meta property='og:url' content='https://yonable.github.io/p/rx-magic-1/'>
+<meta property='og:site_name' content='Yonable.Space'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Rx.NET' /><meta property='article:tag' content='CSharp' /><meta property='article:published_time' content='2022-08-07T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2022-08-07T00:00:00&#43;00:00'/><meta property='og:image' content='https://yonable.github.io/p/rx-magic-1/head.png' />
+<meta name="twitter:title" content="Rx.NET 响应式编程指北 01 - 基础概念">
+<meta name="twitter:description" content="前言 最近刚读了 Rx.NET in Action，学到的新概念非常多，担忧自己会日渐遗忘，觉得有必要写一篇博客记录一下，说不定也能帮到一些志同道合的朋友。
+本系列将会使用我深爱的 C# 语言和 Rx.NET 框架来讲解响应式编程（Reactive Programming）的魔法 ╰(°▽°)╯
+背景知识 C# 中的委托、泛型、事件以及 LINQ 等概念 Rx = Reactive Extension Rx 是由微软旗下一个实验室发起的 巨硬大法好 响应式概念 Rx 到底是干啥的？
+首先来看看微软的解释：Rx = Observables &#43; LINQ &#43; Schedulers。谔谔，啥玩意儿？
+那看看大佬怎么解释的吧：Rx = 处理异步数据流。这个解释还行，但还是不明白。
+这里是更通俗的解释：
+1 2 3 var a = 1; var b = 2; var c = a &#43; b; // c 的值显然为 3 当你改变 a 或者 b 值的时候，按照我们以前的思维，c 的值并不会随之发生变化。
+如果我们想要 c 的值随之而改变呢？很简单，快快使用 Rx！
+可观察对象 Observable 1 2 3 4 public interface IObservable&amp;lt;T&amp;gt; { IDisposable Subscribe(IObserver&amp;lt;T&amp;gt; observer); } 接口只有一个方法 Subscribe，返回 IDisposable 对象（代表着订阅事件本身） Observable 持有 Observer 的集合，在值改变时随时通知它们 IDisposable 对象可以通过 Dispose 方法随时取消订阅 观察者 Observer 观察者的源码其实也很简单。"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://yonable.github.io/p/rx-magic-1/head.png' /><style>
+    :root {
+      --sys-font-family: "Noto Serif SC";
+      --zh-font-family: "Noto Serif SC";
+      --base-font-family: "Noto Serif SC";
+      --code-font-family: "Noto Serif SC";
+      --article-font-family: "Noto Serif SC";
+    }
+  </style>
+  
+  <script>
+    (function () {
+      const customFont = document.createElement("link");
+      customFont.href =
+        "https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&display=swap";
+  
+      customFont.type = "text/css";
+      customFont.rel = "stylesheet";
+  
+      document.head.appendChild(customFont);
+    })();
+  </script>
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/%E5%8D%97%E4%BA%91%E6%97%A5%E9%B9%A42_hu5971c73a93cd34c6a54b40261e8ec7c0_507693_300x0_resize_q75_box.jpg" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🎲</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Yonable.Space</a></h1>
+            <h2 class="site-description">即此羡闲逸，怅然吟式微</h2>
+        </div>
+    </header><ol class="social-menu">
+            
+                <li>
+                    <a 
+                        href='https://github.com/Yoroion'
+                        target="_blank"
+                        title="GitHub"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://twitter.com/yoroion'
+                        target="_blank"
+                        title="Twitter"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+
+        <li >
+            <a href='/' target="_blank">
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>About</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+            
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <span>Dark Mode</span>
+                </li>
+            
+        </div>
+    </ol>
+</aside>
+<main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/rx-magic-1/">
+                <img src="/p/rx-magic-1/head_hu60daa3e750dae8efe162b164d024055e_222411_800x0_resize_box_3.png"
+                        srcset="/p/rx-magic-1/head_hu60daa3e750dae8efe162b164d024055e_222411_800x0_resize_box_3.png 800w, /p/rx-magic-1/head_hu60daa3e750dae8efe162b164d024055e_222411_1600x0_resize_box_3.png 1600w"
+                        width="800" 
+                        height="420" 
+                        loading="lazy"
+                        alt="Featured image of post Rx.NET 响应式编程指北 01 - 基础概念" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E7%BC%96%E7%A8%8B/" >
+                编程
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/rx-magic-1/">Rx.NET 响应式编程指北 01 - 基础概念</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Aug 07, 2022</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    2 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+</header>
+
+    <section class="article-content">
+    
+    
+    <h2 id="前言">前言</h2>
+<p>最近刚读了 <em>Rx.NET in Action</em>，学到的新概念非常多，担忧自己会日渐遗忘，觉得有必要写一篇博客记录一下，说不定也能帮到一些志同道合的朋友。</p>
+<p>本系列将会使用我深爱的 C# 语言和 Rx.NET 框架来讲解响应式编程（Reactive Programming）的魔法 ╰(<em>°▽°</em>)╯</p>
+<h2 id="背景知识">背景知识</h2>
+<ul>
+<li>C# 中的<strong>委托</strong>、<strong>泛型</strong>、<strong>事件</strong>以及 <strong>LINQ</strong> 等概念</li>
+<li>Rx = Reactive Extension</li>
+<li>Rx 是由<strong>微软</strong>旗下一个实验室发起的  <del>巨硬大法好</del></li>
+</ul>
+<h2 id="响应式概念">响应式概念</h2>
+<p>Rx 到底是干啥的？</p>
+<p>首先来看看微软的解释：Rx = Observables + LINQ + Schedulers。谔谔，啥玩意儿？</p>
+<p>那看看大佬怎么解释的吧：Rx = 处理异步数据流。这个解释还行，但还是不明白。</p>
+<p>这里是更通俗的解释：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl"><span class="kt">var</span> <span class="n">a</span> <span class="p">=</span> <span class="m">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">var</span> <span class="n">b</span> <span class="p">=</span> <span class="m">2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">var</span> <span class="n">c</span> <span class="p">=</span> <span class="n">a</span> <span class="p">+</span> <span class="n">b</span><span class="p">;</span> <span class="c1">// c 的值显然为 3</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>当你改变 <code>a</code> 或者 <code>b</code> 值的时候，按照我们以前的思维，<code>c</code> 的值并不会随之发生变化。</p>
+<p>如果我们想要 <code>c</code> 的值随之而改变呢？很简单，快快使用 <strong>Rx</strong>！</p>
+<h3 id="可观察对象-observable">可观察对象 Observable</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl"><span class="k">public</span> <span class="k">interface</span> <span class="nc">IObservable</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">IDisposable</span> <span class="n">Subscribe</span><span class="p">(</span><span class="n">IObserver</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;</span> <span class="n">observer</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>接口只有一个方法 <code>Subscribe</code>，返回 <code>IDisposable</code> 对象（代表着订阅事件本身）</li>
+<li><code>Observable</code> 持有 <code>Observer</code> 的集合，在值改变时随时通知它们</li>
+<li><code>IDisposable</code> 对象可以通过  <code>Dispose</code> 方法随时取消订阅</li>
+</ul>
+<h3 id="观察者-observer">观察者 Observer</h3>
+<p>观察者的源码其实也很简单。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl"><span class="k">public</span> <span class="k">interface</span> <span class="nc">IObserver</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">void</span> <span class="n">OnNext</span><span class="p">(</span><span class="n">T</span> <span class="k">value</span><span class="p">);</span> 
+</span></span><span class="line"><span class="cl">    <span class="k">void</span> <span class="n">OnError</span><span class="p">(</span><span class="n">Exception</span> <span class="n">error</span><span class="p">);</span> 
+</span></span><span class="line"><span class="cl">    <span class="k">void</span> <span class="n">OnCompleted</span><span class="p">();</span> 
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><code>OnNext</code> 方法定义当观测的值出现变化时，该做什么（类比迭代）</li>
+<li><code>OnError</code> 方法定义它出现错误时该做什么</li>
+<li><code>OnCompleted</code> 方法定义它任务完成时该做什么</li>
+<li>值得注意的是：发生错误时，数据流就会中断</li>
+</ul>
+<h3 id="操作符-operator">操作符 Operator</h3>
+<p>Rx 带来了海量的操作符，帮助我们分类、查找、转换数据。</p>
+<p>Rx.NET 的操作符与其它语言的 Rx 不同的是，操作符采用了原汁原味的 LINQ 风格。</p>
+<p>下面来点简单实例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl"><span class="n">IObservable</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;</span> <span class="n">strings</span><span class="p">=</span> <span class="p">...</span> <span class="c1">// 数据源</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">IDisposable</span> <span class="n">subscription</span> <span class="p">=</span> <span class="n">strings</span> <span class="c1">// 一个 IDisposable 代表了订阅事件本身</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="n">Where</span><span class="p">(</span><span class="n">str</span> <span class="p">=&gt;</span> <span class="n">str</span><span class="p">.</span><span class="n">StartsWith</span><span class="p">(</span><span class="s">&#34;A&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="n">Select</span><span class="p">(</span><span class="n">str</span> <span class="p">=&gt;</span> <span class="n">str</span><span class="p">.</span><span class="n">ToUpper</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="n">Subscribe</span><span class="p">(...);</span> <span class="c1">// 传入 Observer 或直接传 OnNext 方法</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">subscription</span><span class="p">.</span><span class="n">Dispose</span><span class="p">();</span> <span class="c1">// 上面说过了，可以随时取消订阅</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>上面的代码读起来是不是很流畅？</p>
+<p>其实第一行省略了如何创建可观察数据源，专注于操作符本身，要不然太劝退了。</p>
+<p>如何创建可观察的数据源将在后面的章节讲解。</p>
+<h2 id="理解事件和流-events--streams">理解事件和流 Events &amp; Streams</h2>
+<p>事件非常好理解，比如我们点击一个按钮就是一个事件。</p>
+<p>在 C# 中，事件由<strong>数据源</strong>「Event Source」和<strong>处理器</strong>「Event Handler」组成。</p>
+<p>在 Rx 中，「Event Source」对应「Observable」而「Event Handler」对应「Observer」。</p>
+<h3 id="万物皆流">万物皆流</h3>
+<blockquote>
+<p>A data stream is like a hose: every drop of water is a data packet that needs to go through stations until it reaches the end. Your data also needs to be filtered and transformed until  it gets to the real handler that does something useful with it.</p>
+</blockquote>
+<p>上面这段 Quote 来自 <em>Rx.NET in Action</em>，大致的意思就是数据就像水管子一样，我们通过操作符过滤水流，最后通过喷头将水流传播。</p>
+<p>我认为这是响应式的核心概念。只要你想持续地监听某数据的变化，那么使用 Rx 让数据变成可观察流，绝对是个好主意。</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/rx.net/">Rx.NET</a>
+        
+            <a href="/tags/csharp/">CSharp</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">Related content</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/p/rx-magic-3/">
+        
+        
+            <div class="article-image">
+                <img src="/p/rx-magic-3/head.c9b141998febf281884606d443822a75_hu60daa3e750dae8efe162b164d024055e_222411_250x150_fill_box_smart1_3.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post Rx.NET 响应式编程指北 03 - 深入流的创建"
+                        data-key="rx-magic-3" 
+                        data-hash="md5-ybFBmY/r8oGIRgbUQ4IqdQ==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Rx.NET 响应式编程指北 03 - 深入流的创建</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/rx-magic-ex/">
+        
+        
+            <div class="article-image">
+                <img src="/p/rx-magic-ex/head.c9b141998febf281884606d443822a75_hu60daa3e750dae8efe162b164d024055e_222411_250x150_fill_box_smart1_3.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post Rx.NET 响应式编程指北 Ex - 函数式思想 &amp; 流式接口"
+                        data-key="rx-magic-ex" 
+                        data-hash="md5-ybFBmY/r8oGIRgbUQ4IqdQ==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Rx.NET 响应式编程指北 Ex - 函数式思想 &amp; 流式接口</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/rx-magic-2/">
+        
+        
+            <div class="article-image">
+                <img src="/p/rx-magic-2/head.c9b141998febf281884606d443822a75_hu60daa3e750dae8efe162b164d024055e_222411_250x150_fill_box_smart1_3.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post Rx.NET 响应式编程指北 02 - 基本使用"
+                        data-key="rx-magic-2" 
+                        data-hash="md5-ybFBmY/r8oGIRgbUQ4IqdQ==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Rx.NET 响应式编程指北 02 - 基本使用</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/advanced-csharp-1/">
+        
+        
+            <div class="article-image">
+                <img src="/p/advanced-csharp-1/head.50573d1817e36e3313a7fd57690ebc80_hu6445997bcd53608f7e2f035aad872a86_31881_250x150_fill_box_smart1_3.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post 鎧恩的 C# 进阶小册  01 - 并发与异步"
+                        data-key="advanced-csharp-1" 
+                        data-hash="md5-UFc9GBfjbjMTp/1XaQ68gA==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">鎧恩的 C# 进阶小册  01 - 并发与异步</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/fsharp-for-csharp-devs/">
+        
+        
+            <div class="article-image">
+                <img src="/p/fsharp-for-csharp-devs/head.87737bdf5db61101d4ad0fb8eff57d53_hu7ae8c9477ae0a68f34fbf9d5a3829117_280528_250x150_fill_box_smart1_3.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post 写给 C# 开发者的 F# 光速入门教程"
+                        data-key="fsharp-for-csharp-devs" 
+                        data-hash="md5-h3N73122EQHUrQ&#43;47/V9Uw==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">写给 C# 开发者的 F# 光速入门教程</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2021 - 
+        
+        2023 Yonable.Space
+    </section>
+    
+    <section class="powerby">
+        
+            (*/ω＼*) <br/>
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.13.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#前言">前言</a></li>
+    <li><a href="#背景知识">背景知识</a></li>
+    <li><a href="#响应式概念">响应式概念</a>
+      <ol>
+        <li><a href="#可观察对象-observable">可观察对象 Observable</a></li>
+        <li><a href="#观察者-observer">观察者 Observer</a></li>
+        <li><a href="#操作符-operator">操作符 Operator</a></li>
+      </ol>
+    </li>
+    <li><a href="#理解事件和流-events--streams">理解事件和流 Events &amp; Streams</a>
+      <ol>
+        <li><a href="#万物皆流">万物皆流</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
