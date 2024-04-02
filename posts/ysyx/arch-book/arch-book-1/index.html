@@ -73,6 +73,26 @@
 
 
 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.13/dist/katex.min.css" integrity="sha384-RZU/ijkSsFbcmivfdRBQDtwuwVqK7GMOw6IMvKyeWL2K5UAlyp6WonmB8m7Jd0Hn" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.13/dist/katex.min.js" integrity="sha384-pK1WpvzWVBQiP0/GjnvRxV4mOb0oxFuyRxJlk6vVw146n3egcN5C925NCP7a7BY8" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.13/dist/contrib/auto-render.min.js" integrity="sha384-vZTG03m+2yp6N6BNi5iM4rW4oIwk5DfcNdFfxkk9ZWpDriOkXX8voJBFrAO7MpVl" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+          
+          
+          delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+              {left: '\\(', right: '\\)', display: false},
+              {left: '\\[', right: '\\]', display: true}
+          ],
+          
+          throwOnError : false
+        });
+    });
+</script>
+
 
 
 
@@ -404,8 +424,12 @@
 <p>逻辑电平是指数字电路中电信号的电压水平，用于表示逻辑状态。在数字电路中，通常将电压分为两个离散的状态，分别代表逻辑值 0 和逻辑值 1。</p>
 <h3 id="噪声裕度">噪声裕度</h3>
 <p>表示可以容忍的电压差值：</p>
-<p>$$ NM_{L} = V_{IL} - V_{OL}$$
-$$ NM_{H} = V_{OH} - V_{IH}$$</p>
+<p>$$
+NM_{L} = V_{IL} - V_{OL}
+$$
+$$
+NM_{H} = V_{OH} - V_{IH}
+$$</p>
 <h3 id="直流传输特性">直流传输特性</h3>
 <p>将输入电压作为自变量，将输出电压作为因变量，抽象出一个函数。其形成的图像很有特点，叫作直流传输特性（DC Transfer Characteristics）。图像请参阅原书。</p>
 <h3 id="静态电路法则">静态电路法则</h3>
