@@ -30,7 +30,6 @@
 
 
 
-
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Rx.NET 响应式编程指北 Ex - 函数式思想 &amp; 流式接口"/>
 <meta name="twitter:description" content="Rx.NET in Action 笔记"/>
@@ -473,149 +472,149 @@
 <p>回顾一下基础知识吧。</p>
 <h3 id="委托-delegate">委托 Delegate</h3>
 <p>为了传递函数，C# 老早就加入了委托特性：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#"><span style="color:#ff79c6">public</span> <span style="color:#ff79c6">delegate</span> <span style="color:#8be9fd">bool</span> MyDelegateType (<span style="color:#8be9fd">string</span> first, <span style="color:#8be9fd">string</span> second);
-</code></pre></div><p>在上面的代码中，我们创建了一个名为 <code>MyDelegateType</code> 的委托类型。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#ff79c6">public</span> <span style="color:#ff79c6">delegate</span> <span style="color:#8be9fd">bool</span> MyDelegateType (<span style="color:#8be9fd">string</span> first, <span style="color:#8be9fd">string</span> second);
+</span></span></code></pre></div><p>在上面的代码中，我们创建了一个名为 <code>MyDelegateType</code> 的委托类型。</p>
 <p>我们这样为委托赋值：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#">MyDelegateType myDel;
-myDel += &lt;一些函数&gt;;
-
-myDel(<span style="color:#f1fa8c">&#34;first&#34;</span>, <span style="color:#f1fa8c">&#34;second&#34;</span>); <span style="color:#6272a4">// 这样调用
-</span></code></pre></div><h3 id="匿名方法-anonymous-methods">匿名方法 Anonymous methods</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#">myDel = <span style="color:#ff79c6">delegate</span> (<span style="color:#8be9fd">string</span> first, <span style="color:#8be9fd">string</span> second)
-{
-    <span style="color:#ff79c6">return</span> first.Length == second.Length;
-}
-</code></pre></div><h3 id="lambda-表达式">Lambda 表达式</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#"><span style="color:#6272a4">// 👇 这就是 lambda
-</span><span style="color:#6272a4"></span>MyDelegateType x = (s1,s2) =&gt; s1 == s2; 
-
-<span style="color:#6272a4">// 👇 匿名函数
-</span><span style="color:#6272a4"></span>MyDelegateType y = <span style="color:#ff79c6">delegate</span> (<span style="color:#8be9fd">string</span> s1,<span style="color:#8be9fd">string</span> s2) { <span style="color:#ff79c6">return</span> s1 == s2; }; 
-</code></pre></div><h3 id="func-和-action">Func 和 Action</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span>MyDelegateType myDel;
+</span></span><span style="display:flex;"><span>myDel += &lt;一些函数&gt;;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>myDel(<span style="color:#f1fa8c">&#34;first&#34;</span>, <span style="color:#f1fa8c">&#34;second&#34;</span>); <span style="color:#6272a4">// 这样调用</span>
+</span></span></code></pre></div><h3 id="匿名方法-anonymous-methods">匿名方法 Anonymous methods</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span>myDel = <span style="color:#ff79c6">delegate</span> (<span style="color:#8be9fd">string</span> first, <span style="color:#8be9fd">string</span> second)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">return</span> first.Length == second.Length;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="lambda-表达式">Lambda 表达式</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#6272a4">// 👇 这就是 lambda</span>
+</span></span><span style="display:flex;"><span>MyDelegateType x = (s1,s2) =&gt; s1 == s2; 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">// 👇 匿名函数</span>
+</span></span><span style="display:flex;"><span>MyDelegateType y = <span style="color:#ff79c6">delegate</span> (<span style="color:#8be9fd">string</span> s1,<span style="color:#8be9fd">string</span> s2) { <span style="color:#ff79c6">return</span> s1 == s2; }; 
+</span></span></code></pre></div><h3 id="func-和-action">Func 和 Action</h3>
 <p>这俩都是 .NET 预定义好的标准委托类型。</p>
 <p>也就是说别傻乎乎地自己定义委托类型啦，用它俩就好了。</p>
 <p>.NET 预定义了 17 种 Func 和 Action 委托，全放在 <code>System</code> 名称空间下。</p>
 <h4 id="action">Action</h4>
 <p>Action 用于<strong>无返回值</strong>的函数委托。</p>
 <p>看看定义：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#"><span style="color:#6272a4">// 👇 无参
-</span><span style="color:#6272a4"></span><span style="color:#ff79c6">public</span> <span style="color:#ff79c6">delegate</span> <span style="color:#ff79c6">void</span> Action();
-<span style="color:#6272a4">// 👇 两个参数
-</span><span style="color:#6272a4"></span><span style="color:#ff79c6">public</span> <span style="color:#ff79c6">delegate</span> <span style="color:#ff79c6">void</span> Action&lt;<span style="color:#ff79c6">in</span> T1, <span style="color:#ff79c6">in</span> T2&gt;(T1 arg1, T2 arg2);
-</code></pre></div><p>简单使用：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#"><span style="color:#ff79c6">public</span> <span style="color:#ff79c6">static</span> <span style="color:#ff79c6">void</span> ForEach&lt;T&gt;(IEnumerable&lt;T&gt; collection, Action&lt;T&gt; action)
-{
-    <span style="color:#ff79c6">foreach</span> (<span style="color:#8be9fd">var</span> item <span style="color:#ff79c6">in</span> collection)
-    {
-        action(item);
-    }
-}
-<span style="color:#6272a4">// 👇 完整使用
-</span><span style="color:#6272a4"></span>ForEach(<span style="color:#ff79c6">new</span>[] { <span style="color:#f1fa8c">&#34;a&#34;</span>, <span style="color:#f1fa8c">&#34;b&#34;</span>, <span style="color:#f1fa8c">&#34;c&#34;</span> }, n =&gt; Console.WriteLine(n));
-<span style="color:#6272a4">// 👇 省略形式
-</span><span style="color:#6272a4"></span>ForEach(<span style="color:#ff79c6">new</span>[] { <span style="color:#f1fa8c">&#34;a&#34;</span>, <span style="color:#f1fa8c">&#34;b&#34;</span>, <span style="color:#f1fa8c">&#34;c&#34;</span> }, Console.WriteLine);
-</code></pre></div><h4 id="func">Func</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#6272a4">// 👇 无参</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">public</span> <span style="color:#ff79c6">delegate</span> <span style="color:#ff79c6">void</span> Action();
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">// 👇 两个参数</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">public</span> <span style="color:#ff79c6">delegate</span> <span style="color:#ff79c6">void</span> Action&lt;<span style="color:#ff79c6">in</span> T1, <span style="color:#ff79c6">in</span> T2&gt;(T1 arg1, T2 arg2);
+</span></span></code></pre></div><p>简单使用：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#ff79c6">public</span> <span style="color:#ff79c6">static</span> <span style="color:#ff79c6">void</span> ForEach&lt;T&gt;(IEnumerable&lt;T&gt; collection, Action&lt;T&gt; action)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">foreach</span> (<span style="color:#8be9fd">var</span> item <span style="color:#ff79c6">in</span> collection)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        action(item);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">// 👇 完整使用</span>
+</span></span><span style="display:flex;"><span>ForEach(<span style="color:#ff79c6">new</span>[] { <span style="color:#f1fa8c">&#34;a&#34;</span>, <span style="color:#f1fa8c">&#34;b&#34;</span>, <span style="color:#f1fa8c">&#34;c&#34;</span> }, n =&gt; Console.WriteLine(n));
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">// 👇 省略形式</span>
+</span></span><span style="display:flex;"><span>ForEach(<span style="color:#ff79c6">new</span>[] { <span style="color:#f1fa8c">&#34;a&#34;</span>, <span style="color:#f1fa8c">&#34;b&#34;</span>, <span style="color:#f1fa8c">&#34;c&#34;</span> }, Console.WriteLine);
+</span></span></code></pre></div><h4 id="func">Func</h4>
 <p>Func 用于<strong>有返回值</strong>的函数委托。</p>
 <p>看看定义：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#"><span style="color:#ff79c6">public</span> <span style="color:#ff79c6">delegate</span> TResult Func&lt;<span style="color:#ff79c6">out</span> TResult&gt;(); 
-<span style="color:#ff79c6">public</span> <span style="color:#ff79c6">delegate</span> TResult Func&lt;<span style="color:#ff79c6">in</span> T1,…,T16, <span style="color:#ff79c6">out</span> TResult&gt;(T1 arg,…,T16 arg16);
-</code></pre></div><p>简单使用：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#"><span style="color:#ff79c6">public</span> <span style="color:#ff79c6">static</span> <span style="color:#ff79c6">void</span> ForEach&lt;T&gt;(IEnumerable&lt;T&gt; collection, Action&lt;T&gt; action,
- Func&lt;T, <span style="color:#8be9fd">bool</span>&gt; predicate) 
-{
-     <span style="color:#ff79c6">foreach</span> (<span style="color:#8be9fd">var</span> item <span style="color:#ff79c6">in</span> collection)
-     {
-         <span style="color:#ff79c6">if</span> (predicate(item)) 
-         {
-             action(item);
-         }
-     }
-}
-</code></pre></div><h3 id="懒加载-lazyt">懒加载 <code>Lazy&lt;T&gt;</code></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#ff79c6">public</span> <span style="color:#ff79c6">delegate</span> TResult Func&lt;<span style="color:#ff79c6">out</span> TResult&gt;(); 
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">public</span> <span style="color:#ff79c6">delegate</span> TResult Func&lt;<span style="color:#ff79c6">in</span> T1,…,T16, <span style="color:#ff79c6">out</span> TResult&gt;(T1 arg,…,T16 arg16);
+</span></span></code></pre></div><p>简单使用：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#ff79c6">public</span> <span style="color:#ff79c6">static</span> <span style="color:#ff79c6">void</span> ForEach&lt;T&gt;(IEnumerable&lt;T&gt; collection, Action&lt;T&gt; action,
+</span></span><span style="display:flex;"><span> Func&lt;T, <span style="color:#8be9fd">bool</span>&gt; predicate) 
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>     <span style="color:#ff79c6">foreach</span> (<span style="color:#8be9fd">var</span> item <span style="color:#ff79c6">in</span> collection)
+</span></span><span style="display:flex;"><span>     {
+</span></span><span style="display:flex;"><span>         <span style="color:#ff79c6">if</span> (predicate(item)) 
+</span></span><span style="display:flex;"><span>         {
+</span></span><span style="display:flex;"><span>             action(item);
+</span></span><span style="display:flex;"><span>         }
+</span></span><span style="display:flex;"><span>     }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="懒加载-lazyt">懒加载 <code>Lazy&lt;T&gt;</code></h3>
 <p>我们来看看 Func 作为工厂函数的作用吧。</p>
 <p>你有一个很耗时的类：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#"><span style="color:#ff79c6">class</span> <span style="color:#50fa7b">HeavyClass</span> 
-{
-    <span style="color:#6272a4">// 初始化非常耗时
-</span><span style="color:#6272a4"></span>}
-</code></pre></div><p>你还有个类：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#"><span style="color:#ff79c6">class</span> <span style="color:#50fa7b">ThinClass</span>
-{
-    <span style="color:#ff79c6">private</span> HeavyClass <span style="color:#bd93f9">_</span>heavy;
-    <span style="color:#ff79c6">public</span> HeavyClass TheHeavy
-    {
-        <span style="color:#ff79c6">get</span> 
-        {
-            <span style="color:#ff79c6">if</span> (<span style="color:#bd93f9">_</span>heavy == <span style="color:#ff79c6">null</span>) 
-            { 
-                <span style="color:#bd93f9">_</span>heavy = <span style="color:#ff79c6">new</span> HeavyClass(); <span style="color:#6272a4">// 延迟加载时间
-</span><span style="color:#6272a4"></span>            } 
-            <span style="color:#ff79c6">return</span> <span style="color:#bd93f9">_</span>heavy;
-        }
-    }
-    <span style="color:#ff79c6">public</span> <span style="color:#ff79c6">void</span> SomeMethod()
-    {
-        <span style="color:#8be9fd">var</span> myHeavy = TheHeavy; 
-        <span style="color:#6272a4">// 省略后面的使用
-</span><span style="color:#6272a4"></span>    }
-} 
-</code></pre></div><p>我们可以看到这就是在 Java 中常见的构建模式。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#ff79c6">class</span> <span style="color:#50fa7b">HeavyClass</span> 
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// 初始化非常耗时</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>你还有个类：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#ff79c6">class</span> <span style="color:#50fa7b">ThinClass</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">private</span> HeavyClass _heavy;
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">public</span> HeavyClass TheHeavy
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">get</span> 
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">if</span> (_heavy == <span style="color:#ff79c6">null</span>) 
+</span></span><span style="display:flex;"><span>            { 
+</span></span><span style="display:flex;"><span>                _heavy = <span style="color:#ff79c6">new</span> HeavyClass(); <span style="color:#6272a4">// 延迟加载时间</span>
+</span></span><span style="display:flex;"><span>            } 
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">return</span> _heavy;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">public</span> <span style="color:#ff79c6">void</span> SomeMethod()
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#8be9fd">var</span> myHeavy = TheHeavy; 
+</span></span><span style="display:flex;"><span>        <span style="color:#6272a4">// 省略后面的使用</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>} 
+</span></span></code></pre></div><p>我们可以看到这就是在 Java 中常见的构建模式。</p>
 <p>那如果你有 10 个需要延迟加载的属性呢？像这样一一手写 <code>get</code> 方法未免也太折磨了。</p>
 <p>太笨了，在 C# 中才不这么做！</p>
 <p>我们来使用 <code>System</code> 空间下的懒加载类 <code>Lazy&lt;T&gt;</code>：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#"><span style="color:#ff79c6">class</span> <span style="color:#50fa7b">ClassWithLazy</span>
-{
-    Lazy&lt;HeavyClass&gt; <span style="color:#bd93f9">_l</span>azyHeavyClass = <span style="color:#ff79c6">new</span> Lazy&lt;HeavyClass&gt;();
-
-    <span style="color:#ff79c6">public</span> <span style="color:#ff79c6">void</span> SomeMethod()
-    {
-        <span style="color:#8be9fd">var</span> myHeavy = <span style="color:#bd93f9">_l</span>azyHeavyClass.Value;
-       <span style="color:#6272a4">//使用 myHeavy
-</span><span style="color:#6272a4"></span>    }
-}
-</code></pre></div><p>那如果 <code>HeavyClass</code> 类的构造方法需要参数咋办？</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#ff79c6">class</span> <span style="color:#50fa7b">ClassWithLazy</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    Lazy&lt;HeavyClass&gt; _lazyHeavyClass = <span style="color:#ff79c6">new</span> Lazy&lt;HeavyClass&gt;();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">public</span> <span style="color:#ff79c6">void</span> SomeMethod()
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#8be9fd">var</span> myHeavy = _lazyHeavyClass.Value;
+</span></span><span style="display:flex;"><span>       <span style="color:#6272a4">//使用 myHeavy</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>那如果 <code>HeavyClass</code> 类的构造方法需要参数咋办？</p>
 <p>传递个 <code>Func</code> 给它：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#">Lazy&lt;HeavyClass&gt; <span style="color:#bd93f9">_l</span>azyHeavyClass = <span style="color:#ff79c6">new</span> Lazy&lt;HeavyClass&gt;(() =&gt;
-{
-    <span style="color:#8be9fd">var</span> heavy = <span style="color:#ff79c6">new</span> HeavyClass(...); 
-    ... 
-    <span style="color:#ff79c6">return</span> heavy;
-});
-</code></pre></div><hr>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span>Lazy&lt;HeavyClass&gt; _lazyHeavyClass = <span style="color:#ff79c6">new</span> Lazy&lt;HeavyClass&gt;(() =&gt;
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd">var</span> heavy = <span style="color:#ff79c6">new</span> HeavyClass(...); 
+</span></span><span style="display:flex;"><span>    ... 
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">return</span> heavy;
+</span></span><span style="display:flex;"><span>});
+</span></span></code></pre></div><hr>
 <h2 id="流式接口-fluent-api">流式接口 Fluent API</h2>
 <p>流式接口（Fluent API）是一种方法调用风格：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#">StringBuilder sbuilder = <span style="color:#ff79c6">new</span> StringBuilder();
-<span style="color:#8be9fd">var</span> result = sbuilder
-    .AppendLine(<span style="color:#f1fa8c">&#34;Fluent&#34;</span>)
-    .AppendLine(<span style="color:#f1fa8c">&#34;Interfaces&#34;</span>)
-    .AppendLine(<span style="color:#f1fa8c">&#34;Are&#34;</span>)
-    .AppendLine(<span style="color:#f1fa8c">&#34;Awesome&#34;</span>)
-    .ToString();
-</code></pre></div><p>看看破晓的 <a href="https://github.com/SinoAHpx/ModuleLauncher.Re/blob/main/README_ZH.md">ModuleLauncher.Re</a> 是怎么写的吧：<del>破晓打钱！</del></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#"><span style="color:#8be9fd">var</span> process = <span style="color:#ff79c6">await</span> minecraft.WithAuthentication(<span style="color:#f1fa8c">&#34;&lt;player&gt;&#34;</span>)
-    .WithJava(<span style="color:#f1fa8c">@&#34;&lt;java&gt;&#34;</span>)
-    .LaunchAsync();
-</code></pre></div><p>接下来我们动手写一个流式接口。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span>StringBuilder sbuilder = <span style="color:#ff79c6">new</span> StringBuilder();
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd">var</span> result = sbuilder
+</span></span><span style="display:flex;"><span>    .AppendLine(<span style="color:#f1fa8c">&#34;Fluent&#34;</span>)
+</span></span><span style="display:flex;"><span>    .AppendLine(<span style="color:#f1fa8c">&#34;Interfaces&#34;</span>)
+</span></span><span style="display:flex;"><span>    .AppendLine(<span style="color:#f1fa8c">&#34;Are&#34;</span>)
+</span></span><span style="display:flex;"><span>    .AppendLine(<span style="color:#f1fa8c">&#34;Awesome&#34;</span>)
+</span></span><span style="display:flex;"><span>    .ToString();
+</span></span></code></pre></div><p>看看破晓的 <a href="https://github.com/SinoAHpx/ModuleLauncher.Re/blob/main/README_ZH.md">ModuleLauncher.Re</a> 是怎么写的吧：<del>破晓打钱！</del></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#8be9fd">var</span> process = <span style="color:#ff79c6">await</span> minecraft.WithAuthentication(<span style="color:#f1fa8c">&#34;&lt;player&gt;&#34;</span>)
+</span></span><span style="display:flex;"><span>    .WithJava(<span style="color:#f1fa8c">@&#34;&lt;java&gt;&#34;</span>)
+</span></span><span style="display:flex;"><span>    .LaunchAsync();
+</span></span></code></pre></div><p>接下来我们动手写一个流式接口。</p>
 <p>我们平常为 <code>List</code> 添加元素：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#"><span style="color:#8be9fd">var</span> words = <span style="color:#ff79c6">new</span> List&lt;<span style="color:#8be9fd">string</span>&gt;();
-words.Add(<span style="color:#f1fa8c">&#34;This&#34;</span>);
-words.Add(<span style="color:#f1fa8c">&#34;Feels&#34;</span>);
-words.Add(<span style="color:#f1fa8c">&#34;Weird&#34;</span>);
-</code></pre></div><p>不够优雅！用流式接口写个扩展方法：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#"><span style="color:#ff79c6">public</span> <span style="color:#ff79c6">static</span> <span style="color:#ff79c6">class</span> <span style="color:#50fa7b">ListExtensions</span>
-{
-    <span style="color:#ff79c6">public</span> <span style="color:#ff79c6">static</span> List&lt;T&gt; AddItem&lt;T&gt;(<span style="color:#ff79c6">this</span> List&lt;T&gt; list, T item)
-    {
-        list.Add(item);
-        <span style="color:#ff79c6">return</span> list;
-    }
-}
-</code></pre></div><p>现在我们就可以使用方法链了：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#"><span style="color:#8be9fd">var</span> words = <span style="color:#ff79c6">new</span> List&lt;<span style="color:#8be9fd">string</span>&gt;();
-words.AddItem(<span style="color:#f1fa8c">&#34;This&#34;</span>)
-     .AddItem(<span style="color:#f1fa8c">&#34;Feels&#34;</span>)
-     .AddItem(<span style="color:#f1fa8c">&#34;Weird&#34;</span>);
-</code></pre></div><p>Awesome！瞬间就简洁多了。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#8be9fd">var</span> words = <span style="color:#ff79c6">new</span> List&lt;<span style="color:#8be9fd">string</span>&gt;();
+</span></span><span style="display:flex;"><span>words.Add(<span style="color:#f1fa8c">&#34;This&#34;</span>);
+</span></span><span style="display:flex;"><span>words.Add(<span style="color:#f1fa8c">&#34;Feels&#34;</span>);
+</span></span><span style="display:flex;"><span>words.Add(<span style="color:#f1fa8c">&#34;Weird&#34;</span>);
+</span></span></code></pre></div><p>不够优雅！用流式接口写个扩展方法：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#ff79c6">public</span> <span style="color:#ff79c6">static</span> <span style="color:#ff79c6">class</span> <span style="color:#50fa7b">ListExtensions</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">public</span> <span style="color:#ff79c6">static</span> List&lt;T&gt; AddItem&lt;T&gt;(<span style="color:#ff79c6">this</span> List&lt;T&gt; list, T item)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        list.Add(item);
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">return</span> list;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>现在我们就可以使用方法链了：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#8be9fd">var</span> words = <span style="color:#ff79c6">new</span> List&lt;<span style="color:#8be9fd">string</span>&gt;();
+</span></span><span style="display:flex;"><span>words.AddItem(<span style="color:#f1fa8c">&#34;This&#34;</span>)
+</span></span><span style="display:flex;"><span>     .AddItem(<span style="color:#f1fa8c">&#34;Feels&#34;</span>)
+</span></span><span style="display:flex;"><span>     .AddItem(<span style="color:#f1fa8c">&#34;Weird&#34;</span>);
+</span></span></code></pre></div><p>Awesome！瞬间就简洁多了。</p>
 
                     
                     <HR width="100%" id="EOF">

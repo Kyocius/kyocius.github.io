@@ -23,7 +23,7 @@ $$ NM_{L} = V_{IL} - V_{OL} $$ $$ NM_{H} = V_{OH} - V_{IH} $$
 直流传输特性 将输入电压作为自变量，将输出电压作为因变量，抽象出一个函数。其形成的图像很有特点，叫作直流传输特性（DC Transfer Characteristics）。图像请参阅原书。
 静态电路法则 静态电路法则要求，在给定逻辑上有效的输入情况下，每个电路元件都将产生逻辑上有效的输出。
 为了提高生产力，诞生了四个逻辑家族：
- TTL CMOS LVTTL LVCMOS  </description>
+TTL CMOS LVTTL LVCMOS </description>
     </item>
     
   </channel>
