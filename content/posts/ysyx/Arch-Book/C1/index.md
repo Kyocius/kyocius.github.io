@@ -10,6 +10,7 @@ tags:
     - Arch
     - ysyx
 image: header.png
+enableLatex: true
 ---
 ## 前言
 
@@ -31,8 +32,12 @@ image: header.png
 
 表示可以容忍的电压差值：
 
-$$ NM_{L} = V_{IL} - V_{OL}$$
-$$ NM_{H} = V_{OH} - V_{IH}$$
+$$
+NM_{L} = V_{IL} - V_{OL}
+$$
+$$
+NM_{H} = V_{OH} - V_{IH}
+$$
 
 ### 直流传输特性
 
