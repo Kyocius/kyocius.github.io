@@ -435,15 +435,15 @@
 <p>首先来看看微软的解释：Rx = Observables + LINQ + Schedulers。谔谔，啥玩意儿？</p>
 <p>那看看大佬怎么解释的吧：Rx = 处理异步数据流。这个解释还行，但还是不明白。</p>
 <p>这里是更通俗的解释：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#8be9fd">var</span> a = <span style="color:#bd93f9">1</span>;
-</span></span><span style="display:flex;"><span><span style="color:#8be9fd">var</span> b = <span style="color:#bd93f9">2</span>;
-</span></span><span style="display:flex;"><span><span style="color:#8be9fd">var</span> c = a + b; <span style="color:#6272a4">// c 的值显然为 3</span>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#e5c07b">var</span> <span style="color:#e06c75">a</span> = <span style="color:#d19a66">1</span>;
+</span></span><span style="display:flex;"><span><span style="color:#e5c07b">var</span> <span style="color:#e06c75">b</span> = <span style="color:#d19a66">2</span>;
+</span></span><span style="display:flex;"><span><span style="color:#e5c07b">var</span> <span style="color:#e06c75">c</span> = <span style="color:#e06c75">a</span> + <span style="color:#e06c75">b</span>; <span style="color:#7f848e">// c 的值显然为 3</span>
 </span></span></code></pre></div><p>当你改变 <code>a</code> 或者 <code>b</code> 值的时候，按照我们以前的思维，<code>c</code> 的值并不会随之发生变化。</p>
 <p>如果我们想要 <code>c</code> 的值随之而改变呢？很简单，快快使用 <strong>Rx</strong>！</p>
 <h3 id="可观察对象-observable">可观察对象 Observable</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#ff79c6">public</span> <span style="color:#ff79c6">interface</span> <span style="color:#50fa7b">IObservable</span>&lt;T&gt;
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#c678dd">public</span> <span style="color:#c678dd">interface</span> <span style="color:#e5c07b">IObservable</span>&lt;<span style="color:#e06c75">T</span>&gt;
 </span></span><span style="display:flex;"><span>{
-</span></span><span style="display:flex;"><span>    IDisposable Subscribe(IObserver&lt;T&gt; observer);
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">IDisposable</span> <span style="color:#e06c75">Subscribe</span>(<span style="color:#e06c75">IObserver</span>&lt;<span style="color:#e06c75">T</span>&gt; <span style="color:#e06c75">observer</span>);
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><ul>
 <li>接口只有一个方法 <code>Subscribe</code>，返回 <code>IDisposable</code> 对象（代表着订阅事件本身）</li>
@@ -452,11 +452,11 @@
 </ul>
 <h3 id="观察者-observer">观察者 Observer</h3>
 <p>观察者的源码其实也很简单。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#ff79c6">public</span> <span style="color:#ff79c6">interface</span> <span style="color:#50fa7b">IObserver</span>&lt;T&gt;
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#c678dd">public</span> <span style="color:#c678dd">interface</span> <span style="color:#e5c07b">IObserver</span>&lt;<span style="color:#e06c75">T</span>&gt;
 </span></span><span style="display:flex;"><span>{
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">void</span> OnNext(T <span style="color:#ff79c6">value</span>); 
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">void</span> OnError(Exception error); 
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">void</span> OnCompleted(); 
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">void</span> <span style="color:#e06c75">OnNext</span>(<span style="color:#e06c75">T</span> <span style="color:#c678dd">value</span>); 
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">void</span> <span style="color:#e06c75">OnError</span>(<span style="color:#e06c75">Exception</span> <span style="color:#e06c75">error</span>); 
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">void</span> <span style="color:#e06c75">OnCompleted</span>(); 
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><ul>
 <li><code>OnNext</code> 方法定义当观测的值出现变化时，该做什么（类比迭代）</li>
@@ -468,14 +468,14 @@
 <p>Rx 带来了海量的操作符，帮助我们分类、查找、转换数据。</p>
 <p>Rx.NET 的操作符与其它语言的 Rx 不同的是，操作符采用了原汁原味的 LINQ 风格。</p>
 <p>下面来点简单实例：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span>IObservable&lt;<span style="color:#8be9fd">string</span>&gt; strings= ... <span style="color:#6272a4">// 数据源</span>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#e06c75">IObservable</span>&lt;<span style="color:#e5c07b">string</span>&gt; <span style="color:#e06c75">strings</span>= ... <span style="color:#7f848e">// 数据源</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>IDisposable subscription = strings <span style="color:#6272a4">// 一个 IDisposable 代表了订阅事件本身</span>
-</span></span><span style="display:flex;"><span>    .Where(str =&gt; str.StartsWith(<span style="color:#f1fa8c">&#34;A&#34;</span>))
-</span></span><span style="display:flex;"><span>    .Select(str =&gt; str.ToUpper())
-</span></span><span style="display:flex;"><span>    .Subscribe(...); <span style="color:#6272a4">// 传入 Observer 或直接传 OnNext 方法</span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">IDisposable</span> <span style="color:#e06c75">subscription</span> = <span style="color:#e06c75">strings</span> <span style="color:#7f848e">// 一个 IDisposable 代表了订阅事件本身</span>
+</span></span><span style="display:flex;"><span>    .<span style="color:#e06c75">Where</span>(<span style="color:#e06c75">str</span> =&gt; <span style="color:#e06c75">str</span>.<span style="color:#e06c75">StartsWith</span>(<span style="color:#98c379">&#34;A&#34;</span>))
+</span></span><span style="display:flex;"><span>    .<span style="color:#e06c75">Select</span>(<span style="color:#e06c75">str</span> =&gt; <span style="color:#e06c75">str</span>.<span style="color:#e06c75">ToUpper</span>())
+</span></span><span style="display:flex;"><span>    .<span style="color:#e06c75">Subscribe</span>(...); <span style="color:#7f848e">// 传入 Observer 或直接传 OnNext 方法</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>subscription.Dispose(); <span style="color:#6272a4">// 上面说过了，可以随时取消订阅</span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">subscription</span>.<span style="color:#e06c75">Dispose</span>(); <span style="color:#7f848e">// 上面说过了，可以随时取消订阅</span>
 </span></span></code></pre></div><p>上面的代码读起来是不是很流畅？</p>
 <p>其实第一行省略了如何创建可观察数据源，专注于操作符本身，要不然太劝退了。</p>
 <p>如何创建可观察的数据源将在后面的章节讲解。</p>

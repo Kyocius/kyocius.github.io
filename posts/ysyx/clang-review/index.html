@@ -376,7 +376,7 @@
 <ol>
 <li>如何使用 <code>,</code>（逗号）字符来在for循环的每一部分中，<code>;</code>（分号）之间分隔多条语句？</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#ff79c6">for</span> (i <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">0</span>, j <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">10</span>; i <span style="color:#ff79c6">&lt;</span> <span style="color:#bd93f9">10</span>; i<span style="color:#ff79c6">++</span>, j<span style="color:#ff79c6">--</span>)
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#c678dd">for</span> (<span style="color:#e06c75">i</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">0</span>, <span style="color:#e06c75">j</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">10</span>; <span style="color:#e06c75">i</span> <span style="color:#56b6c2">&lt;</span> <span style="color:#d19a66">10</span>; <span style="color:#e06c75">i</span><span style="color:#56b6c2">++</span>, <span style="color:#e06c75">j</span><span style="color:#56b6c2">--</span>)
 </span></span></code></pre></div><ol start="2">
 <li>查询 <code>NULL</code> 是什么东西，看看它会打印出什么？</li>
 </ol>
@@ -385,25 +385,25 @@
 <ol start="3">
 <li>看看你是否能在打印之前将 <code>states</code> 的一个元素赋值给 <code>argv</code> 中的元素，再试试相反的操作？</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#ff79c6">#include</span> <span style="color:#ff79c6">&lt;stdio.h&gt;</span><span style="color:#ff79c6">
-</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6"></span>
-</span></span><span style="display:flex;"><span><span style="color:#8be9fd">int</span> <span style="color:#50fa7b">main</span>(<span style="color:#8be9fd">int</span> argc, <span style="color:#8be9fd">char</span> <span style="color:#ff79c6">*</span>argv[]) {
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#7f848e">#include</span> <span style="color:#7f848e">&lt;stdio.h&gt;</span><span style="color:#7f848e">
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#e5c07b">int</span> <span style="color:#61afef;font-weight:bold">main</span>(<span style="color:#e5c07b">int</span> <span style="color:#e06c75">argc</span>, <span style="color:#e5c07b">char</span> <span style="color:#56b6c2">*</span><span style="color:#e06c75">argv</span>[]) {
 </span></span><span style="display:flex;"><span>  
 </span></span><span style="display:flex;"><span>  
-</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd">char</span> <span style="color:#ff79c6">*</span>states[] <span style="color:#ff79c6">=</span> {<span style="color:#f1fa8c">&#34;California&#34;</span>, <span style="color:#f1fa8c">&#34;Oregon&#34;</span>, <span style="color:#f1fa8c">&#34;Washington&#34;</span>, <span style="color:#f1fa8c">&#34;Texas&#34;</span>};
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">char</span> <span style="color:#56b6c2">*</span><span style="color:#e06c75">states</span>[] <span style="color:#56b6c2">=</span> {<span style="color:#98c379">&#34;California&#34;</span>, <span style="color:#98c379">&#34;Oregon&#34;</span>, <span style="color:#98c379">&#34;Washington&#34;</span>, <span style="color:#98c379">&#34;Texas&#34;</span>};
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// 将states的一个元素赋值给argv的一个元素
-</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    <span style="color:#6272a4">// 注意：这通常不是个好主意，因为argv通常不应被修改
-</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    <span style="color:#ff79c6">if</span> (argc <span style="color:#ff79c6">&gt;</span> <span style="color:#bd93f9">1</span>) {
-</span></span><span style="display:flex;"><span>        argv[<span style="color:#bd93f9">1</span>] <span style="color:#ff79c6">=</span> states[<span style="color:#bd93f9">0</span>];
-</span></span><span style="display:flex;"><span>        <span style="color:#50fa7b">printf</span>(<span style="color:#f1fa8c">&#34;argv[1] is now %s</span><span style="color:#f1fa8c">\n</span><span style="color:#f1fa8c">&#34;</span>, argv[<span style="color:#bd93f9">1</span>]);
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">// 将states的一个元素赋值给argv的一个元素
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#7f848e">// 注意：这通常不是个好主意，因为argv通常不应被修改
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#c678dd">if</span> (<span style="color:#e06c75">argc</span> <span style="color:#56b6c2">&gt;</span> <span style="color:#d19a66">1</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">argv</span>[<span style="color:#d19a66">1</span>] <span style="color:#56b6c2">=</span> <span style="color:#e06c75">states</span>[<span style="color:#d19a66">0</span>];
+</span></span><span style="display:flex;"><span>        <span style="color:#61afef;font-weight:bold">printf</span>(<span style="color:#98c379">&#34;argv[1] is now %s</span><span style="color:#98c379">\n</span><span style="color:#98c379">&#34;</span>, <span style="color:#e06c75">argv</span>[<span style="color:#d19a66">1</span>]);
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// 将argv的一个元素赋值给states的一个元素
-</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    states[<span style="color:#bd93f9">0</span>] <span style="color:#ff79c6">=</span> argv[<span style="color:#bd93f9">0</span>];
-</span></span><span style="display:flex;"><span>    <span style="color:#50fa7b">printf</span>(<span style="color:#f1fa8c">&#34;states[0] is now %s</span><span style="color:#f1fa8c">\n</span><span style="color:#f1fa8c">&#34;</span>, states[<span style="color:#bd93f9">0</span>]);
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">// 将argv的一个元素赋值给states的一个元素
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#e06c75">states</span>[<span style="color:#d19a66">0</span>] <span style="color:#56b6c2">=</span> <span style="color:#e06c75">argv</span>[<span style="color:#d19a66">0</span>];
+</span></span><span style="display:flex;"><span>    <span style="color:#61afef;font-weight:bold">printf</span>(<span style="color:#98c379">&#34;states[0] is now %s</span><span style="color:#98c379">\n</span><span style="color:#98c379">&#34;</span>, <span style="color:#e06c75">states</span>[<span style="color:#d19a66">0</span>]);
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">return</span> <span style="color:#bd93f9">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">return</span> <span style="color:#d19a66">0</span>;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><h2 id="练习16结构体和指向它们的指针">练习16：结构体和指向它们的指针</h2>
 <ol>
@@ -424,7 +424,7 @@
 <ol>
 <li><code>strncpy</code> 有什么设计缺陷？</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#8be9fd">char</span> <span style="color:#ff79c6">*</span><span style="color:#50fa7b">strncpy</span>(<span style="color:#8be9fd">char</span> <span style="color:#ff79c6">*</span>dest, <span style="color:#ff79c6">const</span> <span style="color:#8be9fd">char</span> <span style="color:#ff79c6">*</span>src, <span style="color:#8be9fd">size_t</span> n)
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#e5c07b">char</span> <span style="color:#56b6c2">*</span><span style="color:#61afef;font-weight:bold">strncpy</span>(<span style="color:#e5c07b">char</span> <span style="color:#56b6c2">*</span><span style="color:#e06c75">dest</span>, <span style="color:#c678dd">const</span> <span style="color:#e5c07b">char</span> <span style="color:#56b6c2">*</span><span style="color:#e06c75">src</span>, <span style="color:#e5c07b">size_t</span> <span style="color:#e06c75">n</span>)
 </span></span></code></pre></div><p><code>strcpy</code> 函数不会向 <code>dest</code> 追加 <code>\0</code>，也就是字符串没有了结束，可能会造成内存非法访问。</p>
 <ol start="2">
 <li>C 如何打包结构体？结构体添加一些字段之后的新大小？</li>
@@ -439,9 +439,9 @@
 <li>将名称改成指针名称：<code>int (*compare_cb)(int a, int b)</code></li>
 </ul>
 <p>我们可以使用 <code>typedef</code> 来简化函数指针以便于传参：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#ff79c6">typedef</span> <span style="color:#8be9fd">int</span> (<span style="color:#ff79c6">*</span>compare_cb)(<span style="color:#8be9fd">int</span> a, <span style="color:#8be9fd">int</span> b)
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#c678dd">typedef</span> <span style="color:#e5c07b">int</span> (<span style="color:#56b6c2">*</span><span style="color:#e06c75">compare_cb</span>)(<span style="color:#e5c07b">int</span> <span style="color:#e06c75">a</span>, <span style="color:#e5c07b">int</span> <span style="color:#e06c75">b</span>)
 </span></span></code></pre></div><p>如此，在另一个函数中，我们就能将 <code>compare_cb</code> 作为类型传递：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#8be9fd">int</span> <span style="color:#ff79c6">*</span><span style="color:#50fa7b">bubble_sort</span>(<span style="color:#8be9fd">int</span> <span style="color:#ff79c6">*</span>numbers, <span style="color:#8be9fd">int</span> count, compare_cb cmp)
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#e5c07b">int</span> <span style="color:#56b6c2">*</span><span style="color:#61afef;font-weight:bold">bubble_sort</span>(<span style="color:#e5c07b">int</span> <span style="color:#56b6c2">*</span><span style="color:#e06c75">numbers</span>, <span style="color:#e5c07b">int</span> <span style="color:#e06c75">count</span>, <span style="color:#e06c75">compare_cb</span> <span style="color:#e06c75">cmp</span>)
 </span></span></code></pre></div><ol>
 <li>将错误的函数传给 <code>compare_cb</code>，并看看 C 编辑器会报告什么错误？</li>
 </ol>
@@ -449,22 +449,22 @@
 <ol start="2">
 <li>将 <code>NULL</code> 传给它，看看程序中会发生什么。然后运行 Valgrind 来看看它会报告什么？</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#ff79c6">#include</span> <span style="color:#ff79c6">&lt;stdio.h&gt;</span><span style="color:#ff79c6">
-</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6"></span>
-</span></span><span style="display:flex;"><span><span style="color:#8be9fd">void</span> <span style="color:#50fa7b">myFunction</span>(<span style="color:#8be9fd">int</span> <span style="color:#ff79c6">*</span>ptr) {
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> (ptr <span style="color:#ff79c6">!=</span> <span style="color:#8be9fd;font-style:italic">NULL</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#6272a4">// 在这里解引用非空指针
-</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>        <span style="color:#ff79c6">*</span>ptr <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">42</span>;
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#7f848e">#include</span> <span style="color:#7f848e">&lt;stdio.h&gt;</span><span style="color:#7f848e">
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#e5c07b">void</span> <span style="color:#61afef;font-weight:bold">myFunction</span>(<span style="color:#e5c07b">int</span> <span style="color:#56b6c2">*</span><span style="color:#e06c75">ptr</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">if</span> (<span style="color:#e06c75">ptr</span> <span style="color:#56b6c2">!=</span> <span style="color:#e5c07b">NULL</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#7f848e">// 在这里解引用非空指针
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>        <span style="color:#56b6c2">*</span><span style="color:#e06c75">ptr</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">42</span>;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#8be9fd">int</span> <span style="color:#50fa7b">main</span>() {
-</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd">int</span> <span style="color:#ff79c6">*</span>nullPointer <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">NULL</span>;
+</span></span><span style="display:flex;"><span><span style="color:#e5c07b">int</span> <span style="color:#61afef;font-weight:bold">main</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">int</span> <span style="color:#56b6c2">*</span><span style="color:#e06c75">nullPointer</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">NULL</span>;
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// 将 NULL 传递给函数指针
-</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    <span style="color:#50fa7b">myFunction</span>(nullPointer);
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">// 将 NULL 传递给函数指针
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#61afef;font-weight:bold">myFunction</span>(<span style="color:#e06c75">nullPointer</span>);
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">return</span> <span style="color:#bd93f9">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">return</span> <span style="color:#d19a66">0</span>;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p>Valgrind 的报错：</p>
 <pre tabindex="0"><code>==12345== Invalid write of size 4
@@ -475,169 +475,169 @@
 <h2 id="练习32双向链表">练习32：双向链表</h2>
 <p>强烈建议 0 数据结构基础先去油管看一下印度老哥的双向链表教程：<a href="https://www.youtube.com/watch?v=nsMWbs-r4vE&amp;list=PLBlnK6fEyqRg7pacSDMgPn7vDVhz3N1uf&amp;index=2">YouTube</a></p>
 <p>先在头文件中编写两个结构体：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#ff79c6">#include</span> <span style="color:#ff79c6">&lt;stdlib.h&gt;</span><span style="color:#ff79c6">
-</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6"></span>
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">struct</span> ListNode;
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#7f848e">#include</span> <span style="color:#7f848e">&lt;stdlib.h&gt;</span><span style="color:#7f848e">
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">struct</span> <span style="color:#e06c75">ListNode</span>;
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">typedef</span> <span style="color:#ff79c6">struct</span> ListNode
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">typedef</span> <span style="color:#c678dd">struct</span> <span style="color:#e06c75">ListNode</span>
 </span></span><span style="display:flex;"><span>{
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">struct</span> ListNode <span style="color:#ff79c6">*</span>prev;
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">struct</span> ListNode <span style="color:#ff79c6">*</span>next;
-</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd">void</span> <span style="color:#ff79c6">*</span>value; <span style="color:#6272a4">// 可以指向任何数据类型
-</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>} ListNode;
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">struct</span> <span style="color:#e06c75">ListNode</span> <span style="color:#56b6c2">*</span><span style="color:#e06c75">prev</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">struct</span> <span style="color:#e06c75">ListNode</span> <span style="color:#56b6c2">*</span><span style="color:#e06c75">next</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">void</span> <span style="color:#56b6c2">*</span><span style="color:#e06c75">value</span>; <span style="color:#7f848e">// 可以指向任何数据类型
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>} <span style="color:#e06c75">ListNode</span>;
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">typedef</span> <span style="color:#ff79c6">struct</span> List
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">typedef</span> <span style="color:#c678dd">struct</span> <span style="color:#e06c75">List</span>
 </span></span><span style="display:flex;"><span>{
-</span></span><span style="display:flex;"><span>    ListNode <span style="color:#ff79c6">*</span>first;
-</span></span><span style="display:flex;"><span>    ListNode <span style="color:#ff79c6">*</span>last;
-</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd">int</span> count;
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">ListNode</span> <span style="color:#56b6c2">*</span><span style="color:#e06c75">first</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">ListNode</span> <span style="color:#56b6c2">*</span><span style="color:#e06c75">last</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">int</span> <span style="color:#e06c75">count</span>;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p>然后预定义四个 List 的整体方法：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>List <span style="color:#ff79c6">*</span><span style="color:#50fa7b">List_create</span>();
-</span></span><span style="display:flex;"><span><span style="color:#8be9fd">void</span> <span style="color:#50fa7b">List_destroy</span>(List <span style="color:#ff79c6">*</span>list);
-</span></span><span style="display:flex;"><span><span style="color:#8be9fd">void</span> <span style="color:#50fa7b">List_clear</span>(List <span style="color:#ff79c6">*</span>list);
-</span></span><span style="display:flex;"><span><span style="color:#8be9fd">void</span> <span style="color:#50fa7b">List_clear_destroy</span>(List <span style="color:#ff79c6">*</span>list);
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#e06c75">List</span> <span style="color:#56b6c2">*</span><span style="color:#61afef;font-weight:bold">List_create</span>();
+</span></span><span style="display:flex;"><span><span style="color:#e5c07b">void</span> <span style="color:#61afef;font-weight:bold">List_destroy</span>(<span style="color:#e06c75">List</span> <span style="color:#56b6c2">*</span><span style="color:#e06c75">list</span>);
+</span></span><span style="display:flex;"><span><span style="color:#e5c07b">void</span> <span style="color:#61afef;font-weight:bold">List_clear</span>(<span style="color:#e06c75">List</span> <span style="color:#56b6c2">*</span><span style="color:#e06c75">list</span>);
+</span></span><span style="display:flex;"><span><span style="color:#e5c07b">void</span> <span style="color:#61afef;font-weight:bold">List_clear_destroy</span>(<span style="color:#e06c75">List</span> <span style="color:#56b6c2">*</span><span style="color:#e06c75">list</span>);
 </span></span></code></pre></div><p>三个宏方法（不知道为什么要用宏）：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#ff79c6">#define List_count(A) ((A)-&gt;count)
-</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6"></span>
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">#define List_first(A) ((A)-&gt;first != NULL ? (A)-&gt;first-&gt;value : NULL)
-</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6"></span>
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">#define List_last(A) ((A)-&gt;last != NULL ? (A)-&gt;last-&gt;value : NULL)
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#7f848e">#define List_count(A) ((A)-&gt;count)
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#7f848e">#define List_first(A) ((A)-&gt;first != NULL ? (A)-&gt;first-&gt;value : NULL)
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#7f848e">#define List_last(A) ((A)-&gt;last != NULL ? (A)-&gt;last-&gt;value : NULL)
 </span></span></span></code></pre></div><p>接下来预定义数据的操作方法：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#8be9fd">void</span> <span style="color:#50fa7b">List_push</span>(List <span style="color:#ff79c6">*</span>list, <span style="color:#8be9fd">void</span> <span style="color:#ff79c6">*</span>value);
-</span></span><span style="display:flex;"><span><span style="color:#8be9fd">void</span> <span style="color:#ff79c6">*</span><span style="color:#50fa7b">List_pop</span>(List <span style="color:#ff79c6">*</span>list);
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#e5c07b">void</span> <span style="color:#61afef;font-weight:bold">List_push</span>(<span style="color:#e06c75">List</span> <span style="color:#56b6c2">*</span><span style="color:#e06c75">list</span>, <span style="color:#e5c07b">void</span> <span style="color:#56b6c2">*</span><span style="color:#e06c75">value</span>);
+</span></span><span style="display:flex;"><span><span style="color:#e5c07b">void</span> <span style="color:#56b6c2">*</span><span style="color:#61afef;font-weight:bold">List_pop</span>(<span style="color:#e06c75">List</span> <span style="color:#56b6c2">*</span><span style="color:#e06c75">list</span>);
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#6272a4">// 链表的头部插入与删除，命名风格来自于 Perl 语言
-</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span><span style="color:#8be9fd">void</span> <span style="color:#50fa7b">List_unshift</span>(List <span style="color:#ff79c6">*</span>list, <span style="color:#8be9fd">void</span> <span style="color:#ff79c6">*</span>value);
-</span></span><span style="display:flex;"><span><span style="color:#8be9fd">void</span> <span style="color:#ff79c6">*</span><span style="color:#50fa7b">List_shift</span>(List <span style="color:#ff79c6">*</span>list);
+</span></span><span style="display:flex;"><span><span style="color:#7f848e">// 链表的头部插入与删除，命名风格来自于 Perl 语言
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#e5c07b">void</span> <span style="color:#61afef;font-weight:bold">List_unshift</span>(<span style="color:#e06c75">List</span> <span style="color:#56b6c2">*</span><span style="color:#e06c75">list</span>, <span style="color:#e5c07b">void</span> <span style="color:#56b6c2">*</span><span style="color:#e06c75">value</span>);
+</span></span><span style="display:flex;"><span><span style="color:#e5c07b">void</span> <span style="color:#56b6c2">*</span><span style="color:#61afef;font-weight:bold">List_shift</span>(<span style="color:#e06c75">List</span> <span style="color:#56b6c2">*</span><span style="color:#e06c75">list</span>);
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#8be9fd">void</span> <span style="color:#ff79c6">*</span><span style="color:#50fa7b">List_remove</span>(List <span style="color:#ff79c6">*</span>list, ListNode <span style="color:#ff79c6">*</span>node);
+</span></span><span style="display:flex;"><span><span style="color:#e5c07b">void</span> <span style="color:#56b6c2">*</span><span style="color:#61afef;font-weight:bold">List_remove</span>(<span style="color:#e06c75">List</span> <span style="color:#56b6c2">*</span><span style="color:#e06c75">list</span>, <span style="color:#e06c75">ListNode</span> <span style="color:#56b6c2">*</span><span style="color:#e06c75">node</span>);
 </span></span></code></pre></div><p>定义 <code>LIST_FOREACH</code> 宏。书中说这是个常见的习语：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#ff79c6">#define LIST_FOREACH(L, S, M, V) ListNode *_node = NULL; \
-</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">    ListNode *V = NULL;\
-</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">    for(V = _node = L -&gt; S; _node != NULL; V = _node = _node -&gt; M)
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#7f848e">#define LIST_FOREACH(L, S, M, V) ListNode *_node = NULL; \
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e">    ListNode *V = NULL;\
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e">    for(V = _node = L -&gt; S; _node != NULL; V = _node = _node -&gt; M)
 </span></span></span></code></pre></div><p>这个宏利用了一个 <code>for</code> 循环，其中 <code>_node</code> 用于跟踪当前节点，<code>V</code> 用于表示当前节点。在每次迭代中，<code>_node</code> 被更新为下一个节点，从而实现链表遍历的封装。</p>
 <p>现在开始实现头文件的方法。在 <code>list.c</code> 中先完成 List 的整体方法：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#ff79c6">#include</span> <span style="color:#ff79c6">&lt;lcthw/list.h&gt;</span><span style="color:#ff79c6">
-</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6"></span>
-</span></span><span style="display:flex;"><span>List <span style="color:#ff79c6">*</span><span style="color:#50fa7b">List_create</span>()
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#7f848e">#include</span> <span style="color:#7f848e">&lt;lcthw/list.h&gt;</span><span style="color:#7f848e">
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">List</span> <span style="color:#56b6c2">*</span><span style="color:#61afef;font-weight:bold">List_create</span>()
 </span></span><span style="display:flex;"><span>{
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">return</span> <span style="color:#50fa7b">calloc</span>(<span style="color:#bd93f9">1</span>, <span style="color:#ff79c6">sizeof</span>(List));
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">return</span> <span style="color:#61afef;font-weight:bold">calloc</span>(<span style="color:#d19a66">1</span>, <span style="color:#c678dd">sizeof</span>(<span style="color:#e06c75">List</span>));
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#8be9fd">void</span> <span style="color:#50fa7b">List_destroy</span>(List <span style="color:#ff79c6">*</span>list)
+</span></span><span style="display:flex;"><span><span style="color:#e5c07b">void</span> <span style="color:#61afef;font-weight:bold">List_destroy</span>(<span style="color:#e06c75">List</span> <span style="color:#56b6c2">*</span><span style="color:#e06c75">list</span>)
 </span></span><span style="display:flex;"><span>{
-</span></span><span style="display:flex;"><span>    <span style="color:#50fa7b">LIST_FOREACH</span>(list, first, next, cur)
+</span></span><span style="display:flex;"><span>    <span style="color:#61afef;font-weight:bold">LIST_FOREACH</span>(<span style="color:#e06c75">list</span>, <span style="color:#e06c75">first</span>, <span style="color:#e06c75">next</span>, <span style="color:#e06c75">cur</span>)
 </span></span><span style="display:flex;"><span>    {
-</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">if</span> (cur<span style="color:#ff79c6">-&gt;</span>prev)
-</span></span><span style="display:flex;"><span>            <span style="color:#50fa7b">free</span>(cur<span style="color:#ff79c6">-&gt;</span>prev)
+</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">if</span> (<span style="color:#e06c75">cur</span><span style="color:#56b6c2">-&gt;</span><span style="color:#e06c75">prev</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#61afef;font-weight:bold">free</span>(<span style="color:#e06c75">cur</span><span style="color:#56b6c2">-&gt;</span><span style="color:#e06c75">prev</span>)
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#50fa7b">free</span>(list<span style="color:#ff79c6">-&gt;</span>last);
-</span></span><span style="display:flex;"><span>    <span style="color:#50fa7b">free</span>(list);
+</span></span><span style="display:flex;"><span>    <span style="color:#61afef;font-weight:bold">free</span>(<span style="color:#e06c75">list</span><span style="color:#56b6c2">-&gt;</span><span style="color:#e06c75">last</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#61afef;font-weight:bold">free</span>(<span style="color:#e06c75">list</span>);
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#8be9fd">void</span> <span style="color:#50fa7b">List_clear</span>(List <span style="color:#ff79c6">*</span>list)
+</span></span><span style="display:flex;"><span><span style="color:#e5c07b">void</span> <span style="color:#61afef;font-weight:bold">List_clear</span>(<span style="color:#e06c75">List</span> <span style="color:#56b6c2">*</span><span style="color:#e06c75">list</span>)
 </span></span><span style="display:flex;"><span>{
-</span></span><span style="display:flex;"><span>    <span style="color:#50fa7b">LIST_FOREACH</span>(list, first, next, cur) 
+</span></span><span style="display:flex;"><span>    <span style="color:#61afef;font-weight:bold">LIST_FOREACH</span>(<span style="color:#e06c75">list</span>, <span style="color:#e06c75">first</span>, <span style="color:#e06c75">next</span>, <span style="color:#e06c75">cur</span>) 
 </span></span><span style="display:flex;"><span>    {
-</span></span><span style="display:flex;"><span>        <span style="color:#50fa7b">free</span>(cur<span style="color:#ff79c6">-&gt;</span>value);
+</span></span><span style="display:flex;"><span>        <span style="color:#61afef;font-weight:bold">free</span>(<span style="color:#e06c75">cur</span><span style="color:#56b6c2">-&gt;</span><span style="color:#e06c75">value</span>);
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#8be9fd">void</span> <span style="color:#50fa7b">List_clear_destroy</span>(List <span style="color:#ff79c6">*</span>list)
+</span></span><span style="display:flex;"><span><span style="color:#e5c07b">void</span> <span style="color:#61afef;font-weight:bold">List_clear_destroy</span>(<span style="color:#e06c75">List</span> <span style="color:#56b6c2">*</span><span style="color:#e06c75">list</span>)
 </span></span><span style="display:flex;"><span>{
-</span></span><span style="display:flex;"><span>    <span style="color:#50fa7b">List_clear</span>(list);
-</span></span><span style="display:flex;"><span>    <span style="color:#50fa7b">List_destroy</span>(list);
+</span></span><span style="display:flex;"><span>    <span style="color:#61afef;font-weight:bold">List_clear</span>(<span style="color:#e06c75">list</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#61afef;font-weight:bold">List_destroy</span>(<span style="color:#e06c75">list</span>);
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p>接下来实现数据的操作方法：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#8be9fd">void</span> <span style="color:#50fa7b">List_push</span>(List <span style="color:#ff79c6">*</span>list, <span style="color:#8be9fd">void</span> <span style="color:#ff79c6">*</span>value)
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#e5c07b">void</span> <span style="color:#61afef;font-weight:bold">List_push</span>(<span style="color:#e06c75">List</span> <span style="color:#56b6c2">*</span><span style="color:#e06c75">list</span>, <span style="color:#e5c07b">void</span> <span style="color:#56b6c2">*</span><span style="color:#e06c75">value</span>)
 </span></span><span style="display:flex;"><span>{
-</span></span><span style="display:flex;"><span>    ListNode <span style="color:#ff79c6">*</span>node <span style="color:#ff79c6">=</span> <span style="color:#50fa7b">calloc</span>(<span style="color:#bd93f9">1</span>, <span style="color:#ff79c6">sizeof</span>(ListNode));
-</span></span><span style="display:flex;"><span>    <span style="color:#50fa7b">check_mem</span>(node); <span style="color:#6272a4">// 跳转到 error 标签
-</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>
-</span></span><span style="display:flex;"><span>    node<span style="color:#ff79c6">-&gt;</span>value <span style="color:#ff79c6">=</span> value;
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">ListNode</span> <span style="color:#56b6c2">*</span><span style="color:#e06c75">node</span> <span style="color:#56b6c2">=</span> <span style="color:#61afef;font-weight:bold">calloc</span>(<span style="color:#d19a66">1</span>, <span style="color:#c678dd">sizeof</span>(<span style="color:#e06c75">ListNode</span>));
+</span></span><span style="display:flex;"><span>    <span style="color:#61afef;font-weight:bold">check_mem</span>(<span style="color:#e06c75">node</span>); <span style="color:#7f848e">// 跳转到 error 标签
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">node</span><span style="color:#56b6c2">-&gt;</span><span style="color:#e06c75">value</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">value</span>;
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span>(list<span style="color:#ff79c6">-&gt;</span>last <span style="color:#ff79c6">==</span> <span style="color:#8be9fd;font-style:italic">NULL</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">if</span>(<span style="color:#e06c75">list</span><span style="color:#56b6c2">-&gt;</span><span style="color:#e06c75">last</span> <span style="color:#56b6c2">==</span> <span style="color:#e5c07b">NULL</span>)
 </span></span><span style="display:flex;"><span>    {
-</span></span><span style="display:flex;"><span>        list<span style="color:#ff79c6">-&gt;</span>first <span style="color:#ff79c6">=</span> node;
-</span></span><span style="display:flex;"><span>        list<span style="color:#ff79c6">-&gt;</span>last <span style="color:#ff79c6">=</span> node;
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">list</span><span style="color:#56b6c2">-&gt;</span><span style="color:#e06c75">first</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">node</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">list</span><span style="color:#56b6c2">-&gt;</span><span style="color:#e06c75">last</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">node</span>;
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">else</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">else</span>
 </span></span><span style="display:flex;"><span>    {
-</span></span><span style="display:flex;"><span>        list<span style="color:#ff79c6">-&gt;</span>last<span style="color:#ff79c6">-&gt;</span>next <span style="color:#ff79c6">=</span> node;
-</span></span><span style="display:flex;"><span>        node<span style="color:#ff79c6">-&gt;</span>prev <span style="color:#ff79c6">=</span> list<span style="color:#ff79c6">-&gt;</span>last;
-</span></span><span style="display:flex;"><span>        list<span style="color:#ff79c6">-&gt;</span>last <span style="color:#ff79c6">=</span> node;
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">list</span><span style="color:#56b6c2">-&gt;</span><span style="color:#e06c75">last</span><span style="color:#56b6c2">-&gt;</span><span style="color:#e06c75">next</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">node</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">node</span><span style="color:#56b6c2">-&gt;</span><span style="color:#e06c75">prev</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">list</span><span style="color:#56b6c2">-&gt;</span><span style="color:#e06c75">last</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">list</span><span style="color:#56b6c2">-&gt;</span><span style="color:#e06c75">last</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">node</span>;
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    list<span style="color:#ff79c6">-&gt;</span>count<span style="color:#ff79c6">++</span>;
-</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">error</span>:
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">return</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">list</span><span style="color:#56b6c2">-&gt;</span><span style="color:#e06c75">count</span><span style="color:#56b6c2">++</span>;
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">error</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">return</span>;
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#8be9fd">void</span> <span style="color:#ff79c6">*</span><span style="color:#50fa7b">List_pop</span>(List <span style="color:#ff79c6">*</span>list)
+</span></span><span style="display:flex;"><span><span style="color:#e5c07b">void</span> <span style="color:#56b6c2">*</span><span style="color:#61afef;font-weight:bold">List_pop</span>(<span style="color:#e06c75">List</span> <span style="color:#56b6c2">*</span><span style="color:#e06c75">list</span>)
 </span></span><span style="display:flex;"><span>{
-</span></span><span style="display:flex;"><span>    ListNode <span style="color:#ff79c6">*</span>node <span style="color:#ff79c6">=</span> list<span style="color:#ff79c6">-&gt;</span>last;
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">return</span> node <span style="color:#ff79c6">!=</span> <span style="color:#8be9fd;font-style:italic">NULL</span> <span style="color:#ff79c6">?</span> <span style="color:#50fa7b">List_remove</span>(list, node) <span style="color:#ff79c6">:</span> <span style="color:#8be9fd;font-style:italic">NULL</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">ListNode</span> <span style="color:#56b6c2">*</span><span style="color:#e06c75">node</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">list</span><span style="color:#56b6c2">-&gt;</span><span style="color:#e06c75">last</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">return</span> <span style="color:#e06c75">node</span> <span style="color:#56b6c2">!=</span> <span style="color:#e5c07b">NULL</span> <span style="color:#56b6c2">?</span> <span style="color:#61afef;font-weight:bold">List_remove</span>(<span style="color:#e06c75">list</span>, <span style="color:#e06c75">node</span>) <span style="color:#56b6c2">:</span> <span style="color:#e5c07b">NULL</span>;
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#8be9fd">void</span> <span style="color:#50fa7b">List_unshift</span>(List <span style="color:#ff79c6">*</span>list, <span style="color:#8be9fd">void</span> <span style="color:#ff79c6">*</span>value)
+</span></span><span style="display:flex;"><span><span style="color:#e5c07b">void</span> <span style="color:#61afef;font-weight:bold">List_unshift</span>(<span style="color:#e06c75">List</span> <span style="color:#56b6c2">*</span><span style="color:#e06c75">list</span>, <span style="color:#e5c07b">void</span> <span style="color:#56b6c2">*</span><span style="color:#e06c75">value</span>)
 </span></span><span style="display:flex;"><span>{
-</span></span><span style="display:flex;"><span>    ListNode <span style="color:#ff79c6">*</span>node <span style="color:#ff79c6">=</span> <span style="color:#50fa7b">calloc</span>(<span style="color:#bd93f9">1</span>, <span style="color:#ff79c6">sizeof</span>(ListNode));
-</span></span><span style="display:flex;"><span>    <span style="color:#50fa7b">check_mem</span>(node);
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">ListNode</span> <span style="color:#56b6c2">*</span><span style="color:#e06c75">node</span> <span style="color:#56b6c2">=</span> <span style="color:#61afef;font-weight:bold">calloc</span>(<span style="color:#d19a66">1</span>, <span style="color:#c678dd">sizeof</span>(<span style="color:#e06c75">ListNode</span>));
+</span></span><span style="display:flex;"><span>    <span style="color:#61afef;font-weight:bold">check_mem</span>(<span style="color:#e06c75">node</span>);
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    node<span style="color:#ff79c6">-&gt;</span>value <span style="color:#ff79c6">=</span> value;
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">node</span><span style="color:#56b6c2">-&gt;</span><span style="color:#e06c75">value</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">value</span>;
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span>(list<span style="color:#ff79c6">-&gt;</span>first <span style="color:#ff79c6">==</span> <span style="color:#8be9fd;font-style:italic">NULL</span>) {
-</span></span><span style="display:flex;"><span>        list<span style="color:#ff79c6">-&gt;</span>first <span style="color:#ff79c6">=</span> node;
-</span></span><span style="display:flex;"><span>        list<span style="color:#ff79c6">-&gt;</span>last <span style="color:#ff79c6">=</span> node;
-</span></span><span style="display:flex;"><span>    } <span style="color:#ff79c6">else</span> {
-</span></span><span style="display:flex;"><span>        node<span style="color:#ff79c6">-&gt;</span>next <span style="color:#ff79c6">=</span> list<span style="color:#ff79c6">-&gt;</span>first;
-</span></span><span style="display:flex;"><span>        list<span style="color:#ff79c6">-&gt;</span>first<span style="color:#ff79c6">-&gt;</span>prev <span style="color:#ff79c6">=</span> node;
-</span></span><span style="display:flex;"><span>        list<span style="color:#ff79c6">-&gt;</span>first <span style="color:#ff79c6">=</span> node;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    list<span style="color:#ff79c6">-&gt;</span>count<span style="color:#ff79c6">++</span>;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">error</span>:
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">return</span>;
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#8be9fd">void</span> <span style="color:#ff79c6">*</span><span style="color:#50fa7b">List_shift</span>(List <span style="color:#ff79c6">*</span>list)
-</span></span><span style="display:flex;"><span>{
-</span></span><span style="display:flex;"><span>    ListNode <span style="color:#ff79c6">*</span>node <span style="color:#ff79c6">=</span> list<span style="color:#ff79c6">-&gt;</span>first;
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">return</span> node <span style="color:#ff79c6">!=</span> <span style="color:#8be9fd;font-style:italic">NULL</span> <span style="color:#ff79c6">?</span> <span style="color:#50fa7b">List_remove</span>(list, node) <span style="color:#ff79c6">:</span> <span style="color:#8be9fd;font-style:italic">NULL</span>;
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#8be9fd">void</span> <span style="color:#ff79c6">*</span><span style="color:#50fa7b">List_remove</span>(List <span style="color:#ff79c6">*</span>list, ListNode <span style="color:#ff79c6">*</span>node)
-</span></span><span style="display:flex;"><span>{
-</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd">void</span> <span style="color:#ff79c6">*</span>result <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">NULL</span>;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#50fa7b">check</span>(list<span style="color:#ff79c6">-&gt;</span>first <span style="color:#ff79c6">&amp;&amp;</span> list<span style="color:#ff79c6">-&gt;</span>last, <span style="color:#f1fa8c">&#34;List is empty.&#34;</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#50fa7b">check</span>(node, <span style="color:#f1fa8c">&#34;node can&#39;t be NULL&#34;</span>);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span>(node <span style="color:#ff79c6">==</span> list<span style="color:#ff79c6">-&gt;</span>first <span style="color:#ff79c6">&amp;&amp;</span> node <span style="color:#ff79c6">==</span> list<span style="color:#ff79c6">-&gt;</span>last) {
-</span></span><span style="display:flex;"><span>        list<span style="color:#ff79c6">-&gt;</span>first <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">NULL</span>;
-</span></span><span style="display:flex;"><span>        list<span style="color:#ff79c6">-&gt;</span>last <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">NULL</span>;
-</span></span><span style="display:flex;"><span>    } <span style="color:#ff79c6">else</span> <span style="color:#ff79c6">if</span>(node <span style="color:#ff79c6">==</span> list<span style="color:#ff79c6">-&gt;</span>first) {
-</span></span><span style="display:flex;"><span>        list<span style="color:#ff79c6">-&gt;</span>first <span style="color:#ff79c6">=</span> node<span style="color:#ff79c6">-&gt;</span>next;
-</span></span><span style="display:flex;"><span>        <span style="color:#50fa7b">check</span>(list<span style="color:#ff79c6">-&gt;</span>first <span style="color:#ff79c6">!=</span> <span style="color:#8be9fd;font-style:italic">NULL</span>, <span style="color:#f1fa8c">&#34;Invalid list, somehow got a first that is NULL.&#34;</span>);
-</span></span><span style="display:flex;"><span>        list<span style="color:#ff79c6">-&gt;</span>first<span style="color:#ff79c6">-&gt;</span>prev <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">NULL</span>;
-</span></span><span style="display:flex;"><span>    } <span style="color:#ff79c6">else</span> <span style="color:#ff79c6">if</span> (node <span style="color:#ff79c6">==</span> list<span style="color:#ff79c6">-&gt;</span>last) {
-</span></span><span style="display:flex;"><span>        list<span style="color:#ff79c6">-&gt;</span>last <span style="color:#ff79c6">=</span> node<span style="color:#ff79c6">-&gt;</span>prev;
-</span></span><span style="display:flex;"><span>        <span style="color:#50fa7b">check</span>(list<span style="color:#ff79c6">-&gt;</span>last <span style="color:#ff79c6">!=</span> <span style="color:#8be9fd;font-style:italic">NULL</span>, <span style="color:#f1fa8c">&#34;Invalid list, somehow got a next that is NULL.&#34;</span>);
-</span></span><span style="display:flex;"><span>        list<span style="color:#ff79c6">-&gt;</span>last<span style="color:#ff79c6">-&gt;</span>next <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">NULL</span>;
-</span></span><span style="display:flex;"><span>    } <span style="color:#ff79c6">else</span> {
-</span></span><span style="display:flex;"><span>        ListNode <span style="color:#ff79c6">*</span>after <span style="color:#ff79c6">=</span> node<span style="color:#ff79c6">-&gt;</span>next;
-</span></span><span style="display:flex;"><span>        ListNode <span style="color:#ff79c6">*</span>before <span style="color:#ff79c6">=</span> node<span style="color:#ff79c6">-&gt;</span>prev;
-</span></span><span style="display:flex;"><span>        after<span style="color:#ff79c6">-&gt;</span>prev <span style="color:#ff79c6">=</span> before;
-</span></span><span style="display:flex;"><span>        before<span style="color:#ff79c6">-&gt;</span>next <span style="color:#ff79c6">=</span> after;
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">if</span>(<span style="color:#e06c75">list</span><span style="color:#56b6c2">-&gt;</span><span style="color:#e06c75">first</span> <span style="color:#56b6c2">==</span> <span style="color:#e5c07b">NULL</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">list</span><span style="color:#56b6c2">-&gt;</span><span style="color:#e06c75">first</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">node</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">list</span><span style="color:#56b6c2">-&gt;</span><span style="color:#e06c75">last</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">node</span>;
+</span></span><span style="display:flex;"><span>    } <span style="color:#c678dd">else</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">node</span><span style="color:#56b6c2">-&gt;</span><span style="color:#e06c75">next</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">list</span><span style="color:#56b6c2">-&gt;</span><span style="color:#e06c75">first</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">list</span><span style="color:#56b6c2">-&gt;</span><span style="color:#e06c75">first</span><span style="color:#56b6c2">-&gt;</span><span style="color:#e06c75">prev</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">node</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">list</span><span style="color:#56b6c2">-&gt;</span><span style="color:#e06c75">first</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">node</span>;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    list<span style="color:#ff79c6">-&gt;</span>count<span style="color:#ff79c6">--</span>;
-</span></span><span style="display:flex;"><span>    result <span style="color:#ff79c6">=</span> node<span style="color:#ff79c6">-&gt;</span>value;
-</span></span><span style="display:flex;"><span>    <span style="color:#50fa7b">free</span>(node);
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">list</span><span style="color:#56b6c2">-&gt;</span><span style="color:#e06c75">count</span><span style="color:#56b6c2">++</span>;
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">error</span>:
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">return</span> result;
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">error</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">return</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#e5c07b">void</span> <span style="color:#56b6c2">*</span><span style="color:#61afef;font-weight:bold">List_shift</span>(<span style="color:#e06c75">List</span> <span style="color:#56b6c2">*</span><span style="color:#e06c75">list</span>)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">ListNode</span> <span style="color:#56b6c2">*</span><span style="color:#e06c75">node</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">list</span><span style="color:#56b6c2">-&gt;</span><span style="color:#e06c75">first</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">return</span> <span style="color:#e06c75">node</span> <span style="color:#56b6c2">!=</span> <span style="color:#e5c07b">NULL</span> <span style="color:#56b6c2">?</span> <span style="color:#61afef;font-weight:bold">List_remove</span>(<span style="color:#e06c75">list</span>, <span style="color:#e06c75">node</span>) <span style="color:#56b6c2">:</span> <span style="color:#e5c07b">NULL</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#e5c07b">void</span> <span style="color:#56b6c2">*</span><span style="color:#61afef;font-weight:bold">List_remove</span>(<span style="color:#e06c75">List</span> <span style="color:#56b6c2">*</span><span style="color:#e06c75">list</span>, <span style="color:#e06c75">ListNode</span> <span style="color:#56b6c2">*</span><span style="color:#e06c75">node</span>)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">void</span> <span style="color:#56b6c2">*</span><span style="color:#e06c75">result</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">NULL</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#61afef;font-weight:bold">check</span>(<span style="color:#e06c75">list</span><span style="color:#56b6c2">-&gt;</span><span style="color:#e06c75">first</span> <span style="color:#56b6c2">&amp;&amp;</span> <span style="color:#e06c75">list</span><span style="color:#56b6c2">-&gt;</span><span style="color:#e06c75">last</span>, <span style="color:#98c379">&#34;List is empty.&#34;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#61afef;font-weight:bold">check</span>(<span style="color:#e06c75">node</span>, <span style="color:#98c379">&#34;node can&#39;t be NULL&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">if</span>(<span style="color:#e06c75">node</span> <span style="color:#56b6c2">==</span> <span style="color:#e06c75">list</span><span style="color:#56b6c2">-&gt;</span><span style="color:#e06c75">first</span> <span style="color:#56b6c2">&amp;&amp;</span> <span style="color:#e06c75">node</span> <span style="color:#56b6c2">==</span> <span style="color:#e06c75">list</span><span style="color:#56b6c2">-&gt;</span><span style="color:#e06c75">last</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">list</span><span style="color:#56b6c2">-&gt;</span><span style="color:#e06c75">first</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">NULL</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">list</span><span style="color:#56b6c2">-&gt;</span><span style="color:#e06c75">last</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">NULL</span>;
+</span></span><span style="display:flex;"><span>    } <span style="color:#c678dd">else</span> <span style="color:#c678dd">if</span>(<span style="color:#e06c75">node</span> <span style="color:#56b6c2">==</span> <span style="color:#e06c75">list</span><span style="color:#56b6c2">-&gt;</span><span style="color:#e06c75">first</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">list</span><span style="color:#56b6c2">-&gt;</span><span style="color:#e06c75">first</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">node</span><span style="color:#56b6c2">-&gt;</span><span style="color:#e06c75">next</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#61afef;font-weight:bold">check</span>(<span style="color:#e06c75">list</span><span style="color:#56b6c2">-&gt;</span><span style="color:#e06c75">first</span> <span style="color:#56b6c2">!=</span> <span style="color:#e5c07b">NULL</span>, <span style="color:#98c379">&#34;Invalid list, somehow got a first that is NULL.&#34;</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">list</span><span style="color:#56b6c2">-&gt;</span><span style="color:#e06c75">first</span><span style="color:#56b6c2">-&gt;</span><span style="color:#e06c75">prev</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">NULL</span>;
+</span></span><span style="display:flex;"><span>    } <span style="color:#c678dd">else</span> <span style="color:#c678dd">if</span> (<span style="color:#e06c75">node</span> <span style="color:#56b6c2">==</span> <span style="color:#e06c75">list</span><span style="color:#56b6c2">-&gt;</span><span style="color:#e06c75">last</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">list</span><span style="color:#56b6c2">-&gt;</span><span style="color:#e06c75">last</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">node</span><span style="color:#56b6c2">-&gt;</span><span style="color:#e06c75">prev</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#61afef;font-weight:bold">check</span>(<span style="color:#e06c75">list</span><span style="color:#56b6c2">-&gt;</span><span style="color:#e06c75">last</span> <span style="color:#56b6c2">!=</span> <span style="color:#e5c07b">NULL</span>, <span style="color:#98c379">&#34;Invalid list, somehow got a next that is NULL.&#34;</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">list</span><span style="color:#56b6c2">-&gt;</span><span style="color:#e06c75">last</span><span style="color:#56b6c2">-&gt;</span><span style="color:#e06c75">next</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">NULL</span>;
+</span></span><span style="display:flex;"><span>    } <span style="color:#c678dd">else</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">ListNode</span> <span style="color:#56b6c2">*</span><span style="color:#e06c75">after</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">node</span><span style="color:#56b6c2">-&gt;</span><span style="color:#e06c75">next</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">ListNode</span> <span style="color:#56b6c2">*</span><span style="color:#e06c75">before</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">node</span><span style="color:#56b6c2">-&gt;</span><span style="color:#e06c75">prev</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">after</span><span style="color:#56b6c2">-&gt;</span><span style="color:#e06c75">prev</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">before</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">before</span><span style="color:#56b6c2">-&gt;</span><span style="color:#e06c75">next</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">after</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">list</span><span style="color:#56b6c2">-&gt;</span><span style="color:#e06c75">count</span><span style="color:#56b6c2">--</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">result</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">node</span><span style="color:#56b6c2">-&gt;</span><span style="color:#e06c75">value</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#61afef;font-weight:bold">free</span>(<span style="color:#e06c75">node</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">error</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">return</span> <span style="color:#e06c75">result</span>;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p>现在我们终于实现了双向链表上的所有操作。闹麻了，书上的实现方法感觉跟喂了 Poops 一样。</p>
 <ol>

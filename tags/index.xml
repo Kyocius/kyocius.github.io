@@ -7,22 +7,31 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
     <copyright>Kyocius. 本站遵循 CC-BY-NC 4.0 协议</copyright>
-    <lastBuildDate>Fri, 02 Feb 2024 11:25:05 -0400</lastBuildDate><atom:link href="https://kyocius.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 02 Feb 2024 11:25:05 +0800</lastBuildDate><atom:link href="https://kyocius.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Arch</title>
-      <link>https://kyocius.github.io/tags/arch/</link>
-      <pubDate>Fri, 02 Feb 2024 11:25:05 -0400</pubDate>
+      <title>一生一芯</title>
+      <link>https://kyocius.github.io/tags/%E4%B8%80%E7%94%9F%E4%B8%80%E8%8A%AF/</link>
+      <pubDate>Fri, 02 Feb 2024 11:25:05 +0800</pubDate>
       
-      <guid>https://kyocius.github.io/tags/arch/</guid>
+      <guid>https://kyocius.github.io/tags/%E4%B8%80%E7%94%9F%E4%B8%80%E8%8A%AF/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>ysyx</title>
-      <link>https://kyocius.github.io/tags/ysyx/</link>
-      <pubDate>Fri, 02 Feb 2024 11:25:05 -0400</pubDate>
+      <title>体系结构</title>
+      <link>https://kyocius.github.io/tags/%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/</link>
+      <pubDate>Fri, 02 Feb 2024 11:25:05 +0800</pubDate>
       
-      <guid>https://kyocius.github.io/tags/ysyx/</guid>
+      <guid>https://kyocius.github.io/tags/%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>数字电路</title>
+      <link>https://kyocius.github.io/tags/%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF/</link>
+      <pubDate>Fri, 02 Feb 2024 11:25:05 +0800</pubDate>
+      
+      <guid>https://kyocius.github.io/tags/%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF/</guid>
       <description></description>
     </item>
     
@@ -41,15 +50,6 @@
       <pubDate>Fri, 26 Aug 2022 00:00:00 +0000</pubDate>
       
       <guid>https://kyocius.github.io/tags/fsharp-basic/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Advanced CSharp</title>
-      <link>https://kyocius.github.io/tags/advanced-csharp/</link>
-      <pubDate>Mon, 15 Aug 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://kyocius.github.io/tags/advanced-csharp/</guid>
       <description></description>
     </item>
     

@@ -567,87 +567,87 @@
 <ol>
 <li>先编写一个类，其中只有一个事件属性：</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#ff79c6">class</span> <span style="color:#50fa7b">StockTicker</span>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#c678dd">class</span> <span style="color:#e5c07b">StockTicker</span>
 </span></span><span style="display:flex;"><span>{
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">public</span> <span style="color:#ff79c6">event</span> EventHandler&lt;StockTick&gt; StockTick; 
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">public</span> <span style="color:#c678dd">event</span> <span style="color:#e06c75">EventHandler</span>&lt;<span style="color:#e06c75">StockTick</span>&gt; <span style="color:#e06c75">StockTick</span>; 
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><ol start="2">
 <li>编写一个类包含我们的数据：</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#ff79c6">class</span> <span style="color:#50fa7b">StockTick</span>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#c678dd">class</span> <span style="color:#e5c07b">StockTick</span>
 </span></span><span style="display:flex;"><span>{
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">public</span> <span style="color:#8be9fd">string</span> QuoteSymbol { <span style="color:#ff79c6">get</span>; <span style="color:#ff79c6">set</span>; }
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">public</span> <span style="color:#8be9fd">decimal</span> Price { <span style="color:#ff79c6">get</span>; <span style="color:#ff79c6">set</span>; }
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">public</span> <span style="color:#e5c07b">string</span> <span style="color:#e06c75">QuoteSymbol</span> { <span style="color:#c678dd">get</span>; <span style="color:#c678dd">set</span>; }
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">public</span> <span style="color:#e5c07b">decimal</span> <span style="color:#e06c75">Price</span> { <span style="color:#c678dd">get</span>; <span style="color:#c678dd">set</span>; }
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><ol start="3">
 <li>创建一个类来监听变化，并订阅事件：</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#ff79c6">class</span> <span style="color:#50fa7b">StockMonitor</span>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#c678dd">class</span> <span style="color:#e5c07b">StockMonitor</span>
 </span></span><span style="display:flex;"><span>{ 
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">public</span> StockMonitor(StockTicker ticker)
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">public</span> <span style="color:#e06c75">StockMonitor</span>(<span style="color:#e06c75">StockTicker</span> <span style="color:#e06c75">ticker</span>)
 </span></span><span style="display:flex;"><span>    {
-</span></span><span style="display:flex;"><span>        ticker.StockTick += OnStockTick; <span style="color:#6272a4">// OnStockTick 注册事件</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">ticker</span>.<span style="color:#e06c75">StockTick</span> += <span style="color:#e06c75">OnStockTick</span>; <span style="color:#7f848e">// OnStockTick 注册事件</span>
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>    ...
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><ol start="4">
 <li>因为我们需要比较股票价格的变化，所以我们可以通过字典来存储先前的股票数据。编写一个新类：</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#ff79c6">class</span> <span style="color:#50fa7b">StockInfo</span>
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#c678dd">class</span> <span style="color:#e5c07b">StockInfo</span>
 </span></span><span style="display:flex;"><span>{
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">public</span> StockInfo(<span style="color:#8be9fd">string</span> symbol, <span style="color:#8be9fd">decimal</span> price)
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">public</span> <span style="color:#e06c75">StockInfo</span>(<span style="color:#e5c07b">string</span> <span style="color:#e06c75">symbol</span>, <span style="color:#e5c07b">decimal</span> <span style="color:#e06c75">price</span>)
 </span></span><span style="display:flex;"><span>    {
-</span></span><span style="display:flex;"><span>        Symbol = symbol;
-</span></span><span style="display:flex;"><span>        PrevPrice = price;
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">Symbol</span> = <span style="color:#e06c75">symbol</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">PrevPrice</span> = <span style="color:#e06c75">price</span>;
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">public</span> <span style="color:#8be9fd">string</span> Symbol { <span style="color:#ff79c6">get</span>; <span style="color:#ff79c6">set</span>; }
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">public</span> <span style="color:#8be9fd">decimal</span> PrevPrice { <span style="color:#ff79c6">get</span>; <span style="color:#ff79c6">set</span>; }
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">public</span> <span style="color:#e5c07b">string</span> <span style="color:#e06c75">Symbol</span> { <span style="color:#c678dd">get</span>; <span style="color:#c678dd">set</span>; }
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">public</span> <span style="color:#e5c07b">decimal</span> <span style="color:#e06c75">PrevPrice</span> { <span style="color:#c678dd">get</span>; <span style="color:#c678dd">set</span>; }
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p>之后你可以在 <code>StockMonitor</code> 中声明一个 <code>StockInfo</code> 类型的属性。</p>
 <ol start="5">
 <li>每当股票变化时，<code>OnStockTick</code>  就会被调用。因此，我们的应用还要实现一个新旧数据比较的功能。我们将使用 <code>TryGetValue</code> 方法。当我们想要的值存在时，这个方法会返回一个 <code>true</code>。在 <code>StockMonitor</code> 中编写以下代码：</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#8be9fd">var</span> _stockInfos = <span style="color:#ff79c6">new</span> Dictionary&lt;<span style="color:#8be9fd">string</span>, StockInfo&gt;();
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#e5c07b">var</span> <span style="color:#e06c75">_stockInfos</span> = <span style="color:#c678dd">new</span> <span style="color:#e06c75">Dictionary</span>&lt;<span style="color:#e5c07b">string</span>, <span style="color:#e06c75">StockInfo</span>&gt;();
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">void</span> OnStockTick(<span style="color:#8be9fd">object</span> sender, StockTick stockTick)
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">void</span> <span style="color:#e06c75">OnStockTick</span>(<span style="color:#e5c07b">object</span> <span style="color:#e06c75">sender</span>, <span style="color:#e06c75">StockTick</span> <span style="color:#e06c75">stockTick</span>)
 </span></span><span style="display:flex;"><span>{
-</span></span><span style="display:flex;"><span>    StockInfo stockInfo;
-</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd">var</span> quoteSymbol = stockTick.QuoteSymbol;
-</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd">var</span> stockInfoExists = _stockInfos.TryGetValue(quoteSymbol, <span style="color:#ff79c6">out</span> stockInfo);
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">StockInfo</span> <span style="color:#e06c75">stockInfo</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">var</span> <span style="color:#e06c75">quoteSymbol</span> = <span style="color:#e06c75">stockTick</span>.<span style="color:#e06c75">QuoteSymbol</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">var</span> <span style="color:#e06c75">stockInfoExists</span> = <span style="color:#e06c75">_stockInfos</span>.<span style="color:#e06c75">TryGetValue</span>(<span style="color:#e06c75">quoteSymbol</span>, <span style="color:#c678dd">out</span> <span style="color:#e06c75">stockInfo</span>);
 </span></span><span style="display:flex;"><span>    ...
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><ol start="6">
 <li>如果一个股票数据存在，我们就可以比较大小了：</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#ff79c6">const</span> <span style="color:#8be9fd">decimal</span> maxChangeRatio = <span style="color:#bd93f9">0.1</span>m;
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#c678dd">const</span> <span style="color:#e5c07b">decimal</span> <span style="color:#e06c75">maxChangeRatio</span> = <span style="color:#d19a66">0.1</span><span style="color:#e06c75">m</span>;
 </span></span><span style="display:flex;"><span>...
-</span></span><span style="display:flex;"><span><span style="color:#8be9fd">var</span> quoteSymbol = stockTick.QuoteSymbol;
-</span></span><span style="display:flex;"><span><span style="color:#8be9fd">var</span> stockInfoExists = _stockInfos.TryGetValue(quoteSymbol, <span style="color:#ff79c6">out</span> stockInfo);
+</span></span><span style="display:flex;"><span><span style="color:#e5c07b">var</span> <span style="color:#e06c75">quoteSymbol</span> = <span style="color:#e06c75">stockTick</span>.<span style="color:#e06c75">QuoteSymbol</span>;
+</span></span><span style="display:flex;"><span><span style="color:#e5c07b">var</span> <span style="color:#e06c75">stockInfoExists</span> = <span style="color:#e06c75">_stockInfos</span>.<span style="color:#e06c75">TryGetValue</span>(<span style="color:#e06c75">quoteSymbol</span>, <span style="color:#c678dd">out</span> <span style="color:#e06c75">stockInfo</span>);
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">if</span> (stockInfoExists)
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">if</span> (<span style="color:#e06c75">stockInfoExists</span>)
 </span></span><span style="display:flex;"><span>{
-</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd">var</span> priceDiff = stockTick.Price-stockInfo.PrevPrice; 
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">var</span> <span style="color:#e06c75">priceDiff</span> = <span style="color:#e06c75">stockTick</span>.<span style="color:#e06c75">Price</span>-<span style="color:#e06c75">stockInfo</span>.<span style="color:#e06c75">PrevPrice</span>; 
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// 变化的百分比</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd">var</span> changeRatio = Math.Abs(priceDiff/stockInfo.PrevPrice); 
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">// 变化的百分比</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">var</span> <span style="color:#e06c75">changeRatio</span> = <span style="color:#e06c75">Math</span>.<span style="color:#e06c75">Abs</span>(<span style="color:#e06c75">priceDiff</span>/<span style="color:#e06c75">stockInfo</span>.<span style="color:#e06c75">PrevPrice</span>); 
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> (changeRatio &gt; maxChangeRatio)
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">if</span> (<span style="color:#e06c75">changeRatio</span> &gt; <span style="color:#e06c75">maxChangeRatio</span>)
 </span></span><span style="display:flex;"><span>    {
-</span></span><span style="display:flex;"><span>        <span style="color:#6272a4">// 简单打印个信息，用的是 C# 6.0 以前的写法</span>
-</span></span><span style="display:flex;"><span>        Console.WriteLine(<span style="color:#f1fa8c">&#34;Stock:{0} has changed with {1} ratio, Old Price:{2} New Price:{3}&#34;</span>, quoteSymbol, changeRatio, stockInfo.PrevPrice, stockTick.Price);
+</span></span><span style="display:flex;"><span>        <span style="color:#7f848e">// 简单打印个信息，用的是 C# 6.0 以前的写法</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">Console</span>.<span style="color:#e06c75">WriteLine</span>(<span style="color:#98c379">&#34;Stock:{0} has changed with {1} ratio, Old Price:{2} New Price:{3}&#34;</span>, <span style="color:#e06c75">quoteSymbol</span>, <span style="color:#e06c75">changeRatio</span>, <span style="color:#e06c75">stockInfo</span>.<span style="color:#e06c75">PrevPrice</span>, <span style="color:#e06c75">stockTick</span>.<span style="color:#e06c75">Price</span>);
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">//保存这个新数据</span>
-</span></span><span style="display:flex;"><span>     _stockInfos[quoteSymbol].PrevPrice = stockTick.Price; 
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">//保存这个新数据</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#e06c75">_stockInfos</span>[<span style="color:#e06c75">quoteSymbol</span>].<span style="color:#e06c75">PrevPrice</span> = <span style="color:#e06c75">stockTick</span>.<span style="color:#e06c75">Price</span>; 
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><ol start="7">
 <li>那如果我们不想要订阅股票消息了咋办？幸运的是 .NET 提供了方法来干这个活。在 <code>StockMonitor</code> 里编写以下方法：</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#ff79c6">public</span> <span style="color:#ff79c6">void</span> Dispose()
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#c678dd">public</span> <span style="color:#c678dd">void</span> <span style="color:#e06c75">Dispose</span>()
 </span></span><span style="display:flex;"><span>{
-</span></span><span style="display:flex;"><span>    _ticker.StockTick -= OnStockTick; 
-</span></span><span style="display:flex;"><span>    _stockInfos.Clear();
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">_ticker</span>.<span style="color:#e06c75">StockTick</span> -= <span style="color:#e06c75">OnStockTick</span>; 
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">_stockInfos</span>.<span style="color:#e06c75">Clear</span>();
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><ol start="8">
 <li>写一点假数据，测试一下结果：</li>
@@ -681,129 +681,129 @@ Stock:MSFT has changed with 0.15 ratio, Old Price:170 New Price:195.5
 <p>Rx.NET 放在 <code>System.Reactive</code> 名称空间下。</p>
 <h3 id="事件转换">事件转换</h3>
 <p>Rx.NET 提供了好用的 <code>FromEventPattern</code> 方法，帮助我们将事件转换成可观察对象（Observable）：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span>IObservable&lt;EventPattern&lt;StockTick&gt;&gt; ticks =
-</span></span><span style="display:flex;"><span>        Observable.FromEventPattern&lt;EventHandler&lt;StockTick&gt;, StockTick&gt;( 
-</span></span><span style="display:flex;"><span>            h =&gt; ticker.StockTick += h, 
-</span></span><span style="display:flex;"><span>            h =&gt; ticker.StockTick -= h);
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#e06c75">IObservable</span>&lt;<span style="color:#e06c75">EventPattern</span>&lt;<span style="color:#e06c75">StockTick</span>&gt;&gt; <span style="color:#e06c75">ticks</span> =
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">Observable</span>.<span style="color:#e06c75">FromEventPattern</span>&lt;<span style="color:#e06c75">EventHandler</span>&lt;<span style="color:#e06c75">StockTick</span>&gt;, <span style="color:#e06c75">StockTick</span>&gt;( 
+</span></span><span style="display:flex;"><span>            <span style="color:#e06c75">h</span> =&gt; <span style="color:#e06c75">ticker</span>.<span style="color:#e06c75">StockTick</span> += <span style="color:#e06c75">h</span>, 
+</span></span><span style="display:flex;"><span>            <span style="color:#e06c75">h</span> =&gt; <span style="color:#e06c75">ticker</span>.<span style="color:#e06c75">StockTick</span> -= <span style="color:#e06c75">h</span>);
 </span></span></code></pre></div><p>谔谔，看不懂捏&hellip;</p>
 <p>那来看一下这个方法的定义吧：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span>FromEventPattern&lt;TDelegate,TEventArgs(Action&lt;TDelegate&gt;addHandler, Action&lt;TDelegate&gt; removeHandler)
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#e06c75">FromEventPattern</span>&lt;<span style="color:#e06c75">TDelegate</span>,<span style="color:#e06c75">TEventArgs</span>(<span style="color:#e06c75">Action</span>&lt;<span style="color:#e06c75">TDelegate</span>&gt;<span style="color:#e06c75">addHandler</span>, <span style="color:#e06c75">Action</span>&lt;<span style="color:#e06c75">TDelegate</span>&gt; <span style="color:#e06c75">removeHandler</span>)
 </span></span></code></pre></div><ul>
 <li><code>TDelegate</code> 是匹配事件的委托 → <code>EventHandler&lt;StockTick&gt;</code></li>
 <li><code>TEventArgs</code> 就是 <code>EventArgs</code>  →  <code>StockTick</code></li>
 <li><code>addHandler</code> 和 <code>removeHandler</code> 一般就直接写成 Lambda 表达式的形式</li>
 </ul>
 <p>因为我们只关心传入的 <code>EventArgs</code>，所以代码可以改写成：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#8be9fd">var</span> ticks = Observable.FromEventPattern&lt;EventHandler&lt;StockTick&gt;, StockTick&gt;(
-</span></span><span style="display:flex;"><span>            h =&gt; ticker.StockTick += h, 
-</span></span><span style="display:flex;"><span>            h =&gt; ticker.StockTick -= h) 
-</span></span><span style="display:flex;"><span>        .Select(tickEvent =&gt; tickEvent.EventArgs);
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#e5c07b">var</span> <span style="color:#e06c75">ticks</span> = <span style="color:#e06c75">Observable</span>.<span style="color:#e06c75">FromEventPattern</span>&lt;<span style="color:#e06c75">EventHandler</span>&lt;<span style="color:#e06c75">StockTick</span>&gt;, <span style="color:#e06c75">StockTick</span>&gt;(
+</span></span><span style="display:flex;"><span>            <span style="color:#e06c75">h</span> =&gt; <span style="color:#e06c75">ticker</span>.<span style="color:#e06c75">StockTick</span> += <span style="color:#e06c75">h</span>, 
+</span></span><span style="display:flex;"><span>            <span style="color:#e06c75">h</span> =&gt; <span style="color:#e06c75">ticker</span>.<span style="color:#e06c75">StockTick</span> -= <span style="color:#e06c75">h</span>) 
+</span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">Select</span>(<span style="color:#e06c75">tickEvent</span> =&gt; <span style="color:#e06c75">tickEvent</span>.<span style="color:#e06c75">EventArgs</span>);
 </span></span></code></pre></div><h3 id="数据处理">数据处理</h3>
 <p>现在你已经有了一个可观察的数据流了，我们将围绕它展开查询操作，就像 LINQ 一样。</p>
 <h4 id="分组-group">分组 Group</h4>
 <p>我们试着通过 <code>Symbol</code> 来为每支股票分组：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#6272a4">// 查询语句形式</span>
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">from</span> tick <span style="color:#ff79c6">in</span> ticks 
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">group</span> tick <span style="color:#ff79c6">by</span> tick.QuoteSymbol <span style="color:#ff79c6">into</span> company
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#7f848e">// 查询语句形式</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">from</span> <span style="color:#e06c75">tick</span> <span style="color:#c678dd">in</span> <span style="color:#e06c75">ticks</span> 
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">group</span> <span style="color:#e06c75">tick</span> <span style="color:#c678dd">by</span> <span style="color:#e06c75">tick</span>.<span style="color:#e06c75">QuoteSymbol</span> <span style="color:#c678dd">into</span> <span style="color:#e06c75">company</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#6272a4">// 函数形式</span>
-</span></span><span style="display:flex;"><span>ticks.GroupBy(tick =&gt; tick.QuoteSymbol);
+</span></span><span style="display:flex;"><span><span style="color:#7f848e">// 函数形式</span>
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">ticks</span>.<span style="color:#e06c75">GroupBy</span>(<span style="color:#e06c75">tick</span> =&gt; <span style="color:#e06c75">tick</span>.<span style="color:#e06c75">QuoteSymbol</span>);
 </span></span></code></pre></div><p><img src="company.png" alt="Company"></p>
 <h4 id="分批-buffer">分批 Buffer</h4>
 <p><code>Buffer</code> 用于同组内再分批（Batch）。</p>
 <p>在这里是同组内数据两两前后比较：</p>
 <p><img src="batch.png" alt="Batch"></p>
 <p><img src="buffer.png" alt="Buffer"></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#ff79c6">from</span> tick <span style="color:#ff79c6">in</span> ticks
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">group</span> tick <span style="color:#ff79c6">by</span> tick.QuoteSymbol <span style="color:#ff79c6">into</span> company
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">from</span> tickPair <span style="color:#ff79c6">in</span> company.Buffer(<span style="color:#bd93f9">2</span>, <span style="color:#bd93f9">1</span>)
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">let</span> changeRatio = Math.Abs((tickPair[<span style="color:#bd93f9">1</span>].Price - tickPair[<span style="color:#bd93f9">0</span>].Price) / 
-</span></span><span style="display:flex;"><span>    tickPair[<span style="color:#bd93f9">0</span>].Price)
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#c678dd">from</span> <span style="color:#e06c75">tick</span> <span style="color:#c678dd">in</span> <span style="color:#e06c75">ticks</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">group</span> <span style="color:#e06c75">tick</span> <span style="color:#c678dd">by</span> <span style="color:#e06c75">tick</span>.<span style="color:#e06c75">QuoteSymbol</span> <span style="color:#c678dd">into</span> <span style="color:#e06c75">company</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">from</span> <span style="color:#e06c75">tickPair</span> <span style="color:#c678dd">in</span> <span style="color:#e06c75">company</span>.<span style="color:#e06c75">Buffer</span>(<span style="color:#d19a66">2</span>, <span style="color:#d19a66">1</span>)
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">let</span> <span style="color:#e06c75">changeRatio</span> = <span style="color:#e06c75">Math</span>.<span style="color:#e06c75">Abs</span>((<span style="color:#e06c75">tickPair</span>[<span style="color:#d19a66">1</span>].<span style="color:#e06c75">Price</span> - <span style="color:#e06c75">tickPair</span>[<span style="color:#d19a66">0</span>].<span style="color:#e06c75">Price</span>) / 
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">tickPair</span>[<span style="color:#d19a66">0</span>].<span style="color:#e06c75">Price</span>)
 </span></span></code></pre></div><p><img src="abs.png" alt="Abs"></p>
 <p>最后全部的代码：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#ff79c6">const</span> <span style="color:#8be9fd">decimal</span> maxChangeRatio = <span style="color:#bd93f9">0.1</span> m;
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#c678dd">const</span> <span style="color:#e5c07b">decimal</span> <span style="color:#e06c75">maxChangeRatio</span> = <span style="color:#d19a66">0.1</span> <span style="color:#e06c75">m</span>;
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#8be9fd">var</span> drasticChanges = 
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">from</span> tick <span style="color:#ff79c6">in</span> ticks
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">group</span> tick <span style="color:#ff79c6">by</span> tick.QuoteSymbol
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">into</span> company
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">from</span> tickPair <span style="color:#ff79c6">in</span> company.Buffer(<span style="color:#bd93f9">2</span>, <span style="color:#bd93f9">1</span>)
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">let</span> changeRatio = Math.Abs((tickPair[<span style="color:#bd93f9">1</span>].Price - tickPair[<span style="color:#bd93f9">0</span>].Price) / tickPair[<span style="color:#bd93f9">0</span>].Price)
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">where</span> changeRatio &gt; maxChangeRatio
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">select</span> <span style="color:#ff79c6">new</span> DrasticChange()
+</span></span><span style="display:flex;"><span><span style="color:#e5c07b">var</span> <span style="color:#e06c75">drasticChanges</span> = 
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">from</span> <span style="color:#e06c75">tick</span> <span style="color:#c678dd">in</span> <span style="color:#e06c75">ticks</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">group</span> <span style="color:#e06c75">tick</span> <span style="color:#c678dd">by</span> <span style="color:#e06c75">tick</span>.<span style="color:#e06c75">QuoteSymbol</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">into</span> <span style="color:#e06c75">company</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">from</span> <span style="color:#e06c75">tickPair</span> <span style="color:#c678dd">in</span> <span style="color:#e06c75">company</span>.<span style="color:#e06c75">Buffer</span>(<span style="color:#d19a66">2</span>, <span style="color:#d19a66">1</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">let</span> <span style="color:#e06c75">changeRatio</span> = <span style="color:#e06c75">Math</span>.<span style="color:#e06c75">Abs</span>((<span style="color:#e06c75">tickPair</span>[<span style="color:#d19a66">1</span>].<span style="color:#e06c75">Price</span> - <span style="color:#e06c75">tickPair</span>[<span style="color:#d19a66">0</span>].<span style="color:#e06c75">Price</span>) / <span style="color:#e06c75">tickPair</span>[<span style="color:#d19a66">0</span>].<span style="color:#e06c75">Price</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">where</span> <span style="color:#e06c75">changeRatio</span> &gt; <span style="color:#e06c75">maxChangeRatio</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">select</span> <span style="color:#c678dd">new</span> <span style="color:#e06c75">DrasticChange</span>()
 </span></span><span style="display:flex;"><span>    {
-</span></span><span style="display:flex;"><span>    Symbol = company.Key,
-</span></span><span style="display:flex;"><span>        ChangeRatio = changeRatio,
-</span></span><span style="display:flex;"><span>        OldPrice = tickPair[<span style="color:#bd93f9">0</span>].Price,
-</span></span><span style="display:flex;"><span>        NewPrice = tickPair[<span style="color:#bd93f9">1</span>].Price
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">Symbol</span> = <span style="color:#e06c75">company</span>.<span style="color:#e06c75">Key</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">ChangeRatio</span> = <span style="color:#e06c75">changeRatio</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">OldPrice</span> = <span style="color:#e06c75">tickPair</span>[<span style="color:#d19a66">0</span>].<span style="color:#e06c75">Price</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">NewPrice</span> = <span style="color:#e06c75">tickPair</span>[<span style="color:#d19a66">1</span>].<span style="color:#e06c75">Price</span>
 </span></span><span style="display:flex;"><span>    };
 </span></span></code></pre></div><p><img src="all.png" alt="Result"></p>
 <h3 id="消费数据">消费数据</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span>_subscription = 
-</span></span><span style="display:flex;"><span>    drasticChanges.Subscribe(change =&gt; {
-</span></span><span style="display:flex;"><span>        Console.WriteLine(<span style="color:#f1fa8c">$&#34;Stock:{change.Symbol} has changed with {change.ChangeRatio} ratio, 
-</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">        Old Price: {change.OldPrice} 
-</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">        New Price: {change.NewPrice}&#34;</span>);
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#e06c75">_subscription</span> = 
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">drasticChanges</span>.<span style="color:#e06c75">Subscribe</span>(<span style="color:#e06c75">change</span> =&gt; {
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">Console</span>.<span style="color:#e06c75">WriteLine</span>(<span style="color:#98c379">$&#34;Stock:{change.Symbol} has changed with {change.ChangeRatio} ratio, 
+</span></span></span><span style="display:flex;"><span><span style="color:#98c379">        Old Price: {change.OldPrice} 
+</span></span></span><span style="display:flex;"><span><span style="color:#98c379">        New Price: {change.NewPrice}&#34;</span>);
 </span></span><span style="display:flex;"><span>    },
-</span></span><span style="display:flex;"><span>    ex =&gt; { <span style="color:#6272a4">/* 处理错误 */</span>}, 
-</span></span><span style="display:flex;"><span>    () =&gt; {<span style="color:#6272a4">/* 响应任务完成 */</span>});
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">ex</span> =&gt; { <span style="color:#7f848e">/* 处理错误 */</span>}, 
+</span></span><span style="display:flex;"><span>    () =&gt; {<span style="color:#7f848e">/* 响应任务完成 */</span>});
 </span></span></code></pre></div><h3 id="取消订阅">取消订阅</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#ff79c6">public</span> <span style="color:#ff79c6">void</span> Dispose()
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#c678dd">public</span> <span style="color:#c678dd">void</span> <span style="color:#e06c75">Dispose</span>()
 </span></span><span style="display:flex;"><span>{
-</span></span><span style="display:flex;"><span>    _subscription.Dispose();
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">_subscription</span>.<span style="color:#e06c75">Dispose</span>();
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><h3 id="同步流">同步流</h3>
 <p>还记得我们之前使用事件系统的问题吗？</p>
 <p>异步 IO 会导致线程不安全。</p>
 <p>因此我们要将我们的 <code>ticks</code> 可观察数据流转换成同步的：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#8be9fd">var</span> ticks = Observable.FromEventPattern&lt;EventHandler&lt;StockTick&gt;, StockTick&gt;(
-</span></span><span style="display:flex;"><span>            h =&gt; ticker.StockTick += h, 
-</span></span><span style="display:flex;"><span>            h =&gt; ticker.StockTick -= h) 
-</span></span><span style="display:flex;"><span>        .Select(tickEvent =&gt; tickEvent.EventArgs)
-</span></span><span style="display:flex;"><span>        .Synchronize();
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#e5c07b">var</span> <span style="color:#e06c75">ticks</span> = <span style="color:#e06c75">Observable</span>.<span style="color:#e06c75">FromEventPattern</span>&lt;<span style="color:#e06c75">EventHandler</span>&lt;<span style="color:#e06c75">StockTick</span>&gt;, <span style="color:#e06c75">StockTick</span>&gt;(
+</span></span><span style="display:flex;"><span>            <span style="color:#e06c75">h</span> =&gt; <span style="color:#e06c75">ticker</span>.<span style="color:#e06c75">StockTick</span> += <span style="color:#e06c75">h</span>, 
+</span></span><span style="display:flex;"><span>            <span style="color:#e06c75">h</span> =&gt; <span style="color:#e06c75">ticker</span>.<span style="color:#e06c75">StockTick</span> -= <span style="color:#e06c75">h</span>) 
+</span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">Select</span>(<span style="color:#e06c75">tickEvent</span> =&gt; <span style="color:#e06c75">tickEvent</span>.<span style="color:#e06c75">EventArgs</span>)
+</span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">Synchronize</span>();
 </span></span></code></pre></div><h3 id="总览代码">总览代码</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#ff79c6">class</span> <span style="color:#50fa7b">RxStockMonitor</span> : IDisposable
+<div class="highlight"><pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c#" data-lang="c#"><span style="display:flex;"><span><span style="color:#c678dd">class</span> <span style="color:#e5c07b">RxStockMonitor</span> : <span style="color:#e06c75">IDisposable</span>
 </span></span><span style="display:flex;"><span>{
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">private</span> IDisposable _subscription;
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">public</span> RxStockMonitor(StockTicker ticker)
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">private</span> <span style="color:#e06c75">IDisposable</span> <span style="color:#e06c75">_subscription</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">public</span> <span style="color:#e06c75">RxStockMonitor</span>(<span style="color:#e06c75">StockTicker</span> <span style="color:#e06c75">ticker</span>)
 </span></span><span style="display:flex;"><span>    {
-</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">const</span> <span style="color:#8be9fd">decimal</span> maxChangeRatio = <span style="color:#bd93f9">0.1</span>m;
-</span></span><span style="display:flex;"><span>        <span style="color:#8be9fd">var</span> ticks = 
-</span></span><span style="display:flex;"><span>            Observable.FromEventPattern&lt;EventHandler&lt;StockTick&gt;, StockTick&gt;(
-</span></span><span style="display:flex;"><span>                    h =&gt; ticker.StockTick += h, 
-</span></span><span style="display:flex;"><span>                    h =&gt; ticker.StockTick -= h) 
-</span></span><span style="display:flex;"><span>                .Select(tickEvent =&gt; tickEvent.EventArgs)
-</span></span><span style="display:flex;"><span>                .Synchronize(); 
-</span></span><span style="display:flex;"><span>        <span style="color:#8be9fd">var</span> drasticChanges = 
-</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">from</span> tick <span style="color:#ff79c6">in</span> ticks 
-</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">group</span> tick <span style="color:#ff79c6">by</span> tick.QuoteSymbol 
-</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">into</span> company 
-</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">from</span> tickPair <span style="color:#ff79c6">in</span> company.Buffer(<span style="color:#bd93f9">2</span>, <span style="color:#bd93f9">1</span>) 
-</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">let</span> changeRatio = Math.Abs((tickPair[<span style="color:#bd93f9">1</span>].Price -
-</span></span><span style="display:flex;"><span>                                        tickPair[<span style="color:#bd93f9">0</span>].Price)/tickPair[<span style="color:#bd93f9">0</span>].Price) 
-</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">where</span> changeRatio &gt; maxChangeRatio 
-</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">select</span> <span style="color:#ff79c6">new</span> 
+</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">const</span> <span style="color:#e5c07b">decimal</span> <span style="color:#e06c75">maxChangeRatio</span> = <span style="color:#d19a66">0.1</span><span style="color:#e06c75">m</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#e5c07b">var</span> <span style="color:#e06c75">ticks</span> = 
+</span></span><span style="display:flex;"><span>            <span style="color:#e06c75">Observable</span>.<span style="color:#e06c75">FromEventPattern</span>&lt;<span style="color:#e06c75">EventHandler</span>&lt;<span style="color:#e06c75">StockTick</span>&gt;, <span style="color:#e06c75">StockTick</span>&gt;(
+</span></span><span style="display:flex;"><span>                    <span style="color:#e06c75">h</span> =&gt; <span style="color:#e06c75">ticker</span>.<span style="color:#e06c75">StockTick</span> += <span style="color:#e06c75">h</span>, 
+</span></span><span style="display:flex;"><span>                    <span style="color:#e06c75">h</span> =&gt; <span style="color:#e06c75">ticker</span>.<span style="color:#e06c75">StockTick</span> -= <span style="color:#e06c75">h</span>) 
+</span></span><span style="display:flex;"><span>                .<span style="color:#e06c75">Select</span>(<span style="color:#e06c75">tickEvent</span> =&gt; <span style="color:#e06c75">tickEvent</span>.<span style="color:#e06c75">EventArgs</span>)
+</span></span><span style="display:flex;"><span>                .<span style="color:#e06c75">Synchronize</span>(); 
+</span></span><span style="display:flex;"><span>        <span style="color:#e5c07b">var</span> <span style="color:#e06c75">drasticChanges</span> = 
+</span></span><span style="display:flex;"><span>            <span style="color:#c678dd">from</span> <span style="color:#e06c75">tick</span> <span style="color:#c678dd">in</span> <span style="color:#e06c75">ticks</span> 
+</span></span><span style="display:flex;"><span>            <span style="color:#c678dd">group</span> <span style="color:#e06c75">tick</span> <span style="color:#c678dd">by</span> <span style="color:#e06c75">tick</span>.<span style="color:#e06c75">QuoteSymbol</span> 
+</span></span><span style="display:flex;"><span>            <span style="color:#c678dd">into</span> <span style="color:#e06c75">company</span> 
+</span></span><span style="display:flex;"><span>            <span style="color:#c678dd">from</span> <span style="color:#e06c75">tickPair</span> <span style="color:#c678dd">in</span> <span style="color:#e06c75">company</span>.<span style="color:#e06c75">Buffer</span>(<span style="color:#d19a66">2</span>, <span style="color:#d19a66">1</span>) 
+</span></span><span style="display:flex;"><span>            <span style="color:#c678dd">let</span> <span style="color:#e06c75">changeRatio</span> = <span style="color:#e06c75">Math</span>.<span style="color:#e06c75">Abs</span>((<span style="color:#e06c75">tickPair</span>[<span style="color:#d19a66">1</span>].<span style="color:#e06c75">Price</span> -
+</span></span><span style="display:flex;"><span>                                        <span style="color:#e06c75">tickPair</span>[<span style="color:#d19a66">0</span>].<span style="color:#e06c75">Price</span>)/<span style="color:#e06c75">tickPair</span>[<span style="color:#d19a66">0</span>].<span style="color:#e06c75">Price</span>) 
+</span></span><span style="display:flex;"><span>            <span style="color:#c678dd">where</span> <span style="color:#e06c75">changeRatio</span> &gt; <span style="color:#e06c75">maxChangeRatio</span> 
+</span></span><span style="display:flex;"><span>            <span style="color:#c678dd">select</span> <span style="color:#c678dd">new</span> 
 </span></span><span style="display:flex;"><span>            { 
-</span></span><span style="display:flex;"><span>                Symbol = company.Key, 
-</span></span><span style="display:flex;"><span>                ChangeRatio = changeRatio, 
-</span></span><span style="display:flex;"><span>                OldPrice = tickPair[<span style="color:#bd93f9">0</span>].Price, 
-</span></span><span style="display:flex;"><span>                NewPrice = tickPair[<span style="color:#bd93f9">1</span>].Price 
+</span></span><span style="display:flex;"><span>                <span style="color:#e06c75">Symbol</span> = <span style="color:#e06c75">company</span>.<span style="color:#e06c75">Key</span>, 
+</span></span><span style="display:flex;"><span>                <span style="color:#e06c75">ChangeRatio</span> = <span style="color:#e06c75">changeRatio</span>, 
+</span></span><span style="display:flex;"><span>                <span style="color:#e06c75">OldPrice</span> = <span style="color:#e06c75">tickPair</span>[<span style="color:#d19a66">0</span>].<span style="color:#e06c75">Price</span>, 
+</span></span><span style="display:flex;"><span>                <span style="color:#e06c75">NewPrice</span> = <span style="color:#e06c75">tickPair</span>[<span style="color:#d19a66">1</span>].<span style="color:#e06c75">Price</span> 
 </span></span><span style="display:flex;"><span>            }; 
-</span></span><span style="display:flex;"><span>        _subscription = 
-</span></span><span style="display:flex;"><span>            drasticChanges.Subscribe(change =&gt; 
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">_subscription</span> = 
+</span></span><span style="display:flex;"><span>            <span style="color:#e06c75">drasticChanges</span>.<span style="color:#e06c75">Subscribe</span>(<span style="color:#e06c75">change</span> =&gt; 
 </span></span><span style="display:flex;"><span>                { 
-</span></span><span style="display:flex;"><span>                    WriteLine(<span style="color:#f1fa8c">$&#34;Stock:{change.Symbol} has changed
-</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">                        with {change.ChangeRatio} ratio,
-</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">                    Old Price: {change.OldPrice} 
-</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">                    New Price: {change.NewPrice}&#34;</span>); 
+</span></span><span style="display:flex;"><span>                    <span style="color:#e06c75">WriteLine</span>(<span style="color:#98c379">$&#34;Stock:{change.Symbol} has changed
+</span></span></span><span style="display:flex;"><span><span style="color:#98c379">                        with {change.ChangeRatio} ratio,
+</span></span></span><span style="display:flex;"><span><span style="color:#98c379">                    Old Price: {change.OldPrice} 
+</span></span></span><span style="display:flex;"><span><span style="color:#98c379">                    New Price: {change.NewPrice}&#34;</span>); 
 </span></span><span style="display:flex;"><span>                }, 
-</span></span><span style="display:flex;"><span>                ex =&gt; { <span style="color:#6272a4">/* 处理错误 */</span>}, 
-</span></span><span style="display:flex;"><span>                () =&gt;{<span style="color:#6272a4">/* 响应任务完成 */</span>});
+</span></span><span style="display:flex;"><span>                <span style="color:#e06c75">ex</span> =&gt; { <span style="color:#7f848e">/* 处理错误 */</span>}, 
+</span></span><span style="display:flex;"><span>                () =&gt;{<span style="color:#7f848e">/* 响应任务完成 */</span>});
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">public</span> <span style="color:#ff79c6">void</span> Dispose() 
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">public</span> <span style="color:#c678dd">void</span> <span style="color:#e06c75">Dispose</span>() 
 </span></span><span style="display:flex;"><span>    {
-</span></span><span style="display:flex;"><span>        _subscription.Dispose();
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">_subscription</span>.<span style="color:#e06c75">Dispose</span>();
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><h2 id="rx-的优点">Rx 的优点</h2>
