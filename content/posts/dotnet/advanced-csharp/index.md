@@ -1,13 +1,12 @@
 ---
-title: C# 进阶小册  01 - 并发与异步
+title: C# 进阶小册 - 并发与异步
 description: 大量参考《C# 10 in a Nutshell》
 date: 2022-08-15
 draft: false
-slug: advanced-csharp-1
+slug: advanced-csharp
 categories:
     - 编程
 tags:
-    - Advanced CSharp
     - CSharp
 featured_image: head.png
 ---

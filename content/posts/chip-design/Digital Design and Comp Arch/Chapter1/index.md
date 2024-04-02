@@ -1,15 +1,15 @@
 ---
 title: 数电与计算机体系结构 01：入门
-date: 2024-02-02T11:25:05-04:00
+date: 2024-02-02T11:25:05+08:00
 draft: false
-slug: arch-book-1
+slug: ddca-1
 description: Digital Design and Computer Architecture 01
 categories:
     - 编程
 tags:
-    - Arch
-    - ysyx
-image: header.png
+    - 体系结构
+    - 数字电路
+    - 一生一芯
 enableLatex: true
 ---
 ## 前言

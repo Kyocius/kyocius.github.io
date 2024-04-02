@@ -7,9 +7,9 @@ description: Partial Answers for Learn C The Hard Way
 categories:
     - 编程
 tags:
+    - 一生一芯
     - Clang
-    - ysyx
-image: head.png
+featured_image: head.png
 ---
 ## 前言
 
