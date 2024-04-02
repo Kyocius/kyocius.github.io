@@ -977,41 +977,41 @@
 <p>虽然在 C# 中 Task 的使用频率远超直接使用线程，但是有关线程的概念还是要复习一下的。</p>
 <p><del>才不是因为我全忘了</del></p>
 <h3 id="创建线程-create-a-thread">创建线程 Create a Thread</h3>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#"><span style="color:#fff;font-weight:bold">using</span> System;
-<span style="color:#fff;font-weight:bold">using</span> System.Threading;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#"><span style="color:#ff79c6">using</span> System;
+<span style="color:#ff79c6">using</span> System.Threading;
 
-<span style="color:#fff;font-weight:bold">var</span> t = <span style="color:#fff;font-weight:bold">new</span> Thread(WriteY);
+<span style="color:#8be9fd">var</span> t = <span style="color:#ff79c6">new</span> Thread(WriteY);
 t.Start();
 
-<span style="color:#fff;font-weight:bold">for</span> (<span style="color:#fff;font-weight:bold">var</span> i = <span style="color:#ff0;font-weight:bold">0</span>; i &lt; <span style="color:#ff0;font-weight:bold">1000</span>; i++)
+<span style="color:#ff79c6">for</span> (<span style="color:#8be9fd">var</span> i = <span style="color:#bd93f9">0</span>; i &lt; <span style="color:#bd93f9">1000</span>; i++)
 {
-    Console.Write(<span style="color:#0ff;font-weight:bold">&#34;x&#34;</span>);
+    Console.Write(<span style="color:#f1fa8c">&#34;x&#34;</span>);
 }
-<span style="color:#fff;font-weight:bold">void</span> WriteY()
+<span style="color:#ff79c6">void</span> WriteY()
 {
-    <span style="color:#fff;font-weight:bold">for</span> (<span style="color:#fff;font-weight:bold">var</span> i = <span style="color:#ff0;font-weight:bold">0</span>; i &lt; <span style="color:#ff0;font-weight:bold">1000</span>; i++) Console.Write(<span style="color:#0ff;font-weight:bold">&#34;y&#34;</span>);
+    <span style="color:#ff79c6">for</span> (<span style="color:#8be9fd">var</span> i = <span style="color:#bd93f9">0</span>; i &lt; <span style="color:#bd93f9">1000</span>; i++) Console.Write(<span style="color:#f1fa8c">&#34;y&#34;</span>);
 }
 
 
-<span style="color:#007f7f">//输出：
-</span><span style="color:#007f7f"></span>xxxxxxxxxxxxxyyyyyyyyyyyyyyyyyyyyy...
+<span style="color:#6272a4">//输出：
+</span><span style="color:#6272a4"></span>xxxxxxxxxxxxxyyyyyyyyyyyyyyyyyyyyy...
 xxxxxxxxxxxxxxxxxxxxxxxxxyyyyyyyyy...
 xxxxxxxxxxxxxxxxyyyyyyyyyyyyyyyyyy...
 yyyyyyyyyxxxxxxxxxxxxxxxxxxxxxxxxx...
 </code></pre></div><p>我们可以通过 <code>Name</code> 属性来访问线程的名字：</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#">WriteLine(Thread.CurrentThread.Name);
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#">WriteLine(Thread.CurrentThread.Name);
 </code></pre></div><h3 id="join-与-sleep">Join 与 Sleep</h3>
 <p>你可以使用 <code>Join</code> 方法来等待线程结束：</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#">Thread t = <span style="color:#fff;font-weight:bold">new</span> Thread(Go);
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#">Thread t = <span style="color:#ff79c6">new</span> Thread(Go);
 t.Start();
 t.Join();
-Console.WriteLine(<span style="color:#0ff;font-weight:bold">&#34;线程t结束&#34;</span>);
+Console.WriteLine(<span style="color:#f1fa8c">&#34;线程t结束&#34;</span>);
 
-<span style="color:#fff;font-weight:bold">void</span> Go() { <span style="color:#fff;font-weight:bold">for</span> (<span style="color:#fff;font-weight:bold">var</span> i = <span style="color:#ff0;font-weight:bold">0</span>; i &lt; <span style="color:#ff0;font-weight:bold">1000</span>; i++) Console.Write(<span style="color:#0ff;font-weight:bold">&#34;y&#34;</span>); }
+<span style="color:#ff79c6">void</span> Go() { <span style="color:#ff79c6">for</span> (<span style="color:#8be9fd">var</span> i = <span style="color:#bd93f9">0</span>; i &lt; <span style="color:#bd93f9">1000</span>; i++) Console.Write(<span style="color:#f1fa8c">&#34;y&#34;</span>); }
 </code></pre></div><p>这段代码会打印 <code>y</code> 1000 次然后才会输出 <code>线程t结束</code>。</p>
 <p>下面是 <code>Sleep</code> 的用法：</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#">Thread.Sleep(TimeSpan.FromHours(<span style="color:#ff0;font-weight:bold">1</span>)); <span style="color:#007f7f">//睡一小时
-</span><span style="color:#007f7f"></span>Thread.Sleep(<span style="color:#ff0;font-weight:bold">500</span>)                    <span style="color:#007f7f">//睡500毫秒
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#">Thread.Sleep(TimeSpan.FromHours(<span style="color:#bd93f9">1</span>)); <span style="color:#6272a4">//睡一小时
+</span><span style="color:#6272a4"></span>Thread.Sleep(<span style="color:#bd93f9">500</span>)                    <span style="color:#6272a4">//睡500毫秒
 </span></code></pre></div><p>特殊的是：</p>
 <ul>
 <li>
@@ -1023,7 +1023,7 @@ Console.WriteLine(<span style="color:#0ff;font-weight:bold">&#34;线程t结束&#
 </ul>
 <h3 id="阻塞线程-blocking">阻塞线程 Blocking</h3>
 <p>查询阻塞状态：</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#"><span style="color:#fff;font-weight:bold">bool</span> isBlocked = (someThread.ThreadState &amp; ThreadState.WaitSleepJoin) != <span style="color:#ff0;font-weight:bold">0</span>;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#"><span style="color:#8be9fd">bool</span> isBlocked = (someThread.ThreadState &amp; ThreadState.WaitSleepJoin) != <span style="color:#bd93f9">0</span>;
 </code></pre></div><blockquote>
 <p><code>ThreadState</code> 是一个 flags 枚举。</p>
 </blockquote>
@@ -1035,116 +1035,116 @@ Console.WriteLine(<span style="color:#0ff;font-weight:bold">&#34;线程t结束&#
 </ul>
 <h3 id="局部变量--共享状态-local--shared-state">局部变量 &amp; 共享状态 Local &amp; Shared State</h3>
 <p>CLR 会分配给每个线程不同的内存栈，所以某一线程的局部变量是与其它线程隔绝的：</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#"><span style="color:#fff;font-weight:bold">new</span> Thread (Go).Start(); <span style="color:#007f7f">// 在新线程调用Go方法
-</span><span style="color:#007f7f"></span>Go();                    <span style="color:#007f7f">// 在主线程调用Go方法
-</span><span style="color:#007f7f"></span><span style="color:#fff;font-weight:bold">void</span> Go()
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#"><span style="color:#ff79c6">new</span> Thread (Go).Start(); <span style="color:#6272a4">// 在新线程调用Go方法
+</span><span style="color:#6272a4"></span>Go();                    <span style="color:#6272a4">// 在主线程调用Go方法
+</span><span style="color:#6272a4"></span><span style="color:#ff79c6">void</span> Go()
 {
-    <span style="color:#007f7f">//局部变量cycles
-</span><span style="color:#007f7f"></span>    <span style="color:#fff;font-weight:bold">for</span> (<span style="color:#fff;font-weight:bold">int</span> cycles = <span style="color:#ff0;font-weight:bold">0</span>; cycles &lt; <span style="color:#ff0;font-weight:bold">5</span>; cycles++) Console.Write (<span style="color:#0ff;font-weight:bold">&#39;?&#39;</span>);
+    <span style="color:#6272a4">//局部变量cycles
+</span><span style="color:#6272a4"></span>    <span style="color:#ff79c6">for</span> (<span style="color:#8be9fd">int</span> cycles = <span style="color:#bd93f9">0</span>; cycles &lt; <span style="color:#bd93f9">5</span>; cycles++) Console.Write (<span style="color:#f1fa8c">&#39;?&#39;</span>);
 }
 </code></pre></div><p>结果可想而知，会输出 10 个问号「?」。</p>
 <p>但是线程可以共享数据：如果它们有对同一对象或变量的引用：</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#"><span style="color:#fff;font-weight:bold">bool</span> <span style="color:#ff0;font-weight:bold">_d</span>one = <span style="color:#fff;font-weight:bold">false</span>;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#"><span style="color:#8be9fd">bool</span> <span style="color:#bd93f9">_d</span>one = <span style="color:#ff79c6">false</span>;
 
-<span style="color:#fff;font-weight:bold">new</span> Thread (Go).Start();
+<span style="color:#ff79c6">new</span> Thread (Go).Start();
 Go()
 ;
-<span style="color:#fff;font-weight:bold">void</span> Go()
+<span style="color:#ff79c6">void</span> Go()
 {
-    <span style="color:#fff;font-weight:bold">if</span> (!<span style="color:#ff0;font-weight:bold">_d</span>one) { <span style="color:#ff0;font-weight:bold">_d</span>one = <span style="color:#fff;font-weight:bold">true</span>; Console.WriteLine (<span style="color:#0ff;font-weight:bold">&#34;Done&#34;</span>); }
+    <span style="color:#ff79c6">if</span> (!<span style="color:#bd93f9">_d</span>one) { <span style="color:#bd93f9">_d</span>one = <span style="color:#ff79c6">true</span>; Console.WriteLine (<span style="color:#f1fa8c">&#34;Done&#34;</span>); }
 }
 </code></pre></div><p>两个线程共享了 <code>_done</code> 所以「Done」仅仅输出一次。</p>
 <p>换成 Lambda 表达式也是可以共享的：</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#"><span style="color:#fff;font-weight:bold">bool</span> done = <span style="color:#fff;font-weight:bold">false</span>;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#"><span style="color:#8be9fd">bool</span> done = <span style="color:#ff79c6">false</span>;
 ThreadStart action = () =&gt;
 {
-    <span style="color:#fff;font-weight:bold">if</span> (!done) { done = <span style="color:#fff;font-weight:bold">true</span>; Console.WriteLine (<span style="color:#0ff;font-weight:bold">&#34;Done&#34;</span>); }
+    <span style="color:#ff79c6">if</span> (!done) { done = <span style="color:#ff79c6">true</span>; Console.WriteLine (<span style="color:#f1fa8c">&#34;Done&#34;</span>); }
 };
-<span style="color:#fff;font-weight:bold">new</span> Thread (action).Start();
+<span style="color:#ff79c6">new</span> Thread (action).Start();
 action();
 </code></pre></div><p>这引出了一个关键概念：<strong>线程安全</strong>！</p>
 <h3 id="线程锁--线程安全-lock--thread-safety">线程锁 &amp; 线程安全 Lock &amp; Thread Safety</h3>
 <p>来看看锁🔒：</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#"><span style="color:#fff;font-weight:bold">class</span> ThreadSafe
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#"><span style="color:#ff79c6">class</span> <span style="color:#50fa7b">ThreadSafe</span>
 {
-    <span style="color:#fff;font-weight:bold">static</span> <span style="color:#fff;font-weight:bold">bool</span> <span style="color:#ff0;font-weight:bold">_d</span>one;
-    <span style="color:#fff;font-weight:bold">static</span> <span style="color:#fff;font-weight:bold">readonly</span> <span style="color:#fff;font-weight:bold">object</span> <span style="color:#ff0;font-weight:bold">_l</span>ocker = <span style="color:#fff;font-weight:bold">new</span> <span style="color:#fff;font-weight:bold">object</span>();
-    <span style="color:#fff;font-weight:bold">static</span> <span style="color:#fff;font-weight:bold">void</span> Main()
+    <span style="color:#ff79c6">static</span> <span style="color:#8be9fd">bool</span> <span style="color:#bd93f9">_d</span>one;
+    <span style="color:#ff79c6">static</span> <span style="color:#ff79c6">readonly</span> <span style="color:#8be9fd">object</span> <span style="color:#bd93f9">_l</span>ocker = <span style="color:#ff79c6">new</span> <span style="color:#8be9fd">object</span>();
+    <span style="color:#ff79c6">static</span> <span style="color:#ff79c6">void</span> Main()
     {
-        <span style="color:#fff;font-weight:bold">new</span> Thread (Go).Start();
+        <span style="color:#ff79c6">new</span> Thread (Go).Start();
         Go();
     }
 
-    <span style="color:#fff;font-weight:bold">static</span> <span style="color:#fff;font-weight:bold">void</span> Go()
+    <span style="color:#ff79c6">static</span> <span style="color:#ff79c6">void</span> Go()
     {
-        <span style="color:#fff;font-weight:bold">lock</span> (<span style="color:#ff0;font-weight:bold">_l</span>ocker)
+        <span style="color:#ff79c6">lock</span> (<span style="color:#bd93f9">_l</span>ocker)
         {
-            <span style="color:#fff;font-weight:bold">if</span> (!<span style="color:#ff0;font-weight:bold">_d</span>one) { Console.WriteLine (<span style="color:#0ff;font-weight:bold">&#34;Done&#34;</span>); <span style="color:#ff0;font-weight:bold">_d</span>one = <span style="color:#fff;font-weight:bold">true</span>; }
+            <span style="color:#ff79c6">if</span> (!<span style="color:#bd93f9">_d</span>one) { Console.WriteLine (<span style="color:#f1fa8c">&#34;Done&#34;</span>); <span style="color:#bd93f9">_d</span>one = <span style="color:#ff79c6">true</span>; }
         }
     }
 }
 </code></pre></div><p>其实这也不必多说，就是阻止两个线程同时修改某一变量罢了。</p>
 <h3 id="向线程传递数据">向线程传递数据</h3>
 <p>有的时候，我们想在线程开始的时候传递数据，可以这么做：</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#">Thread t = <span style="color:#fff;font-weight:bold">new</span> Thread ( () =&gt; Print (<span style="color:#0ff;font-weight:bold">&#34;Hello from t!&#34;</span>) );
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#">Thread t = <span style="color:#ff79c6">new</span> Thread ( () =&gt; Print (<span style="color:#f1fa8c">&#34;Hello from t!&#34;</span>) );
 t.Start();
 
-<span style="color:#fff;font-weight:bold">void</span> Print (<span style="color:#fff;font-weight:bold">string</span> message) =&gt; Console.WriteLine (message);
+<span style="color:#ff79c6">void</span> Print (<span style="color:#8be9fd">string</span> message) =&gt; Console.WriteLine (message);
 </code></pre></div><p>用 Lambda 表达式也行：</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#"><span style="color:#fff;font-weight:bold">new</span> Thread (() =&gt;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#"><span style="color:#ff79c6">new</span> Thread (() =&gt;
 {
-    Console.WriteLine (<span style="color:#0ff;font-weight:bold">&#34;看！我跑在另一个线程里！&#34;</span>);
-    Console.WriteLine (<span style="color:#0ff;font-weight:bold">&#34;有手就行！&#34;</span>);
+    Console.WriteLine (<span style="color:#f1fa8c">&#34;看！我跑在另一个线程里！&#34;</span>);
+    Console.WriteLine (<span style="color:#f1fa8c">&#34;有手就行！&#34;</span>);
 }).Start();
 </code></pre></div><h4 id="捕获变量-captured-variables">捕获变量 Captured Variables</h4>
 <p>一定要小心捕获变量：</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C#" data-lang="C#"><span style="color:#fff;font-weight:bold">for</span> (<span style="color:#fff;font-weight:bold">int</span> i = <span style="color:#ff0;font-weight:bold">0</span>; i &lt; <span style="color:#ff0;font-weight:bold">10</span>; i++)
-    <span style="color:#fff;font-weight:bold">new</span> Thread (() =&gt; Console.Write (i)).Start();
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C#" data-lang="C#"><span style="color:#ff79c6">for</span> (<span style="color:#8be9fd">int</span> i = <span style="color:#bd93f9">0</span>; i &lt; <span style="color:#bd93f9">10</span>; i++)
+    <span style="color:#ff79c6">new</span> Thread (() =&gt; Console.Write (i)).Start();
 </code></pre></div><p>输出结果是不确定的！结果：</p>
 <pre><code>0223557799
 </code></pre><p>问题所在是变量 <code>i</code> 指向了循环中同一内存位置。所以变量 <code>i</code> 的值其实一直在被不同线程修改。</p>
 <p>解决方案是使用临时变量：</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#"><span style="color:#fff;font-weight:bold">for</span> (<span style="color:#fff;font-weight:bold">int</span> i = <span style="color:#ff0;font-weight:bold">0</span>; i &lt; <span style="color:#ff0;font-weight:bold">10</span>; i++)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#"><span style="color:#ff79c6">for</span> (<span style="color:#8be9fd">int</span> i = <span style="color:#bd93f9">0</span>; i &lt; <span style="color:#bd93f9">10</span>; i++)
 {
-    <span style="color:#fff;font-weight:bold">int</span> temp = i;
-    <span style="color:#fff;font-weight:bold">new</span> Thread (() =&gt; Console.Write (temp)).Start();
+    <span style="color:#8be9fd">int</span> temp = i;
+    <span style="color:#ff79c6">new</span> Thread (() =&gt; Console.Write (temp)).Start();
 }
 </code></pre></div><p>再来看看类似的问题：</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#"><span style="color:#fff;font-weight:bold">string</span> text = <span style="color:#0ff;font-weight:bold">&#34;t1&#34;</span>;
-Thread t1 = <span style="color:#fff;font-weight:bold">new</span> Thread ( () =&gt; Console.WriteLine (text) );
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#"><span style="color:#8be9fd">string</span> text = <span style="color:#f1fa8c">&#34;t1&#34;</span>;
+Thread t1 = <span style="color:#ff79c6">new</span> Thread ( () =&gt; Console.WriteLine (text) );
 
-text = <span style="color:#0ff;font-weight:bold">&#34;t2&#34;</span>;
-Thread t2 = <span style="color:#fff;font-weight:bold">new</span> Thread ( () =&gt; Console.WriteLine (text) 
+text = <span style="color:#f1fa8c">&#34;t2&#34;</span>;
+Thread t2 = <span style="color:#ff79c6">new</span> Thread ( () =&gt; Console.WriteLine (text) 
 );
 t1.Start(); t2.Start();
 </code></pre></div><p>因为两个 Lambda 表达式捕获了同一变量 <code>text</code>，所以值 <code>t2</code> 会被输出两次。</p>
 <h3 id="异常处理">异常处理</h3>
 <p>先看看<strong>不正确</strong>的写法：</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#"><span style="color:#fff;font-weight:bold">try</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#"><span style="color:#ff79c6">try</span>
 {
-    <span style="color:#fff;font-weight:bold">new</span> Thread (Go).Start();
+    <span style="color:#ff79c6">new</span> Thread (Go).Start();
 }
-<span style="color:#fff;font-weight:bold">catch</span> (Exception ex)
+<span style="color:#ff79c6">catch</span> (Exception ex)
 {
-    <span style="color:#007f7f">// 永远不会到达这里！
-</span><span style="color:#007f7f"></span>    Console.WriteLine (<span style="color:#0ff;font-weight:bold">&#34;Exception!&#34;</span>);
+    <span style="color:#6272a4">// 永远不会到达这里！
+</span><span style="color:#6272a4"></span>    Console.WriteLine (<span style="color:#f1fa8c">&#34;Exception!&#34;</span>);
 }
 
-<span style="color:#fff;font-weight:bold">void</span> Go() { <span style="color:#fff;font-weight:bold">throw</span> <span style="color:#fff;font-weight:bold">null</span>; } <span style="color:#007f7f">// 本应该抛出Null引用错误
+<span style="color:#ff79c6">void</span> Go() { <span style="color:#ff79c6">throw</span> <span style="color:#ff79c6">null</span>; } <span style="color:#6272a4">// 本应该抛出Null引用错误
 </span></code></pre></div><p>每个线程有独立的执行路径，所以我们在线程之外捕获异常是没用的。</p>
 <p>解决方案是把异常处理语句放入方法内：</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#"><span style="color:#fff;font-weight:bold">new</span> Thread (Go).Start();
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#"><span style="color:#ff79c6">new</span> Thread (Go).Start();
 
-<span style="color:#fff;font-weight:bold">void</span> Go()
+<span style="color:#ff79c6">void</span> Go()
 {
-    <span style="color:#fff;font-weight:bold">try</span>
+    <span style="color:#ff79c6">try</span>
     {
-        <span style="color:#fff;font-weight:bold">throw</span> <span style="color:#fff;font-weight:bold">null</span>; 
+        <span style="color:#ff79c6">throw</span> <span style="color:#ff79c6">null</span>; 
     }
-    <span style="color:#fff;font-weight:bold">catch</span> (Exception ex)
+    <span style="color:#ff79c6">catch</span> (Exception ex)
     {
-        <span style="color:#007f7f">// 这样就可以捕获了
-</span><span style="color:#007f7f"></span>    }
+        <span style="color:#6272a4">// 这样就可以捕获了
+</span><span style="color:#6272a4"></span>    }
 }
 </code></pre></div><h4 id="集中异常处理-centralized-exception-handler">集中异常处理 Centralized Exception Handler</h4>
 <p>在 WPF、UWP 或者 WinForm 应用里，我们可以订阅<strong>全局</strong>异常处理事件 <code>Application.DispatcherUnhandledException</code> 以及 <code>Application.ThreadException</code>。</p>
@@ -1152,32 +1152,32 @@ t1.Start(); t2.Start();
 <p>默认情况下，你显式创建的线程都是前台线程。程序结束，你的显式线程也会结束。</p>
 <p>后台线程则不然，依然会保持运行。</p>
 <p>你可以用 <code>IsBackground</code> 属性来操作前后台状态：</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#"><span style="color:#fff;font-weight:bold">static</span> <span style="color:#fff;font-weight:bold">void</span> Main (<span style="color:#fff;font-weight:bold">string</span>[] args)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#"><span style="color:#ff79c6">static</span> <span style="color:#ff79c6">void</span> Main (<span style="color:#8be9fd">string</span>[] args)
 {
-   Thread worker = <span style="color:#fff;font-weight:bold">new</span> Thread ( () =&gt; Console.ReadLine() );
-   <span style="color:#fff;font-weight:bold">if</span> (args.Length &gt; <span style="color:#ff0;font-weight:bold">0</span>) worker.IsBackground = <span style="color:#fff;font-weight:bold">true</span>;
+   Thread worker = <span style="color:#ff79c6">new</span> Thread ( () =&gt; Console.ReadLine() );
+   <span style="color:#ff79c6">if</span> (args.Length &gt; <span style="color:#bd93f9">0</span>) worker.IsBackground = <span style="color:#ff79c6">true</span>;
    worker.Start();
 }
 </code></pre></div><h3 id="线程级别-thread-priority">线程级别 Thread Priority</h3>
 <p>一个线程的 <code>Priority</code> 属性决定了它可以运行多久（相较于其它线程而言）：</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#"><span style="color:#fff;font-weight:bold">enum</span> ThreadPriority { Lowest, BelowNormal, Normal, AboveNormal, Highest }
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#"><span style="color:#ff79c6">enum</span> ThreadPriority { Lowest, BelowNormal, Normal, AboveNormal, Highest }
 </code></pre></div><h3 id="发信号-signaling">发信号 Signaling</h3>
 <p>有时，你需要线程一直等待直到收到其它线程发送的通知，这就是 <strong>Signaling</strong>。</p>
 <p>最简单的 Signaling 结构是 <code>ManualResetEvent</code> 。</p>
 <p>在一个 <code>ManualResetEvent</code> 块中调用 <code>WaitOne</code> 方法，阻塞当前线程直到另一线程调用 <code>Set</code> 方法：</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#"><span style="color:#fff;font-weight:bold">var</span> signal = <span style="color:#fff;font-weight:bold">new</span> ManualResetEvent (<span style="color:#fff;font-weight:bold">false</span>);
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#"><span style="color:#8be9fd">var</span> signal = <span style="color:#ff79c6">new</span> ManualResetEvent (<span style="color:#ff79c6">false</span>);
 
-<span style="color:#fff;font-weight:bold">new</span> Thread (() =&gt;
+<span style="color:#ff79c6">new</span> Thread (() =&gt;
 {
-    Console.WriteLine (<span style="color:#0ff;font-weight:bold">&#34;Waiting for signal...&#34;</span>);
+    Console.WriteLine (<span style="color:#f1fa8c">&#34;Waiting for signal...&#34;</span>);
     signal.WaitOne();
     signal.Dispose();
-    Console.WriteLine (<span style="color:#0ff;font-weight:bold">&#34;Got signal!&#34;</span>);
+    Console.WriteLine (<span style="color:#f1fa8c">&#34;Got signal!&#34;</span>);
 }).Start();
 
 
-Thread.Sleep(<span style="color:#ff0;font-weight:bold">2000</span>);
-signal.Set(); <span style="color:#007f7f">// 发送信号
+Thread.Sleep(<span style="color:#bd93f9">2000</span>);
+signal.Set(); <span style="color:#6272a4">// 发送信号
 </span></code></pre></div><h3 id="线程在客户端应用-threading-in-rich-client-applications">线程在客户端应用 Threading in Rich Client Applications</h3>
 <p>在 WPF 或者 UWP 等等客户端的开发中，但我们要执行耗时的任务时，通常的做法是启动一个「Worker」线程。</p>
 <p>当你想要从「Worker」线程更新 UI 时，你必须传递至 UI 线程。编程术语「编列 Marshal」专门指代这一行为。</p>
@@ -1194,21 +1194,21 @@ signal.Set(); <span style="color:#007f7f">// 发送信号
 </ul>
 <p>这些方法的实质都是把你想要执行的方法推送到 UI 线程的消息队列中。</p>
 <p>但是 <code>Invoke</code> 方法有一点特殊：它会<strong>阻塞</strong>线程直到消息被 UI 线程处理。因此它可以用来返回值。</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#"><span style="color:#fff;font-weight:bold">partial</span> <span style="color:#fff;font-weight:bold">class</span> MyWindow : Window
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#"><span style="color:#ff79c6">partial</span> <span style="color:#ff79c6">class</span> <span style="color:#50fa7b">MyWindow</span> : Window
 {
-    <span style="color:#fff;font-weight:bold">public</span> MyWindow()
+    <span style="color:#ff79c6">public</span> MyWindow()
     {
         InitializeComponent();
-        <span style="color:#fff;font-weight:bold">new</span> Thread (Work).Start();
+        <span style="color:#ff79c6">new</span> Thread (Work).Start();
     }
 
-    <span style="color:#fff;font-weight:bold">void</span> Work()
+    <span style="color:#ff79c6">void</span> Work()
     {
-        Thread.Sleep (<span style="color:#ff0;font-weight:bold">5000</span>); <span style="color:#007f7f">// 假装耗时任务
-</span><span style="color:#007f7f"></span>        UpdateMessage (<span style="color:#0ff;font-weight:bold">&#34;The answer&#34;</span>);
+        Thread.Sleep (<span style="color:#bd93f9">5000</span>); <span style="color:#6272a4">// 假装耗时任务
+</span><span style="color:#6272a4"></span>        UpdateMessage (<span style="color:#f1fa8c">&#34;The answer&#34;</span>);
     }
 
-    <span style="color:#fff;font-weight:bold">void</span> UpdateMessage (<span style="color:#fff;font-weight:bold">string</span> message)
+    <span style="color:#ff79c6">void</span> UpdateMessage (<span style="color:#8be9fd">string</span> message)
     {
         Action action = () =&gt; txtMessage.Text = message;
         Dispatcher.BeginInvoke (action);
@@ -1217,28 +1217,28 @@ signal.Set(); <span style="color:#007f7f">// 发送信号
 </code></pre></div><h3 id="同步上下文-synchronization-contexts">同步上下文 Synchronization Contexts</h3>
 <p>WPF、UWP 等等框架都实现了这个类（子类）。</p>
 <p>这个类被放在 <code>System.ComponentModel</code> 中，用来帮助我们进行 「Marshal」操作。</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#"><span style="color:#fff;font-weight:bold">partial</span> <span style="color:#fff;font-weight:bold">class</span> MyWindow : Window
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#"><span style="color:#ff79c6">partial</span> <span style="color:#ff79c6">class</span> <span style="color:#50fa7b">MyWindow</span> : Window
 {
-    SynchronizationContext <span style="color:#ff0;font-weight:bold">_</span>uiSyncContext;
-    <span style="color:#fff;font-weight:bold">public</span> MyWindow()
+    SynchronizationContext <span style="color:#bd93f9">_</span>uiSyncContext;
+    <span style="color:#ff79c6">public</span> MyWindow()
     {
         InitializeComponent();
 
-        <span style="color:#007f7f">// 获取当前UI线程的同步上下文
-</span><span style="color:#007f7f"></span>        <span style="color:#ff0;font-weight:bold">_</span>uiSyncContext = SynchronizationContext.Current;
-        <span style="color:#fff;font-weight:bold">new</span> Thread (Work).Start();
+        <span style="color:#6272a4">// 获取当前UI线程的同步上下文
+</span><span style="color:#6272a4"></span>        <span style="color:#bd93f9">_</span>uiSyncContext = SynchronizationContext.Current;
+        <span style="color:#ff79c6">new</span> Thread (Work).Start();
     }
 
-    <span style="color:#fff;font-weight:bold">void</span> Work()
+    <span style="color:#ff79c6">void</span> Work()
     {
-        Thread.Sleep (<span style="color:#ff0;font-weight:bold">5000</span>); <span style="color:#007f7f">// 假装耗时操作
-</span><span style="color:#007f7f"></span>        UpdateMessage (<span style="color:#0ff;font-weight:bold">&#34;The answer&#34;</span>);
+        Thread.Sleep (<span style="color:#bd93f9">5000</span>); <span style="color:#6272a4">// 假装耗时操作
+</span><span style="color:#6272a4"></span>        UpdateMessage (<span style="color:#f1fa8c">&#34;The answer&#34;</span>);
     }
 
-    <span style="color:#fff;font-weight:bold">void</span> UpdateMessage (<span style="color:#fff;font-weight:bold">string</span> message)
+    <span style="color:#ff79c6">void</span> UpdateMessage (<span style="color:#8be9fd">string</span> message)
     {
-        <span style="color:#007f7f">// Marshal委托至UI线程
-</span><span style="color:#007f7f"></span>        <span style="color:#ff0;font-weight:bold">_</span>uiSyncContext.Post (<span style="color:#ff0;font-weight:bold">_</span> =&gt; txtMessage.Text = message, <span style="color:#fff;font-weight:bold">null</span>);
+        <span style="color:#6272a4">// Marshal委托至UI线程
+</span><span style="color:#6272a4"></span>        <span style="color:#bd93f9">_</span>uiSyncContext.Post (<span style="color:#bd93f9">_</span> =&gt; txtMessage.Text = message, <span style="color:#ff79c6">null</span>);
     }
 }
 </code></pre></div><p>调用 <code>Post</code> 方法等价于调用 <code>BeginInvoke</code> 方法。</p>
@@ -1260,9 +1260,9 @@ signal.Set(); <span style="color:#007f7f">// 发送信号
 <p>你可以通过 <code>Thread.CurrentThread.IsThreadPoolThread.</code> 来指定是否让线程在池里运行。</p>
 <h4 id="进入线程池-enter-the-pool">进入线程池 Enter the pool</h4>
 <p>最简单的方式是：</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#">Task.Run (() =&gt; Console.WriteLine (<span style="color:#0ff;font-weight:bold">&#34;你先别急，Task后面会讲&#34;</span>));
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#">Task.Run (() =&gt; Console.WriteLine (<span style="color:#f1fa8c">&#34;你先别急，Task后面会讲&#34;</span>));
 </code></pre></div><p>在 .NET Framework 4.0 以前的上古时期 C# 没有 Task 协程，是这样进入线程池的：</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#">ThreadPool.QueueUserWorkItem (notUsed =&gt; Console.WriteLine (<span style="color:#0ff;font-weight:bold">&#34;Hello&#34;</span>));
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#">ThreadPool.QueueUserWorkItem (notUsed =&gt; Console.WriteLine (<span style="color:#f1fa8c">&#34;Hello&#34;</span>));
 </code></pre></div><blockquote>
 <p>隐式使用线程池的库：</p>
 <ul>
@@ -1284,59 +1284,59 @@ signal.Set(); <span style="color:#007f7f">// 发送信号
 <hr>
 <h2 id="任务-task">任务 Task</h2>
 <h3 id="创建任务-create-a-task">创建任务 Create a Task</h3>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#">Task.Run (() =&gt; Console.WriteLine (<span style="color:#0ff;font-weight:bold">&#34;Foo&#34;</span>));
-Console.ReadLine(); <span style="color:#007f7f">//用来阻塞一下
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#">Task.Run (() =&gt; Console.WriteLine (<span style="color:#f1fa8c">&#34;Foo&#34;</span>));
+Console.ReadLine(); <span style="color:#6272a4">//用来阻塞一下
 </span></code></pre></div><h4 id="等待-wait">等待 Wait</h4>
 <p>和线程的 <code>Join</code> 类似：</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#">Task task = Task.Run (() =&gt;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#">Task task = Task.Run (() =&gt;
 {
-    Thread.Sleep (<span style="color:#ff0;font-weight:bold">2000</span>);
-    Console.WriteLine (<span style="color:#0ff;font-weight:bold">&#34;Foo&#34;</span>);
+    Thread.Sleep (<span style="color:#bd93f9">2000</span>);
+    Console.WriteLine (<span style="color:#f1fa8c">&#34;Foo&#34;</span>);
 });
 
-Console.WriteLine (task.IsCompleted); <span style="color:#007f7f">// False
-</span><span style="color:#007f7f"></span>task.Wait(); <span style="color:#007f7f">// 阻塞直到Task结束
+Console.WriteLine (task.IsCompleted); <span style="color:#6272a4">// False
+</span><span style="color:#6272a4"></span>task.Wait(); <span style="color:#6272a4">// 阻塞直到Task结束
 </span></code></pre></div><h4 id="耗时任务-longrunning-task">耗时任务 LongRunning Task</h4>
 <p>CLR 默认会让 Task 运行在池线程（适用于短时计算的线程）。</p>
 <p>为了运行耗时长的 Task：</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#">Task task = Task.Factory.StartNew (() =&gt; ..., TaskCreationOptions.LongRunning);
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#">Task task = Task.Factory.StartNew (() =&gt; ..., TaskCreationOptions.LongRunning);
 </code></pre></div><h3 id="返回值-return-values">返回值 Return Values</h3>
 <p>最简单的返回值写法：</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#">Task&lt;<span style="color:#fff;font-weight:bold">int</span>&gt; task = Task.Run (() =&gt; { Console.WriteLine (<span style="color:#0ff;font-weight:bold">&#34;Foo&#34;</span>); <span style="color:#fff;font-weight:bold">return</span> <span style="color:#ff0;font-weight:bold">3</span>; });
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#">Task&lt;<span style="color:#8be9fd">int</span>&gt; task = Task.Run (() =&gt; { Console.WriteLine (<span style="color:#f1fa8c">&#34;Foo&#34;</span>); <span style="color:#ff79c6">return</span> <span style="color:#bd93f9">3</span>; });
 </code></pre></div><p>你可以通过 Task 的 <code>Result</code> 属性来获取返回值。这步操作将会阻塞线程直至 Task 结束：</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#"><span style="color:#fff;font-weight:bold">int</span> result = task.Result;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#"><span style="color:#8be9fd">int</span> result = task.Result;
 Console.WriteLine(result);
 </code></pre></div><p>接下来，我们创建一个使用 LINQ 的 Task，用以计算 300 0000 以内的素数：</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#">Task&lt;<span style="color:#fff;font-weight:bold">int</span>&gt; primeNumberTask = Task.Run (() =&gt; 
-    Enumerable.Range (<span style="color:#ff0;font-weight:bold">2</span>, <span style="color:#ff0;font-weight:bold">3000000</span>).Count (n =&gt;
-        Enumerable.Range (<span style="color:#ff0;font-weight:bold">2</span>, (<span style="color:#fff;font-weight:bold">int</span>)Math.Sqrt(n)-<span style="color:#ff0;font-weight:bold">1</span>).All (i =&gt; n % i &gt; <span style="color:#ff0;font-weight:bold">0</span>)));
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#">Task&lt;<span style="color:#8be9fd">int</span>&gt; primeNumberTask = Task.Run (() =&gt; 
+    Enumerable.Range (<span style="color:#bd93f9">2</span>, <span style="color:#bd93f9">3000000</span>).Count (n =&gt;
+        Enumerable.Range (<span style="color:#bd93f9">2</span>, (<span style="color:#8be9fd">int</span>)Math.Sqrt(n)-<span style="color:#bd93f9">1</span>).All (i =&gt; n % i &gt; <span style="color:#bd93f9">0</span>)));
 
-Console.WriteLine (<span style="color:#0ff;font-weight:bold">&#34;Task running...&#34;</span>);
-Console.WriteLine (<span style="color:#0ff;font-weight:bold">&#34;The answer is &#34;</span> + primeNumberTask.Result);
+Console.WriteLine (<span style="color:#f1fa8c">&#34;Task running...&#34;</span>);
+Console.WriteLine (<span style="color:#f1fa8c">&#34;The answer is &#34;</span> + primeNumberTask.Result);
 </code></pre></div><h3 id="异常-exception">异常 Exception</h3>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#"><span style="color:#007f7f">//开启一个抛出NullReferenceException的Task
-</span><span style="color:#007f7f"></span>Task task = Task.Run (() =&gt; { <span style="color:#fff;font-weight:bold">throw</span> <span style="color:#fff;font-weight:bold">null</span>; });
-<span style="color:#fff;font-weight:bold">try</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#"><span style="color:#6272a4">//开启一个抛出NullReferenceException的Task
+</span><span style="color:#6272a4"></span>Task task = Task.Run (() =&gt; { <span style="color:#ff79c6">throw</span> <span style="color:#ff79c6">null</span>; });
+<span style="color:#ff79c6">try</span>
 {
     task.Wait();
 }
-<span style="color:#fff;font-weight:bold">catch</span> (AggregateException aex)
+<span style="color:#ff79c6">catch</span> (AggregateException aex)
 {
-    <span style="color:#fff;font-weight:bold">if</span> (aex.InnerException <span style="color:#fff;font-weight:bold">is</span> NullReferenceException)
-    Console.WriteLine (<span style="color:#0ff;font-weight:bold">&#34;Null!&#34;</span>);
-<span style="color:#fff;font-weight:bold">else</span>
-    <span style="color:#fff;font-weight:bold">throw</span>;
+    <span style="color:#ff79c6">if</span> (aex.InnerException <span style="color:#ff79c6">is</span> NullReferenceException)
+    Console.WriteLine (<span style="color:#f1fa8c">&#34;Null!&#34;</span>);
+<span style="color:#ff79c6">else</span>
+    <span style="color:#ff79c6">throw</span>;
 }
 </code></pre></div><h3 id="后续-continuations">后续 Continuations</h3>
 <p>顾名思义，就是当 Task 结束之后该干啥：</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#">Task&lt;<span style="color:#fff;font-weight:bold">int</span>&gt; primeNumberTask = Task.Run (() =&gt;
-    Enumerable.Range (<span style="color:#ff0;font-weight:bold">2</span>, <span style="color:#ff0;font-weight:bold">3000000</span>).Count (n =&gt;
-        Enumerable.Range (<span style="color:#ff0;font-weight:bold">2</span>, (<span style="color:#fff;font-weight:bold">int</span>)Math.Sqrt(n)-<span style="color:#ff0;font-weight:bold">1</span>).All (i =&gt; n % i &gt; <span style="color:#ff0;font-weight:bold">0</span>)));
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#">Task&lt;<span style="color:#8be9fd">int</span>&gt; primeNumberTask = Task.Run (() =&gt;
+    Enumerable.Range (<span style="color:#bd93f9">2</span>, <span style="color:#bd93f9">3000000</span>).Count (n =&gt;
+        Enumerable.Range (<span style="color:#bd93f9">2</span>, (<span style="color:#8be9fd">int</span>)Math.Sqrt(n)-<span style="color:#bd93f9">1</span>).All (i =&gt; n % i &gt; <span style="color:#bd93f9">0</span>)));
 
-<span style="color:#fff;font-weight:bold">var</span> awaiter = primeNumberTask.GetAwaiter();
+<span style="color:#8be9fd">var</span> awaiter = primeNumberTask.GetAwaiter();
 awaiter.OnCompleted (() =&gt;
 {
-    <span style="color:#fff;font-weight:bold">int</span> result = awaiter.GetResult();
+    <span style="color:#8be9fd">int</span> result = awaiter.GetResult();
     Console.WriteLine (result); 
 });
 </code></pre></div><hr>
@@ -1345,151 +1345,151 @@ awaiter.OnCompleted (() =&gt;
 <h3 id="awaiting">Awaiting</h3>
 <p><code>await</code> 关键字自动附加后续操作。</p>
 <p>简单使用：</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#"><span style="color:#fff;font-weight:bold">var</span> result = <span style="color:#fff;font-weight:bold">await</span> expression;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#"><span style="color:#8be9fd">var</span> result = <span style="color:#ff79c6">await</span> expression;
 statement(s);
 </code></pre></div><p>编译器会把这小段代码自动转化为：</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#"><span style="color:#fff;font-weight:bold">var</span> awaiter = expression.GetAwaiter();
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#"><span style="color:#8be9fd">var</span> awaiter = expression.GetAwaiter();
 awaiter.OnCompleted (() =&gt;
 {
-    <span style="color:#fff;font-weight:bold">var</span> result = awaiter.GetResult();
+    <span style="color:#8be9fd">var</span> result = awaiter.GetResult();
     statement(s);
 });
 </code></pre></div><p>来看看之前的代码：</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#">Task&lt;<span style="color:#fff;font-weight:bold">int</span>&gt; GetPrimesCountAsync (<span style="color:#fff;font-weight:bold">int</span> start, <span style="color:#fff;font-weight:bold">int</span> count)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#">Task&lt;<span style="color:#8be9fd">int</span>&gt; GetPrimesCountAsync (<span style="color:#8be9fd">int</span> start, <span style="color:#8be9fd">int</span> count)
 {
-    <span style="color:#fff;font-weight:bold">return</span> Task.Run (() =&gt;
+    <span style="color:#ff79c6">return</span> Task.Run (() =&gt;
         ParallelEnumerable.Range (start, count).Count (n =&gt;
-            Enumerable.Range (<span style="color:#ff0;font-weight:bold">2</span>, (<span style="color:#fff;font-weight:bold">int</span>)Math.Sqrt(n)-<span style="color:#ff0;font-weight:bold">1</span>).All (i =&gt; n % i &gt; <span style="color:#ff0;font-weight:bold">0</span>)));
+            Enumerable.Range (<span style="color:#bd93f9">2</span>, (<span style="color:#8be9fd">int</span>)Math.Sqrt(n)-<span style="color:#bd93f9">1</span>).All (i =&gt; n % i &gt; <span style="color:#bd93f9">0</span>)));
 }
 </code></pre></div><p>使用 <code>await</code> 关键字，我们可以如下调用：</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#"><span style="color:#fff;font-weight:bold">int</span> result = <span style="color:#fff;font-weight:bold">await</span> GetPrimesCountAsync (<span style="color:#ff0;font-weight:bold">2</span>, <span style="color:#ff0;font-weight:bold">1000000</span>);
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#"><span style="color:#8be9fd">int</span> result = <span style="color:#ff79c6">await</span> GetPrimesCountAsync (<span style="color:#bd93f9">2</span>, <span style="color:#bd93f9">1000000</span>);
 Console.WriteLine (result);
 </code></pre></div><p>但在编译前，我们需要给外层代码加一个 <code>async</code> 关键字：</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#"><span style="color:#fff;font-weight:bold">async</span> <span style="color:#fff;font-weight:bold">void</span> DisplayPrimesCount()
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#"><span style="color:#ff79c6">async</span> <span style="color:#ff79c6">void</span> DisplayPrimesCount()
 {
-    <span style="color:#fff;font-weight:bold">int</span> result = <span style="color:#fff;font-weight:bold">await</span> GetPrimesCountAsync (<span style="color:#ff0;font-weight:bold">2</span>, <span style="color:#ff0;font-weight:bold">1000000</span>);
+    <span style="color:#8be9fd">int</span> result = <span style="color:#ff79c6">await</span> GetPrimesCountAsync (<span style="color:#bd93f9">2</span>, <span style="color:#bd93f9">1000000</span>);
     Console.WriteLine (result);
 }
 </code></pre></div><p><code>async</code> 关键字只能加给返回值类型是 <code>void</code>，<code>Task</code> 以及 <code>Task&lt;TResult&gt;</code> 的方法。</p>
 <p>当返回值是空时：</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#"><span style="color:#fff;font-weight:bold">await</span> Task.Delay (<span style="color:#ff0;font-weight:bold">5000</span>);
-Console.WriteLine (<span style="color:#0ff;font-weight:bold">&#34;Five seconds passed!&#34;</span>);
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#"><span style="color:#ff79c6">await</span> Task.Delay (<span style="color:#bd93f9">5000</span>);
+Console.WriteLine (<span style="color:#f1fa8c">&#34;Five seconds passed!&#34;</span>);
 </code></pre></div><h4 id="捕获局部变量-capturing-local-state">捕获局部变量 Capturing local state</h4>
 <p><code>await</code> 的真正力量在于它可以出现在代码的任意位置（但不能在线程锁以及 <code>unsafe</code> 块中）：</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#"><span style="color:#fff;font-weight:bold">async</span> <span style="color:#fff;font-weight:bold">void</span> DisplayPrimeCounts()
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#"><span style="color:#ff79c6">async</span> <span style="color:#ff79c6">void</span> DisplayPrimeCounts()
 {
-    <span style="color:#fff;font-weight:bold">for</span> (<span style="color:#fff;font-weight:bold">int</span> i = <span style="color:#ff0;font-weight:bold">0</span>; i &lt; <span style="color:#ff0;font-weight:bold">10</span>; i++)
-    Console.WriteLine (<span style="color:#fff;font-weight:bold">await</span> GetPrimesCountAsync (i*<span style="color:#ff0;font-weight:bold">1000000</span>+<span style="color:#ff0;font-weight:bold">2</span>, <span style="color:#ff0;font-weight:bold">1000000</span>));
+    <span style="color:#ff79c6">for</span> (<span style="color:#8be9fd">int</span> i = <span style="color:#bd93f9">0</span>; i &lt; <span style="color:#bd93f9">10</span>; i++)
+    Console.WriteLine (<span style="color:#ff79c6">await</span> GetPrimesCountAsync (i*<span style="color:#bd93f9">1000000</span>+<span style="color:#bd93f9">2</span>, <span style="color:#bd93f9">1000000</span>));
 }
 </code></pre></div><p>在第一次执行 <code>GetPrimesCountAsync</code> 之后，变量 <code>i</code> 的值会被保存。</p>
 <h4 id="在-ui-中等待-awaiting-in-a-ui">在 UI 中等待 Awaiting in a UI</h4>
 <p>我们先从一个同步的代码开始：</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#"><span style="color:#fff;font-weight:bold">class</span> TestUI : Window
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#"><span style="color:#ff79c6">class</span> <span style="color:#50fa7b">TestUI</span> : Window
 {
-    Button <span style="color:#ff0;font-weight:bold">_</span>button = <span style="color:#fff;font-weight:bold">new</span> Button { Content = <span style="color:#0ff;font-weight:bold">&#34;Go&#34;</span> };
-    TextBlock <span style="color:#ff0;font-weight:bold">_</span>results = <span style="color:#fff;font-weight:bold">new</span> TextBlock();
+    Button <span style="color:#bd93f9">_</span>button = <span style="color:#ff79c6">new</span> Button { Content = <span style="color:#f1fa8c">&#34;Go&#34;</span> };
+    TextBlock <span style="color:#bd93f9">_</span>results = <span style="color:#ff79c6">new</span> TextBlock();
     
-    <span style="color:#fff;font-weight:bold">public</span> TestUI()
+    <span style="color:#ff79c6">public</span> TestUI()
     {
-        <span style="color:#fff;font-weight:bold">var</span> panel = <span style="color:#fff;font-weight:bold">new</span> StackPanel();
-        panel.Children.Add (<span style="color:#ff0;font-weight:bold">_</span>button);
-        panel.Children.Add (<span style="color:#ff0;font-weight:bold">_</span>results);
+        <span style="color:#8be9fd">var</span> panel = <span style="color:#ff79c6">new</span> StackPanel();
+        panel.Children.Add (<span style="color:#bd93f9">_</span>button);
+        panel.Children.Add (<span style="color:#bd93f9">_</span>results);
         Content = panel;
-        <span style="color:#ff0;font-weight:bold">_</span>button.Click += (sender, args) =&gt; Go();
+        <span style="color:#bd93f9">_</span>button.Click += (sender, args) =&gt; Go();
     }
 
-    <span style="color:#fff;font-weight:bold">void</span> Go()
+    <span style="color:#ff79c6">void</span> Go()
     {
-    <span style="color:#fff;font-weight:bold">for</span> (<span style="color:#fff;font-weight:bold">int</span> i = <span style="color:#ff0;font-weight:bold">1</span>; i &lt; <span style="color:#ff0;font-weight:bold">5</span>; i++)
-        <span style="color:#ff0;font-weight:bold">_</span>results.Text += GetPrimesCount (i * <span style="color:#ff0;font-weight:bold">1000000</span>, <span style="color:#ff0;font-weight:bold">1000000</span>) +
-        <span style="color:#0ff;font-weight:bold">&#34; primes between &#34;</span> + (i*<span style="color:#ff0;font-weight:bold">1000000</span>) + <span style="color:#0ff;font-weight:bold">&#34; and &#34;</span> + ((i+<span style="color:#ff0;font-weight:bold">1</span>)*<span style="color:#ff0;font-weight:bold">1000000</span>-<span style="color:#ff0;font-weight:bold">1</span>) +
+    <span style="color:#ff79c6">for</span> (<span style="color:#8be9fd">int</span> i = <span style="color:#bd93f9">1</span>; i &lt; <span style="color:#bd93f9">5</span>; i++)
+        <span style="color:#bd93f9">_</span>results.Text += GetPrimesCount (i * <span style="color:#bd93f9">1000000</span>, <span style="color:#bd93f9">1000000</span>) +
+        <span style="color:#f1fa8c">&#34; primes between &#34;</span> + (i*<span style="color:#bd93f9">1000000</span>) + <span style="color:#f1fa8c">&#34; and &#34;</span> + ((i+<span style="color:#bd93f9">1</span>)*<span style="color:#bd93f9">1000000</span>-<span style="color:#bd93f9">1</span>) +
         Environment.NewLine;
     }
     
-    <span style="color:#fff;font-weight:bold">int</span> GetPrimesCount (<span style="color:#fff;font-weight:bold">int</span> start, <span style="color:#fff;font-weight:bold">int</span> count)
+    <span style="color:#8be9fd">int</span> GetPrimesCount (<span style="color:#8be9fd">int</span> start, <span style="color:#8be9fd">int</span> count)
     {
-        <span style="color:#fff;font-weight:bold">return</span> ParallelEnumerable.Range (start, count).Count (n =&gt; Enumerable.Range (<span style="color:#ff0;font-weight:bold">2</span>, (<span style="color:#fff;font-weight:bold">int</span>) Math.Sqrt(n)-<span style="color:#ff0;font-weight:bold">1</span>).All (i =&gt; n % i &gt; <span style="color:#ff0;font-weight:bold">0</span>));
+        <span style="color:#ff79c6">return</span> ParallelEnumerable.Range (start, count).Count (n =&gt; Enumerable.Range (<span style="color:#bd93f9">2</span>, (<span style="color:#8be9fd">int</span>) Math.Sqrt(n)-<span style="color:#bd93f9">1</span>).All (i =&gt; n % i &gt; <span style="color:#bd93f9">0</span>));
     }
 }
 </code></pre></div><p>可以看到点击按钮就会阻塞线程。</p>
 <p>接下来我们使用异步改写。</p>
 <p>第一步是把计算素数的方法改成异步的：</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#">Task&lt;<span style="color:#fff;font-weight:bold">int</span>&gt; GetPrimesCountAsync (<span style="color:#fff;font-weight:bold">int</span> start, <span style="color:#fff;font-weight:bold">int</span> count)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#">Task&lt;<span style="color:#8be9fd">int</span>&gt; GetPrimesCountAsync (<span style="color:#8be9fd">int</span> start, <span style="color:#8be9fd">int</span> count)
 {
-    <span style="color:#fff;font-weight:bold">return</span> Task.Run (() =&gt; ParallelEnumerable.Range (start, count).Count(n =&gt; Enumerable.Range(<span style="color:#ff0;font-weight:bold">2</span>, (<span style="color:#fff;font-weight:bold">int</span>) Math.Sqrt(n)-<span style="color:#ff0;font-weight:bold">1</span>).All (i =&gt; n % i &gt; <span style="color:#ff0;font-weight:bold">0</span>)));
+    <span style="color:#ff79c6">return</span> Task.Run (() =&gt; ParallelEnumerable.Range (start, count).Count(n =&gt; Enumerable.Range(<span style="color:#bd93f9">2</span>, (<span style="color:#8be9fd">int</span>) Math.Sqrt(n)-<span style="color:#bd93f9">1</span>).All (i =&gt; n % i &gt; <span style="color:#bd93f9">0</span>)));
 }
 </code></pre></div><p>第二步是修改 <code>Go</code> 方法：</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#"><span style="color:#fff;font-weight:bold">async</span> <span style="color:#fff;font-weight:bold">void</span> Go()
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#"><span style="color:#ff79c6">async</span> <span style="color:#ff79c6">void</span> Go()
 {
-    <span style="color:#ff0;font-weight:bold">_</span>button.IsEnabled = <span style="color:#fff;font-weight:bold">false</span>;
-    <span style="color:#fff;font-weight:bold">for</span> (<span style="color:#fff;font-weight:bold">int</span> i = <span style="color:#ff0;font-weight:bold">1</span>; i &lt; <span style="color:#ff0;font-weight:bold">5</span>; i++)
-    <span style="color:#ff0;font-weight:bold">_</span>results.Text += <span style="color:#fff;font-weight:bold">await</span> GetPrimesCountAsync (i * <span style="color:#ff0;font-weight:bold">1000000</span>, <span style="color:#ff0;font-weight:bold">1000000</span>) + <span style="color:#0ff;font-weight:bold">&#34; primes between &#34;</span> + (i*<span style="color:#ff0;font-weight:bold">1000000</span>) + <span style="color:#0ff;font-weight:bold">&#34; and &#34;</span> + ((i+<span style="color:#ff0;font-weight:bold">1</span>)*<span style="color:#ff0;font-weight:bold">1000000</span>-<span style="color:#ff0;font-weight:bold">1</span>) +
+    <span style="color:#bd93f9">_</span>button.IsEnabled = <span style="color:#ff79c6">false</span>;
+    <span style="color:#ff79c6">for</span> (<span style="color:#8be9fd">int</span> i = <span style="color:#bd93f9">1</span>; i &lt; <span style="color:#bd93f9">5</span>; i++)
+    <span style="color:#bd93f9">_</span>results.Text += <span style="color:#ff79c6">await</span> GetPrimesCountAsync (i * <span style="color:#bd93f9">1000000</span>, <span style="color:#bd93f9">1000000</span>) + <span style="color:#f1fa8c">&#34; primes between &#34;</span> + (i*<span style="color:#bd93f9">1000000</span>) + <span style="color:#f1fa8c">&#34; and &#34;</span> + ((i+<span style="color:#bd93f9">1</span>)*<span style="color:#bd93f9">1000000</span>-<span style="color:#bd93f9">1</span>) +
     Environment.NewLine;
-    <span style="color:#ff0;font-weight:bold">_</span>button.IsEnabled = <span style="color:#fff;font-weight:bold">true</span>;
+    <span style="color:#bd93f9">_</span>button.IsEnabled = <span style="color:#ff79c6">true</span>;
 }
 </code></pre></div><p>再来另一个例子，这回我们想要从网络上异步地下载数据了。</p>
 <p>重写 <code>Go</code> 方法：</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#"><span style="color:#fff;font-weight:bold">async</span> <span style="color:#fff;font-weight:bold">void</span> Go() 
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#"><span style="color:#ff79c6">async</span> <span style="color:#ff79c6">void</span> Go() 
 {
-    <span style="color:#ff0;font-weight:bold">_</span>button.IsEnabled = <span style="color:#fff;font-weight:bold">false</span>;
-    <span style="color:#fff;font-weight:bold">string</span>[] urls = <span style="color:#0ff;font-weight:bold">&#34;yoroion.github.io www.oreilly.com sinoahpx.github.io&#34;</span>.Split();
-    <span style="color:#fff;font-weight:bold">int</span> totalLength = <span style="color:#ff0;font-weight:bold">0</span>;
-    <span style="color:#fff;font-weight:bold">try</span>
+    <span style="color:#bd93f9">_</span>button.IsEnabled = <span style="color:#ff79c6">false</span>;
+    <span style="color:#8be9fd">string</span>[] urls = <span style="color:#f1fa8c">&#34;yoroion.github.io www.oreilly.com sinoahpx.github.io&#34;</span>.Split();
+    <span style="color:#8be9fd">int</span> totalLength = <span style="color:#bd93f9">0</span>;
+    <span style="color:#ff79c6">try</span>
     {
-        <span style="color:#fff;font-weight:bold">foreach</span> (<span style="color:#fff;font-weight:bold">string</span> url <span style="color:#fff;font-weight:bold">in</span> urls)
+        <span style="color:#ff79c6">foreach</span> (<span style="color:#8be9fd">string</span> url <span style="color:#ff79c6">in</span> urls)
         {
-            <span style="color:#fff;font-weight:bold">var</span> uri = <span style="color:#fff;font-weight:bold">new</span> Uri(<span style="color:#0ff;font-weight:bold">&#34;http://&#34;</span> + url)
-            <span style="color:#fff;font-weight:bold">byte</span>[] data = <span style="color:#fff;font-weight:bold">await</span> <span style="color:#fff;font-weight:bold">new</span> WebClient().DownloadDataTaskAsync (uri);
-            <span style="color:#ff0;font-weight:bold">_</span>results.Text += <span style="color:#0ff;font-weight:bold">&#34;Length of &#34;</span> + url + <span style="color:#0ff;font-weight:bold">&#34; is &#34;</span> + data.Length + Environment.NewLine;
+            <span style="color:#8be9fd">var</span> uri = <span style="color:#ff79c6">new</span> Uri(<span style="color:#f1fa8c">&#34;http://&#34;</span> + url)
+            <span style="color:#8be9fd">byte</span>[] data = <span style="color:#ff79c6">await</span> <span style="color:#ff79c6">new</span> WebClient().DownloadDataTaskAsync (uri);
+            <span style="color:#bd93f9">_</span>results.Text += <span style="color:#f1fa8c">&#34;Length of &#34;</span> + url + <span style="color:#f1fa8c">&#34; is &#34;</span> + data.Length + Environment.NewLine;
             totalLength += data.Length;
         }
-        <span style="color:#ff0;font-weight:bold">_</span>results.Text += <span style="color:#0ff;font-weight:bold">&#34;Total length: &#34;</span> + totalLength;
+        <span style="color:#bd93f9">_</span>results.Text += <span style="color:#f1fa8c">&#34;Total length: &#34;</span> + totalLength;
     }
-    <span style="color:#fff;font-weight:bold">catch</span>
+    <span style="color:#ff79c6">catch</span>
     {
-        <span style="color:#ff0;font-weight:bold">_</span>results.Text += <span style="color:#0ff;font-weight:bold">&#34;Error: &#34;</span> + ex.Message;
+        <span style="color:#bd93f9">_</span>results.Text += <span style="color:#f1fa8c">&#34;Error: &#34;</span> + ex.Message;
     }
-    <span style="color:#fff;font-weight:bold">finally</span> { <span style="color:#ff0;font-weight:bold">_</span>button.IsEnabled = <span style="color:#fff;font-weight:bold">true</span>; }
+    <span style="color:#ff79c6">finally</span> { <span style="color:#bd93f9">_</span>button.IsEnabled = <span style="color:#ff79c6">true</span>; }
 }
 </code></pre></div><p>我们附加在 UI 控件上的 Event Handler 在消息队列（message loop）中进行。</p>
 <p>当我们的 <code>Go</code> 方法运行时，直至遇到 await 表达式，会跳转回消息队列来来响应其它事件。</p>
 <h3 id="编写异步方法-writing-asynchronous-functions">编写异步方法 Writing Asynchronous Functions</h3>
 <p>编写异步方法，我们可以把空返回值的方法改成返回 Task：</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#"><span style="color:#fff;font-weight:bold">async</span> Task PrintAnswerToLife() <span style="color:#007f7f">//Task 替代了 void
-</span><span style="color:#007f7f"></span>{
-    <span style="color:#fff;font-weight:bold">await</span> Task.Delay (<span style="color:#ff0;font-weight:bold">5000</span>);
-    <span style="color:#fff;font-weight:bold">int</span> answer = <span style="color:#ff0;font-weight:bold">21</span> * <span style="color:#ff0;font-weight:bold">2</span>;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#"><span style="color:#ff79c6">async</span> Task PrintAnswerToLife() <span style="color:#6272a4">//Task 替代了 void
+</span><span style="color:#6272a4"></span>{
+    <span style="color:#ff79c6">await</span> Task.Delay (<span style="color:#bd93f9">5000</span>);
+    <span style="color:#8be9fd">int</span> answer = <span style="color:#bd93f9">21</span> * <span style="color:#bd93f9">2</span>;
     Console.WriteLine (answer);
 }
 </code></pre></div><p>可以发现我们并没有显式地返回 Task，编译器帮我们简化了：</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#"><span style="color:#fff;font-weight:bold">async</span> Task Go()
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#"><span style="color:#ff79c6">async</span> Task Go()
 {
-    <span style="color:#fff;font-weight:bold">await</span> PrintAnswerToLife();
-    Console.WriteLine(<span style="color:#0ff;font-weight:bold">&#34;Done&#34;</span>);
+    <span style="color:#ff79c6">await</span> PrintAnswerToLife();
+    Console.WriteLine(<span style="color:#f1fa8c">&#34;Done&#34;</span>);
 }
 </code></pre></div><h4 id="返回-tasktresult">返回 Task<!-- raw HTML omitted --></h4>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#"><span style="color:#fff;font-weight:bold">async</span> Task&lt;<span style="color:#fff;font-weight:bold">int</span>&gt; GetAnswerToLife()
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#"><span style="color:#ff79c6">async</span> Task&lt;<span style="color:#8be9fd">int</span>&gt; GetAnswerToLife()
 {
-    <span style="color:#fff;font-weight:bold">await</span> Task.Delay (<span style="color:#ff0;font-weight:bold">5000</span>);
-    <span style="color:#fff;font-weight:bold">int</span> answer = <span style="color:#ff0;font-weight:bold">21</span> * <span style="color:#ff0;font-weight:bold">2</span>;
-    <span style="color:#fff;font-weight:bold">return</span> answer; <span style="color:#007f7f">//直接返回整型
-</span><span style="color:#007f7f"></span>}
+    <span style="color:#ff79c6">await</span> Task.Delay (<span style="color:#bd93f9">5000</span>);
+    <span style="color:#8be9fd">int</span> answer = <span style="color:#bd93f9">21</span> * <span style="color:#bd93f9">2</span>;
+    <span style="color:#ff79c6">return</span> answer; <span style="color:#6272a4">//直接返回整型
+</span><span style="color:#6272a4"></span>}
 </code></pre></div><p>整体看一下代码:</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#"><span style="color:#fff;font-weight:bold">async</span> Task Go()
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#"><span style="color:#ff79c6">async</span> Task Go()
 {
-    <span style="color:#fff;font-weight:bold">await</span> PrintAnswerToLife();
-    Console.WriteLine (<span style="color:#0ff;font-weight:bold">&#34;Done&#34;</span>);
+    <span style="color:#ff79c6">await</span> PrintAnswerToLife();
+    Console.WriteLine (<span style="color:#f1fa8c">&#34;Done&#34;</span>);
 }
-<span style="color:#fff;font-weight:bold">async</span> Task PrintAnswerToLife()
+<span style="color:#ff79c6">async</span> Task PrintAnswerToLife()
 {
-    <span style="color:#fff;font-weight:bold">int</span> answer = <span style="color:#fff;font-weight:bold">await</span> GetAnswerToLife();
+    <span style="color:#8be9fd">int</span> answer = <span style="color:#ff79c6">await</span> GetAnswerToLife();
     Console.WriteLine (answer);
 }
-<span style="color:#fff;font-weight:bold">async</span> Task&lt;<span style="color:#fff;font-weight:bold">int</span>&gt; GetAnswerToLife()
+<span style="color:#ff79c6">async</span> Task&lt;<span style="color:#8be9fd">int</span>&gt; GetAnswerToLife()
 {
-    <span style="color:#fff;font-weight:bold">await</span> Task.Delay (<span style="color:#ff0;font-weight:bold">5000</span>);
-    <span style="color:#fff;font-weight:bold">int</span> answer = <span style="color:#ff0;font-weight:bold">21</span> * <span style="color:#ff0;font-weight:bold">2</span>;
-    <span style="color:#fff;font-weight:bold">return</span> answer;
+    <span style="color:#ff79c6">await</span> Task.Delay (<span style="color:#bd93f9">5000</span>);
+    <span style="color:#8be9fd">int</span> answer = <span style="color:#bd93f9">21</span> * <span style="color:#bd93f9">2</span>;
+    <span style="color:#ff79c6">return</span> answer;
 }
 </code></pre></div><blockquote>
 <p>这也揭示了 C# 中编写异步方法的基本原则:</p>
