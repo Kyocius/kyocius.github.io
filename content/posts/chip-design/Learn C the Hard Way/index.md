@@ -9,7 +9,7 @@ categories:
 tags:
     - 一生一芯
     - Clang
-featured_image: head.png
+# featured_image: head.png
 ---
 ## 前言
 

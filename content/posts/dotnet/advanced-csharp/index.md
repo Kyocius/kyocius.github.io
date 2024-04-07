@@ -8,7 +8,6 @@ categories:
     - 编程
 tags:
     - CSharp
-featured_image: head.png
 ---
 
 ## 前言
