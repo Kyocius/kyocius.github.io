@@ -1,5 +1,5 @@
 ---
-title:  写给 C# 开发者的 F# 光速入门教程
+title: "[译] 写给 C# 开发者的 F# 光速入门指南"
 date: 2022-08-26
 draft: false
 slug: fsharp-for-csharp-devs

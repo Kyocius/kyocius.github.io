@@ -1,7 +1,7 @@
 ---
-title: C# 进阶小册 - 并发与异步
-description: 大量参考《C# 10 in a Nutshell》
-date: 2022-08-15
+title: "[Reading Notes] C# 比较高级的特性"
+description: 并发和异步
+date: 2022-08-15T12:00:00
 draft: false
 slug: advanced-csharp
 categories:
