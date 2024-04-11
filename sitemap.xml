@@ -20,6 +20,9 @@
     <loc>https://kyocius.github.io/about/</loc>
     <lastmod>2024-04-01T21:11:31+08:00</lastmod>
   </url><url>
+    <loc>https://kyocius.github.io/posts/chip-design/2024-02-02-ddca/</loc>
+    <lastmod>2024-02-02T11:25:05+08:00</lastmod>
+  </url><url>
     <loc>https://kyocius.github.io/tags/</loc>
     <lastmod>2024-02-02T11:25:05+08:00</lastmod>
   </url><url>
@@ -32,29 +35,26 @@
     <loc>https://kyocius.github.io/categories/%E7%BC%96%E7%A8%8B/</loc>
     <lastmod>2024-02-02T11:25:05+08:00</lastmod>
   </url><url>
-    <loc>https://kyocius.github.io/posts/chip-design/digital-design-and-comp-arch/ddca-1/</loc>
-    <lastmod>2024-02-02T11:25:05+08:00</lastmod>
-  </url><url>
     <loc>https://kyocius.github.io/tags/%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF/</loc>
     <lastmod>2024-02-02T11:25:05+08:00</lastmod>
-  </url><url>
-    <loc>https://kyocius.github.io/tags/clang/</loc>
-    <lastmod>2024-01-23T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://kyocius.github.io/posts/chip-design/clang-review/</loc>
     <lastmod>2024-01-23T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://kyocius.github.io/tags/fsharp-basic/</loc>
-    <lastmod>2022-08-26T00:00:00+00:00</lastmod>
+    <loc>https://kyocius.github.io/tags/clang/</loc>
+    <lastmod>2024-01-23T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://kyocius.github.io/posts/dotnet/fsharp-for-csharp-devs/</loc>
     <lastmod>2022-08-26T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>https://kyocius.github.io/tags/fsharp-basic/</loc>
+    <lastmod>2022-08-26T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://kyocius.github.io/posts/dotnet/advanced-csharp/</loc>
-    <lastmod>2022-08-15T00:00:00+00:00</lastmod>
+    <lastmod>2022-08-15T12:00:00+00:00</lastmod>
   </url><url>
     <loc>https://kyocius.github.io/tags/csharp/</loc>
-    <lastmod>2022-08-15T00:00:00+00:00</lastmod>
+    <lastmod>2022-08-15T12:00:00+00:00</lastmod>
   </url><url>
     <loc>https://kyocius.github.io/tags/rx.net-tutorial/</loc>
     <lastmod>2022-08-10T00:00:00+00:00</lastmod>
