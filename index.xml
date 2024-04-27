@@ -65,7 +65,7 @@
     
     
         <item>
-        <title>[Reading Notes] 速通数电与计算机体系结构</title>
+        <title>速通数电与计算机体系结构</title>
         <link>https://kyocius.github.io/posts/chip-design/2024-02-02-ddca/</link>
         <pubDate>Fri, 02 Feb 2024 11:25:05 +0800</pubDate>
         
@@ -75,7 +75,7 @@
 &lt;h3 id=&#34;原码&#34;&gt;原码&lt;/h3&gt;
 &lt;p&gt;原码（Sign/Magnitude Number）的第一位表示正负，0 为正，1 为负。例如 5 的二进制为 101，则 -5 的四位二进制原码为 1101。&lt;/p&gt;
 &lt;h3 id=&#34;补码&#34;&gt;补码&lt;/h3&gt;
-&lt;p&gt;补码（Two&amp;rsquo;s Complement），将每位数字取反然后末尾加 1。例如 2 = 0010，则 -2 = 1101 末尾加 1，为1110。&lt;/p&gt;
+&lt;p&gt;补码（Two&#39;s Complement），将每位数字取反然后末尾加 1。例如 2 = 0010，则 -2 = 1101 末尾加 1，为1110。&lt;/p&gt;
 &lt;p&gt;补码可以方便二进制的运算，使用最为广泛。&lt;/p&gt;
 &lt;h2 id=&#34;逻辑门&#34;&gt;逻辑门&lt;/h2&gt;
 &lt;table&gt;
@@ -143,14 +143,31 @@ $$&lt;/p&gt;
 &lt;li&gt;LVCMOS&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h1 id=&#34;第二章&#34;&gt;第二章&lt;/h1&gt;
-&lt;p&gt;123&lt;/p&gt;
+&lt;h2 id=&#34;布尔方程式&#34;&gt;布尔方程式&lt;/h2&gt;
+&lt;p&gt;变量的反（Complement）：
+$A \rArr \overline{A}$，不代表$A$就是 True，只是有无横线。&lt;/p&gt;
+&lt;p&gt;与项（AND）：乘法。最小项（minterm）是包含所有输入变量的与项&lt;/p&gt;
+&lt;p&gt;或项（OR）：加法。最大项（maxterm）是包含所有输入变量的或项&lt;/p&gt;
+&lt;p&gt;析取范式（Sum of Products）：积之和。$Y = AB + CD$。&lt;/p&gt;
+&lt;p&gt;合取范式（Product of Sums）：和之积。$Y = (A + B)(C + D)$。&lt;/p&gt;
+&lt;h2 id=&#34;布尔代数式&#34;&gt;布尔代数式&lt;/h2&gt;
+&lt;p&gt;两张表格，记忆即可：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;image.png&#34; alt=&#34;BA1&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;image-1.png&#34; alt=&#34;BA2&#34;&gt;&lt;/p&gt;
+&lt;p&gt;注意最后一行的德·摩根定律，数电中很有用：&lt;/p&gt;
+&lt;p&gt;$$
+\overline{Y} = \overline{AB} + \overline{A}B
+\
+\overline{\overline{Y}} = \overline{\overline{AB}} + \overline{\overline{AB}} = (\overline{AB})(\overline{AB}) = (A + B)(A + B)
+$$&lt;/p&gt;
+&lt;h2 id=&#34;从逻辑到门&#34;&gt;从逻辑到门&lt;/h2&gt;
 - https://kyocius.github.io/posts/chip-design/2024-02-02-ddca/ - Kyocius. 本站遵循 CC-BY-NC 4.0 协议</description>
         </item>
     
     
     
         <item>
-        <title>[Reading Notes] 笨方法学 C 附加题不完全解答</title>
+        <title>笨方法学 C 附加题不完全解答</title>
         <link>https://kyocius.github.io/posts/chip-design/clang-review/</link>
         <pubDate>Tue, 23 Jan 2024 00:00:00 +0000</pubDate>
         
@@ -440,7 +457,7 @@ $$&lt;/p&gt;
     
     
         <item>
-        <title>[译] 写给 C# 开发者的 F# 光速入门指南</title>
+        <title>写给 C# 开发者的 F# 光速入门指南（译）</title>
         <link>https://kyocius.github.io/posts/dotnet/fsharp-for-csharp-devs/</link>
         <pubDate>Fri, 26 Aug 2022 00:00:00 +0000</pubDate>
         
@@ -1389,7 +1406,7 @@ $$&lt;/p&gt;
     
     
         <item>
-        <title>[Reading Notes] C# 比较高级的特性</title>
+        <title>看看 C# 比较高级的特性</title>
         <link>https://kyocius.github.io/posts/dotnet/advanced-csharp/</link>
         <pubDate>Mon, 15 Aug 2022 12:00:00 +0000</pubDate>
         

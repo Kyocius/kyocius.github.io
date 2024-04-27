@@ -2,8 +2,8 @@
 <html><head>
   <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+HK:wght@100..900&family=Noto+Sans+SC:wght@100..900&family=Noto+Serif+SC:wght@400;700&family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-<title>[Reading Notes] 速通数电与计算机体系结构</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+HK:wght@100..900&family=Noto+Sans:wght@100..900&family=Noto+Sans+SC:wght@100..900&family=Noto+Serif+SC:wght@400;700&family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<title>速通数电与计算机体系结构</title>
 
 
 
@@ -19,7 +19,7 @@
 
 
 
-<meta property="og:title" content="[Reading Notes] 速通数电与计算机体系结构" />
+<meta property="og:title" content="速通数电与计算机体系结构" />
 <meta property="og:description" content="Digital Design and Computer Architecture with RISC-V" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://kyocius.github.io/posts/chip-design/2024-02-02-ddca/" /><meta property="article:section" content="posts" />
@@ -31,7 +31,7 @@
 
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="[Reading Notes] 速通数电与计算机体系结构"/>
+<meta name="twitter:title" content="速通数电与计算机体系结构"/>
 <meta name="twitter:description" content="Digital Design and Computer Architecture with RISC-V"/>
 
 
@@ -63,7 +63,7 @@
     
     <link type="text/css" rel="stylesheet" href="/vendor/css/bootstrap.min.css">
 
-<link rel="stylesheet" href="/scss/dark-mode.min.86309a7870aaca80dc9d4e8cde3fc17889d3cce053e4b8a12bee15a0fb93271e.css" integrity="sha256-hjCaeHCqyoDcnU6M3j/BeInTzOBT5LihK&#43;4VoPuTJx4=" media="screen">
+<link rel="stylesheet" href="/scss/dark-mode.min.7f52cb9c968db45e104cc5000a0ea8559a295b164f4c9c6113799c3088220581.css" integrity="sha256-f1LLnJaNtF4QTMUACg6oVZopWxZPTJxhE3mcMIgiBYE=" media="screen">
 
 
 <link rel="stylesheet"
@@ -426,6 +426,66 @@
 					
 				
 			
+				
+				
+					
+						
+						
+						
+						
+							
+								
+									<ul>
+								
+							
+						
+						
+							<li>
+								<a href="#%e5%b8%83%e5%b0%94%e6%96%b9%e7%a8%8b%e5%bc%8f" class="nav-布尔方程式">
+									布尔方程式
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e5%b8%83%e5%b0%94%e4%bb%a3%e6%95%b0%e5%bc%8f" class="nav-布尔代数式">
+									布尔代数式
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e4%bb%8e%e9%80%bb%e8%be%91%e5%88%b0%e9%97%a8" class="nav-从逻辑到门">
+									从逻辑到门
+								</a>
+							</li>
+						
+						
+					
+				
+			
 		</ul>
 	</div>
 
@@ -481,7 +541,7 @@
                 
             >
                 <div class="post-title">
-                    [Reading Notes] 速通数电与计算机体系结构
+                    速通数电与计算机体系结构
                     
                     <div class="post-subtitle">
                         Digital Design and Computer Architecture with RISC-V
@@ -527,7 +587,7 @@
 <h3 id="原码">原码</h3>
 <p>原码（Sign/Magnitude Number）的第一位表示正负，0 为正，1 为负。例如 5 的二进制为 101，则 -5 的四位二进制原码为 1101。</p>
 <h3 id="补码">补码</h3>
-<p>补码（Two&rsquo;s Complement），将每位数字取反然后末尾加 1。例如 2 = 0010，则 -2 = 1101 末尾加 1，为1110。</p>
+<p>补码（Two's Complement），将每位数字取反然后末尾加 1。例如 2 = 0010，则 -2 = 1101 末尾加 1，为1110。</p>
 <p>补码可以方便二进制的运算，使用最为广泛。</p>
 <h2 id="逻辑门">逻辑门</h2>
 <table>
@@ -595,7 +655,24 @@ $$</p>
 <li>LVCMOS</li>
 </ul>
 <h1 id="第二章">第二章</h1>
-<p>123</p>
+<h2 id="布尔方程式">布尔方程式</h2>
+<p>变量的反（Complement）：
+$A \rArr \overline{A}$，不代表$A$就是 True，只是有无横线。</p>
+<p>与项（AND）：乘法。最小项（minterm）是包含所有输入变量的与项</p>
+<p>或项（OR）：加法。最大项（maxterm）是包含所有输入变量的或项</p>
+<p>析取范式（Sum of Products）：积之和。$Y = AB + CD$。</p>
+<p>合取范式（Product of Sums）：和之积。$Y = (A + B)(C + D)$。</p>
+<h2 id="布尔代数式">布尔代数式</h2>
+<p>两张表格，记忆即可：</p>
+<p><img src="image.png" alt="BA1"></p>
+<p><img src="image-1.png" alt="BA2"></p>
+<p>注意最后一行的德·摩根定律，数电中很有用：</p>
+<p>$$
+\overline{Y} = \overline{AB} + \overline{A}B
+\
+\overline{\overline{Y}} = \overline{\overline{AB}} + \overline{\overline{AB}} = (\overline{AB})(\overline{AB}) = (A + B)(A + B)
+$$</p>
+<h2 id="从逻辑到门">从逻辑到门</h2>
 
                     
                     <HR width="100%" id="EOF">
@@ -615,7 +692,7 @@ $$</p>
                 
                 
                 <a class="older-posts" href="/posts/chip-design/clang-review/">
-			上回<br>[Reading Notes] 笨方法学 C 附加题不完全解答
+			上回<br>笨方法学 C 附加题不完全解答
                 </a>
                 
             </nav>
@@ -997,6 +1074,66 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 							<li>
 								<a href="#%e7%ac%ac%e4%ba%8c%e7%ab%a0" class="nav-第二章">
 									第二章
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								
+									<ul>
+								
+							
+						
+						
+							<li>
+								<a href="#%e5%b8%83%e5%b0%94%e6%96%b9%e7%a8%8b%e5%bc%8f" class="nav-布尔方程式">
+									布尔方程式
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e5%b8%83%e5%b0%94%e4%bb%a3%e6%95%b0%e5%bc%8f" class="nav-布尔代数式">
+									布尔代数式
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e4%bb%8e%e9%80%bb%e8%be%91%e5%88%b0%e9%97%a8" class="nav-从逻辑到门">
+									从逻辑到门
 								</a>
 							</li>
 						
