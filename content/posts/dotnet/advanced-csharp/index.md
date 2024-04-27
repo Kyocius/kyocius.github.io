@@ -1,5 +1,5 @@
 ---
-title: "[Reading Notes] C# 比较高级的特性"
+title: "看看 C# 比较高级的特性"
 description: 并发和异步
 date: 2022-08-15T12:00:00
 draft: false

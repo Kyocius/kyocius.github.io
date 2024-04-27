@@ -1,5 +1,5 @@
 ---
-title: "[Reading Notes] 笨方法学 C 附加题不完全解答"
+title: "笨方法学 C 附加题不完全解答"
 date: 2024-01-23
 draft: false
 slug: clang-review

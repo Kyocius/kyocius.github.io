@@ -1,5 +1,5 @@
 ---
-title: "[Reading Notes] 速通数电与计算机体系结构"
+title: "速通数电与计算机体系结构"
 date: 2024-02-02T11:25:05+08:00
 #draft: true
 slug: 2024-02-02-ddca
@@ -22,7 +22,7 @@ enableLatex: true
 
 ### 补码
 
-补码（Two's Complement），将每位数字取反然后末尾加 1。例如 2 = 0010，则 -2 = 1101 末尾加 1，为1110。
+补码（Two\'s Complement），将每位数字取反然后末尾加 1。例如 2 = 0010，则 -2 = 1101 末尾加 1，为1110。
 
 补码可以方便二进制的运算，使用最为广泛。
 
@@ -79,4 +79,34 @@ $$
 - LVCMOS
 
 # 第二章
-123
+
+## 布尔方程式
+
+变量的反（Complement）：
+$A \rArr \overline{A}$，不代表$A$就是 True，只是有无横线。
+
+与项（AND）：乘法。最小项（minterm）是包含所有输入变量的与项
+
+或项（OR）：加法。最大项（maxterm）是包含所有输入变量的或项
+
+析取范式（Sum of Products）：积之和。$Y = AB + CD$。
+
+合取范式（Product of Sums）：和之积。$Y = (A + B)(C + D)$。
+
+## 布尔代数式
+
+两张表格，记忆即可：
+
+![BA1](image.png)
+
+![BA2](image-1.png)
+
+注意最后一行的德·摩根定律，数电中很有用：
+
+$$
+\overline{Y} = \overline{AB} + \overline{A}B
+\\
+\overline{\overline{Y}} = \overline{\overline{AB}} + \overline{\overline{AB}} = (\overline{AB})(\overline{AB}) = (A + B)(A + B)
+$$
+
+## 从逻辑到门
