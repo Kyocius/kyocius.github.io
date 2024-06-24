@@ -11,13 +11,13 @@ categories: 随笔
 
 推进雅思英语词汇，用的不背单词。还差正好 2000 个。
 
-重新学一遍线性代数，用的 [3B1B 线性代数本质](https://www.bilibili.com/video/BV1ys411472E?p=8&vd_source=761f7d019a0848a165a93faf761026f3)，看到 6/16，Manim 真是神奇。
+重新学一遍线性代数，用的 [3B1B 线性代数本质](https://www.bilibili.com/video/BV1ys411472E?p=8&vd_source=761f7d019a0848a165a93faf761026f3)，看到 8/16，Manim 真是神奇。
 
 两个学期下来太狗屎了，根本没时间好好学。狗屁应试。考前挑着看了经典 MIT 线性代数系列，速通成功。虽然到最后 Jordan 标准型的类型题一半不会写，Hermite 矩阵是啥也忘了，Hamilton-Cayley 定理正好没复习。
 
-![hermite](C:\Users\kyoci\Documents\Project\Blog\content\posts\casual-writting\2024-summer\hermite.png)
+![hermite](./hermite.png)
 
-![clay](C:\Users\kyoci\Documents\Project\Blog\content\posts\casual-writting\2024-summer\clay.png)
+![clay](./clay.png)
 
 膜拜 [JiaHuann(github.com)](https://github.com/JiaHuann)，真厉害。
 
