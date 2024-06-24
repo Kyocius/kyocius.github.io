@@ -1,0 +1,95 @@
+<?xml-stylesheet href="/rss.xsl" type="text/xsl"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>游尔曼斯克</title>
+    <link>https://kyocius.github.io/</link>
+    <description>Recent content on 游尔曼斯克</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh</language>
+    <copyright>Kyocius. 本站遵循 CC-BY-NC 4.0 协议</copyright>
+    <lastBuildDate>Tue, 25 Jun 2024 00:35:00 +0800</lastBuildDate>
+    
+        <atom:link href="https://kyocius.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    
+        <item>
+        <title>Rx.NET 响应式编程指北 01 - 基础概念</title>
+        <link>https://kyocius.github.io/posts/dotnet/reactive/rx-magic-1/</link>
+        <pubDate>Sun, 07 Aug 2022 00:00:00 +0000</pubDate>
+        
+        <guid>https://kyocius.github.io/posts/dotnet/reactive/rx-magic-1/</guid>
+        <description>游尔曼斯克 https://kyocius.github.io/posts/dotnet/reactive/rx-magic-1/ -&lt;h2 id=&#34;前言&#34;&gt;前言&lt;/h2&gt;
+&lt;p&gt;最近刚读了 &lt;em&gt;Rx.NET in Action&lt;/em&gt;，学到的新概念非常多，担忧自己会日渐遗忘，觉得有必要写一篇博客记录一下，说不定也能帮到一些志同道合的朋友。&lt;/p&gt;
+&lt;p&gt;本系列将会使用我深爱的 C# 语言和 Rx.NET 框架来讲解响应式编程（Reactive Programming）的魔法 ╰(&lt;em&gt;°▽°&lt;/em&gt;)╯&lt;/p&gt;
+&lt;h2 id=&#34;背景知识&#34;&gt;背景知识&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;C# 中的&lt;strong&gt;委托&lt;/strong&gt;、&lt;strong&gt;泛型&lt;/strong&gt;、&lt;strong&gt;事件&lt;/strong&gt;以及 &lt;strong&gt;LINQ&lt;/strong&gt; 等概念&lt;/li&gt;
+&lt;li&gt;Rx = Reactive Extension&lt;/li&gt;
+&lt;li&gt;Rx 是由&lt;strong&gt;微软&lt;/strong&gt;旗下一个实验室发起的  &lt;del&gt;巨硬大法好&lt;/del&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;响应式概念&#34;&gt;响应式概念&lt;/h2&gt;
+&lt;p&gt;Rx 到底是干啥的？&lt;/p&gt;
+&lt;p&gt;首先来看看微软的解释：Rx = Observables + LINQ + Schedulers。谔谔，啥玩意儿？&lt;/p&gt;
+&lt;p&gt;那看看大佬怎么解释的吧：Rx = 处理异步数据流。这个解释还行，但还是不明白。&lt;/p&gt;
+&lt;p&gt;这里是更通俗的解释：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c#&#34; data-lang=&#34;c#&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8be9fd&#34;&gt;var&lt;/span&gt; a = &lt;span style=&#34;color:#bd93f9&#34;&gt;1&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8be9fd&#34;&gt;var&lt;/span&gt; b = &lt;span style=&#34;color:#bd93f9&#34;&gt;2&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8be9fd&#34;&gt;var&lt;/span&gt; c = a + b; &lt;span style=&#34;color:#6272a4&#34;&gt;// c 的值显然为 3&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;当你改变 &lt;code&gt;a&lt;/code&gt; 或者 &lt;code&gt;b&lt;/code&gt; 值的时候，按照我们以前的思维，&lt;code&gt;c&lt;/code&gt; 的值并不会随之发生变化。&lt;/p&gt;
+&lt;p&gt;如果我们想要 &lt;code&gt;c&lt;/code&gt; 的值随之而改变呢？很简单，快快使用 &lt;strong&gt;Rx&lt;/strong&gt;！&lt;/p&gt;
+&lt;h3 id=&#34;可观察对象-observable&#34;&gt;可观察对象 Observable&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c#&#34; data-lang=&#34;c#&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;interface&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;IObservable&lt;/span&gt;&amp;lt;T&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    IDisposable Subscribe(IObserver&amp;lt;T&amp;gt; observer);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;接口只有一个方法 &lt;code&gt;Subscribe&lt;/code&gt;，返回 &lt;code&gt;IDisposable&lt;/code&gt; 对象（代表着订阅事件本身）&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Observable&lt;/code&gt; 持有 &lt;code&gt;Observer&lt;/code&gt; 的集合，在值改变时随时通知它们&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;IDisposable&lt;/code&gt; 对象可以通过  &lt;code&gt;Dispose&lt;/code&gt; 方法随时取消订阅&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;观察者-observer&#34;&gt;观察者 Observer&lt;/h3&gt;
+&lt;p&gt;观察者的源码其实也很简单。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c#&#34; data-lang=&#34;c#&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;interface&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;IObserver&lt;/span&gt;&amp;lt;T&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;void&lt;/span&gt; OnNext(T &lt;span style=&#34;color:#ff79c6&#34;&gt;value&lt;/span&gt;); 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;void&lt;/span&gt; OnError(Exception error); 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;void&lt;/span&gt; OnCompleted(); 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;OnNext&lt;/code&gt; 方法定义当观测的值出现变化时，该做什么（类比迭代）&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;OnError&lt;/code&gt; 方法定义它出现错误时该做什么&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;OnCompleted&lt;/code&gt; 方法定义它任务完成时该做什么&lt;/li&gt;
+&lt;li&gt;值得注意的是：发生错误时，数据流就会中断&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;操作符-operator&#34;&gt;操作符 Operator&lt;/h3&gt;
+&lt;p&gt;Rx 带来了海量的操作符，帮助我们分类、查找、转换数据。&lt;/p&gt;
+&lt;p&gt;Rx.NET 的操作符与其它语言的 Rx 不同的是，操作符采用了原汁原味的 LINQ 风格。&lt;/p&gt;
+&lt;p&gt;下面来点简单实例：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c#&#34; data-lang=&#34;c#&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;IObservable&amp;lt;&lt;span style=&#34;color:#8be9fd&#34;&gt;string&lt;/span&gt;&amp;gt; strings= ... &lt;span style=&#34;color:#6272a4&#34;&gt;// 数据源&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;IDisposable subscription = strings &lt;span style=&#34;color:#6272a4&#34;&gt;// 一个 IDisposable 代表了订阅事件本身&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    .Where(str =&amp;gt; str.StartsWith(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;A&amp;#34;&lt;/span&gt;))
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    .Select(str =&amp;gt; str.ToUpper())
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    .Subscribe(...); &lt;span style=&#34;color:#6272a4&#34;&gt;// 传入 Observer 或直接传 OnNext 方法&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;subscription.Dispose(); &lt;span style=&#34;color:#6272a4&#34;&gt;// 上面说过了，可以随时取消订阅&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;上面的代码读起来是不是很流畅？&lt;/p&gt;
+&lt;p&gt;其实第一行省略了如何创建可观察数据源，专注于操作符本身，要不然太劝退了。&lt;/p&gt;
+&lt;p&gt;如何创建可观察的数据源将在后面的章节讲解。&lt;/p&gt;
+&lt;h2 id=&#34;理解事件和流-events--streams&#34;&gt;理解事件和流 Events &amp;amp; Streams&lt;/h2&gt;
+&lt;p&gt;事件非常好理解，比如我们点击一个按钮就是一个事件。&lt;/p&gt;
+&lt;p&gt;在 C# 中，事件由&lt;strong&gt;数据源&lt;/strong&gt;「Event Source」和&lt;strong&gt;处理器&lt;/strong&gt;「Event Handler」组成。&lt;/p&gt;
+&lt;p&gt;在 Rx 中，「Event Source」对应「Observable」而「Event Handler」对应「Observer」。&lt;/p&gt;
+&lt;h3 id=&#34;万物皆流&#34;&gt;万物皆流&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;A data stream is like a hose: every drop of water is a data packet that needs to go through stations until it reaches the end. Your data also needs to be filtered and transformed until  it gets to the real handler that does something useful with it.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;上面这段 Quote 来自 &lt;em&gt;Rx.NET in Action&lt;/em&gt;，大致的意思就是数据就像水管子一样，我们通过操作符过滤水流，最后通过喷头将水流传播。&lt;/p&gt;
+&lt;p&gt;我认为这是响应式的核心概念。只要你想持续地监听某数据的变化，那么使用 Rx 让数据变成可观察流，绝对是个好主意。&lt;/p&gt;
+- https://kyocius.github.io/posts/dotnet/reactive/rx-magic-1/ - Kyocius. 本站遵循 CC-BY-NC 4.0 协议</description>
+        </item>
+    
+    
+  </channel>
+</rss> 
