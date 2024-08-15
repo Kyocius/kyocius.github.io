@@ -7,9 +7,281 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
     <copyright>Kyocius. 本站遵循 CC-BY-NC 4.0 协议</copyright>
-    <lastBuildDate>Tue, 25 Jun 2024 00:35:00 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 03 Aug 2024 20:36:00 +0800</lastBuildDate>
     
         <atom:link href="https://kyocius.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    
+        <item>
+        <title>Rx.NET 响应式编程指北 02 - 基本使用</title>
+        <link>https://kyocius.github.io/posts/dotnet/reactive/rx-magic-2/</link>
+        <pubDate>Mon, 08 Aug 2022 00:00:00 +0000</pubDate>
+        
+        <guid>https://kyocius.github.io/posts/dotnet/reactive/rx-magic-2/</guid>
+        <description>游尔港 https://kyocius.github.io/posts/dotnet/reactive/rx-magic-2/ -&lt;h2 id=&#34;前言&#34;&gt;前言&lt;/h2&gt;
+&lt;p&gt;在上一章里，我们学习了响应式的基本概念。在这一章节，我们将编写一个&lt;strong&gt;股票监控&lt;/strong&gt;程序。首先我们将使用传统的 .NET 事件系统来写一次，之后再通过 Rx 来重构。&lt;/p&gt;
+&lt;h2 id=&#34;传统事件写法&#34;&gt;传统事件写法&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;先编写一个类，其中只有一个事件属性：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c#&#34; data-lang=&#34;c#&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;StockTicker&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;event&lt;/span&gt; EventHandler&amp;lt;StockTick&amp;gt; StockTick; 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;编写一个类包含我们的数据：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c#&#34; data-lang=&#34;c#&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;StockTick&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#8be9fd&#34;&gt;string&lt;/span&gt; QuoteSymbol { &lt;span style=&#34;color:#ff79c6&#34;&gt;get&lt;/span&gt;; &lt;span style=&#34;color:#ff79c6&#34;&gt;set&lt;/span&gt;; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#8be9fd&#34;&gt;decimal&lt;/span&gt; Price { &lt;span style=&#34;color:#ff79c6&#34;&gt;get&lt;/span&gt;; &lt;span style=&#34;color:#ff79c6&#34;&gt;set&lt;/span&gt;; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;创建一个类来监听变化，并订阅事件：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c#&#34; data-lang=&#34;c#&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;StockMonitor&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{ 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;public&lt;/span&gt; StockMonitor(StockTicker ticker)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        ticker.StockTick += OnStockTick; &lt;span style=&#34;color:#6272a4&#34;&gt;// OnStockTick 注册事件&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ...
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;因为我们需要比较股票价格的变化，所以我们可以通过字典来存储先前的股票数据。编写一个新类：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c#&#34; data-lang=&#34;c#&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;StockInfo&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;public&lt;/span&gt; StockInfo(&lt;span style=&#34;color:#8be9fd&#34;&gt;string&lt;/span&gt; symbol, &lt;span style=&#34;color:#8be9fd&#34;&gt;decimal&lt;/span&gt; price)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        Symbol = symbol;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        PrevPrice = price;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#8be9fd&#34;&gt;string&lt;/span&gt; Symbol { &lt;span style=&#34;color:#ff79c6&#34;&gt;get&lt;/span&gt;; &lt;span style=&#34;color:#ff79c6&#34;&gt;set&lt;/span&gt;; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#8be9fd&#34;&gt;decimal&lt;/span&gt; PrevPrice { &lt;span style=&#34;color:#ff79c6&#34;&gt;get&lt;/span&gt;; &lt;span style=&#34;color:#ff79c6&#34;&gt;set&lt;/span&gt;; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;之后你可以在 &lt;code&gt;StockMonitor&lt;/code&gt; 中声明一个 &lt;code&gt;StockInfo&lt;/code&gt; 类型的属性。&lt;/p&gt;
+&lt;ol start=&#34;5&#34;&gt;
+&lt;li&gt;每当股票变化时，&lt;code&gt;OnStockTick&lt;/code&gt;  就会被调用。因此，我们的应用还要实现一个新旧数据比较的功能。我们将使用 &lt;code&gt;TryGetValue&lt;/code&gt; 方法。当我们想要的值存在时，这个方法会返回一个 &lt;code&gt;true&lt;/code&gt;。在 &lt;code&gt;StockMonitor&lt;/code&gt; 中编写以下代码：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c#&#34; data-lang=&#34;c#&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8be9fd&#34;&gt;var&lt;/span&gt; _stockInfos = &lt;span style=&#34;color:#ff79c6&#34;&gt;new&lt;/span&gt; Dictionary&amp;lt;&lt;span style=&#34;color:#8be9fd&#34;&gt;string&lt;/span&gt;, StockInfo&amp;gt;();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;void&lt;/span&gt; OnStockTick(&lt;span style=&#34;color:#8be9fd&#34;&gt;object&lt;/span&gt; sender, StockTick stockTick)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    StockInfo stockInfo;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#8be9fd&#34;&gt;var&lt;/span&gt; quoteSymbol = stockTick.QuoteSymbol;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#8be9fd&#34;&gt;var&lt;/span&gt; stockInfoExists = _stockInfos.TryGetValue(quoteSymbol, &lt;span style=&#34;color:#ff79c6&#34;&gt;out&lt;/span&gt; stockInfo);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ...
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;6&#34;&gt;
+&lt;li&gt;如果一个股票数据存在，我们就可以比较大小了：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c#&#34; data-lang=&#34;c#&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#8be9fd&#34;&gt;decimal&lt;/span&gt; maxChangeRatio = &lt;span style=&#34;color:#bd93f9&#34;&gt;0.1&lt;/span&gt;m;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;...
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8be9fd&#34;&gt;var&lt;/span&gt; quoteSymbol = stockTick.QuoteSymbol;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8be9fd&#34;&gt;var&lt;/span&gt; stockInfoExists = _stockInfos.TryGetValue(quoteSymbol, &lt;span style=&#34;color:#ff79c6&#34;&gt;out&lt;/span&gt; stockInfo);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt; (stockInfoExists)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#8be9fd&#34;&gt;var&lt;/span&gt; priceDiff = stockTick.Price-stockInfo.PrevPrice; 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#6272a4&#34;&gt;// 变化的百分比&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#8be9fd&#34;&gt;var&lt;/span&gt; changeRatio = Math.Abs(priceDiff/stockInfo.PrevPrice); 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt; (changeRatio &amp;gt; maxChangeRatio)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#6272a4&#34;&gt;// 简单打印个信息，用的是 C# 6.0 以前的写法&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        Console.WriteLine(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;Stock:{0} has changed with {1} ratio, Old Price:{2} New Price:{3}&amp;#34;&lt;/span&gt;, quoteSymbol, changeRatio, stockInfo.PrevPrice, stockTick.Price);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#6272a4&#34;&gt;//保存这个新数据&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;     _stockInfos[quoteSymbol].PrevPrice = stockTick.Price; 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;7&#34;&gt;
+&lt;li&gt;那如果我们不想要订阅股票消息了咋办？幸运的是 .NET 提供了方法来干这个活。在 &lt;code&gt;StockMonitor&lt;/code&gt; 里编写以下方法：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c#&#34; data-lang=&#34;c#&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;void&lt;/span&gt; Dispose()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    _ticker.StockTick -= OnStockTick; 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    _stockInfos.Clear();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;8&#34;&gt;
+&lt;li&gt;写一点假数据，测试一下结果：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;// 瞎编的
+Symbol: &amp;#34;MSFT&amp;#34; Price: 100
+Symbol: &amp;#34;INTC&amp;#34; Price: 150
+Symbol: &amp;#34;MSFT&amp;#34; Price: 170
+Symbol: &amp;#34;MSFT&amp;#34; Price: 195
+
+// 运行结果
+Stock:MSFT has changed with 0.7 ratio, Old Price:100 New Price:170
+Stock:MSFT has changed with 0.15 ratio, Old Price:170 New Price:195.5
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;哇哦，感觉还不错嘛！&lt;/p&gt;
+&lt;p&gt;但是这么写就一点问题没有吗？&lt;/p&gt;
+&lt;h3 id=&#34;并发问题&#34;&gt;并发问题&lt;/h3&gt;
+&lt;p&gt;我们的程序运行起来没啥问题，但背后有个严重漏洞：&lt;/p&gt;
+&lt;p&gt;不是&lt;strong&gt;并发&lt;/strong&gt;的！&lt;/p&gt;
+&lt;p&gt;如果 &lt;code&gt;StockMonitor&lt;/code&gt; 运行期间又有新的股票变化咋办？&lt;/p&gt;
+&lt;p&gt;很抱歉，只能等着第一次程序结束。&lt;/p&gt;
+&lt;h3 id=&#34;线程不安全&#34;&gt;线程不安全&lt;/h3&gt;
+&lt;p&gt;虽然我们的 &lt;code&gt;StockInfo&lt;/code&gt; 字典支持多读者（Multiple Readers）同时读取，但当我们读取字典时字典正在被修改，那么就会报错。&lt;/p&gt;
+&lt;p&gt;这是你可能会说，可以改用 .NET 提供的无锁 &lt;code&gt;ConcurrentDictionary&lt;/code&gt; 呀！这样就不报错了。&lt;/p&gt;
+&lt;p&gt;但是，那我们每次比较的&lt;strong&gt;新值&lt;/strong&gt;又是谁？是修改前的，还是修改后的？&lt;/p&gt;
+&lt;p&gt;你可能又会说，可以使用线程锁（Thread Lock）来阻塞两个同时发生的线程的其中一个。&lt;/p&gt;
+&lt;p&gt;可是如果资源不及时释放，又很容易导致&lt;strong&gt;死锁&lt;/strong&gt;问题。&lt;/p&gt;
+&lt;h2 id=&#34;响应式写法&#34;&gt;响应式写法&lt;/h2&gt;
+&lt;p&gt;使用 Rx 的话，传统事件写法暴露出的问题可以通过更简单的方式解决。&lt;/p&gt;
+&lt;h3 id=&#34;安装-rxnet&#34;&gt;安装 Rx.NET&lt;/h3&gt;
+&lt;p&gt;你都看到这里了，相信咋安装根本不用我教你。&lt;/p&gt;
+&lt;p&gt;Rx.NET 放在 &lt;code&gt;System.Reactive&lt;/code&gt; 名称空间下。&lt;/p&gt;
+&lt;h3 id=&#34;事件转换&#34;&gt;事件转换&lt;/h3&gt;
+&lt;p&gt;Rx.NET 提供了好用的 &lt;code&gt;FromEventPattern&lt;/code&gt; 方法，帮助我们将事件转换成可观察对象（Observable）：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c#&#34; data-lang=&#34;c#&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;IObservable&amp;lt;EventPattern&amp;lt;StockTick&amp;gt;&amp;gt; ticks =
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        Observable.FromEventPattern&amp;lt;EventHandler&amp;lt;StockTick&amp;gt;, StockTick&amp;gt;( 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            h =&amp;gt; ticker.StockTick += h, 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            h =&amp;gt; ticker.StockTick -= h);
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;谔谔，看不懂捏&amp;hellip;&lt;/p&gt;
+&lt;p&gt;那来看一下这个方法的定义吧：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c#&#34; data-lang=&#34;c#&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;FromEventPattern&amp;lt;TDelegate,TEventArgs(Action&amp;lt;TDelegate&amp;gt;addHandler, Action&amp;lt;TDelegate&amp;gt; removeHandler)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;TDelegate&lt;/code&gt; 是匹配事件的委托 → &lt;code&gt;EventHandler&amp;lt;StockTick&amp;gt;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;TEventArgs&lt;/code&gt; 就是 &lt;code&gt;EventArgs&lt;/code&gt;  →  &lt;code&gt;StockTick&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;addHandler&lt;/code&gt; 和 &lt;code&gt;removeHandler&lt;/code&gt; 一般就直接写成 Lambda 表达式的形式&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;因为我们只关心传入的 &lt;code&gt;EventArgs&lt;/code&gt;，所以代码可以改写成：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c#&#34; data-lang=&#34;c#&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8be9fd&#34;&gt;var&lt;/span&gt; ticks = Observable.FromEventPattern&amp;lt;EventHandler&amp;lt;StockTick&amp;gt;, StockTick&amp;gt;(
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            h =&amp;gt; ticker.StockTick += h, 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            h =&amp;gt; ticker.StockTick -= h) 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        .Select(tickEvent =&amp;gt; tickEvent.EventArgs);
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;数据处理&#34;&gt;数据处理&lt;/h3&gt;
+&lt;p&gt;现在你已经有了一个可观察的数据流了，我们将围绕它展开查询操作，就像 LINQ 一样。&lt;/p&gt;
+&lt;h4 id=&#34;分组-group&#34;&gt;分组 Group&lt;/h4&gt;
+&lt;p&gt;我们试着通过 &lt;code&gt;Symbol&lt;/code&gt; 来为每支股票分组：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c#&#34; data-lang=&#34;c#&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;// 查询语句形式&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;from&lt;/span&gt; tick &lt;span style=&#34;color:#ff79c6&#34;&gt;in&lt;/span&gt; ticks 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;group&lt;/span&gt; tick &lt;span style=&#34;color:#ff79c6&#34;&gt;by&lt;/span&gt; tick.QuoteSymbol &lt;span style=&#34;color:#ff79c6&#34;&gt;into&lt;/span&gt; company
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;// 函数形式&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ticks.GroupBy(tick =&amp;gt; tick.QuoteSymbol);
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;company.png&#34; alt=&#34;Company&#34;&gt;&lt;/p&gt;
+&lt;h4 id=&#34;分批-buffer&#34;&gt;分批 Buffer&lt;/h4&gt;
+&lt;p&gt;&lt;code&gt;Buffer&lt;/code&gt; 用于同组内再分批（Batch）。&lt;/p&gt;
+&lt;p&gt;在这里是同组内数据两两前后比较：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;batch.png&#34; alt=&#34;Batch&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;buffer.png&#34; alt=&#34;Buffer&#34;&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c#&#34; data-lang=&#34;c#&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;from&lt;/span&gt; tick &lt;span style=&#34;color:#ff79c6&#34;&gt;in&lt;/span&gt; ticks
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;group&lt;/span&gt; tick &lt;span style=&#34;color:#ff79c6&#34;&gt;by&lt;/span&gt; tick.QuoteSymbol &lt;span style=&#34;color:#ff79c6&#34;&gt;into&lt;/span&gt; company
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;from&lt;/span&gt; tickPair &lt;span style=&#34;color:#ff79c6&#34;&gt;in&lt;/span&gt; company.Buffer(&lt;span style=&#34;color:#bd93f9&#34;&gt;2&lt;/span&gt;, &lt;span style=&#34;color:#bd93f9&#34;&gt;1&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;let&lt;/span&gt; changeRatio = Math.Abs((tickPair[&lt;span style=&#34;color:#bd93f9&#34;&gt;1&lt;/span&gt;].Price - tickPair[&lt;span style=&#34;color:#bd93f9&#34;&gt;0&lt;/span&gt;].Price) / 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    tickPair[&lt;span style=&#34;color:#bd93f9&#34;&gt;0&lt;/span&gt;].Price)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;abs.png&#34; alt=&#34;Abs&#34;&gt;&lt;/p&gt;
+&lt;p&gt;最后全部的代码：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c#&#34; data-lang=&#34;c#&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#8be9fd&#34;&gt;decimal&lt;/span&gt; maxChangeRatio = &lt;span style=&#34;color:#bd93f9&#34;&gt;0.1&lt;/span&gt; m;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8be9fd&#34;&gt;var&lt;/span&gt; drasticChanges = 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;from&lt;/span&gt; tick &lt;span style=&#34;color:#ff79c6&#34;&gt;in&lt;/span&gt; ticks
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;group&lt;/span&gt; tick &lt;span style=&#34;color:#ff79c6&#34;&gt;by&lt;/span&gt; tick.QuoteSymbol
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;into&lt;/span&gt; company
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;from&lt;/span&gt; tickPair &lt;span style=&#34;color:#ff79c6&#34;&gt;in&lt;/span&gt; company.Buffer(&lt;span style=&#34;color:#bd93f9&#34;&gt;2&lt;/span&gt;, &lt;span style=&#34;color:#bd93f9&#34;&gt;1&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;let&lt;/span&gt; changeRatio = Math.Abs((tickPair[&lt;span style=&#34;color:#bd93f9&#34;&gt;1&lt;/span&gt;].Price - tickPair[&lt;span style=&#34;color:#bd93f9&#34;&gt;0&lt;/span&gt;].Price) / tickPair[&lt;span style=&#34;color:#bd93f9&#34;&gt;0&lt;/span&gt;].Price)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;where&lt;/span&gt; changeRatio &amp;gt; maxChangeRatio
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;select&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;new&lt;/span&gt; DrasticChange()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    Symbol = company.Key,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        ChangeRatio = changeRatio,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        OldPrice = tickPair[&lt;span style=&#34;color:#bd93f9&#34;&gt;0&lt;/span&gt;].Price,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        NewPrice = tickPair[&lt;span style=&#34;color:#bd93f9&#34;&gt;1&lt;/span&gt;].Price
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    };
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;all.png&#34; alt=&#34;Result&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;消费数据&#34;&gt;消费数据&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c#&#34; data-lang=&#34;c#&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;_subscription = 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    drasticChanges.Subscribe(change =&amp;gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        Console.WriteLine(&lt;span style=&#34;color:#f1fa8c&#34;&gt;$&amp;#34;Stock:{change.Symbol} has changed with {change.ChangeRatio} ratio, 
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;        Old Price: {change.OldPrice} 
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;        New Price: {change.NewPrice}&amp;#34;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    },
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ex =&amp;gt; { &lt;span style=&#34;color:#6272a4&#34;&gt;/* 处理错误 */&lt;/span&gt;}, 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    () =&amp;gt; {&lt;span style=&#34;color:#6272a4&#34;&gt;/* 响应任务完成 */&lt;/span&gt;});
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;取消订阅&#34;&gt;取消订阅&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c#&#34; data-lang=&#34;c#&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;void&lt;/span&gt; Dispose()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    _subscription.Dispose();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;同步流&#34;&gt;同步流&lt;/h3&gt;
+&lt;p&gt;还记得我们之前使用事件系统的问题吗？&lt;/p&gt;
+&lt;p&gt;异步 IO 会导致线程不安全。&lt;/p&gt;
+&lt;p&gt;因此我们要将我们的 &lt;code&gt;ticks&lt;/code&gt; 可观察数据流转换成同步的：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c#&#34; data-lang=&#34;c#&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8be9fd&#34;&gt;var&lt;/span&gt; ticks = Observable.FromEventPattern&amp;lt;EventHandler&amp;lt;StockTick&amp;gt;, StockTick&amp;gt;(
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            h =&amp;gt; ticker.StockTick += h, 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            h =&amp;gt; ticker.StockTick -= h) 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        .Select(tickEvent =&amp;gt; tickEvent.EventArgs)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        .Synchronize();
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;总览代码&#34;&gt;总览代码&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c#&#34; data-lang=&#34;c#&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;RxStockMonitor&lt;/span&gt; : IDisposable
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;private&lt;/span&gt; IDisposable _subscription;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;public&lt;/span&gt; RxStockMonitor(StockTicker ticker)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#ff79c6&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#8be9fd&#34;&gt;decimal&lt;/span&gt; maxChangeRatio = &lt;span style=&#34;color:#bd93f9&#34;&gt;0.1&lt;/span&gt;m;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#8be9fd&#34;&gt;var&lt;/span&gt; ticks = 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            Observable.FromEventPattern&amp;lt;EventHandler&amp;lt;StockTick&amp;gt;, StockTick&amp;gt;(
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                    h =&amp;gt; ticker.StockTick += h, 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                    h =&amp;gt; ticker.StockTick -= h) 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                .Select(tickEvent =&amp;gt; tickEvent.EventArgs)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                .Synchronize(); 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#8be9fd&#34;&gt;var&lt;/span&gt; drasticChanges = 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#ff79c6&#34;&gt;from&lt;/span&gt; tick &lt;span style=&#34;color:#ff79c6&#34;&gt;in&lt;/span&gt; ticks 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#ff79c6&#34;&gt;group&lt;/span&gt; tick &lt;span style=&#34;color:#ff79c6&#34;&gt;by&lt;/span&gt; tick.QuoteSymbol 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#ff79c6&#34;&gt;into&lt;/span&gt; company 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#ff79c6&#34;&gt;from&lt;/span&gt; tickPair &lt;span style=&#34;color:#ff79c6&#34;&gt;in&lt;/span&gt; company.Buffer(&lt;span style=&#34;color:#bd93f9&#34;&gt;2&lt;/span&gt;, &lt;span style=&#34;color:#bd93f9&#34;&gt;1&lt;/span&gt;) 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#ff79c6&#34;&gt;let&lt;/span&gt; changeRatio = Math.Abs((tickPair[&lt;span style=&#34;color:#bd93f9&#34;&gt;1&lt;/span&gt;].Price -
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                                        tickPair[&lt;span style=&#34;color:#bd93f9&#34;&gt;0&lt;/span&gt;].Price)/tickPair[&lt;span style=&#34;color:#bd93f9&#34;&gt;0&lt;/span&gt;].Price) 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#ff79c6&#34;&gt;where&lt;/span&gt; changeRatio &amp;gt; maxChangeRatio 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#ff79c6&#34;&gt;select&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;new&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            { 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                Symbol = company.Key, 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                ChangeRatio = changeRatio, 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                OldPrice = tickPair[&lt;span style=&#34;color:#bd93f9&#34;&gt;0&lt;/span&gt;].Price, 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                NewPrice = tickPair[&lt;span style=&#34;color:#bd93f9&#34;&gt;1&lt;/span&gt;].Price 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            }; 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        _subscription = 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            drasticChanges.Subscribe(change =&amp;gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                { 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                    WriteLine(&lt;span style=&#34;color:#f1fa8c&#34;&gt;$&amp;#34;Stock:{change.Symbol} has changed
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;                        with {change.ChangeRatio} ratio,
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;                    Old Price: {change.OldPrice} 
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;                    New Price: {change.NewPrice}&amp;#34;&lt;/span&gt;); 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                }, 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                ex =&amp;gt; { &lt;span style=&#34;color:#6272a4&#34;&gt;/* 处理错误 */&lt;/span&gt;}, 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                () =&amp;gt;{&lt;span style=&#34;color:#6272a4&#34;&gt;/* 响应任务完成 */&lt;/span&gt;});
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;void&lt;/span&gt; Dispose() 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        _subscription.Dispose();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;rx-的优点&#34;&gt;Rx 的优点&lt;/h2&gt;
+&lt;p&gt;我们已经用两种方式编写了这个股票监控程序，是时候比较两种写法了。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;代码更紧凑：所有逻辑集中在一起&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;更少的资源占用：Rx 几乎没有资源处理的开销&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;强大的操作符：Rx 最明显的优势&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;更简单地同步：一个 &lt;code&gt;Synchronize&lt;/code&gt; 方法足矣&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+- https://kyocius.github.io/posts/dotnet/reactive/rx-magic-2/ - Kyocius. 本站遵循 CC-BY-NC 4.0 协议</description>
+        </item>
     
     
     
