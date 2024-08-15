@@ -1,5 +1,5 @@
 ---
-title: 二〇二二年夏日谈
+title: 2022 夏日谈
 description: 一段不愿被忘记的时光
 date: 2022-07-15
 slug: summer-holiday-2022
@@ -7,7 +7,6 @@ categories:
     - 随笔
 tags:
     - Holiday
-image: linm.jpg
 draft: true
 ---
 

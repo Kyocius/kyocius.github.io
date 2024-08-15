@@ -1,7 +1,7 @@
 ---
 title: "速通数电与计算机体系结构"
 date: 2024-02-02T11:25:05+08:00
-#draft: true
+draft: true
 slug: 2024-02-02-ddca
 description: Digital Design and Computer Architecture with RISC-V
 categories:
