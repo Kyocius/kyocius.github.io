@@ -1,6 +1,6 @@
 ---
 title: 近况，困顿与精神符号
-description: 太长不看；活着好难。
+description: 太长不看：活着好难。
 slug: 2024-04-02-confusion
 date: 2024-04-02T14:13:00+08:00
 # draft: true

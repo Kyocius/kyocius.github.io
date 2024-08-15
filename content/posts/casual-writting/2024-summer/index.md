@@ -1,6 +1,6 @@
 ---
 title: 2024 夏日谈
-description: 普通的挣扎
+description: 普通的挣扎。因为过于在乎。
 slug: 2024-summer-holiday
 date: 2024-06-25T00:35:00+08:00
 #draft: true
