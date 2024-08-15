@@ -2,13 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://kyocius.github.io/about/</loc>
+    <lastmod>2024-08-14T21:11:31+08:00</lastmod>
+  </url><url>
+    <loc>https://kyocius.github.io/posts/casual-writting/2024-summer-holiday/</loc>
+    <lastmod>2024-06-25T00:35:00+08:00</lastmod>
+  </url><url>
     <loc>https://kyocius.github.io/categories/</loc>
     <lastmod>2024-06-25T00:35:00+08:00</lastmod>
   </url><url>
     <loc>https://kyocius.github.io/posts/</loc>
-    <lastmod>2024-06-25T00:35:00+08:00</lastmod>
-  </url><url>
-    <loc>https://kyocius.github.io/posts/casual-writting/2024-summer-holiday/</loc>
     <lastmod>2024-06-25T00:35:00+08:00</lastmod>
   </url><url>
     <loc>https://kyocius.github.io/</loc>
@@ -19,9 +22,6 @@
   </url><url>
     <loc>https://kyocius.github.io/posts/casual-writting/2024-04-02-confusion/</loc>
     <lastmod>2024-04-02T14:13:00+08:00</lastmod>
-  </url><url>
-    <loc>https://kyocius.github.io/about/</loc>
-    <lastmod>2024-04-01T21:11:31+08:00</lastmod>
   </url><url>
     <loc>https://kyocius.github.io/tags/</loc>
     <lastmod>2024-02-02T11:25:05+08:00</lastmod>

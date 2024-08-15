@@ -1,9 +1,9 @@
 <?xml-stylesheet href="/rss.xsl" type="text/xsl"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>游尔曼斯克</title>
+    <title>游尔港</title>
     <link>https://kyocius.github.io/</link>
-    <description>Recent content on 游尔曼斯克</description>
+    <description>Recent content on 游尔港</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
     <copyright>Kyocius. 本站遵循 CC-BY-NC 4.0 协议</copyright>
@@ -19,7 +19,7 @@
         <pubDate>Sun, 07 Aug 2022 00:00:00 +0000</pubDate>
         
         <guid>https://kyocius.github.io/posts/dotnet/reactive/rx-magic-1/</guid>
-        <description>游尔曼斯克 https://kyocius.github.io/posts/dotnet/reactive/rx-magic-1/ -&lt;h2 id=&#34;前言&#34;&gt;前言&lt;/h2&gt;
+        <description>游尔港 https://kyocius.github.io/posts/dotnet/reactive/rx-magic-1/ -&lt;h2 id=&#34;前言&#34;&gt;前言&lt;/h2&gt;
 &lt;p&gt;最近刚读了 &lt;em&gt;Rx.NET in Action&lt;/em&gt;，学到的新概念非常多，担忧自己会日渐遗忘，觉得有必要写一篇博客记录一下，说不定也能帮到一些志同道合的朋友。&lt;/p&gt;
 &lt;p&gt;本系列将会使用我深爱的 C# 语言和 Rx.NET 框架来讲解响应式编程（Reactive Programming）的魔法 ╰(&lt;em&gt;°▽°&lt;/em&gt;)╯&lt;/p&gt;
 &lt;h2 id=&#34;背景知识&#34;&gt;背景知识&lt;/h2&gt;
