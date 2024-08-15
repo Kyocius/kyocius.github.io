@@ -1,11 +1,11 @@
 ---
-title: 流年再忆：高中篇
+title: 流年再忆：高中
 date: 2023-06-19
 slug: memory-graduation-2023
 categories:
     - 随笔
 tags:
-image: bg.png
+#image: bg.png
 draft: true
 ---
 ## 楔子

@@ -1,9 +1,9 @@
 ---
-title: 二零二四夏日谈
+title: 2024 夏日谈
 description: 普通的挣扎
 slug: 2024-summer-holiday
 date: 2024-06-25T00:35:00+08:00
-# draft: true
+#draft: true
 categories: 随笔
 ---
 

@@ -1,7 +1,7 @@
 baseURL = "https://kyocius.github.io/"
 DefaultContentLanguage = "zh-hant" # Theme's display language, supports: en, fr, zh, zh-hant
 languageCode = "zh"
-title = "游尔曼斯克"
+title = "游尔港"
 copyright = "Kyocius. 本站遵循 CC-BY-NC 4.0 协议"
 theme = "diary"
 # googleAnalytics = "UA-123-45"
@@ -19,7 +19,7 @@ theme = "diary"
     tabWidth = 4
 
 [params]
-subtitle = "Kyocius +"
+subtitle = "苏格拉底不会梦见"
 enableGitalk = false
 enableGiscus = true
 
@@ -29,7 +29,7 @@ clarity = "abcdefghzd"
 # Twitter Card and Open Graph settings
 enableOpenGraph = true
 enableTwitterCards = true
-title = "My Blog" # will set 'og:site_name'
+title = "kyocius" # will set 'og:site_name'
 description = "My HomePage Description"  # will set 'og:description'
 
 [params.gitalk]
