@@ -9,15 +9,15 @@ categories:
 tags:
     - 一生一芯
     - Clang
-# featured_image: head.png
+featured_image: oldpc.jpg
 ---
-## 前言
+# 前言
 
 笔者撰写本文时还在上大一，数据结构基础几乎为零，所以会有一些可笑的问题和不合时宜的吐槽。
 
 本文尝试解答书后附加题，有的章节太简单就略过了。
 
-## 练习10：字符串数组和循环
+# 练习10：字符串数组和循环
 
 1. 如何使用 `,`（逗号）字符来在for循环的每一部分中，`;`（分号）之间分隔多条语句？
 
@@ -56,7 +56,7 @@ int main(int argc, char *argv[]) {
 }
 ```
 
-## 练习16：结构体和指向它们的指针
+# 练习16：结构体和指向它们的指针
 
 1. 如何在栈上创建结构体，就像你创建任何其它变量那样？
 2. 如何使用 `x.y` 而不是 `x->y` 来初始化结构体？
@@ -69,7 +69,7 @@ C 语言**不可能**不使用指针传递结构体本身。所以这道题的�
 
 详细代码请见：[GitHub](https://github.com/eleloya23/Learn-C-The-Hard-Way/blob/master/Ex16/ex16_e.c)
 
-## 练习17：堆和栈的内存分配
+# 练习17：堆和栈的内存分配
 
 > 对于现在你们这些年轻人来说，编程简直太容易了。如果你玩玩 Ruby 或者 Python 的话，只要创建对象或变量就好了，不用管它们存放在哪里。
 
@@ -89,7 +89,7 @@ char *strncpy(char *dest, const char *src, size_t n)
 
 结构体的总大小是其最大对齐成员的大小的整数倍。
 
-## 练习18：函数指针
+# 练习18：函数指针
 
 函数指针编写窍门：
 
@@ -145,7 +145,7 @@ Valgrind 的报错：
 ```
 这个报告表明在 `myFunction` 函数的第 6 行发生了一个尝试写入大小为 4 的无效内存。
 
-## 练习32：双向链表
+# 练习32：双向链表
 
 强烈建议 0 数据结构基础先去油管看一下印度老哥的双向链表教程：[YouTube](https://www.youtube.com/watch?v=nsMWbs-r4vE&list=PLBlnK6fEyqRg7pacSDMgPn7vDVhz3N1uf&index=2)
 

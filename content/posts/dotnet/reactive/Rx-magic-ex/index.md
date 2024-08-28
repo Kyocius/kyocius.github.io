@@ -1,5 +1,5 @@
 ---
-title: Rx.NET 响应式编程指北 Ex - 函数式思想 & 流式接口
+title: Rx.NET 响应式编程指北 Ex - 函数式 & 流式接口
 description: Rx.NET in Action 笔记
 date: 2022-08-09
 draft: false
@@ -9,7 +9,7 @@ categories:
 tags:
     - Rx.NET Tutorial
     - CSharp
-image: head.png
+featured_image: head.jpg
 
 ---
 

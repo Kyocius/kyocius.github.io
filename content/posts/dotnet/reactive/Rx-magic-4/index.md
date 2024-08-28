@@ -8,7 +8,7 @@ categories:
 tags:
     - Rx.NET
     - CSharp
-image: head.png
+featured_image: head.jpg
 
 ---
 

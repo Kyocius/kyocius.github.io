@@ -8,19 +8,17 @@ categories:
     - 编程
 tags:
     - FSharp Basic
-image: head.png
+featured_image: head.jpg
 
 ---
 
 > 本文翻译自托管在 GitHub 上的 [2fsharp](https://github.com/knocte/2fsharp) 开源项目
 > 
-> 译版仅发表在知乎和 [本人博客](https://yoroion.github.io) 上，未经授权**禁止转载**
+> 译版仅发表在知乎和 [本人博客](https://kyocius.github.io) 上，未经授权**禁止转载**
 
-这个教程是基于实例来讲解的，将会花费你 15-30 分钟的时间。
+这个教程是基于实例来讲解的，将会花费你 15-30 分钟的时间，你将会学到 F# 这门语言 80% 的特性！
 
-你将会学到 F# 这门语言 80% 的特性！
-
-### 例 1：基本函数声明与实现
+# 例 1：基本函数声明与实现
 
 ```csharp
 public int GiveMeTheLength(string input)
@@ -58,7 +56,7 @@ let GiveMeTheLength(input: string): int =
 ```
 
 
-### 例 2：基本关键字和操作符
+# 例 2：基本关键字和操作符
 
 ```csharp
 using System;
@@ -125,7 +123,7 @@ Environment.Exit(exitCode)
 （这和 C# 中的三元操作符类似，但是可读性更高）
 
 
-### 例 3：基础集合
+# 例 3：基础集合
 
 ```csharp
 var intArray = new int[] { 1, 2, 3 };
@@ -150,7 +148,7 @@ let dictionary: IDictionary<string,int> = dict [ ("One", 1); ("Two", 2) ]
 你可能也注意到了，泛型类型需要一个前缀单引号「'」
 
 
-### 例 4：代码块
+# 例 4：代码块
 
 ```csharp
 try {
@@ -202,7 +200,7 @@ DoStuff(reader)
 * 资源会自动释放（和 C# 的 using 相同）。
 
 
-### 例 5：避免 Null 和忽略
+# 例 5：避免 Null 和忽略
 
 ```csharp
 void Check(SomeType someParam1, SomeType someParam2)
@@ -241,7 +239,7 @@ let Check(someParam1: Option<SomeType>, someParam2: Option<SomeType>): unit =
 * 管道操作符：`ignore(x)` 与 `x |> ignore` 等价。
 
 
-### 例 6：类型
+# 例 6：类型
 
 下面这个类使用 F# 就简单很多。
 
@@ -294,7 +292,7 @@ module FooFactory =
 * 在 F# 中，不需要使用 `new` 关键字，除非这个类实现了 `IDisposable` 接口。
 
 
-### 例 7：函数的顺序很重要，循环依赖是万恶之源
+# 例 7：函数的顺序很重要，循环依赖是万恶之源
 
 作为 C# 开发者，你当然知道下面的代码可以通过编译：
 
@@ -415,7 +413,7 @@ module Foo =
 ```
 
 
-### 例 8：委托、匿名函数···我的老天爷！
+# 例 8：委托、匿名函数···我的老天爷！
 
 在 C# 的早期版本中，需要通过委托类型和匿名函数传递函数。请看下面有 4 种组合的例子：
 
@@ -604,7 +602,7 @@ module SomeFsharpModule =
 同样重要的是，C# 的 `(...) => { ... }` 变成了 `fun ... -> ...`
 
 
-### 例 9：元组、局部应用以及柯里化
+# 例 9：元组、局部应用以及柯里化
 
 如果你没有做过函数式编程，你可能会对其中的一些概念感到害怕，比如「局部应用 Partial Application」「柯里化 Currification」。
 
@@ -765,7 +763,7 @@ static int Main()
 关于局部应用及其用处的最后说明：你使用 F# 的时间越长，你就会意识到局部应用实际上是一种简化的依赖注入/控制反转（DI / IoC）方式，详见[《局部应用就是依赖注入》](https://blog.ploeh.dk/2017/01/30/partial-application-is-dependency-injection/)一文。
 
 
-### 例 10：字符串插值
+# 例 10：字符串插值
 
 在早期的 C# 版本中，你需要这样写：
 
@@ -786,7 +784,7 @@ let aStringToShowToTheUser = sprintf "Hello %s, I see you are %i years old" name
 * 你需要通过 `%` 后面的字母来指定字符串中元素的类型，如果它与为同一位置提供的元素的类型不匹配，那么你会得到一个编译器错误（而不是一个无用的元素字符串表示）。
 * 你需要更少的小括号（参见本指南中的最后一个例子）。
 
-### 例 11：异步代码
+# 例 11：异步代码
 
 一段简单的 C# 异步代码：
 
@@ -961,7 +959,7 @@ let main(argv) =
 * `Task.WhenAll` 的等价物是 `Async.Parallel`。
 
 
-### 例 12：编写更少符号，提升 F# 脚本的可阅读性！
+# 例 12：编写更少符号，提升 F# 脚本的可阅读性！
 
 相信你已经明白了 F# 中元组和柯里化参数的区别。后者更推荐使用。
 

@@ -9,7 +9,7 @@ categories:
 tags:
     - Rx.NET Tutorial
     - CSharp
-image: head.png
+featured_image: head.jpg
 
 ---
 
