@@ -187,3 +187,14 @@ $$ Expected \ Time = 2016 \times 10 \ min/block $$
   - PUSHDATA (pubkey_N)
   - N
   - CHECKMULTISIG
+  
+# 分叉
+
+## 状态分叉
+
+因为对区块状态意见不合导致的分叉，例如*分叉攻击*。
+
+## 协议分叉
+
+- 硬分叉：需要所有区块都升级。
+- 软分叉：不需要所有区块都升级的更新，例如 P2SH。
