@@ -36,7 +36,7 @@ using System; using System.Reactive.Disposables; public class NumbersObservable 
     </item>
     
     <item>
-      <title>Rx.NET 响应式编程指北 Ex - 函数式思想 &amp; 流式接口</title>
+      <title>Rx.NET 响应式编程指北 Ex - 函数式 &amp; 流式接口</title>
       <link>https://kyocius.github.io/posts/dotnet/reactive/rx-magic-ex/</link>
       <pubDate>Tue, 09 Aug 2022 00:00:00 +0000</pubDate>
       

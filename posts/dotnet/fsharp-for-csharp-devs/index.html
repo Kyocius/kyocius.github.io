@@ -169,16 +169,6 @@
 						
 						
 						
-							
-								
-									<ul>
-								
-							
-								
-									<ul>
-								
-							
-						
 						
 							<li>
 								<a href="#%e4%be%8b-1%e5%9f%ba%e6%9c%ac%e5%87%bd%e6%95%b0%e5%a3%b0%e6%98%8e%e4%b8%8e%e5%ae%9e%e7%8e%b0" class="nav-例-1基本函数声明与实现">
@@ -438,8 +428,15 @@
             
             
             
+                
+            
 
-            <div class="post-head-wrapper-text-only"
+            <div class="post-head-wrapper"
+                
+                    
+                    
+                    style="background-image: url('/posts/dotnet/fsharp-for-csharp-devs/head.jpg')"
+                    
                 
             >
                 <div class="post-title">
@@ -480,11 +477,10 @@
                 
                     <blockquote>
 <p>本文翻译自托管在 GitHub 上的 <a href="https://github.com/knocte/2fsharp">2fsharp</a> 开源项目</p>
-<p>译版仅发表在知乎和 <a href="https://yoroion.github.io">本人博客</a> 上，未经授权<strong>禁止转载</strong></p>
+<p>译版仅发表在知乎和 <a href="https://kyocius.github.io">本人博客</a> 上，未经授权<strong>禁止转载</strong></p>
 </blockquote>
-<p>这个教程是基于实例来讲解的，将会花费你 15-30 分钟的时间。</p>
-<p>你将会学到 F# 这门语言 80% 的特性！</p>
-<h3 id="例-1基本函数声明与实现">例 1：基本函数声明与实现</h3>
+<p>这个教程是基于实例来讲解的，将会花费你 15-30 分钟的时间，你将会学到 F# 这门语言 80% 的特性！</p>
+<h1 id="例-1基本函数声明与实现">例 1：基本函数声明与实现</h1>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-csharp" data-lang="csharp"><span style="display:flex;"><span><span style="color:#ff79c6">public</span> <span style="color:#8be9fd">int</span> GiveMeTheLength(<span style="color:#8be9fd">string</span> input)
 </span></span><span style="display:flex;"><span>{
 </span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// 单行注释</span>
@@ -511,7 +507,7 @@
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fsharp" data-lang="fsharp"><span style="display:flex;"><span><span style="color:#ff79c6">let</span> <span style="color:#8be9fd;font-style:italic">GiveMeTheLength</span><span style="color:#ff79c6">(</span>input<span style="color:#ff79c6">:</span> <span style="color:#8be9fd">string</span><span style="color:#ff79c6">):</span> int <span style="color:#ff79c6">=</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">let</span> <span style="color:#8be9fd;font-style:italic">result</span><span style="color:#ff79c6">:</span> int <span style="color:#ff79c6">=</span> input<span style="color:#ff79c6">.</span>Length
 </span></span><span style="display:flex;"><span>    result
-</span></span></code></pre></div><h3 id="例-2基本关键字和操作符">例 2：基本关键字和操作符</h3>
+</span></span></code></pre></div><h1 id="例-2基本关键字和操作符">例 2：基本关键字和操作符</h1>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-csharp" data-lang="csharp"><span style="display:flex;"><span><span style="color:#ff79c6">using</span> System;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#ff79c6">class</span> <span style="color:#50fa7b">MainClass</span>
@@ -568,7 +564,7 @@
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>Environment.Exit<span style="color:#ff79c6">(</span>exitCode<span style="color:#ff79c6">)</span>
 </span></span></code></pre></div><p>（这和 C# 中的三元操作符类似，但是可读性更高）</p>
-<h3 id="例-3基础集合">例 3：基础集合</h3>
+<h1 id="例-3基础集合">例 3：基础集合</h1>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-csharp" data-lang="csharp"><span style="display:flex;"><span><span style="color:#8be9fd">var</span> intArray = <span style="color:#ff79c6">new</span> <span style="color:#8be9fd">int</span>[] { <span style="color:#bd93f9">1</span>, <span style="color:#bd93f9">2</span>, <span style="color:#bd93f9">3</span> };
 </span></span><span style="display:flex;"><span><span style="color:#8be9fd">var</span> intList = <span style="color:#ff79c6">new</span> List&lt;<span style="color:#8be9fd">int</span>&gt;({ <span style="color:#bd93f9">4</span>, <span style="color:#bd93f9">5</span>, <span style="color:#bd93f9">6</span> });
 </span></span><span style="display:flex;"><span>IEnumerable&lt;<span style="color:#8be9fd">int</span>&gt; sequenceOfIntegers = intList;
@@ -587,7 +583,7 @@
 <li>你使用一个 <code>dict</code> 来初始化一个<code>IDictionary&lt;K,V&gt;</code> 集合，但是在 F# 中你将会更倾向于使用 <code>Map&lt;'K,'V&gt;</code> 因为它是可变的。</li>
 </ul>
 <p>你可能也注意到了，泛型类型需要一个前缀单引号「&rsquo;」</p>
-<h3 id="例-4代码块">例 4：代码块</h3>
+<h1 id="例-4代码块">例 4：代码块</h1>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-csharp" data-lang="csharp"><span style="display:flex;"><span><span style="color:#ff79c6">try</span> {
 </span></span><span style="display:flex;"><span>    TrySomething(someParam);
 </span></span><span style="display:flex;"><span>} <span style="color:#ff79c6">catch</span> (SomeException ex) {
@@ -630,7 +626,7 @@
 <li>使用 <code>use</code> 就不再需要嵌套代码块了。</li>
 <li>资源会自动释放（和 C# 的 using 相同）。</li>
 </ul>
-<h3 id="例-5避免-null-和忽略">例 5：避免 Null 和忽略</h3>
+<h1 id="例-5避免-null-和忽略">例 5：避免 Null 和忽略</h1>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-csharp" data-lang="csharp"><span style="display:flex;"><span><span style="color:#ff79c6">void</span> Check(SomeType someParam1, SomeType someParam2)
 </span></span><span style="display:flex;"><span>{
 </span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> (someParam1 != <span style="color:#ff79c6">null</span>)
@@ -665,7 +661,7 @@
 </li>
 <li>管道操作符：<code>ignore(x)</code> 与 <code>x |&gt; ignore</code> 等价。</li>
 </ul>
-<h3 id="例-6类型">例 6：类型</h3>
+<h1 id="例-6类型">例 6：类型</h1>
 <p>下面这个类使用 F# 就简单很多。</p>
 <p>（译者注：其实可以使用 C# 6.0 的自动完成属性或者 C# 9.0 的记录类）</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-csharp" data-lang="csharp"><span style="display:flex;"><span><span style="color:#ff79c6">public</span> <span style="color:#ff79c6">class</span> <span style="color:#50fa7b">Foo</span>
@@ -708,7 +704,7 @@
 <li>静态类变成了「modules」，如上 <code>FooFactory</code> 类。</li>
 <li>在 F# 中，不需要使用 <code>new</code> 关键字，除非这个类实现了 <code>IDisposable</code> 接口。</li>
 </ul>
-<h3 id="例-7函数的顺序很重要循环依赖是万恶之源">例 7：函数的顺序很重要，循环依赖是万恶之源</h3>
+<h1 id="例-7函数的顺序很重要循环依赖是万恶之源">例 7：函数的顺序很重要，循环依赖是万恶之源</h1>
 <p>作为 C# 开发者，你当然知道下面的代码可以通过编译：</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-csharp" data-lang="csharp"><span style="display:flex;"><span><span style="color:#ff79c6">static</span> <span style="color:#ff79c6">class</span> <span style="color:#50fa7b">Foo</span>
 </span></span><span style="display:flex;"><span>{
@@ -797,7 +793,7 @@
 </span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">let</span> <span style="color:#8be9fd;font-style:italic">rec</span> Bar() <span style="color:#ff79c6">=</span>
 </span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">if</span> Baz() <span style="color:#ff79c6">then</span>
 </span></span><span style="display:flex;"><span>            Bar()
-</span></span></code></pre></div><h3 id="例-8委托匿名函数我的老天爷">例 8：委托、匿名函数···我的老天爷！</h3>
+</span></span></code></pre></div><h1 id="例-8委托匿名函数我的老天爷">例 8：委托、匿名函数···我的老天爷！</h1>
 <p>在 C# 的早期版本中，需要通过委托类型和匿名函数传递函数。请看下面有 4 种组合的例子：</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-csharp" data-lang="csharp"><span style="display:flex;"><span><span style="color:#ff79c6">static</span> <span style="color:#ff79c6">class</span> <span style="color:#50fa7b">SomeOldCsharpClass</span>
 </span></span><span style="display:flex;"><span>{
@@ -968,7 +964,7 @@
 </span></span></code></pre></div><p>正如你所看到的，BCL 的 <code>System.Function</code> 和 <code>System.Action</code> 变成了原生 F# 语法。</p>
 <p>通过 <code>-&gt;</code> 符号来表示参数和返回值，例如 <code>TArg1-&gt;TResult</code>。请记住，<code>void</code> 在 F# 中是 <code>unit</code>。</p>
 <p>同样重要的是，C# 的 <code>(...) =&gt; { ... }</code> 变成了 <code>fun ... -&gt; ...</code></p>
-<h3 id="例-9元组局部应用以及柯里化">例 9：元组、局部应用以及柯里化</h3>
+<h1 id="例-9元组局部应用以及柯里化">例 9：元组、局部应用以及柯里化</h1>
 <p>如果你没有做过函数式编程，你可能会对其中的一些概念感到害怕，比如「局部应用 Partial Application」「柯里化 Currification」。</p>
 <p>但事实是，它们并不是那么复杂的概念。为了正确解释它们，我们需要先解释元组，以及为什么不建议在 F# 中滥用它们。</p>
 <p>（事实上，你不能用元组来使用局部应用！稍后将详细介绍）</p>
@@ -1066,7 +1062,7 @@
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p>你的大脑能转过弯儿来吗？对我来说，这比阅读 F# 代码难理解多了。</p>
 <p>关于局部应用及其用处的最后说明：你使用 F# 的时间越长，你就会意识到局部应用实际上是一种简化的依赖注入/控制反转（DI / IoC）方式，详见<a href="https://blog.ploeh.dk/2017/01/30/partial-application-is-dependency-injection/">《局部应用就是依赖注入》</a>一文。</p>
-<h3 id="例-10字符串插值">例 10：字符串插值</h3>
+<h1 id="例-10字符串插值">例 10：字符串插值</h1>
 <p>在早期的 C# 版本中，你需要这样写：</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-csharp" data-lang="csharp"><span style="display:flex;"><span><span style="color:#8be9fd">var</span> aStringToShowToTheUser = String.Format(<span style="color:#f1fa8c">&#34;Hello {0}, I see you are {1} years old&#34;</span>, name, age);
 </span></span></code></pre></div><p>这有两个问题：在大型代码库中，许多变量和元素被包含在一个字符串中，我们索引了一个没有提供的变量（例如 <code>{2}</code>）很容易发生，或者我们提供的变量没有隐式转换为字符串。</p>
@@ -1078,7 +1074,7 @@
 <li>你需要通过 <code>%</code> 后面的字母来指定字符串中元素的类型，如果它与为同一位置提供的元素的类型不匹配，那么你会得到一个编译器错误（而不是一个无用的元素字符串表示）。</li>
 <li>你需要更少的小括号（参见本指南中的最后一个例子）。</li>
 </ul>
-<h3 id="例-11异步代码">例 11：异步代码</h3>
+<h1 id="例-11异步代码">例 11：异步代码</h1>
 <p>一段简单的 C# 异步代码：</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-csharp" data-lang="csharp"><span style="display:flex;"><span>    <span style="color:#ff79c6">static</span> <span style="color:#ff79c6">class</span> <span style="color:#50fa7b">MainClass</span>
 </span></span><span style="display:flex;"><span>    {
@@ -1236,7 +1232,7 @@
 <li>在 C# 中处理非泛型 Task，在 F# 中意味着使用 <code>unit</code> 作为 <code>Async</code> 的泛型参数：<code>Async&lt;unit&gt;</code>。不要使用 <code>let! x = ...</code>，你只需要 <code>do!</code>。</li>
 <li><code>Task.WhenAll</code> 的等价物是 <code>Async.Parallel</code>。</li>
 </ul>
-<h3 id="例-12编写更少符号提升-f-脚本的可阅读性">例 12：编写更少符号，提升 F# 脚本的可阅读性！</h3>
+<h1 id="例-12编写更少符号提升-f-脚本的可阅读性">例 12：编写更少符号，提升 F# 脚本的可阅读性！</h1>
 <p>相信你已经明白了 F# 中元组和柯里化参数的区别。后者更推荐使用。</p>
 <p>你可能明白，写这么多小括号其实只是为了映射元组中的东西。事实上，这是刚从 C# 转到 F# 的思维惯性。</p>
 <p>F# 的简洁之处：</p>
@@ -1587,16 +1583,6 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 						
 						
 						
-							
-								
-									<ul>
-								
-							
-								
-									<ul>
-								
-							
-						
 						
 							<li>
 								<a href="#%e4%be%8b-1%e5%9f%ba%e6%9c%ac%e5%87%bd%e6%95%b0%e5%a3%b0%e6%98%8e%e4%b8%8e%e5%ae%9e%e7%8e%b0" class="nav-例-1基本函数声明与实现">
@@ -1828,7 +1814,9 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
         
         
     </div>
-</div><div id="single-column-footer">
+</div>
+
+<div id="single-column-footer">
 Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> by <a href="https://risehere.net/">Rise</a>
 <br>
 移植自 <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a>'s <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> <br>

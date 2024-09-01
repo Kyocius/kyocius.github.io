@@ -169,12 +169,6 @@
 						
 						
 						
-							
-								
-									<ul>
-								
-							
-						
 						
 							<li>
 								<a href="#%e5%89%8d%e8%a8%80" class="nav-前言">
@@ -326,8 +320,15 @@
             
             
             
+                
+            
 
-            <div class="post-head-wrapper-text-only"
+            <div class="post-head-wrapper"
+                
+                    
+                    
+                    style="background-image: url('/posts/chip-design/clang-review/oldpc.jpg')"
+                    
                 
             >
                 <div class="post-title">
@@ -369,10 +370,10 @@
                 
                 <div class="post-body" v-pre>
                 
-                    <h2 id="前言">前言</h2>
+                    <h1 id="前言">前言</h1>
 <p>笔者撰写本文时还在上大一，数据结构基础几乎为零，所以会有一些可笑的问题和不合时宜的吐槽。</p>
 <p>本文尝试解答书后附加题，有的章节太简单就略过了。</p>
-<h2 id="练习10字符串数组和循环">练习10：字符串数组和循环</h2>
+<h1 id="练习10字符串数组和循环">练习10：字符串数组和循环</h1>
 <ol>
 <li>如何使用 <code>,</code>（逗号）字符来在for循环的每一部分中，<code>;</code>（分号）之间分隔多条语句？</li>
 </ol>
@@ -405,7 +406,7 @@
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">return</span> <span style="color:#bd93f9">0</span>;
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><h2 id="练习16结构体和指向它们的指针">练习16：结构体和指向它们的指针</h2>
+</span></span></code></pre></div><h1 id="练习16结构体和指向它们的指针">练习16：结构体和指向它们的指针</h1>
 <ol>
 <li>如何在栈上创建结构体，就像你创建任何其它变量那样？</li>
 <li>如何使用 <code>x.y</code> 而不是 <code>x-&gt;y</code> 来初始化结构体？</li>
@@ -416,7 +417,7 @@
 </ol>
 <p>C 语言<strong>不可能</strong>不使用指针传递结构体本身。所以这道题的意思就浅显地指，把参数的 <code>*</code> 去掉你会不会&hellip;</p>
 <p>详细代码请见：<a href="https://github.com/eleloya23/Learn-C-The-Hard-Way/blob/master/Ex16/ex16_e.c">GitHub</a></p>
-<h2 id="练习17堆和栈的内存分配">练习17：堆和栈的内存分配</h2>
+<h1 id="练习17堆和栈的内存分配">练习17：堆和栈的内存分配</h1>
 <blockquote>
 <p>对于现在你们这些年轻人来说，编程简直太容易了。如果你玩玩 Ruby 或者 Python 的话，只要创建对象或变量就好了，不用管它们存放在哪里。</p>
 </blockquote>
@@ -431,7 +432,7 @@
 </ol>
 <p>在 C 语言中，结构体的默认对齐方式通常是按照结构体成员中占用内存最大的数据类型进行对齐。这被称为“最大成员对齐”或“自然对齐”。</p>
 <p>结构体的总大小是其最大对齐成员的大小的整数倍。</p>
-<h2 id="练习18函数指针">练习18：函数指针</h2>
+<h1 id="练习18函数指针">练习18：函数指针</h1>
 <p>函数指针编写窍门：</p>
 <ul>
 <li>编写一个普通的函数声明：<code>int callme(int a, int b)</code></li>
@@ -472,7 +473,7 @@
 ==12345==    by 0x80484F4: main (example.c:14)
 ==12345==  Address 0x0 is not stack&#39;d, malloc&#39;d or (recently) free&#39;d
 </code></pre><p>这个报告表明在 <code>myFunction</code> 函数的第 6 行发生了一个尝试写入大小为 4 的无效内存。</p>
-<h2 id="练习32双向链表">练习32：双向链表</h2>
+<h1 id="练习32双向链表">练习32：双向链表</h1>
 <p>强烈建议 0 数据结构基础先去油管看一下印度老哥的双向链表教程：<a href="https://www.youtube.com/watch?v=nsMWbs-r4vE&amp;list=PLBlnK6fEyqRg7pacSDMgPn7vDVhz3N1uf&amp;index=2">YouTube</a></p>
 <p>先在头文件中编写两个结构体：</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#ff79c6">#include</span> <span style="color:#ff79c6">&lt;stdlib.h&gt;</span><span style="color:#ff79c6">
@@ -819,12 +820,6 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 						
 						
 						
-							
-								
-									<ul>
-								
-							
-						
 						
 							<li>
 								<a href="#%e5%89%8d%e8%a8%80" class="nav-前言">
@@ -948,7 +943,9 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
         
         
     </div>
-</div><div id="single-column-footer">
+</div>
+
+<div id="single-column-footer">
 Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> by <a href="https://risehere.net/">Rise</a>
 <br>
 移植自 <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a>'s <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> <br>

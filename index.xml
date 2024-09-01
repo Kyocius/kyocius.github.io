@@ -7,9 +7,242 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
     <copyright>Kyocius. 本站遵循 CC-BY-NC 4.0 协议</copyright>
-    <lastBuildDate>Sat, 03 Aug 2024 20:36:00 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 26 Aug 2024 14:19:05 +0800</lastBuildDate>
     
         <atom:link href="https://kyocius.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    
+        <item>
+        <title>潦草 PKU 区块链备忘录（上）</title>
+        <link>https://kyocius.github.io/posts/pku-blockchain/2024-08-26-pku-btc/</link>
+        <pubDate>Mon, 26 Aug 2024 14:19:05 +0800</pubDate>
+        
+        <guid>https://kyocius.github.io/posts/pku-blockchain/2024-08-26-pku-btc/</guid>
+        <description>游尔港 https://kyocius.github.io/posts/pku-blockchain/2024-08-26-pku-btc/ -&lt;h1 id=&#34;密码学基础&#34;&gt;密码学基础&lt;/h1&gt;
+&lt;p&gt;哈希函数的三个特点：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;单向性（One-Wayness）：$X \rightarrow H(X)$。&lt;/li&gt;
+&lt;li&gt;唯一性（Uniqueness）：$X$ 只对应一个 $H(X)$。&lt;/li&gt;
+&lt;li&gt;抗碰撞性（Collision Resistance）：不存在 $H(X) = H(Y)$。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&#34;数据结构&#34;&gt;数据结构&lt;/h1&gt;
+&lt;p&gt;最重要的&lt;strong&gt;哈希树&lt;/strong&gt;（Merkle Tree）结构。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;merkleTree.png&#34; alt=&#34;Merkle Tree&#34;&gt;&lt;/p&gt;
+&lt;h1 id=&#34;区块链实现&#34;&gt;区块链实现&lt;/h1&gt;
+&lt;p&gt;&lt;strong&gt;UTXO&lt;/strong&gt;（Unspent Transaction Output）：所有没被花掉的交易的输出。全节点要在内存中维护 UTXO，以便快速检验是否存在 Double Spending。&lt;/p&gt;
+&lt;h1 id=&#34;网络&#34;&gt;网络&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;比特币网络使用 P2P 和 TCP，便于穿透防火墙。&lt;/li&gt;
+&lt;li&gt;比特币对区块有 1M 字节的限制。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&#34;挖矿难度&#34;&gt;挖矿难度&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;挖矿原理：$$ Hash(Block \ Header) \leq Target $$&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;比特币采用 SHA-256 算法，也就是说目标值有 $2^{256}$ 个取值。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;挖矿难度：$$ Difficulty = \frac{Difficulty^{=1} \ Target}{Target} $$&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;限制出块时间。出块时间太短：容易改链。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;比特币规定每隔 2016 个区块要调整阈值。目标阈值迭代更新方法：&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;$$ Target=Target \times \frac{Actual \ Time}{Expected \ Time} $$&lt;/p&gt;
+&lt;p&gt;$$ Expected \ Time = 2016 \times 10 \ min/block $$&lt;/p&gt;
+&lt;ol start=&#34;6&#34;&gt;
+&lt;li&gt;
+&lt;p&gt;挖矿难度用 nBits 格式存储，包含在区块头中。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;比特币系统中的参数可能只在中本聪的一念之间。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&#34;挖矿&#34;&gt;挖矿&lt;/h1&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;轻节点&lt;/th&gt;
+&lt;th&gt;全节点&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;不一定在线&lt;/td&gt;
+&lt;td&gt;一直在线&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;不用保存整个区块链，只要保存每个区块的区块头&lt;/td&gt;
+&lt;td&gt;在本地硬盘上维护完整的区块链信息&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;不用保存全部交易，只保存与自己相关的交易&lt;/td&gt;
+&lt;td&gt;在内存里维护 UTXO 集合，以极快速度验证交易的正确性&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;无法验证大多数交易的合法性，只能验证与自己相关的那些交易的合法性&lt;/td&gt;
+&lt;td&gt;监听比特币网络上的交易信息，验证每个交易的合法性&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;无法检测网上发布的区块的正确性&lt;/td&gt;
+&lt;td&gt;决定哪些交易会打包到区块里&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;可以验证好的难度&lt;/td&gt;
+&lt;td&gt;监听别的矿工挖出来的区块，验证其合法性&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;只能检测哪个是最长链，不知道哪个是最长合法链&lt;/td&gt;
+&lt;td&gt;挖矿（选择链分支）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;ASIC&lt;/strong&gt;（Application Specific Integrated Circuit）：专门为挖矿而生的芯片。现在的挖矿难度用 GPU 已经划不来了。有的加密货币还提出 Alternative Puzzle 来抵抗 ASIC 挖矿。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;矿池&lt;/strong&gt;：矿主分配任务，矿工提交 Almost Vaild Block 给矿主来计算工作量。&lt;/p&gt;
+&lt;h1 id=&#34;比特币脚本&#34;&gt;比特币脚本&lt;/h1&gt;
+&lt;p&gt;&lt;strong&gt;Bitcoin Scripting Language&lt;/strong&gt;：非常简单，基于栈的语言。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;btc-scripting.png&#34; alt=&#34;btc-scripting&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;交易结构&#34;&gt;交易结构&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;result&amp;#34;&lt;/span&gt;: {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;#34;txid&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;921a...dd24&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;#34;hash&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;921a...dd24&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;#34;version&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#bd93f9&#34;&gt;1&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;#34;size&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#bd93f9&#34;&gt;226&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;#34;locktime&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#bd93f9&#34;&gt;0&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;#34;vin&amp;#34;&lt;/span&gt;: [...],
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;#34;vout&amp;#34;&lt;/span&gt;: [...],
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;#34;blockhash&amp;#34;&lt;/span&gt;:    &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;0000000000000000002c510d...5c0b&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;#34;confirmations&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#bd93f9&#34;&gt;23&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;#34;time&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#bd93f9&#34;&gt;1530846727&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;#34;blocktime&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#bd93f9&#34;&gt;1530846727&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;交易的输入&#34;&gt;交易的输入&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;vin&amp;#34;&lt;/span&gt;: [
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;#34;txid&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;c0cb...c57b&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;#34;vout&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#bd93f9&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#6272a4&#34;&gt;// 对应上一个交易的第 0 个输出
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;#34;scriptSig&amp;#34;&lt;/span&gt;: {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;#34;asm&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;3045...0018&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;#34;hex&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;4830...0018&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;交易的输出&#34;&gt;交易的输出&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;vout&amp;#34;&lt;/span&gt;: [
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;#34;value&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#bd93f9&#34;&gt;0.22684000&lt;/span&gt;, &lt;span style=&#34;color:#6272a4&#34;&gt;// 交易金额，也可以用 Satoshi 作为单位
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;#34;n&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#bd93f9&#34;&gt;0&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;#34;scriptPubKey&amp;#34;&lt;/span&gt;: {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;#34;asm&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;DUP HASH160 628e...d743 EQUALVERIFY CHECKSIG&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;#34;hex&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;76a9...88ac&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;#34;reqSigs&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#bd93f9&#34;&gt;1&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;#34;type&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;pubkeyhash&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;#34;addresses&amp;#34;&lt;/span&gt;: [
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;19z8LJkNXLrTv2QK5jgTncJCGUEEfpQvSr&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      ]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  },
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;#34;value&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#bd93f9&#34;&gt;0.53756644&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;#34;n&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#bd93f9&#34;&gt;1&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;#34;scriptPubKey&amp;#34;&lt;/span&gt;: {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;#34;asm&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;DUP HASH160 da7d...2cd2 EQUALVERIFY CHECKSIG&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;#34;hex&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;76a9...88ac&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;#34;reqSigs&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#bd93f9&#34;&gt;1&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;#34;type&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;pubkeyhash&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;#34;addresses&amp;#34;&lt;/span&gt;: [
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;1LvGTpdyeVLcLCDK2m9f7Pbh7zwhs7NYhX&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      ]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;p2pk&#34;&gt;P2PK&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Pay to Puclic Key&lt;/strong&gt;，最简单。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Input Script&lt;/strong&gt;:
+&lt;ul&gt;
+&lt;li&gt;PUSHDATA(SIG)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Output Script&lt;/strong&gt;:
+&lt;ul&gt;
+&lt;li&gt;PUSHDATA(PubKey)&lt;/li&gt;
+&lt;li&gt;CHECKSIG&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;p2pkh&#34;&gt;P2PKH&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Pay to Public Key Hash&lt;/strong&gt;，最常用。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Input Script&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;PUSHDATA (Sig)&lt;/li&gt;
+&lt;li&gt;PUSHDATA (PubKey)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Output Script&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;DUP：将 PubKey 再复制一份&lt;/li&gt;
+&lt;li&gt;HASH160&lt;/li&gt;
+&lt;li&gt;PUSHDATA (PubKeyHash)&lt;/li&gt;
+&lt;li&gt;EQUALVERIFY&lt;/li&gt;
+&lt;li&gt;CHECKSIG&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;p2sh&#34;&gt;P2SH&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Pay to Script Hash&lt;/strong&gt;，可以实现多重签名。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Input Script&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;×&lt;/li&gt;
+&lt;li&gt;PUSHDATA (Sig_1)&lt;/li&gt;
+&lt;li&gt;PUSHDATA (Sig_2)&lt;/li&gt;
+&lt;li&gt;&amp;hellip;&lt;/li&gt;
+&lt;li&gt;PUSHDATA (Sig_M)&lt;/li&gt;
+&lt;li&gt;PUSHDATA (serialized &lt;em&gt;RedeemScript&lt;/em&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Output Script&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;HASH160&lt;/li&gt;
+&lt;li&gt;PUSHDATA (&lt;em&gt;RedeemScript&lt;/em&gt;Hash)&lt;/li&gt;
+&lt;li&gt;EQUAL&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;redeemScript&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;M&lt;/li&gt;
+&lt;li&gt;PUSHDATA (pubkey_1)&lt;/li&gt;
+&lt;li&gt;PUSHDATA (pubkey_2)&lt;/li&gt;
+&lt;li&gt;&amp;hellip;&lt;/li&gt;
+&lt;li&gt;PUSHDATA (pubkey_N)&lt;/li&gt;
+&lt;li&gt;N&lt;/li&gt;
+&lt;li&gt;CHECKMULTISIG&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;分叉&#34;&gt;分叉&lt;/h1&gt;
+&lt;h2 id=&#34;状态分叉&#34;&gt;状态分叉&lt;/h2&gt;
+&lt;p&gt;因为对区块状态意见不合导致的分叉，例如&lt;em&gt;分叉攻击&lt;/em&gt;。&lt;/p&gt;
+&lt;h2 id=&#34;协议分叉&#34;&gt;协议分叉&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;硬分叉：需要所有区块都升级。&lt;/li&gt;
+&lt;li&gt;软分叉：不需要所有区块都升级的更新，例如 P2SH。&lt;/li&gt;
+&lt;/ul&gt;
+- https://kyocius.github.io/posts/pku-blockchain/2024-08-26-pku-btc/ - Kyocius. 本站遵循 CC-BY-NC 4.0 协议</description>
+        </item>
     
     
     
@@ -43,14 +276,14 @@
         <pubDate>Sat, 03 Aug 2024 20:36:00 +0800</pubDate>
         
         <guid>https://kyocius.github.io/posts/casual-writting/2024-08-03-two-sparrow/</guid>
-        <description>游尔港 https://kyocius.github.io/posts/casual-writting/2024-08-03-two-sparrow/ -&lt;p&gt;走廊尽头靠近窗户的一隅，是我的房间，
+        <description>游尔港 https://kyocius.github.io/posts/casual-writting/2024-08-03-two-sparrow/ -&lt;p&gt;走廊尽头，靠近窗户的一隅，是我的房间，
 今早不知如何，飞进两只麻雀。&lt;/p&gt;
-&lt;p&gt;一只麻雀仿佛在控诉，不停地撞击玻璃，想飞上这镜花里的枝丫；
-另一只受到了莫大的惊吓，躲进了洗手台的角落，微弱地叽喳叽喳。&lt;/p&gt;
+&lt;p&gt;一只麻雀仿佛在控诉，不停地撞击玻璃，想飞上镜花水月般的枝丫；
+另一只受到了莫大的惊吓，躲进了洗手台的角落，发出微弱的呢喃。&lt;/p&gt;
 &lt;p&gt;积灰的米黄色地板此时散落着麻雀的绒毛和白羽，
 可想而知，这场努力落得多狼狈。&lt;/p&gt;
 &lt;p&gt;我被这撞击与啼叫吵醒，不耐烦地找寻噪音的源头。伸手抓走这两只可怜虫，将它们推搡着，轰出房间。
-随手把门带上，免得再听见它俩的恫哭。&lt;/p&gt;
+随手把门带上，免得再听见它俩的哀鸣。&lt;/p&gt;
 &lt;p&gt;我不知道两只麻雀为何不请自来，钢筋水泥的楼宇不可能有它们的容身之处。
 也许只是因为一次道路的选择、一次误判，或者说一次阴差阳错，导致了它们可能有去无回的光顾。
 我确信其中一只麻雀的翅膀已经折断，此生可能无法再伸展羽翼。&lt;/p&gt;
@@ -59,9 +292,9 @@
 我撑着伞走到宿舍门的连廊前，看见了一团棕色的、像抹布似的东西。&lt;/p&gt;
 &lt;p&gt;湿漉漉的麻雀，躺在积水的地砖上。另一只麻雀不知所踪。我没有仔细看，可以说是不想去看。
 毕竟比起糟心的脏乱，烦躁的现实有更多事值得内耗。&lt;/p&gt;
-&lt;p&gt;雨下的很大，伞在风和雨的蹂躏下显得快要如琴弦绷断一般。我快步走着，被积水浸湿了鞋。&lt;/p&gt;
+&lt;p&gt;雨下的很大，伞在风和雨的蹂躏下，显得快要如琴弦绷断一般。我快步走着，被积水浸湿了鞋。&lt;/p&gt;
 &lt;p&gt;一只麻雀找到了离开的路，却倒在了滂沱大雨中。&lt;/p&gt;
-&lt;p&gt;雨一直到傍晚也没有停。&lt;/p&gt;
+&lt;p&gt;雨一直到傍晚也没有停歇。&lt;/p&gt;
 - https://kyocius.github.io/posts/casual-writting/2024-08-03-two-sparrow/ - Kyocius. 本站遵循 CC-BY-NC 4.0 协议</description>
         </item>
     
@@ -161,10 +394,10 @@
         <pubDate>Tue, 23 Jan 2024 00:00:00 +0000</pubDate>
         
         <guid>https://kyocius.github.io/posts/chip-design/clang-review/</guid>
-        <description>游尔港 https://kyocius.github.io/posts/chip-design/clang-review/ -&lt;h2 id=&#34;前言&#34;&gt;前言&lt;/h2&gt;
+        <description>游尔港 https://kyocius.github.io/posts/chip-design/clang-review/ -&lt;h1 id=&#34;前言&#34;&gt;前言&lt;/h1&gt;
 &lt;p&gt;笔者撰写本文时还在上大一，数据结构基础几乎为零，所以会有一些可笑的问题和不合时宜的吐槽。&lt;/p&gt;
 &lt;p&gt;本文尝试解答书后附加题，有的章节太简单就略过了。&lt;/p&gt;
-&lt;h2 id=&#34;练习10字符串数组和循环&#34;&gt;练习10：字符串数组和循环&lt;/h2&gt;
+&lt;h1 id=&#34;练习10字符串数组和循环&#34;&gt;练习10：字符串数组和循环&lt;/h1&gt;
 &lt;ol&gt;
 &lt;li&gt;如何使用 &lt;code&gt;,&lt;/code&gt;（逗号）字符来在for循环的每一部分中，&lt;code&gt;;&lt;/code&gt;（分号）之间分隔多条语句？&lt;/li&gt;
 &lt;/ol&gt;
@@ -197,7 +430,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#bd93f9&#34;&gt;0&lt;/span&gt;;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;练习16结构体和指向它们的指针&#34;&gt;练习16：结构体和指向它们的指针&lt;/h2&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;练习16结构体和指向它们的指针&#34;&gt;练习16：结构体和指向它们的指针&lt;/h1&gt;
 &lt;ol&gt;
 &lt;li&gt;如何在栈上创建结构体，就像你创建任何其它变量那样？&lt;/li&gt;
 &lt;li&gt;如何使用 &lt;code&gt;x.y&lt;/code&gt; 而不是 &lt;code&gt;x-&amp;gt;y&lt;/code&gt; 来初始化结构体？&lt;/li&gt;
@@ -208,7 +441,7 @@
 &lt;/ol&gt;
 &lt;p&gt;C 语言&lt;strong&gt;不可能&lt;/strong&gt;不使用指针传递结构体本身。所以这道题的意思就浅显地指，把参数的 &lt;code&gt;*&lt;/code&gt; 去掉你会不会&amp;hellip;&lt;/p&gt;
 &lt;p&gt;详细代码请见：&lt;a href=&#34;https://github.com/eleloya23/Learn-C-The-Hard-Way/blob/master/Ex16/ex16_e.c&#34;&gt;GitHub&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&#34;练习17堆和栈的内存分配&#34;&gt;练习17：堆和栈的内存分配&lt;/h2&gt;
+&lt;h1 id=&#34;练习17堆和栈的内存分配&#34;&gt;练习17：堆和栈的内存分配&lt;/h1&gt;
 &lt;blockquote&gt;
 &lt;p&gt;对于现在你们这些年轻人来说，编程简直太容易了。如果你玩玩 Ruby 或者 Python 的话，只要创建对象或变量就好了，不用管它们存放在哪里。&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -223,7 +456,7 @@
 &lt;/ol&gt;
 &lt;p&gt;在 C 语言中，结构体的默认对齐方式通常是按照结构体成员中占用内存最大的数据类型进行对齐。这被称为“最大成员对齐”或“自然对齐”。&lt;/p&gt;
 &lt;p&gt;结构体的总大小是其最大对齐成员的大小的整数倍。&lt;/p&gt;
-&lt;h2 id=&#34;练习18函数指针&#34;&gt;练习18：函数指针&lt;/h2&gt;
+&lt;h1 id=&#34;练习18函数指针&#34;&gt;练习18：函数指针&lt;/h1&gt;
 &lt;p&gt;函数指针编写窍门：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;编写一个普通的函数声明：&lt;code&gt;int callme(int a, int b)&lt;/code&gt;&lt;/li&gt;
@@ -264,7 +497,7 @@
 ==12345==    by 0x80484F4: main (example.c:14)
 ==12345==  Address 0x0 is not stack&amp;#39;d, malloc&amp;#39;d or (recently) free&amp;#39;d
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;这个报告表明在 &lt;code&gt;myFunction&lt;/code&gt; 函数的第 6 行发生了一个尝试写入大小为 4 的无效内存。&lt;/p&gt;
-&lt;h2 id=&#34;练习32双向链表&#34;&gt;练习32：双向链表&lt;/h2&gt;
+&lt;h1 id=&#34;练习32双向链表&#34;&gt;练习32：双向链表&lt;/h1&gt;
 &lt;p&gt;强烈建议 0 数据结构基础先去油管看一下印度老哥的双向链表教程：&lt;a href=&#34;https://www.youtube.com/watch?v=nsMWbs-r4vE&amp;amp;list=PLBlnK6fEyqRg7pacSDMgPn7vDVhz3N1uf&amp;amp;index=2&#34;&gt;YouTube&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;先在头文件中编写两个结构体：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;stdlib.h&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;
@@ -508,11 +741,10 @@
         <guid>https://kyocius.github.io/posts/dotnet/fsharp-for-csharp-devs/</guid>
         <description>游尔港 https://kyocius.github.io/posts/dotnet/fsharp-for-csharp-devs/ -&lt;blockquote&gt;
 &lt;p&gt;本文翻译自托管在 GitHub 上的 &lt;a href=&#34;https://github.com/knocte/2fsharp&#34;&gt;2fsharp&lt;/a&gt; 开源项目&lt;/p&gt;
-&lt;p&gt;译版仅发表在知乎和 &lt;a href=&#34;https://yoroion.github.io&#34;&gt;本人博客&lt;/a&gt; 上，未经授权&lt;strong&gt;禁止转载&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;译版仅发表在知乎和 &lt;a href=&#34;https://kyocius.github.io&#34;&gt;本人博客&lt;/a&gt; 上，未经授权&lt;strong&gt;禁止转载&lt;/strong&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;这个教程是基于实例来讲解的，将会花费你 15-30 分钟的时间。&lt;/p&gt;
-&lt;p&gt;你将会学到 F# 这门语言 80% 的特性！&lt;/p&gt;
-&lt;h3 id=&#34;例-1基本函数声明与实现&#34;&gt;例 1：基本函数声明与实现&lt;/h3&gt;
+&lt;p&gt;这个教程是基于实例来讲解的，将会花费你 15-30 分钟的时间，你将会学到 F# 这门语言 80% 的特性！&lt;/p&gt;
+&lt;h1 id=&#34;例-1基本函数声明与实现&#34;&gt;例 1：基本函数声明与实现&lt;/h1&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-csharp&#34; data-lang=&#34;csharp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#8be9fd&#34;&gt;int&lt;/span&gt; GiveMeTheLength(&lt;span style=&#34;color:#8be9fd&#34;&gt;string&lt;/span&gt; input)
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#6272a4&#34;&gt;// 单行注释&lt;/span&gt;
@@ -539,7 +771,7 @@
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-fsharp&#34; data-lang=&#34;fsharp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;let&lt;/span&gt; &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;GiveMeTheLength&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;(&lt;/span&gt;input&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#8be9fd&#34;&gt;string&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;):&lt;/span&gt; int &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;let&lt;/span&gt; &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;result&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; int &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; input&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;Length
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    result
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;例-2基本关键字和操作符&#34;&gt;例 2：基本关键字和操作符&lt;/h3&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;例-2基本关键字和操作符&#34;&gt;例 2：基本关键字和操作符&lt;/h1&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-csharp&#34; data-lang=&#34;csharp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;using&lt;/span&gt; System;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;MainClass&lt;/span&gt;
@@ -596,7 +828,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Environment.Exit&lt;span style=&#34;color:#ff79c6&#34;&gt;(&lt;/span&gt;exitCode&lt;span style=&#34;color:#ff79c6&#34;&gt;)&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;（这和 C# 中的三元操作符类似，但是可读性更高）&lt;/p&gt;
-&lt;h3 id=&#34;例-3基础集合&#34;&gt;例 3：基础集合&lt;/h3&gt;
+&lt;h1 id=&#34;例-3基础集合&#34;&gt;例 3：基础集合&lt;/h1&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-csharp&#34; data-lang=&#34;csharp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8be9fd&#34;&gt;var&lt;/span&gt; intArray = &lt;span style=&#34;color:#ff79c6&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color:#8be9fd&#34;&gt;int&lt;/span&gt;[] { &lt;span style=&#34;color:#bd93f9&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#bd93f9&#34;&gt;2&lt;/span&gt;, &lt;span style=&#34;color:#bd93f9&#34;&gt;3&lt;/span&gt; };
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8be9fd&#34;&gt;var&lt;/span&gt; intList = &lt;span style=&#34;color:#ff79c6&#34;&gt;new&lt;/span&gt; List&amp;lt;&lt;span style=&#34;color:#8be9fd&#34;&gt;int&lt;/span&gt;&amp;gt;({ &lt;span style=&#34;color:#bd93f9&#34;&gt;4&lt;/span&gt;, &lt;span style=&#34;color:#bd93f9&#34;&gt;5&lt;/span&gt;, &lt;span style=&#34;color:#bd93f9&#34;&gt;6&lt;/span&gt; });
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;IEnumerable&amp;lt;&lt;span style=&#34;color:#8be9fd&#34;&gt;int&lt;/span&gt;&amp;gt; sequenceOfIntegers = intList;
@@ -615,7 +847,7 @@
 &lt;li&gt;你使用一个 &lt;code&gt;dict&lt;/code&gt; 来初始化一个&lt;code&gt;IDictionary&amp;lt;K,V&amp;gt;&lt;/code&gt; 集合，但是在 F# 中你将会更倾向于使用 &lt;code&gt;Map&amp;lt;&#39;K,&#39;V&amp;gt;&lt;/code&gt; 因为它是可变的。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;你可能也注意到了，泛型类型需要一个前缀单引号「&amp;rsquo;」&lt;/p&gt;
-&lt;h3 id=&#34;例-4代码块&#34;&gt;例 4：代码块&lt;/h3&gt;
+&lt;h1 id=&#34;例-4代码块&#34;&gt;例 4：代码块&lt;/h1&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-csharp&#34; data-lang=&#34;csharp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;try&lt;/span&gt; {
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    TrySomething(someParam);
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;} &lt;span style=&#34;color:#ff79c6&#34;&gt;catch&lt;/span&gt; (SomeException ex) {
@@ -658,7 +890,7 @@
 &lt;li&gt;使用 &lt;code&gt;use&lt;/code&gt; 就不再需要嵌套代码块了。&lt;/li&gt;
 &lt;li&gt;资源会自动释放（和 C# 的 using 相同）。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;例-5避免-null-和忽略&#34;&gt;例 5：避免 Null 和忽略&lt;/h3&gt;
+&lt;h1 id=&#34;例-5避免-null-和忽略&#34;&gt;例 5：避免 Null 和忽略&lt;/h1&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-csharp&#34; data-lang=&#34;csharp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;void&lt;/span&gt; Check(SomeType someParam1, SomeType someParam2)
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt; (someParam1 != &lt;span style=&#34;color:#ff79c6&#34;&gt;null&lt;/span&gt;)
@@ -693,7 +925,7 @@
 &lt;/li&gt;
 &lt;li&gt;管道操作符：&lt;code&gt;ignore(x)&lt;/code&gt; 与 &lt;code&gt;x |&amp;gt; ignore&lt;/code&gt; 等价。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;例-6类型&#34;&gt;例 6：类型&lt;/h3&gt;
+&lt;h1 id=&#34;例-6类型&#34;&gt;例 6：类型&lt;/h1&gt;
 &lt;p&gt;下面这个类使用 F# 就简单很多。&lt;/p&gt;
 &lt;p&gt;（译者注：其实可以使用 C# 6.0 的自动完成属性或者 C# 9.0 的记录类）&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-csharp&#34; data-lang=&#34;csharp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;Foo&lt;/span&gt;
@@ -736,7 +968,7 @@
 &lt;li&gt;静态类变成了「modules」，如上 &lt;code&gt;FooFactory&lt;/code&gt; 类。&lt;/li&gt;
 &lt;li&gt;在 F# 中，不需要使用 &lt;code&gt;new&lt;/code&gt; 关键字，除非这个类实现了 &lt;code&gt;IDisposable&lt;/code&gt; 接口。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;例-7函数的顺序很重要循环依赖是万恶之源&#34;&gt;例 7：函数的顺序很重要，循环依赖是万恶之源&lt;/h3&gt;
+&lt;h1 id=&#34;例-7函数的顺序很重要循环依赖是万恶之源&#34;&gt;例 7：函数的顺序很重要，循环依赖是万恶之源&lt;/h1&gt;
 &lt;p&gt;作为 C# 开发者，你当然知道下面的代码可以通过编译：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-csharp&#34; data-lang=&#34;csharp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;static&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;Foo&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
@@ -825,7 +1057,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;let&lt;/span&gt; &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;rec&lt;/span&gt; Bar() &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt; Baz() &lt;span style=&#34;color:#ff79c6&#34;&gt;then&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            Bar()
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;例-8委托匿名函数我的老天爷&#34;&gt;例 8：委托、匿名函数···我的老天爷！&lt;/h3&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;例-8委托匿名函数我的老天爷&#34;&gt;例 8：委托、匿名函数···我的老天爷！&lt;/h1&gt;
 &lt;p&gt;在 C# 的早期版本中，需要通过委托类型和匿名函数传递函数。请看下面有 4 种组合的例子：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-csharp&#34; data-lang=&#34;csharp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;static&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;SomeOldCsharpClass&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
@@ -996,7 +1228,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;正如你所看到的，BCL 的 &lt;code&gt;System.Function&lt;/code&gt; 和 &lt;code&gt;System.Action&lt;/code&gt; 变成了原生 F# 语法。&lt;/p&gt;
 &lt;p&gt;通过 &lt;code&gt;-&amp;gt;&lt;/code&gt; 符号来表示参数和返回值，例如 &lt;code&gt;TArg1-&amp;gt;TResult&lt;/code&gt;。请记住，&lt;code&gt;void&lt;/code&gt; 在 F# 中是 &lt;code&gt;unit&lt;/code&gt;。&lt;/p&gt;
 &lt;p&gt;同样重要的是，C# 的 &lt;code&gt;(...) =&amp;gt; { ... }&lt;/code&gt; 变成了 &lt;code&gt;fun ... -&amp;gt; ...&lt;/code&gt;&lt;/p&gt;
-&lt;h3 id=&#34;例-9元组局部应用以及柯里化&#34;&gt;例 9：元组、局部应用以及柯里化&lt;/h3&gt;
+&lt;h1 id=&#34;例-9元组局部应用以及柯里化&#34;&gt;例 9：元组、局部应用以及柯里化&lt;/h1&gt;
 &lt;p&gt;如果你没有做过函数式编程，你可能会对其中的一些概念感到害怕，比如「局部应用 Partial Application」「柯里化 Currification」。&lt;/p&gt;
 &lt;p&gt;但事实是，它们并不是那么复杂的概念。为了正确解释它们，我们需要先解释元组，以及为什么不建议在 F# 中滥用它们。&lt;/p&gt;
 &lt;p&gt;（事实上，你不能用元组来使用局部应用！稍后将详细介绍）&lt;/p&gt;
@@ -1094,7 +1326,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;你的大脑能转过弯儿来吗？对我来说，这比阅读 F# 代码难理解多了。&lt;/p&gt;
 &lt;p&gt;关于局部应用及其用处的最后说明：你使用 F# 的时间越长，你就会意识到局部应用实际上是一种简化的依赖注入/控制反转（DI / IoC）方式，详见&lt;a href=&#34;https://blog.ploeh.dk/2017/01/30/partial-application-is-dependency-injection/&#34;&gt;《局部应用就是依赖注入》&lt;/a&gt;一文。&lt;/p&gt;
-&lt;h3 id=&#34;例-10字符串插值&#34;&gt;例 10：字符串插值&lt;/h3&gt;
+&lt;h1 id=&#34;例-10字符串插值&#34;&gt;例 10：字符串插值&lt;/h1&gt;
 &lt;p&gt;在早期的 C# 版本中，你需要这样写：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-csharp&#34; data-lang=&#34;csharp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8be9fd&#34;&gt;var&lt;/span&gt; aStringToShowToTheUser = String.Format(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;Hello {0}, I see you are {1} years old&amp;#34;&lt;/span&gt;, name, age);
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这有两个问题：在大型代码库中，许多变量和元素被包含在一个字符串中，我们索引了一个没有提供的变量（例如 &lt;code&gt;{2}&lt;/code&gt;）很容易发生，或者我们提供的变量没有隐式转换为字符串。&lt;/p&gt;
@@ -1106,7 +1338,7 @@
 &lt;li&gt;你需要通过 &lt;code&gt;%&lt;/code&gt; 后面的字母来指定字符串中元素的类型，如果它与为同一位置提供的元素的类型不匹配，那么你会得到一个编译器错误（而不是一个无用的元素字符串表示）。&lt;/li&gt;
 &lt;li&gt;你需要更少的小括号（参见本指南中的最后一个例子）。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;例-11异步代码&#34;&gt;例 11：异步代码&lt;/h3&gt;
+&lt;h1 id=&#34;例-11异步代码&#34;&gt;例 11：异步代码&lt;/h1&gt;
 &lt;p&gt;一段简单的 C# 异步代码：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-csharp&#34; data-lang=&#34;csharp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;static&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;MainClass&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    {
@@ -1264,7 +1496,7 @@
 &lt;li&gt;在 C# 中处理非泛型 Task，在 F# 中意味着使用 &lt;code&gt;unit&lt;/code&gt; 作为 &lt;code&gt;Async&lt;/code&gt; 的泛型参数：&lt;code&gt;Async&amp;lt;unit&amp;gt;&lt;/code&gt;。不要使用 &lt;code&gt;let! x = ...&lt;/code&gt;，你只需要 &lt;code&gt;do!&lt;/code&gt;。&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;Task.WhenAll&lt;/code&gt; 的等价物是 &lt;code&gt;Async.Parallel&lt;/code&gt;。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;例-12编写更少符号提升-f-脚本的可阅读性&#34;&gt;例 12：编写更少符号，提升 F# 脚本的可阅读性！&lt;/h3&gt;
+&lt;h1 id=&#34;例-12编写更少符号提升-f-脚本的可阅读性&#34;&gt;例 12：编写更少符号，提升 F# 脚本的可阅读性！&lt;/h1&gt;
 &lt;p&gt;相信你已经明白了 F# 中元组和柯里化参数的区别。后者更推荐使用。&lt;/p&gt;
 &lt;p&gt;你可能明白，写这么多小括号其实只是为了映射元组中的东西。事实上，这是刚从 C# 转到 F# 的思维惯性。&lt;/p&gt;
 &lt;p&gt;F# 的简洁之处：&lt;/p&gt;
@@ -2481,171 +2713,6 @@ Return - OnCompleted()
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;输出：&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;Empty - OnCompleted()
 &lt;/code&gt;&lt;/pre&gt;- https://kyocius.github.io/posts/dotnet/reactive/rx-magic-3/ - Kyocius. 本站遵循 CC-BY-NC 4.0 协议</description>
-        </item>
-    
-    
-    
-        <item>
-        <title>Rx.NET 响应式编程指北 Ex - 函数式思想 &amp; 流式接口</title>
-        <link>https://kyocius.github.io/posts/dotnet/reactive/rx-magic-ex/</link>
-        <pubDate>Tue, 09 Aug 2022 00:00:00 +0000</pubDate>
-        
-        <guid>https://kyocius.github.io/posts/dotnet/reactive/rx-magic-ex/</guid>
-        <description>游尔港 https://kyocius.github.io/posts/dotnet/reactive/rx-magic-ex/ -&lt;h2 id=&#34;前言&#34;&gt;前言&lt;/h2&gt;
-&lt;p&gt;这一章是独立于正式章节的番外，补充一下 C# &lt;strong&gt;函数式编程&lt;/strong&gt;（Functional Programming）以及&lt;strong&gt;流式接口&lt;/strong&gt;（Fluent API）的知识。&lt;/p&gt;
-&lt;p&gt;等等，我们不是在学 Rx.NET 吗，怎么又跑到函数式了？ (＃°Д°)&lt;/p&gt;
-&lt;p&gt;你 先 别 急，二者并不冲突。&lt;/p&gt;
-&lt;p&gt;Rx.NET 提供的方法大部分都是函数式的，比如我们上一章学到的 &lt;code&gt;FromEventPattern&lt;/code&gt; 方法，就是一个&lt;strong&gt;高阶函数&lt;/strong&gt;（High-Order Function），因为它的参数也是函数。&lt;/p&gt;
-&lt;p&gt;有些老古董 Java 程序员认为，C# 和 Java 一样都是纯面向对象语言（Pure OOP），这是完全错误的。经过二十年的发展，C# 早已进化成一门多范式语言了。&lt;/p&gt;
-&lt;h2 id=&#34;函数式编程&#34;&gt;函数式编程&lt;/h2&gt;
-&lt;p&gt;那么如何用 C# 编写函数式代码呢？&lt;/p&gt;
-&lt;p&gt;回顾一下基础知识吧。&lt;/p&gt;
-&lt;h3 id=&#34;委托-delegate&#34;&gt;委托 Delegate&lt;/h3&gt;
-&lt;p&gt;为了传递函数，C# 老早就加入了委托特性：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c#&#34; data-lang=&#34;c#&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;delegate&lt;/span&gt; &lt;span style=&#34;color:#8be9fd&#34;&gt;bool&lt;/span&gt; MyDelegateType (&lt;span style=&#34;color:#8be9fd&#34;&gt;string&lt;/span&gt; first, &lt;span style=&#34;color:#8be9fd&#34;&gt;string&lt;/span&gt; second);
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;在上面的代码中，我们创建了一个名为 &lt;code&gt;MyDelegateType&lt;/code&gt; 的委托类型。&lt;/p&gt;
-&lt;p&gt;我们这样为委托赋值：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c#&#34; data-lang=&#34;c#&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;MyDelegateType myDel;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;myDel += &amp;lt;一些函数&amp;gt;;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;myDel(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;first&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;second&amp;#34;&lt;/span&gt;); &lt;span style=&#34;color:#6272a4&#34;&gt;// 这样调用&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;匿名方法-anonymous-methods&#34;&gt;匿名方法 Anonymous methods&lt;/h3&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c#&#34; data-lang=&#34;c#&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;myDel = &lt;span style=&#34;color:#ff79c6&#34;&gt;delegate&lt;/span&gt; (&lt;span style=&#34;color:#8be9fd&#34;&gt;string&lt;/span&gt; first, &lt;span style=&#34;color:#8be9fd&#34;&gt;string&lt;/span&gt; second)
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;return&lt;/span&gt; first.Length == second.Length;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;lambda-表达式&#34;&gt;Lambda 表达式&lt;/h3&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c#&#34; data-lang=&#34;c#&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;// 👇 这就是 lambda&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;MyDelegateType x = (s1,s2) =&amp;gt; s1 == s2; 
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;// 👇 匿名函数&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;MyDelegateType y = &lt;span style=&#34;color:#ff79c6&#34;&gt;delegate&lt;/span&gt; (&lt;span style=&#34;color:#8be9fd&#34;&gt;string&lt;/span&gt; s1,&lt;span style=&#34;color:#8be9fd&#34;&gt;string&lt;/span&gt; s2) { &lt;span style=&#34;color:#ff79c6&#34;&gt;return&lt;/span&gt; s1 == s2; }; 
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;func-和-action&#34;&gt;Func 和 Action&lt;/h3&gt;
-&lt;p&gt;这俩都是 .NET 预定义好的标准委托类型。&lt;/p&gt;
-&lt;p&gt;也就是说别傻乎乎地自己定义委托类型啦，用它俩就好了。&lt;/p&gt;
-&lt;p&gt;.NET 预定义了 17 种 Func 和 Action 委托，全放在 &lt;code&gt;System&lt;/code&gt; 名称空间下。&lt;/p&gt;
-&lt;h4 id=&#34;action&#34;&gt;Action&lt;/h4&gt;
-&lt;p&gt;Action 用于&lt;strong&gt;无返回值&lt;/strong&gt;的函数委托。&lt;/p&gt;
-&lt;p&gt;看看定义：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c#&#34; data-lang=&#34;c#&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;// 👇 无参&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;delegate&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;void&lt;/span&gt; Action();
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;// 👇 两个参数&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;delegate&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;void&lt;/span&gt; Action&amp;lt;&lt;span style=&#34;color:#ff79c6&#34;&gt;in&lt;/span&gt; T1, &lt;span style=&#34;color:#ff79c6&#34;&gt;in&lt;/span&gt; T2&amp;gt;(T1 arg1, T2 arg2);
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;简单使用：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c#&#34; data-lang=&#34;c#&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;static&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;void&lt;/span&gt; ForEach&amp;lt;T&amp;gt;(IEnumerable&amp;lt;T&amp;gt; collection, Action&amp;lt;T&amp;gt; action)
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;foreach&lt;/span&gt; (&lt;span style=&#34;color:#8be9fd&#34;&gt;var&lt;/span&gt; item &lt;span style=&#34;color:#ff79c6&#34;&gt;in&lt;/span&gt; collection)
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    {
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        action(item);
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;// 👇 完整使用&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ForEach(&lt;span style=&#34;color:#ff79c6&#34;&gt;new&lt;/span&gt;[] { &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;a&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;b&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;c&amp;#34;&lt;/span&gt; }, n =&amp;gt; Console.WriteLine(n));
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;// 👇 省略形式&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ForEach(&lt;span style=&#34;color:#ff79c6&#34;&gt;new&lt;/span&gt;[] { &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;a&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;b&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;c&amp;#34;&lt;/span&gt; }, Console.WriteLine);
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;func&#34;&gt;Func&lt;/h4&gt;
-&lt;p&gt;Func 用于&lt;strong&gt;有返回值&lt;/strong&gt;的函数委托。&lt;/p&gt;
-&lt;p&gt;看看定义：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c#&#34; data-lang=&#34;c#&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;delegate&lt;/span&gt; TResult Func&amp;lt;&lt;span style=&#34;color:#ff79c6&#34;&gt;out&lt;/span&gt; TResult&amp;gt;(); 
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;delegate&lt;/span&gt; TResult Func&amp;lt;&lt;span style=&#34;color:#ff79c6&#34;&gt;in&lt;/span&gt; T1,…,T16, &lt;span style=&#34;color:#ff79c6&#34;&gt;out&lt;/span&gt; TResult&amp;gt;(T1 arg,…,T16 arg16);
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;简单使用：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c#&#34; data-lang=&#34;c#&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;static&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;void&lt;/span&gt; ForEach&amp;lt;T&amp;gt;(IEnumerable&amp;lt;T&amp;gt; collection, Action&amp;lt;T&amp;gt; action,
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; Func&amp;lt;T, &lt;span style=&#34;color:#8be9fd&#34;&gt;bool&lt;/span&gt;&amp;gt; predicate) 
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;     &lt;span style=&#34;color:#ff79c6&#34;&gt;foreach&lt;/span&gt; (&lt;span style=&#34;color:#8be9fd&#34;&gt;var&lt;/span&gt; item &lt;span style=&#34;color:#ff79c6&#34;&gt;in&lt;/span&gt; collection)
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;     {
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;         &lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt; (predicate(item)) 
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;         {
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;             action(item);
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;         }
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;     }
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;懒加载-lazyt&#34;&gt;懒加载 &lt;code&gt;Lazy&amp;lt;T&amp;gt;&lt;/code&gt;&lt;/h3&gt;
-&lt;p&gt;我们来看看 Func 作为工厂函数的作用吧。&lt;/p&gt;
-&lt;p&gt;你有一个很耗时的类：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c#&#34; data-lang=&#34;c#&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;HeavyClass&lt;/span&gt; 
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#6272a4&#34;&gt;// 初始化非常耗时&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;你还有个类：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c#&#34; data-lang=&#34;c#&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;ThinClass&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;private&lt;/span&gt; HeavyClass _heavy;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;public&lt;/span&gt; HeavyClass TheHeavy
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    {
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#ff79c6&#34;&gt;get&lt;/span&gt; 
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        {
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt; (_heavy == &lt;span style=&#34;color:#ff79c6&#34;&gt;null&lt;/span&gt;) 
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            { 
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                _heavy = &lt;span style=&#34;color:#ff79c6&#34;&gt;new&lt;/span&gt; HeavyClass(); &lt;span style=&#34;color:#6272a4&#34;&gt;// 延迟加载时间&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            } 
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#ff79c6&#34;&gt;return&lt;/span&gt; _heavy;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        }
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;void&lt;/span&gt; SomeMethod()
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    {
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#8be9fd&#34;&gt;var&lt;/span&gt; myHeavy = TheHeavy; 
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#6272a4&#34;&gt;// 省略后面的使用&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;} 
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;我们可以看到这就是在 Java 中常见的构建模式。&lt;/p&gt;
-&lt;p&gt;那如果你有 10 个需要延迟加载的属性呢？像这样一一手写 &lt;code&gt;get&lt;/code&gt; 方法未免也太折磨了。&lt;/p&gt;
-&lt;p&gt;太笨了，在 C# 中才不这么做！&lt;/p&gt;
-&lt;p&gt;我们来使用 &lt;code&gt;System&lt;/code&gt; 空间下的懒加载类 &lt;code&gt;Lazy&amp;lt;T&amp;gt;&lt;/code&gt;：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c#&#34; data-lang=&#34;c#&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;ClassWithLazy&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    Lazy&amp;lt;HeavyClass&amp;gt; _lazyHeavyClass = &lt;span style=&#34;color:#ff79c6&#34;&gt;new&lt;/span&gt; Lazy&amp;lt;HeavyClass&amp;gt;();
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;void&lt;/span&gt; SomeMethod()
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    {
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#8be9fd&#34;&gt;var&lt;/span&gt; myHeavy = _lazyHeavyClass.Value;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       &lt;span style=&#34;color:#6272a4&#34;&gt;//使用 myHeavy&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;那如果 &lt;code&gt;HeavyClass&lt;/code&gt; 类的构造方法需要参数咋办？&lt;/p&gt;
-&lt;p&gt;传递个 &lt;code&gt;Func&lt;/code&gt; 给它：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c#&#34; data-lang=&#34;c#&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Lazy&amp;lt;HeavyClass&amp;gt; _lazyHeavyClass = &lt;span style=&#34;color:#ff79c6&#34;&gt;new&lt;/span&gt; Lazy&amp;lt;HeavyClass&amp;gt;(() =&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#8be9fd&#34;&gt;var&lt;/span&gt; heavy = &lt;span style=&#34;color:#ff79c6&#34;&gt;new&lt;/span&gt; HeavyClass(...); 
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ... 
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;return&lt;/span&gt; heavy;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;});
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;hr&gt;
-&lt;h2 id=&#34;流式接口-fluent-api&#34;&gt;流式接口 Fluent API&lt;/h2&gt;
-&lt;p&gt;流式接口（Fluent API）是一种方法调用风格：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c#&#34; data-lang=&#34;c#&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;StringBuilder sbuilder = &lt;span style=&#34;color:#ff79c6&#34;&gt;new&lt;/span&gt; StringBuilder();
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8be9fd&#34;&gt;var&lt;/span&gt; result = sbuilder
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    .AppendLine(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;Fluent&amp;#34;&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    .AppendLine(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;Interfaces&amp;#34;&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    .AppendLine(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;Are&amp;#34;&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    .AppendLine(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;Awesome&amp;#34;&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    .ToString();
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;看看破晓的 &lt;a href=&#34;https://github.com/SinoAHpx/ModuleLauncher.Re/blob/main/README_ZH.md&#34;&gt;ModuleLauncher.Re&lt;/a&gt; 是怎么写的吧：&lt;del&gt;破晓打钱！&lt;/del&gt;&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c#&#34; data-lang=&#34;c#&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8be9fd&#34;&gt;var&lt;/span&gt; process = &lt;span style=&#34;color:#ff79c6&#34;&gt;await&lt;/span&gt; minecraft.WithAuthentication(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;&amp;lt;player&amp;gt;&amp;#34;&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    .WithJava(&lt;span style=&#34;color:#f1fa8c&#34;&gt;@&amp;#34;&amp;lt;java&amp;gt;&amp;#34;&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    .LaunchAsync();
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;接下来我们动手写一个流式接口。&lt;/p&gt;
-&lt;p&gt;我们平常为 &lt;code&gt;List&lt;/code&gt; 添加元素：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c#&#34; data-lang=&#34;c#&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8be9fd&#34;&gt;var&lt;/span&gt; words = &lt;span style=&#34;color:#ff79c6&#34;&gt;new&lt;/span&gt; List&amp;lt;&lt;span style=&#34;color:#8be9fd&#34;&gt;string&lt;/span&gt;&amp;gt;();
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;words.Add(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;This&amp;#34;&lt;/span&gt;);
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;words.Add(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;Feels&amp;#34;&lt;/span&gt;);
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;words.Add(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;Weird&amp;#34;&lt;/span&gt;);
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;不够优雅！用流式接口写个扩展方法：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c#&#34; data-lang=&#34;c#&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;static&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;ListExtensions&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#ff79c6&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;static&lt;/span&gt; List&amp;lt;T&amp;gt; AddItem&amp;lt;T&amp;gt;(&lt;span style=&#34;color:#ff79c6&#34;&gt;this&lt;/span&gt; List&amp;lt;T&amp;gt; list, T item)
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    {
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        list.Add(item);
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#ff79c6&#34;&gt;return&lt;/span&gt; list;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;现在我们就可以使用方法链了：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c#&#34; data-lang=&#34;c#&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8be9fd&#34;&gt;var&lt;/span&gt; words = &lt;span style=&#34;color:#ff79c6&#34;&gt;new&lt;/span&gt; List&amp;lt;&lt;span style=&#34;color:#8be9fd&#34;&gt;string&lt;/span&gt;&amp;gt;();
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;words.AddItem(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;This&amp;#34;&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;     .AddItem(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;Feels&amp;#34;&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;     .AddItem(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;Weird&amp;#34;&lt;/span&gt;);
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Awesome！瞬间就简洁多了。&lt;/p&gt;
-- https://kyocius.github.io/posts/dotnet/reactive/rx-magic-ex/ - Kyocius. 本站遵循 CC-BY-NC 4.0 协议</description>
         </item>
     
     
