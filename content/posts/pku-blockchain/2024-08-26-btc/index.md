@@ -56,17 +56,134 @@ $$ Expected \ Time = 2016 \times 10 \ min/block $$
 
 # 挖矿
 
-| 轻节点 | 全节点 |
-|---|---|
-| 不一定在线 | 一直在线 |
-| 不用保存整个区块链，只要保存每个区块的区块头 | 在本地硬盘上维护完整的区块链信息 |
-| 不用保存全部交易，只保存与自己相关的交易 | 在内存里维护 UTXO 集合，以极快速度验证交易的正确性 |
-| 无法验证大多数交易的合法性，只能验证与自己相关的那些交易的合法性 | 监听比特币网络上的交易信息，验证每个交易的合法性 |
-| 无法检测网上发布的区块的正确性 | 决定哪些交易会打包到区块里 |
-| 可以验证好的难度 | 监听别的矿工挖出来的区块，验证其合法性 |
-| 只能检测哪个是最长链，不知道哪个是最长合法链 | 挖矿（选择链分支） |
+| 轻节点                                                           | 全节点                                             |
+| ---------------------------------------------------------------- | -------------------------------------------------- |
+| 不一定在线                                                       | 一直在线                                           |
+| 不用保存整个区块链，只要保存每个区块的区块头                     | 在本地硬盘上维护完整的区块链信息                   |
+| 不用保存全部交易，只保存与自己相关的交易                         | 在内存里维护 UTXO 集合，以极快速度验证交易的正确性 |
+| 无法验证大多数交易的合法性，只能验证与自己相关的那些交易的合法性 | 监听比特币网络上的交易信息，验证每个交易的合法性   |
+| 无法检测网上发布的区块的正确性                                   | 决定哪些交易会打包到区块里                         |
+| 可以验证好的难度                                                 | 监听别的矿工挖出来的区块，验证其合法性             |
+| 只能检测哪个是最长链，不知道哪个是最长合法链                     | 挖矿（选择链分支）                                 |
 
 **ASIC**（Application Specific Integrated Circuit）：专门为挖矿而生的芯片。现在的挖矿难度用 GPU 已经划不来了。有的加密货币还提出 Alternative Puzzle 来抵抗 ASIC 挖矿。
 
 **矿池**：矿主分配任务，矿工提交 Almost Vaild Block 给矿主来计算工作量。
 
+# 比特币脚本
+
+**Bitcoin Scripting Language**：非常简单，基于栈的语言。
+
+![btc-scripting](btc-scripting.png)
+
+## 交易结构
+```json
+"result": {
+    "txid": "921a...dd24",
+    "hash": "921a...dd24",
+    "version": 1,
+    "size": 226,
+    "locktime": 0,
+    "vin": [...],
+    "vout": [...],
+    "blockhash":    "0000000000000000002c510d...5c0b",
+    "confirmations": 23,
+    "time": 1530846727,
+    "blocktime": 1530846727
+}
+```
+### 交易的输入
+```json
+"vin": [
+    {
+    "txid": "c0cb...c57b",
+    "vout": 0, // 对应上一个交易的第 0 个输出
+    "scriptSig": {
+            "asm": "3045...0018",
+            "hex": "4830...0018"
+        }
+    }
+]
+```
+
+### 交易的输出
+```json
+"vout": [
+  {
+    "value": 0.22684000, // 交易金额，也可以用 Satoshi 作为单位
+    "n": 0,
+    "scriptPubKey": {
+      "asm": "DUP HASH160 628e...d743 EQUALVERIFY CHECKSIG",
+      "hex": "76a9...88ac",
+      "reqSigs": 1,
+      "type": "pubkeyhash",
+      "addresses": [
+        "19z8LJkNXLrTv2QK5jgTncJCGUEEfpQvSr"
+      ]
+    }
+  },
+  {
+    "value": 0.53756644,
+    "n": 1,
+    "scriptPubKey": {
+      "asm": "DUP HASH160 da7d...2cd2 EQUALVERIFY CHECKSIG",
+      "hex": "76a9...88ac",
+      "reqSigs": 1,
+      "type": "pubkeyhash",
+      "addresses": [
+        "1LvGTpdyeVLcLCDK2m9f7Pbh7zwhs7NYhX"
+      ]
+    }
+  }
+]
+```
+## P2PK
+
+**Pay to Puclic Key**，最简单。
+
+- **Input Script**:
+  - PUSHDATA(SIG)
+- **Output Script**:
+  - PUSHDATA(PubKey)
+  - CHECKSIG
+
+## P2PKH
+
+**Pay to Public Key Hash**，最常用。
+
+- **Input Script**:
+  - PUSHDATA (Sig)
+  - PUSHDATA (PubKey)
+
+- **Output Script**:
+  - DUP：将 PubKey 再复制一份
+  - HASH160
+  - PUSHDATA (PubKeyHash)
+  - EQUALVERIFY
+  - CHECKSIG
+
+## P2SH
+
+**Pay to Script Hash**，可以实现多重签名。
+
+- **Input Script**:
+  - ×
+  - PUSHDATA (Sig_1)
+  - PUSHDATA (Sig_2)
+  - ...
+  - PUSHDATA (Sig_M)
+  - PUSHDATA (serialized *RedeemScript*)
+
+- **Output Script**:
+  - HASH160
+  - PUSHDATA (*RedeemScript*Hash)
+  - EQUAL
+
+- **redeemScript**:
+  - M
+  - PUSHDATA (pubkey_1)
+  - PUSHDATA (pubkey_2)
+  - ...
+  - PUSHDATA (pubkey_N)
+  - N
+  - CHECKMULTISIG
