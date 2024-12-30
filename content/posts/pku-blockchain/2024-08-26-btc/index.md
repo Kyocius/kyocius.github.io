@@ -1,5 +1,5 @@
 ---
-title: "潦草 PKU 区块链备忘录（上）"
+title: "潦草 PKU 区块链备忘录"
 date: 2024-08-26T14:19:05+08:00
 #draft: true
 slug: 2024-08-26-pku-btc

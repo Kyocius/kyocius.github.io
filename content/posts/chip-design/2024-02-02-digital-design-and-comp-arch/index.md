@@ -11,6 +11,7 @@ tags:
     - 数字电路
     - 一生一芯
 enableLatex: true
+featured_image: head.jpg
 ---
 # 第一章
 
