@@ -1,7 +1,7 @@
 ---
 title: "潦草 PKU 区块链备忘录（下）"
 date: 2024-09-06T00:28:00+08:00
-#draft: true
+draft: true
 slug: 2024-09-06-pku-eth
 enableLatex: true
 description: 北大肖臻老师的区块链公开课。以太坊部分。
