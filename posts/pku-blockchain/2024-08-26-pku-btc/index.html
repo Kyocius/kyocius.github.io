@@ -3,7 +3,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+HK:wght@100..900&family=Noto+Sans:wght@100..900&family=Noto+Sans+SC:wght@100..900&family=Noto+Serif+SC:wght@400;700&family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-<title>潦草 PKU 区块链备忘录（上）</title>
+<title>潦草 PKU 区块链备忘录</title>
 
 
 
@@ -19,7 +19,7 @@
 
 
 
-<meta property="og:title" content="潦草 PKU 区块链备忘录（上）" />
+<meta property="og:title" content="潦草 PKU 区块链备忘录" />
 <meta property="og:description" content="北大肖臻老师的区块链公开课。比特币部分。" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://kyocius.github.io/posts/pku-blockchain/2024-08-26-pku-btc/" /><meta property="article:section" content="posts" />
@@ -31,7 +31,7 @@
 
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="潦草 PKU 区块链备忘录（上）"/>
+<meta name="twitter:title" content="潦草 PKU 区块链备忘录"/>
 <meta name="twitter:description" content="北大肖臻老师的区块链公开课。比特币部分。"/>
 
 
@@ -496,6 +496,124 @@
 					
 				
 			
+				
+				
+					
+						
+						
+						
+							
+								</ul>
+							
+						
+						
+						
+							<li>
+								<a href="#%e5%8c%bf%e5%90%8d%e6%80%a7" class="nav-匿名性">
+									匿名性
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e6%80%9d%e8%80%83" class="nav-思考">
+									思考
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								
+									<ul>
+								
+							
+						
+						
+							<li>
+								<a href="#%e5%93%88%e5%b8%8c%e6%8c%87%e9%92%88" class="nav-哈希指针">
+									哈希指针
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e5%8c%ba%e5%9d%97%e6%81%8b" class="nav-区块恋">
+									区块恋
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e6%af%94%e7%89%b9%e5%b8%81%e7%9a%84%e7%a8%80%e7%bc%ba%e6%80%a7" class="nav-比特币的稀缺性">
+									比特币的稀缺性
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e9%87%8f%e5%ad%90%e8%ae%a1%e7%ae%97" class="nav-量子计算">
+									量子计算
+								</a>
+							</li>
+						
+						
+					
+				
+			
 		</ul>
 	</div>
 
@@ -558,7 +676,7 @@
                 
             >
                 <div class="post-title">
-                    潦草 PKU 区块链备忘录（上）
+                    潦草 PKU 区块链备忘录
                     
                     <div class="post-subtitle">
                         北大肖臻老师的区块链公开课。比特币部分。
@@ -593,7 +711,10 @@
                 
                 <div class="post-body" v-pre>
                 
-                    <h1 id="密码学基础">密码学基础</h1>
+                    <blockquote>
+<p>不要被学术思维或是程序员思维限制创造力。</p>
+</blockquote>
+<h1 id="密码学基础">密码学基础</h1>
 <p>哈希函数的三个特点：</p>
 <ol>
 <li>单向性（One-Wayness）：$X \rightarrow H(X)$。</li>
@@ -815,6 +936,18 @@
 <li>硬分叉：需要所有区块都升级。</li>
 <li>软分叉：不需要所有区块都升级的更新，例如 P2SH。</li>
 </ul>
+<h1 id="匿名性">匿名性</h1>
+<p><strong>零知识证明</strong>：零知识证明允许一方（证明者）向另一方（验证者）证明某个陈述的真实性，而无需透露任何与该陈述相关的具体信息。</p>
+<p>零币和零钞的概念。</p>
+<h1 id="思考">思考</h1>
+<h2 id="哈希指针">哈希指针</h2>
+<p>Block Header 中实际上没有指针，只有哈希值。全节点将 (key, value) 存储在 LevelDB 中，key 就是哈希值。</p>
+<h2 id="区块恋">区块恋</h2>
+<p>对于多个人共享账户，不要用截断私钥的方法。应该用多重签名（MULTISIG）。</p>
+<h2 id="比特币的稀缺性">比特币的稀缺性</h2>
+<p>比特币发行量固定，但稀缺的东西不适合做货币。优秀的货币要自带通胀的功能。要不然就有人作壁上观，越来越富。</p>
+<h2 id="量子计算">量子计算</h2>
+<p>量子计算距离实用还很远。而且量子计算的出现其实对传统金融业的影响更大，因为所有传输都会变得不安全。</p>
 
                     
                     <HR width="100%" id="EOF">
@@ -827,8 +960,8 @@
             <nav class="post-pagination">
 
                 
-                <a class="newer-posts">
-			下回<br>已經到底啦。
+                <a class="newer-posts" href="/posts/pku-blockchain/2024-09-06-pku-eth/">
+			下回<br>潦草 PKU 区块链备忘录（下）
                 </a>
                 
                 
@@ -1286,6 +1419,124 @@ Hugo Theme <a href="https://github.com/amazingrise/hugo-theme-diary">Diary</a> b
 							<li>
 								<a href="#%e5%8d%8f%e8%ae%ae%e5%88%86%e5%8f%89" class="nav-协议分叉">
 									协议分叉
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+							
+								</ul>
+							
+						
+						
+						
+							<li>
+								<a href="#%e5%8c%bf%e5%90%8d%e6%80%a7" class="nav-匿名性">
+									匿名性
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e6%80%9d%e8%80%83" class="nav-思考">
+									思考
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+							
+								
+									<ul>
+								
+							
+						
+						
+							<li>
+								<a href="#%e5%93%88%e5%b8%8c%e6%8c%87%e9%92%88" class="nav-哈希指针">
+									哈希指针
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e5%8c%ba%e5%9d%97%e6%81%8b" class="nav-区块恋">
+									区块恋
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e6%af%94%e7%89%b9%e5%b8%81%e7%9a%84%e7%a8%80%e7%bc%ba%e6%80%a7" class="nav-比特币的稀缺性">
+									比特币的稀缺性
+								</a>
+							</li>
+						
+						
+					
+				
+			
+				
+				
+					
+						
+						
+						
+						
+						
+							<li>
+								<a href="#%e9%87%8f%e5%ad%90%e8%ae%a1%e7%ae%97" class="nav-量子计算">
+									量子计算
 								</a>
 							</li>
 						
